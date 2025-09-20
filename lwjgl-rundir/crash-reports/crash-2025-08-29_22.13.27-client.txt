@@ -1,0 +1,69 @@
+---- Minecraft Crash Report ----
+// I'm sorry, Dave.
+
+Time: 29.08.2025 22:13
+Description: Registering texture
+
+java.lang.ExceptionInInitializerError
+	at net.minecraft.client.renderer.texture.TextureMap.initMissingImage(TextureMap.java:78)
+	at net.minecraft.client.renderer.texture.TextureMap.loadTexture(TextureMap.java:117)
+	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:86)
+	at net.minecraft.client.renderer.texture.TextureManager.loadTickableTexture(TextureManager.java:68)
+	at net.minecraft.client.renderer.texture.TextureManager.loadTextureMap(TextureManager.java:55)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:452)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:831)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+Caused by: java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "net.minecraft.client.renderer.texture.TextureUtil.immutableAllocated" is null
+	at net.minecraft.client.renderer.texture.TextureUtil.allocateTextureImpl(TextureUtil.java:222)
+	at net.minecraft.client.renderer.texture.TextureUtil.allocateTexture(TextureUtil.java:209)
+	at net.minecraft.client.renderer.texture.DynamicTexture.<init>(DynamicTexture.java:32)
+	at net.minecraft.client.renderer.texture.TextureUtil.<clinit>(TextureUtil.java:27)
+	... 9 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at net.minecraft.client.renderer.texture.TextureMap.initMissingImage(TextureMap.java:78)
+	at net.minecraft.client.renderer.texture.TextureMap.loadTexture(TextureMap.java:117)
+
+-- Resource location being registered --
+Details:
+	Resource location: minecraft:textures/atlas/blocks.png
+	Texture object class: net.minecraft.client.renderer.texture.TextureMap
+Stacktrace:
+	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:86)
+	at net.minecraft.client.renderer.texture.TextureManager.loadTickableTexture(TextureManager.java:68)
+	at net.minecraft.client.renderer.texture.TextureManager.loadTextureMap(TextureManager.java:55)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:452)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:831)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 227564504 bytes (217 MB) / 264241152 bytes (252 MB) up to 4223664128 bytes (4028 MB)
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: 1.7.10
+	LWJGL: 2.9.4
+	OpenGL: ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.101.4502) GL version OpenGL ES 3.0.0 (ANGLE 2.1.22784 git hash: c67f290ef0f0), Google Inc. (Intel)
+	Is Modded: vanilla
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: Deutsch (Deutschland)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

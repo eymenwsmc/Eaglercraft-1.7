@@ -1,0 +1,56 @@
+---- Minecraft Crash Report ----
+// But it works on my machine.
+
+Time: 4.09.2025 09:49
+Description: Rendering screen
+
+java.lang.NullPointerException: Cannot read field "renderYawOffset" because "p_147046_5_" is null
+	at net.minecraft.client.gui.inventory.GuiInventory.func_147046_a(GuiInventory.java:88)
+	at net.lax1dude.eaglercraft.profile.GuiScreenEditProfile.drawScreen(GuiScreenEditProfile.java:247)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1096)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:951)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:848)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at net.minecraft.client.gui.inventory.GuiInventory.func_147046_a(GuiInventory.java:88)
+	at net.lax1dude.eaglercraft.profile.GuiScreenEditProfile.drawScreen(GuiScreenEditProfile.java:247)
+
+-- Screen render details --
+Details:
+	Screen name: net.lax1dude.eaglercraft.profile.GuiScreenEditProfile
+	Mouse location: Scaled: (432, 242). Absolute: (1295, 568)
+	Screen size: Scaled: (780, 432). Absolute: (2338, 1294). Scale factor of 3
+Stacktrace:
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1096)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:951)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:848)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 179367600 bytes (171 MB) / 264241152 bytes (252 MB) up to 4223664128 bytes (4028 MB)
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: 1.7.10
+	LWJGL: 2.9.4
+	OpenGL: ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.101.4502) GL version OpenGL ES 3.0.0 (ANGLE 2.1.22784 git hash: c67f290ef0f0), Google Inc. (Intel)
+	Is Modded: vanilla
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

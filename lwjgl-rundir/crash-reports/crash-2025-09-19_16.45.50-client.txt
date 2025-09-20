@@ -1,0 +1,54 @@
+---- Minecraft Crash Report ----
+// Don't be sad. I'll do better next time, I promise!
+
+Time: 19.09.2025 16:45
+Description: Initializing game
+
+java.lang.ExceptionInInitializerError
+	at net.lax1dude.eaglercraft.profile.EaglerProfile.read(EaglerProfile.java:414)
+	at net.lax1dude.eaglercraft.profile.EaglerProfile.read(EaglerProfile.java:327)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:466)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:773)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 26 out of bounds for length 26
+	at net.lax1dude.eaglercraft.profile.DefaultCapes.<clinit>(DefaultCapes.java:78)
+	... 6 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at net.lax1dude.eaglercraft.profile.EaglerProfile.read(EaglerProfile.java:414)
+	at net.lax1dude.eaglercraft.profile.EaglerProfile.read(EaglerProfile.java:327)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:466)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:773)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 213135560 bytes (203 MB) / 264241152 bytes (252 MB) up to 4223664128 bytes (4028 MB)
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: 1.7.10
+	LWJGL: 2.9.4
+	OpenGL: ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.101.4502) GL version OpenGL ES 3.0.0 (ANGLE 2.1.22784 git hash: c67f290ef0f0), Google Inc. (Intel)
+	Is Modded: vanilla
+	Type: Client (map_client.txt)
+	Resource Packs: [TUBackport_v3_1_7]
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

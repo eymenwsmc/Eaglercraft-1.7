@@ -1,0 +1,53 @@
+---- Minecraft Crash Report ----
+// I'm sorry, Dave.
+
+Time: 22.08.2025 14:04
+Description: Initializing game
+
+java.lang.ClassCastException: class net.minecraft.client.resources.SimpleResource cannot be cast to class java.io.Closeable (net.minecraft.client.resources.SimpleResource is in unnamed module of loader 'app'; java.io.Closeable is in module java.base of loader 'bootstrap')
+	at net.minecraft.client.renderer.texture.TextureUtil.readImageData_SWAP_RB(TextureUtil.java:359)
+	at net.minecraft.client.resources.GrassColorReloadListener.onResourceManagerReload(GrassColorReloadListener.java:17)
+	at net.minecraft.client.resources.SimpleReloadableResourceManager.registerReloadListener(SimpleReloadableResourceManager.java:116)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:472)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:808)
+	at net.lax1dude.eaglercraft.internal.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:72)
+	at net.lax1dude.eaglercraft.internal.MainClass.main(MainClass.java:6)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at net.minecraft.client.renderer.texture.TextureUtil.readImageData_SWAP_RB(TextureUtil.java:359)
+	at net.minecraft.client.resources.GrassColorReloadListener.onResourceManagerReload(GrassColorReloadListener.java:17)
+	at net.minecraft.client.resources.SimpleReloadableResourceManager.registerReloadListener(SimpleReloadableResourceManager.java:116)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:472)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:808)
+	at net.lax1dude.eaglercraft.internal.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:72)
+	at net.lax1dude.eaglercraft.internal.MainClass.main(MainClass.java:6)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 175058960 bytes (166 MB) / 264241152 bytes (252 MB) up to 4223664128 bytes (4028 MB)
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: 1.7.10
+	LWJGL: 2.9.4
+	OpenGL: ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.101.4502) GL version OpenGL ES 3.0.0 (ANGLE 2.1.22784 git hash: c67f290ef0f0), Google Inc. (Intel)
+	Is Modded: vanilla
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: Canadian English (CA)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)
