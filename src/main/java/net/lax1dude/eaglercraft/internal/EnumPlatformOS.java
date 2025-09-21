@@ -1,6 +1,6 @@
 package net.lax1dude.eaglercraft.internal;
 
-import com.demez.eaglercraft.EnumOS2;
+import net.eymenwsmc.EnumOS2;
 
 /**
  * Copyright (c) 2022 lax1dude. All Rights Reserved.

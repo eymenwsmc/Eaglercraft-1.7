@@ -34,13 +34,13 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
-import com.demez.eaglercraft.Sys;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 
+import net.eymenwsmc.Sys;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.EaglercraftVersion;
 import net.lax1dude.eaglercraft.IOUtils;

@@ -1,4 +1,4 @@
-package com.demez.eaglercraft;
+package net.eymenwsmc;
 
 import net.lax1dude.eaglercraft.EagRuntime;
 

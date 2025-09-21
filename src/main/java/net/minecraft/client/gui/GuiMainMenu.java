@@ -34,6 +34,7 @@ import net.lax1dude.eaglercraft.sp.gui.GuiScreenDemoPlayWorldSelection;
 import net.lax1dude.eaglercraft.sp.gui.GuiScreenIntegratedServerBusy;
 import net.lax1dude.eaglercraft.sp.gui.GuiScreenIntegratedServerStartup;
 import net.lax1dude.eaglercraft.Random;
+import net.eymenwsmc.GuiFAQ;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.renderer.DefaultVertexFormats;
@@ -284,6 +285,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
 		this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, i + 72 + 12));
 
+		// FAQ button
+		this.buttonList.add(new GuiButton(15, this.width / 2 - 100, i + 72 + 12 + 24, 200, 20, "FAQ"));
+
 	}
 
 	/**
@@ -352,7 +356,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		}
 
 		if (parGuiButton.id == 15) {
-
+			this.mc.displayGuiScreen(new GuiFAQ(this));
 		}
 	}
 

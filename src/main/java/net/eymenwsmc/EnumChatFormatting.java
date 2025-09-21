@@ -1,4 +1,4 @@
-package com.demez.eaglercraft;
+package net.eymenwsmc;
 
 import java.util.ArrayList;
 import java.util.Collection;

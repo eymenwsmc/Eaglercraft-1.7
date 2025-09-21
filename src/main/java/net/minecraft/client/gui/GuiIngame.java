@@ -429,84 +429,73 @@ public class GuiIngame extends Gui {
 		this.mc.mcProfiler.endSection();
 		GL11.glPopMatrix();
 		var37 = this.mc.theWorld.getScoreboard().func_96539_a(0);
+		if (this.mc.gameSettings.keyBindPlayerList.getIsKeyPressed()
+		        && (!this.mc.isIntegratedServerRunning()
+		            || this.mc.thePlayer.sendQueue.playerInfoList.size() > 1
+		            || var37 != null)) {
 
-		if (this.mc.gameSettings.keyBindPlayerList.getIsKeyPressed() && (!this.mc.isIntegratedServerRunning()
-				|| this.mc.thePlayer.sendQueue.playerInfoList.size() > 1 || var37 != null)) {
-			this.mc.mcProfiler.startSection("playerList");
-			NetHandlerPlayClient var40 = this.mc.thePlayer.sendQueue;
-			List var42 = var40.playerInfoList;
-			var15 = var40.currentServerMaxPlayers;
-			var16 = var15;
+		    this.mc.mcProfiler.startSection("playerList");
 
-			for (var17 = 1; var16 > 20 && var17 < 4; var16 = (var15 + var17 - 1) / var17) {
-				++var17;
-			}
+		    NetHandlerPlayClient var40 = this.mc.thePlayer.sendQueue;
+		    List<GuiPlayerInfo> var42 = var40.playerInfoList;
+		    int playerCount = var42.size();
+		    int columns = 1;
+		    while (playerCount > 20 * columns && columns < 4) columns++;
+		    int rows = (playerCount + columns - 1) / columns;
 
-			int var46 = Math.max(120, 400 / var17);
+		    int maxNameWidth = 0;
+		    for (GuiPlayerInfo p : var42) {
+		        ScorePlayerTeam t = this.mc.theWorld.getScoreboard().getPlayersTeam(p.name);
+		        String nm = ScorePlayerTeam.formatPlayerName(t, p.name);
+		        maxNameWidth = Math.max(maxNameWidth, this.mc.fontRenderer.getStringWidth(nm));
+		    }
+		    int var46 = Math.min(200, Math.max(120, maxNameWidth + 12));
 
-			if (var46 > 200) {
-				var46 = 200;
-			}
+		    int var19 = (var6 - columns * var46) / 2;
+		    int var47 = 10;
 
-			int var19 = (var6 - var17 * var46) / 2;
-			byte var47 = 10;
-			drawRect(var19 - 1, var47 - 1, var19 + var46 * var17, var47 + 9 * var16, Integer.MIN_VALUE);
+		    drawRect(var19 - 1, var47 - 1,
+		             var19 + var46 * columns, var47 + 9 * rows,
+		             Integer.MIN_VALUE);
 
-			for (var21 = 0; var21 < var15; ++var21) {
-				var22 = var19 + var21 % var17 * var46;
-				var23 = var47 + var21 / var17 * 9;
-				drawRect(var22, var23, var22 + var46 - 1, var23 + 8, 553648127);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				GL11.glEnable(GL11.GL_ALPHA_TEST);
+		    for (int i = 0; i < playerCount; i++) {
+		        int var221 = var19 + (i % columns) * var46;
+		        int var231 = var47 + (i / columns) * 9;
 
-				if (var21 < var42.size()) {
-					GuiPlayerInfo var48 = (GuiPlayerInfo) var42.get(var21);
-					ScorePlayerTeam var49 = this.mc.theWorld.getScoreboard().getPlayersTeam(var48.name);
-					String var50 = ScorePlayerTeam.formatPlayerName(var49, var48.name);
-					var8.drawStringWithShadow(var50, var22, var23, 16777215);
+		        drawRect(var221, var231, var221 + var46 - 1, var231 + 8, 553648127);
+		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		        GL11.glEnable(GL11.GL_ALPHA_TEST);
 
-					if (var37 != null) {
-						int var27 = var22 + var8.getStringWidth(var50) + 5;
-						int var28 = var22 + var46 - 12 - 5;
+		        GuiPlayerInfo var48 = var42.get(i);
+		        ScorePlayerTeam var49 = this.mc.theWorld.getScoreboard().getPlayersTeam(var48.name);
+		        String var50 = ScorePlayerTeam.formatPlayerName(var49, var48.name);
+		        var8.drawStringWithShadow(var50, var221, var231, 0xFFFFFF);
 
-						if (var28 - var27 > 5) {
-							Score var29 = var37.getScoreboard().func_96529_a(var48.name, var37);
-							String var30 = EnumChatFormatting.YELLOW + "" + var29.getScorePoints();
-							var8.drawStringWithShadow(var30, var28 - var8.getStringWidth(var30), var23, 16777215);
-						}
-					}
+		        if (var37 != null) {
+		            int var27 = var221 + var8.getStringWidth(var50) + 5;
+		            int var28 = var221 + var46 - 12 - 5; 
+		            if (var28 - var27 > 5) {
+		                Score var29 = var37.getScoreboard().func_96529_a(var48.name, var37);
+		                String var30 = EnumChatFormatting.YELLOW + "" + var29.getScorePoints();
+		                var8.drawStringWithShadow(var30, var28 - var8.getStringWidth(var30), var231, 0xFFFFFF);
+		            }
+		        }
 
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					this.mc.getTextureManager().bindTexture(icons);
-					byte var51 = 0;
-					boolean var52 = false;
-					byte var53;
+		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		        this.mc.getTextureManager().bindTexture(icons);
+		        byte var53;
+		        if (var48.responseTime < 0)      var53 = 5;
+		        else if (var48.responseTime < 150)  var53 = 0;
+		        else if (var48.responseTime < 300)  var53 = 1;
+		        else if (var48.responseTime < 600)  var53 = 2;
+		        else if (var48.responseTime < 1000) var53 = 3;
+		        else                                var53 = 4;
 
-					if (var48.responseTime < 0) {
-						var53 = 5;
-					} else if (var48.responseTime < 150) {
-						var53 = 0;
-					} else if (var48.responseTime < 300) {
-						var53 = 1;
-					} else if (var48.responseTime < 600) {
-						var53 = 2;
-					} else if (var48.responseTime < 1000) {
-						var53 = 3;
-					} else {
-						var53 = 4;
-					}
-
-					this.zLevel += 100.0F;
-					this.drawTexturedModalRect(var22 + var46 - 12, var23, 0 + var51 * 10, 176 + var53 * 8, 10, 8);
-					this.zLevel -= 100.0F;
-				}
-			}
+		        this.zLevel += 100.0F;
+		        this.drawTexturedModalRect(var221 + var46 - 12, var231, 0, 176 + var53 * 8, 10, 8);
+		        this.zLevel -= 100.0F;
+		    }
 		}
-		drawSingleplayerStats(var5);
-
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
 	}
 
 	public void func_152126_a(float p_152126_1_, float p_152126_2_) {

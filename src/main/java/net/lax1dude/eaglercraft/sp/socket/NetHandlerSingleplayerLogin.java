@@ -16,10 +16,10 @@
 
 package net.lax1dude.eaglercraft.sp.socket;
 
-import com.demez.eaglercraft.Sys;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import io.netty.buffer.Unpooled;
+import net.eymenwsmc.Sys;
 import net.lax1dude.eaglercraft.socket.EaglercraftNetworkManager;
 import net.lax1dude.eaglercraft.socket.protocol.GamePluginMessageProtocol;
 import net.minecraft.client.Minecraft;

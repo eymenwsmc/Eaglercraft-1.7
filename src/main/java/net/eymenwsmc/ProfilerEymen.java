@@ -1,4 +1,4 @@
-package com.demez;
+package net.eymenwsmc;
 
 public class ProfilerEymen {
 	private long startTime;

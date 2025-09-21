@@ -1,4 +1,4 @@
-package com.demez.eaglercraft;
+package net.eymenwsmc;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
