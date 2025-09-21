@@ -12,7 +12,7 @@ public class EaglercraftVersion {
 	public static final String projectForkVersion = "u0";
 	public static final String projectForkVendor = "eymenwsmc";
 
-	public static final String projectForkURL = "https://github.com/eymenwsmc/Eaglercraft-1.7.10";
+	public static final String projectForkURL = "https://github.com/eymenwsmc/Eaglercraft-1.7";
 
 	//////////////////////////////////////////////////////////////////////
 
