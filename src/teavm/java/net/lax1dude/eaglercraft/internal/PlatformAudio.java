@@ -604,8 +604,8 @@ public class PlatformAudio {
 	}
 
 	public static void setListener(float x, float y, float z, float pitchDegrees, float yawDegrees) {
-		float var2 = MathHelper.cos(-yawDegrees * 0.017453292F);
-		float var3 = MathHelper.sin(-yawDegrees * 0.017453292F);
+		float var2 = MathHelper.cos((-yawDegrees) * 0.017453292F);
+		float var3 = MathHelper.sin((-yawDegrees) * 0.017453292F);
 		float var4 = -MathHelper.cos(pitchDegrees * 0.017453292F);
 		float var5 = MathHelper.sin(pitchDegrees * 0.017453292F);
 		AudioListener l = audioctx.getListener();

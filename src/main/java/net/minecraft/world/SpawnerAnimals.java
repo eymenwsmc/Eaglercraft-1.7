@@ -3,9 +3,12 @@ package net.minecraft.world;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
@@ -146,6 +149,11 @@ public final class SpawnerAnimals {
 																return var5;
 															}
 
+															// Null check for entity creation
+															if (var41 == null) {
+																continue;
+															}
+
 															var41.setLocationAndAngles((double) var26, (double) var27,
 																	(double) var28,
 																	p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
@@ -236,10 +244,15 @@ public final class SpawnerAnimals {
 							EntityLiving var22;
 
 							try {
-								var22 = (EntityLiving) var8.entityClass.getConstructor(new Class[] { World.class })
-										.newInstance(new Object[] { p_77191_0_ });
-							} catch (Exception var24) {
-								var24.printStackTrace();
+								var22 = (EntityLiving) EntityList
+										.createEntityByClass(var8.entityClass, p_77191_0_);
+							} catch (Exception exception) {
+								EagRuntime.debugPrintStackTrace(exception);
+								continue;
+							}
+
+							// Null check for entity creation
+							if (var22 == null) {
 								continue;
 							}
 

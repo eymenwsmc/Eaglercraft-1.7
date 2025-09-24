@@ -107,7 +107,7 @@ public class GuiIngameMenu extends GuiScreen implements GuiYesNoCallback {
 	 * Draws the screen and all the components in it.
 	 */
 	public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
-		this.drawDefaultBackground();
+		Gui.drawRect(0, 0, this.width, this.height, 0x88000000);
 		this.drawCenteredString(this.fontRendererObj, I18n.format("menu.game", new Object[0]), this.width / 2, 40,
 				16777215);
 		super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);

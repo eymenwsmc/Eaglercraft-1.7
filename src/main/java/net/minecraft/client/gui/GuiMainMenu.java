@@ -285,8 +285,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
 		this.buttonList.add(new GuiButtonLanguage(5, this.width / 2 - 124, i + 72 + 12));
 
-		// FAQ button
-		this.buttonList.add(new GuiButton(15, this.width / 2 - 100, i + 72 + 12 + 24, 200, 20, "FAQ"));
 
 	}
 
@@ -298,7 +296,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		GuiButton nig;
 		this.buttonList.add(
 				nig = new GuiButton(1, this.width / 2 - 100, parInt1, I18n.format("menu.singleplayer", new Object[0])));
-		nig.enabled = false;
 		this.buttonList.add(new GuiButton(2, this.width / 2 - 100, parInt1 + parInt2 * 1,
 				I18n.format("menu.multiplayer", new Object[0])));
 		if (EaglercraftVersion.mainMenuEnableGithubButton) {
@@ -668,7 +665,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		int w = fontRendererObj.getStringWidth(lbl) * 3 / 4;
 
 		if (i >= (this.width - w - 4) && i <= this.width && j >= 0 && j <= 9) {
-			Mouse.showCursor(EnumCursorType.HAND);
 			drawRect((this.width - w - 4), 0, this.width, 10, 0x55000099);
 		} else {
 			drawRect((this.width - w - 4), 0, this.width, 10, 0x55200000);

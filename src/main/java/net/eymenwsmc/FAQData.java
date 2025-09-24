@@ -14,7 +14,7 @@ public class FAQData {
         add(tmp, "Performance tips?", "Lower render distance and turn off fancy graphics in Options.");
         add(tmp, "Why there are no singleplayer mode?", "Because I had a weird chunk loading bug which makes singleplayer UNPLAYABLE. I tried to fix it but It didn't work. Singleplayer will be released in the next update.");
         add(tmp, "Can I make my own 1.7.10 server?", "Yes, you can use EaglerXRewind plugin in your 1.8/1.12 servers. But If you want the backend to be 1.7.10, then you need to make a velocity server with EaglerXServer and EaglerXRewind plugin. Then make the normal 1.7.10 server and add it to velocity..");
-        add(tmp, "Why is am I getting a bad FPS?", "Because this client is not that optimized as 1.8, but I will be backporting optimizitations from 1.8");
+        add(tmp, "Why am I getting a bad FPS?", "Because this client is not that optimized as 1.8, but I will be backporting optimizitations from 1.8");
         add(tmp, "Why did you port 1.7.10?", "Because I saw people wanting 1.7.10 to be ported, I think they love the combat of 1.7.10");
         add(tmp, "Why does some plugins does not work?", "Many plugins are built for newer Minecraft versions (1.8+), which include features 1.7.10 doesn’t support—such as armor stands, JSON chat, advanced holograms, or extra skin layers. When you connect with 1.7.10, these elements either don’t render at all or look broken because your client simply cannot display them. To avoid issues, use a 1.8+ client or ask the server owner if they support 1.7 with compatibility plugins (like ProtocolSupport/EaglerXRewind).");
         ITEMS = Collections.unmodifiableList(tmp);

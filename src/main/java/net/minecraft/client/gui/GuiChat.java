@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.item.ItemStack;
@@ -42,7 +43,7 @@ public class GuiChat extends GuiScreen implements GuiYesNoCallback {
 	private boolean field_146414_r;
 	private int field_146413_s;
 	private List field_146412_t = new ArrayList();
-	private URI field_146411_u;
+	private String field_146411_u;
 	protected GuiTextField field_146415_a;
 	private String field_146409_v = "";
 	private static final String __OBFID = "CL_00000682";
@@ -164,29 +165,21 @@ public class GuiChat extends GuiScreen implements GuiYesNoCallback {
 					if (isShiftKeyDown()) {
 						this.field_146415_a.func_146191_b(var4.getUnformattedTextForChat());
 					} else {
-						URI var6;
+						String var6;
 
 						if (var5.getAction() == ClickEvent.Action.OPEN_URL) {
 							try {
-								var6 = new URI(var5.getValue());
-
-								if (!field_152175_f.contains(var6.getScheme().toLowerCase())) {
-									throw new URISyntaxException(var5.getValue(),
-											"Unsupported protocol: " + var6.getScheme().toLowerCase());
-								}
-
+								var6 = var5.getValue();
 								if (this.mc.gameSettings.chatLinksPrompt) {
 									this.field_146411_u = var6;
 									this.mc.displayGuiScreen(new GuiConfirmOpenLink(this, var5.getValue(), 0, false));
 								} else {
 									this.func_146407_a(var6);
 								}
-							} catch (URISyntaxException var7) {
+							} catch (Exception var7) {
 								logger.error("Can\'t open url for " + var5, var7);
 							}
 						} else if (var5.getAction() == ClickEvent.Action.OPEN_FILE) {
-							var6 = (new File(var5.getValue())).toURI();
-							this.func_146407_a(var6);
 						} else if (var5.getAction() == ClickEvent.Action.SUGGEST_COMMAND) {
 							this.field_146415_a.setText(var5.getValue());
 						} else if (var5.getAction() == ClickEvent.Action.RUN_COMMAND) {
@@ -218,14 +211,8 @@ public class GuiChat extends GuiScreen implements GuiYesNoCallback {
 		}
 	}
 
-	private void func_146407_a(URI p_146407_1_) {
-		try {
-			Class var2 = Class.forName("java.awt.Desktop");
-			Object var3 = var2.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
-			var2.getMethod("browse", new Class[] { URI.class }).invoke(var3, new Object[] { p_146407_1_ });
-		} catch (Throwable var4) {
-			logger.error("Couldn\'t open link", var4);
-		}
+	private void func_146407_a(String p_146407_1_) {
+		EagRuntime.openLink(p_146407_1_);
 	}
 
 	public void func_146404_p_() {

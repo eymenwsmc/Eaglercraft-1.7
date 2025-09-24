@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Eaglercraft Alpha 1.0.6_03 Offline Download">
-    <meta name="keywords" content="eaglercraft, minecraft, alpha, mark101, voidexp, alpha 1.1.2_01">
-    <title>Eaglercraft Alpha 1.0.6_03</title>
+    <meta name="description" content="Eaglercraft 1.7.10 Offline Download">
+    <meta name="keywords" content="eaglercraft, minecraft, release, 1.7, combat, 1.7.10, mc">
+    <title>Eaglercraft 1.7.10</title>
     <meta property="og:locale" content="en-US">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Eaglercraft Alpha 1.0.6_03 Offline">
+    <meta property="og:title" content="Eaglercraft Alpha 1.7.10 Offline">
     <meta property="og:description" content="this file is not a website, whoever uploaded it to this URL is a dumbass">
     <script type="text/javascript">
         "use strict";

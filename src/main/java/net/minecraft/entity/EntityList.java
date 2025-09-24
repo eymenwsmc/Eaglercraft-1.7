@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Maps;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.item.EntityBoat;
@@ -59,6 +60,8 @@ import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
+import static net.lax1dude.eaglercraft.sp.relay.RelayManager.logger;
+
 public class EntityList {
 	/** Provides a mapping between entity classes and a string */
 	private static Map stringToClassMapping = new HashMap();
@@ -77,6 +80,9 @@ public class EntityList {
 
 	/** This is a HashMap of the Creative Entity Eggs/Spawners. */
 	public static HashMap entityEggs = new LinkedHashMap();
+
+	private static final Map<Class<? extends Entity>, EntityConstructor<? extends Entity>> classToConstructorMapping = Maps
+			.newHashMap();
 
 	/**
 	 * adds a mapping between Entity classes and both a string representation and an
@@ -106,6 +112,22 @@ public class EntityList {
 			return null;
 		Integer id = (Integer) stringToIDMapping.get(par0Str);
 		return id != null ? createEntityByID(id.intValue(), par1World) : null;
+	}
+
+
+	public static Entity createEntityByClass(Class<? extends Entity> entityClass, World worldIn) {
+		Entity entity = null;
+
+		try {
+			EntityConstructor<? extends Entity> constructor = classToConstructorMapping.get(entityClass);
+			if (constructor != null) {
+				entity = constructor.createEntity(worldIn);
+			}
+		} catch (Exception exception) {
+			logger.error("Could not create entity", exception);
+		}
+
+		return entity;
 	}
 
 	/**

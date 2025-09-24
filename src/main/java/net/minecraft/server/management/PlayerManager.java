@@ -3,6 +3,8 @@ package net.minecraft.server.management;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import net.lax1dude.eaglercraft.Random;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S21PacketChunkData;
@@ -52,10 +54,158 @@ public class PlayerManager {
 	/** x, z direction vectors: east, south, west, north */
 	private final int[][] xzDirectionsConst = new int[][] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 	private static final String __OBFID = "CL_00001434";
+	
+	// Recursion guard - infinite recursion'ı önlemek için
+	private static final java.util.Set<String> populatingChunks = new java.util.HashSet<String>();
 
 	public PlayerManager(WorldServer p_i1176_1_) {
 		this.theWorldServer = p_i1176_1_;
 		this.func_152622_a(p_i1176_1_.func_73046_m().getConfigurationManager().getViewDistance());
+		
+	}
+	
+	// SINGLEPLAYER FIX: Constructor'da chunk population yapmayalım - dosya sistemi henüz hazır değil
+	// Population sadece chunk yüklenirken yapılacak
+	
+	/**
+	 * Manuel ağaç generation - biome decoration çalışmıyorsa direkt ağaç ekler
+	 */
+	private void generateTreesManually(net.minecraft.world.chunk.Chunk chunk, int chunkX, int chunkZ) {
+		try {
+			net.minecraft.world.WorldServer world = this.theWorldServer;
+			Random random = new Random(world.getSeed() + chunkX * 341873128712L + chunkZ * 132897987541L);
+			
+			int baseX = chunkX * 16;
+			int baseZ = chunkZ * 16;
+			
+			// Biome'u al
+			net.minecraft.world.biome.BiomeGenBase biome = world.getBiomeGenForCoords(baseX + 8, baseZ + 8);
+			
+			// Ağaç generation sayısını biome'a göre ayarla
+			int treeCount = 0;
+			if (biome == net.minecraft.world.biome.BiomeGenBase.forest || 
+				biome == net.minecraft.world.biome.BiomeGenBase.forestHills) {
+				treeCount = 10 + random.nextInt(5); // 10-14 ağaç
+			} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150583_P || // Birch Forest
+					   biome == net.minecraft.world.biome.BiomeGenBase.field_150582_Q) { // Birch Forest Hills
+				treeCount = 8 + random.nextInt(4); // 8-11 ağaç
+			} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150585_R) { // Roofed Forest
+				treeCount = 15 + random.nextInt(5); // 15-19 ağaç
+			} else if (biome == net.minecraft.world.biome.BiomeGenBase.plains) {
+				treeCount = 1 + random.nextInt(2); // 1-2 ağaç
+			} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150588_X || // Savanna
+					   biome == net.minecraft.world.biome.BiomeGenBase.field_150587_Y) { // Savanna Plateau
+				treeCount = 2 + random.nextInt(3); // 2-4 ağaç
+			} else if (biome == net.minecraft.world.biome.BiomeGenBase.jungle ||
+					   biome == net.minecraft.world.biome.BiomeGenBase.jungleHills) {
+				treeCount = 12 + random.nextInt(6); // 12-17 ağaç
+			} else if (biome == net.minecraft.world.biome.BiomeGenBase.taiga ||
+					   biome == net.minecraft.world.biome.BiomeGenBase.taigaHills) {
+				treeCount = 6 + random.nextInt(4); // 6-9 ağaç
+			}
+			
+			field_152627_a.info("Manually generating {} trees for chunk ({}, {}) in biome {}", 
+				treeCount, chunkX, chunkZ, biome.biomeName);
+			
+			// Ağaçları yerleştir
+			for (int i = 0; i < treeCount; i++) {
+				int x = baseX + random.nextInt(16);
+				int z = baseZ + random.nextInt(16);
+				int y = world.getHeightValue(x, z);
+				
+				// Uygun yer kontrolü
+				if (y > 60 && y < 120) {
+					net.minecraft.block.Block groundBlock = world.getBlock(x, y - 1, z);
+					if (groundBlock == net.minecraft.init.Blocks.grass || 
+						groundBlock == net.minecraft.init.Blocks.dirt) {
+						
+						// Ağaç türünü biome'a göre seç
+						net.minecraft.world.gen.feature.WorldGenerator treeGen;
+						if (biome == net.minecraft.world.biome.BiomeGenBase.field_150583_P || // Birch Forest
+							biome == net.minecraft.world.biome.BiomeGenBase.field_150582_Q) { // Birch Forest Hills
+							// Birch tree - metadata 2 for birch log
+							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false, 5, 2, 2, false);
+						} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150585_R) { // Roofed Forest
+							treeGen = new net.minecraft.world.gen.feature.WorldGenCanopyTree(false);
+						} else if (biome == net.minecraft.world.biome.BiomeGenBase.jungle ||
+								   biome == net.minecraft.world.biome.BiomeGenBase.jungleHills) {
+							// Jungle tree - metadata 3 for jungle log
+							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false, 4, 3, 3, true);
+						} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150588_X || // Savanna
+								   biome == net.minecraft.world.biome.BiomeGenBase.field_150587_Y) { // Savanna Plateau
+							treeGen = new net.minecraft.world.gen.feature.WorldGenSavannaTree(false);
+						} else if (biome == net.minecraft.world.biome.BiomeGenBase.taiga ||
+								   biome == net.minecraft.world.biome.BiomeGenBase.taigaHills) {
+							// Spruce tree - metadata 1 for spruce log
+							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false, 6, 1, 1, false);
+						} else {
+							// Normal oak tree
+							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false);
+						}
+						
+						// Ağacı yerleştir
+						if (treeGen.generate(world, random, x, y, z)) {
+							// Başarılı generation log'u
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			field_152627_a.warn("Manual tree generation failed for chunk ({}, {}): {}", 
+				chunkX, chunkZ, e.getMessage());
+		}
+	}
+	
+	/**
+	 * Chunk'ın decoration'a ihtiyacı olup olmadığını kontrol eder
+	 */
+	private static boolean isChunkEmpty(net.minecraft.world.chunk.Chunk chunk) {
+		// Ağaç ve decoration eksikliğini tespit etmek için daha hassas heuristic
+		try {
+			int treeBlocks = 0;
+			int decorationBlocks = 0;
+			int totalSurfaceBlocks = 0;
+			
+			// Daha yoğun sampling - ağaçları kaçırmamak için
+			for (int x = 0; x < 16; x += 2) {
+				for (int z = 0; z < 16; z += 2) {
+					// Yüzey seviyesini bul
+					for (int y = 80; y >= 60; y--) {
+						net.minecraft.block.Block block = chunk.func_150810_a(x, y, z);
+						if (block != net.minecraft.init.Blocks.air) {
+							totalSurfaceBlocks++;
+							
+							// Ağaç blokları (log, leaves)
+							if (block == net.minecraft.init.Blocks.log || 
+								block == net.minecraft.init.Blocks.log2 ||
+								block == net.minecraft.init.Blocks.leaves ||
+								block == net.minecraft.init.Blocks.leaves2) {
+								treeBlocks++;
+							}
+							
+							// Diğer decoration blokları
+							if (block != net.minecraft.init.Blocks.stone && 
+								block != net.minecraft.init.Blocks.dirt && 
+								block != net.minecraft.init.Blocks.grass &&
+								block != net.minecraft.init.Blocks.gravel &&
+								block != net.minecraft.init.Blocks.sand &&
+								block != net.minecraft.init.Blocks.sandstone) {
+								decorationBlocks++;
+							}
+							break; // Yüzeyi bulduk, bir sonraki x,z'ye geç
+						}
+					}
+				}
+			}
+			
+			// Ağaç yok veya çok az decoration varsa chunk boş sayılır
+			boolean noTrees = treeBlocks == 0;
+			boolean lowDecoration = totalSurfaceBlocks > 0 && (decorationBlocks * 100 / totalSurfaceBlocks) < 15;
+			
+			return noTrees || lowDecoration;
+		} catch (Exception e) {
+			return true; // Hata durumunda decoration gerekli kabul et
+		}
 	}
 
 	public WorldServer getWorldServer() {
@@ -194,6 +344,33 @@ public class PlayerManager {
 			while (itRem.hasNext() && chunks.size() < S26PacketMapChunkBulk.func_149258_c()) {
 				ChunkCoordIntPair cc = (ChunkCoordIntPair) itRem.next();
 				Chunk ch = this.theWorldServer.getChunkFromChunkCoords(cc.chunkXPos, cc.chunkZPos);
+				
+				// Singleplayer'da chunk population sorununu çöz - remaining chunk'lar için - GÜVENLİ YAKLAŞIM
+				String chunkKey = cc.chunkXPos + "," + cc.chunkZPos;
+				if (!populatingChunks.contains(chunkKey)) {
+					// Chunk'ın decoration durumunu kontrol et
+					boolean needsDecoration = !ch.isTerrainPopulated || isChunkEmpty(ch);
+					
+					if (needsDecoration) {
+						populatingChunks.add(chunkKey);
+						try {
+							PlayerManager.field_152627_a.info("SAFE remaining chunk population for ({}, {}) - populated: {}, empty: {}", 
+								cc.chunkXPos, cc.chunkZPos, ch.isTerrainPopulated, isChunkEmpty(ch));
+							
+							// SADECE MANUEL AĞAÇ GENERATION YAP - normal population neighboring chunk'lara ihtiyaç duyuyor
+							// ve bunlar henüz dosya sisteminde olmayabilir
+							generateTreesManually(ch, cc.chunkXPos, cc.chunkZPos);
+							
+							ch.setChunkModified();
+						} catch (Exception e) {
+							PlayerManager.field_152627_a.warn("Safe remaining chunk population failed for chunk ({}, {}): {}", 
+								cc.chunkXPos, cc.chunkZPos, e.getMessage());
+						} finally {
+							populatingChunks.remove(chunkKey);
+						}
+					}
+				}
+				
 				chunks.add(ch);
 				tileEntities.addAll(this.theWorldServer.func_147486_a(cc.chunkXPos * 16, 0, cc.chunkZPos * 16,
 						cc.chunkXPos * 16 + 16, 256, cc.chunkZPos * 16 + 16));
@@ -405,6 +582,35 @@ public class PlayerManager {
 		public PlayerInstance(int p_i1518_2_, int p_i1518_3_) {
 			this.chunkLocation = new ChunkCoordIntPair(p_i1518_2_, p_i1518_3_);
 			PlayerManager.this.getWorldServer().theChunkProviderServer.loadChunk(p_i1518_2_, p_i1518_3_);
+		
+			// Singleplayer'da chunk population sorununu çöz - GÜVENLİ YAKLAŞIM
+			String chunkKey = p_i1518_2_ + "," + p_i1518_3_;
+			if (!populatingChunks.contains(chunkKey)) {
+				populatingChunks.add(chunkKey);
+				try {
+					Chunk ch = PlayerManager.this.theWorldServer.getChunkFromChunkCoords(p_i1518_2_, p_i1518_3_);
+					if (ch != null) {
+						// Chunk'ın decoration durumunu kontrol et - basit bir heuristic
+						boolean needsDecoration = !ch.isTerrainPopulated || isChunkEmpty(ch);
+						
+						if (needsDecoration) {
+							PlayerManager.field_152627_a.info("SAFE chunk population for ({}, {}) - populated: {}, empty: {}", 
+								p_i1518_2_, p_i1518_3_, ch.isTerrainPopulated, isChunkEmpty(ch));
+							
+							// SADECE MANUEL AĞAÇ GENERATION YAP - normal population neighboring chunk'lara ihtiyaç duyuyor
+							// ve bunlar henüz dosya sisteminde olmayabilir
+							generateTreesManually(ch, p_i1518_2_, p_i1518_3_);
+							
+							ch.setChunkModified();
+						}
+					}
+				} catch (Exception e) {
+					PlayerManager.field_152627_a.warn("Safe chunk population failed for chunk ({}, {}): {}", 
+						p_i1518_2_, p_i1518_3_, e.getMessage());
+				} finally {
+					populatingChunks.remove(chunkKey);
+				}
+			}
 		}
 
 		public void addPlayer(EntityPlayerMP p_73255_1_) {

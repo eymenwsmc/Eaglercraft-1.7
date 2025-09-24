@@ -31,7 +31,7 @@ public class WASMGCCrashReportStrings {
 	public static void setCrashReportStrings() {
 		//setCrashReportString(CRASH_REPORT_EAGLER_VERSION, JSString.valueOf(EaglercraftVersion.projectForkVersion));
 		//setCrashReportString(CRASH_REPORT_EAGLER_VENDOR, JSString.valueOf(EaglercraftVersion.projectForkVendor));
-		setCrashReportString(CRASH_REPORT_MINECRAFT_VERSION, JSString.valueOf("1.4.7"));
+		setCrashReportString(CRASH_REPORT_MINECRAFT_VERSION, JSString.valueOf("1.7.10"));
 	}
 
 }

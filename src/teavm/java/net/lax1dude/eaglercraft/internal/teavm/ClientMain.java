@@ -76,10 +76,10 @@ public class ClientMain {
 			JSObject opts = getEaglerXOpts();
 			
 			if(opts == null) {
-				systemErr.println("ClientMain: [ERROR] the \"window.eaglercraftXOpts\" variable is undefined");
-				systemErr.println("ClientMain: [ERROR] eaglercraftx cannot start");
-				Window.alert("ERROR: game cannot start, the \"window.eaglercraftXOpts\" variable is undefined");
-				return;
+				systemErr.println("ClientMain: [WARN] the \"window.eaglercraftXOpts\" variable is undefined");
+				systemErr.println("ClientMain: [WARN] using default configuration for worker context");
+				// Worker context'inde default config kullan
+				opts = createDefaultConfig();
 			}
 			
 			try {
@@ -91,11 +91,18 @@ public class ClientMain {
 				if(configRootElementId == null) {
 					throw new JSONException("window.eaglercraftXOpts.container is undefined!");
 				}
-				configRootElement = Window.current().getDocument().getElementById(configRootElementId);
 				
-				HTMLElement oldContent;
-				while((oldContent = configRootElement.querySelector("._eaglercraftX_wrapper_element")) != null) {
-					oldContent.delete();
+				// Worker context'inde DOM erişimi yok, sadece main thread'de çalış
+				try {
+					configRootElement = Window.current().getDocument().getElementById(configRootElementId);
+					
+					HTMLElement oldContent;
+					while((oldContent = configRootElement.querySelector("._eaglercraftX_wrapper_element")) != null) {
+						oldContent.delete();
+					}
+				} catch (Exception e) {
+					systemOut.println("ClientMain: [INFO] Running in worker context, skipping DOM operations");
+					configRootElement = null;
 				}
 				
 				String epkSingleURL = eaglercraftOpts.getAssetsURI();
@@ -125,7 +132,7 @@ public class ClientMain {
 				systemErr.println("ClientMain: [ERROR] the \"window.eaglercraftXOpts\" variable is invalid");
 				EagRuntime.debugPrintStackTraceToSTDERR(t);
 				systemErr.println("ClientMain: [ERROR] eaglercraftx cannot start");
-				Window.alert("ERROR: game cannot start, the \"window.eaglercraftXOpts\" variable is invalid: " + t.toString());
+				// Window.alert("ERROR: game cannot start, the \"window.eaglercraftXOpts\" variable is invalid: " + t.toString());
 				return;
 			}
 			
@@ -180,29 +187,33 @@ public class ClientMain {
 				}
 			};
 			
-			try {
-				EagRuntime.create();
-			}catch(ContextLostError ex) {
-				systemErr.println("ClientMain: [ERROR] webgl context lost during initialization!");
+			if (isWorkerContext()) {
+				systemOut.println("ClientMain: [INFO] Running in worker context, skipping EagRuntime.create()");
+			} else {
 				try {
-					showContextLostScreen(EagRuntime.getStackTrace(ex));
+					EagRuntime.create();
+				}catch(ContextLostError ex) {
+					systemErr.println("ClientMain: [ERROR] webgl context lost during initialization!");
+					try {
+						showContextLostScreen(EagRuntime.getStackTrace(ex));
+					}catch(Throwable t) {
+					}
+					return;
+				}catch(PlatformIncompatibleException ex) {
+					systemErr.println("ClientMain: [ERROR] this browser is incompatible with eaglercraftx!");
+					systemErr.println("ClientMain: [ERROR] Reason: " + ex.getMessage());
+					try {
+						showIncompatibleScreen(ex.getMessage());
+					}catch(Throwable t) {
+					}
+					return;
 				}catch(Throwable t) {
+					systemErr.println("ClientMain: [ERROR] eaglercraftx's runtime could not be initialized!");
+					EagRuntime.debugPrintStackTraceToSTDERR(t);
+					showCrashScreen("EaglercraftX's runtime could not be initialized!", t);
+					systemErr.println("ClientMain: [ERROR] eaglercraftx cannot start");
+					return;
 				}
-				return;
-			}catch(PlatformIncompatibleException ex) {
-				systemErr.println("ClientMain: [ERROR] this browser is incompatible with eaglercraftx!");
-				systemErr.println("ClientMain: [ERROR] Reason: " + ex.getMessage());
-				try {
-					showIncompatibleScreen(ex.getMessage());
-				}catch(Throwable t) {
-				}
-				return;
-			}catch(Throwable t) {
-				systemErr.println("ClientMain: [ERROR] eaglercraftx's runtime could not be initialized!");
-				EagRuntime.debugPrintStackTraceToSTDERR(t);
-				showCrashScreen("EaglercraftX's runtime could not be initialized!", t);
-				systemErr.println("ClientMain: [ERROR] eaglercraftx cannot start");
-				return;
 			}
 
 			systemOut.println("ClientMain: [INFO] launching eaglercraftx main thread");
@@ -226,10 +237,28 @@ public class ClientMain {
 		}
 	}
 	
-	@JSBody(params = {}, script = "if(typeof eaglercraftXOpts === \"undefined\") {return null;}"
-			+ "else if(typeof eaglercraftXOpts === \"string\") {return JSON.parse(eaglercraftXOpts);}"
-			+ "else {return eaglercraftXOpts;}")
+	@JSBody(params = {}, script = "try {"
+			+ "if(typeof window !== \"undefined\" && typeof window.eaglercraftXOpts !== \"undefined\") {"
+			+ "if(typeof window.eaglercraftXOpts === \"string\") {return JSON.parse(window.eaglercraftXOpts);}"
+			+ "else {return window.eaglercraftXOpts;}"
+			+ "} else if(typeof eaglercraftXOpts !== \"undefined\") {"
+			+ "if(typeof eaglercraftXOpts === \"string\") {return JSON.parse(eaglercraftXOpts);}"
+			+ "else {return eaglercraftXOpts;}"
+			+ "} else {return null;}"
+			+ "} catch(e) {return null;}")
 	private static native JSObject getEaglerXOpts();
+
+	@JSBody(params = {}, script = "return {"
+			+ "container: \"game_frame\","
+			+ "worldsDB: \"worlds\","
+			+ "assetsURI: \"assets.epk\","
+			+ "crashOnUncaughtExceptions: false,"
+			+ "deobfStackTraces: true"
+			+ "};")
+	private static native JSObject createDefaultConfig();
+
+	@JSBody(params = {}, script = "return (typeof window === \"undefined\" || typeof document === \"undefined\");")
+	private static native boolean isWorkerContext();
 
 	public static class EPKFileEntry {
 		
@@ -299,8 +328,8 @@ public class ClientMain {
 		}
 
 		StringBuilder str = new StringBuilder();
-		str.append("eaglercraft.version = \"").append("Release 1.4.7").append("\"\n");
-		str.append("eaglercraft.minecraft = \"0.30\"\n");
+		str.append("eaglercraft.version = \"").append("Release 1.7.10").append("\"\n");
+		str.append("eaglercraft.minecraft = \"1.7.10\"\n");
 		str.append("eaglercraft.brand = \"" + "eaglercraft" + "\"\n");
 		str.append('\n');
 		str.append(addWebGLToCrash());
@@ -375,7 +404,6 @@ public class ClientMain {
 			}
 			
 			if(el == null) {
-				Window.alert("Root element not found, crash report was printed to console");
 				systemErr.println(strFinal);
 				return;
 			}
@@ -544,7 +572,7 @@ public class ClientMain {
 			}
 			
 			if(el == null) {
-				Window.alert("Compatibility error: " + t);
+				// Window.alert("Compatibility error: " + t);
 				System.err.println("Compatibility error: " + t);
 				return;
 			}
@@ -718,7 +746,6 @@ public class ClientMain {
 			}
 			
 			if(el == null) {
-				Window.alert("WebGL context lost!");
 				System.err.println("WebGL context lost: " + t);
 				return;
 			}

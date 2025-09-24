@@ -39,7 +39,7 @@ public class DesktopWebSocketClient extends AbstractWebSocketClient {
 		this.currentURI = currentURI;
 		currentURIStr = currentURI.toString();
 		clientImpl = new WebSocketClientImpl(this, currentURI);
-		clientImpl.addHeader("Origin", "EAG_LWJGL_1.4.7".replaceAll("[^a-zA-Z0-9\\-_\\.]", "_"));
+		clientImpl.addHeader("Origin", "EAG_LWJGL_1.7.10".replaceAll("[^a-zA-Z0-9\\-_\\.]", "_"));
 	}
 
 	@Override

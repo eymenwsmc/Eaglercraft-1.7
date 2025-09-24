@@ -955,6 +955,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
 				var6 = this.smoothCamFilterY * var8;
 				this.mc.thePlayer.setAngles(var5, var6 * (float) var7);
 			} else {
+				if (mc.currentScreen == null)
 				this.mc.thePlayer.setAngles(var5, var6 * (float) var7);
 			}
 		}

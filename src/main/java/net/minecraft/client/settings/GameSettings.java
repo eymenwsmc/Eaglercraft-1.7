@@ -39,14 +39,6 @@ public class GameSettings {
 			"options.particles.minimal" };
 	private static final String[] AMBIENT_OCCLUSIONS = new String[] { "options.ao.off", "options.ao.min",
 			"options.ao.max" };
-	private static final String[] field_152391_aS = new String[] { "options.stream.compression.low",
-			"options.stream.compression.medium", "options.stream.compression.high" };
-	private static final String[] field_152392_aT = new String[] { "options.stream.chat.enabled.streaming",
-			"options.stream.chat.enabled.always", "options.stream.chat.enabled.never" };
-	private static final String[] field_152393_aU = new String[] { "options.stream.chat.userFilter.all",
-			"options.stream.chat.userFilter.subs", "options.stream.chat.userFilter.mods" };
-	private static final String[] field_152394_aV = new String[] { "options.stream.mic_toggle.mute",
-			"options.stream.mic_toggle.talk" };
 	public float mouseSensitivity = 0.5F;
 	public boolean invertMouse;
 	public int renderDistanceChunks = -1;
@@ -128,10 +120,6 @@ public class GameSettings {
 	public KeyBinding keyBindTogglePerspective;
 	public KeyBinding keyBindSmoothCamera;
 	public KeyBinding field_152395_am;
-	public KeyBinding field_152396_an;
-	public KeyBinding field_152397_ao;
-	public KeyBinding field_152398_ap;
-	public KeyBinding field_152399_aq;
 	public KeyBinding[] keyBindsHotbar;
 	public KeyBinding[] keyBindings;
 	protected Minecraft mc;
@@ -223,10 +211,6 @@ public class GameSettings {
 		this.keyBindTogglePerspective = new KeyBinding("key.togglePerspective", 63, "key.categories.misc");
 		this.keyBindSmoothCamera = new KeyBinding("key.smoothCamera", 0, "key.categories.misc");
 		this.field_152395_am = new KeyBinding("key.fullscreen", 87, "key.categories.misc");
-		this.field_152396_an = new KeyBinding("key.streamStartStop", 64, "key.categories.stream");
-		this.field_152397_ao = new KeyBinding("key.streamPauseUnpause", 65, "key.categories.stream");
-		this.field_152398_ap = new KeyBinding("key.streamCommercial", 0, "key.categories.stream");
-		this.field_152399_aq = new KeyBinding("key.streamToggleMic", 0, "key.categories.stream");
 		this.keyBindsHotbar = new KeyBinding[] { new KeyBinding("key.hotbar.1", 2, "key.categories.inventory"),
 				new KeyBinding("key.hotbar.2", 3, "key.categories.inventory"),
 				new KeyBinding("key.hotbar.3", 4, "key.categories.inventory"),
@@ -240,8 +224,7 @@ public class GameSettings {
 				this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump,
 				this.keyBindSneak, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList,
 				this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective,
-				this.keyBindSmoothCamera, this.keyBindSprint, this.field_152396_an, this.field_152397_ao,
-				this.field_152398_ap, this.field_152399_aq, this.field_152395_am }, this.keyBindsHotbar);
+				this.keyBindSmoothCamera, this.keyBindSprint, this.field_152395_am}, this.keyBindsHotbar);
 		this.difficulty = EnumDifficulty.NORMAL;
 		this.lastServer = "";
 		this.noclipRate = 1.0F;
@@ -305,10 +288,6 @@ public class GameSettings {
 		this.keyBindTogglePerspective = new KeyBinding("key.togglePerspective", 63, "key.categories.misc");
 		this.keyBindSmoothCamera = new KeyBinding("key.smoothCamera", 0, "key.categories.misc");
 		this.field_152395_am = new KeyBinding("key.fullscreen", 87, "key.categories.misc");
-		this.field_152396_an = new KeyBinding("key.streamStartStop", 64, "key.categories.stream");
-		this.field_152397_ao = new KeyBinding("key.streamPauseUnpause", 65, "key.categories.stream");
-		this.field_152398_ap = new KeyBinding("key.streamCommercial", 0, "key.categories.stream");
-		this.field_152399_aq = new KeyBinding("key.streamToggleMic", 0, "key.categories.stream");
 		this.keyBindsHotbar = new KeyBinding[] { new KeyBinding("key.hotbar.1", 2, "key.categories.inventory"),
 				new KeyBinding("key.hotbar.2", 3, "key.categories.inventory"),
 				new KeyBinding("key.hotbar.3", 4, "key.categories.inventory"),
@@ -322,8 +301,7 @@ public class GameSettings {
 				this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump,
 				this.keyBindSneak, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.keyBindPlayerList,
 				this.keyBindPickBlock, this.keyBindCommand, this.keyBindScreenshot, this.keyBindTogglePerspective,
-				this.keyBindSmoothCamera, this.keyBindSprint, this.field_152396_an, this.field_152397_ao,
-				this.field_152398_ap, this.field_152399_aq, this.field_152395_am }, this.keyBindsHotbar);
+				this.keyBindSmoothCamera, this.keyBindSprint, this.field_152395_am }, this.keyBindsHotbar);
 		this.difficulty = EnumDifficulty.NORMAL;
 		this.lastServer = "";
 		this.noclipRate = 1.0F;
@@ -749,14 +727,6 @@ public class GameSettings {
 			return var2 + getTranslation(PARTICLES, this.particleSetting);
 		} else if (p_74297_1_ == GameSettings.Options.AMBIENT_OCCLUSION) {
 			return var2 + getTranslation(AMBIENT_OCCLUSIONS, this.ambientOcclusion);
-		} else if (p_74297_1_ == GameSettings.Options.STREAM_COMPRESSION) {
-			return var2 + getTranslation(field_152391_aS, this.field_152405_O);
-		} else if (p_74297_1_ == GameSettings.Options.STREAM_CHAT_ENABLED) {
-			return var2 + getTranslation(field_152392_aT, this.field_152408_R);
-		} else if (p_74297_1_ == GameSettings.Options.STREAM_CHAT_USER_FILTER) {
-			return var2 + getTranslation(field_152393_aU, this.field_152409_S);
-		} else if (p_74297_1_ == GameSettings.Options.STREAM_MIC_TOGGLE_BEHAVIOR) {
-			return var2 + getTranslation(field_152394_aV, this.field_152410_T);
 		} else if (p_74297_1_ == GameSettings.Options.GRAPHICS) {
 			if (this.fancyGraphics) {
 				return var2 + I18n.format("options.graphics.fancy", new Object[0]);

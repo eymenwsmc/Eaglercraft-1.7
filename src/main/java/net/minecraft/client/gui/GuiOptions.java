@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import net.eymenwsmc.GuiFAQ;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.audio.SoundEventAccessorComposite;
@@ -54,20 +55,7 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback {
 		}
 
 		this.buttonList.add(new GuiButton(8675309, this.width / 2 + 5, this.height / 6 + 72 - 6, 150, 20,
-				"Super Secret Settings...") {
-			private static final String __OBFID = "CL_00000701";
-
-			public void func_146113_a(SoundHandler p_146113_1_) {
-				SoundEventAccessorComposite var2 = p_146113_1_
-						.getRandomSoundFromCategories(new SoundCategory[] { SoundCategory.ANIMALS, SoundCategory.BLOCKS,
-								SoundCategory.MOBS, SoundCategory.PLAYERS, SoundCategory.WEATHER });
-
-				if (var2 != null) {
-					p_146113_1_.playSound(
-							PositionedSoundRecord.createPositionedSoundRecord(var2.getSoundEventLocation(), 0.5F));
-				}
-			}
-		});
+				"FAQ"));
 		this.buttonList.add(new GuiButton(106, this.width / 2 - 155, this.height / 6 + 72 - 6, 150, 20,
 				I18n.format("options.sounds", new Object[0])));
 		this.buttonList.add(new GuiButton(101, this.width / 2 - 155, this.height / 6 + 96 - 6, 150, 20,
@@ -93,7 +81,7 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback {
 			}
 
 			if (p_146284_1_.id == 8675309) {
-				this.mc.entityRenderer.activateNextShader();
+				mc.displayGuiScreen(new GuiFAQ(this));
 			}
 
 			if (p_146284_1_.id == 101) {

@@ -1133,7 +1133,7 @@ public class Minecraft implements IPlayerUsage {
 	 * focus. Also clears any GUI screen currently displayed
 	 */
 	public void setIngameFocus() {
-		if (Display.isActive()) {
+		if (Display.isActive() && this.currentScreen == null) {
 			if (!this.inGameHasFocus) {
 				this.inGameHasFocus = true;
 				this.mouseHelper.grabMouseCursor();
@@ -2288,16 +2288,11 @@ public class Minecraft implements IPlayerUsage {
 			if (!(this.currentScreen instanceof GuiControls)
 					|| ((GuiControls) this.currentScreen).field_152177_g <= getSystemTime() - 20L) {
 				if (Keyboard.getEventKeyState()) {
-					if (var1 == this.gameSettings.field_152396_an.getKeyCode())
-						if (var1 == this.gameSettings.field_152397_ao.getKeyCode()) {
-						} else if (var1 == this.gameSettings.field_152398_ap.getKeyCode()) {
-						} else if (var1 == this.gameSettings.field_152399_aq.getKeyCode()) {
-						} else if (var1 == this.gameSettings.field_152395_am.getKeyCode()) {
+						if (var1 == this.gameSettings.field_152395_am.getKeyCode()) {
 							this.toggleFullscreen();
 						} else if (var1 == this.gameSettings.keyBindScreenshot.getKeyCode()) {
 							this.ingameGUI.getChatGUI().func_146227_a(ScreenShotHelper.saveScreenshot());
 						}
-				} else if (var1 == this.gameSettings.field_152399_aq.getKeyCode()) {
 				}
 			}
 		}

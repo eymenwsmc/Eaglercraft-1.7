@@ -33,18 +33,29 @@ public class GuiSupportedServers extends GuiScreen {
 
         int y = START_Y;
         int cardWidth = Math.min(MAX_CARD_WIDTH, this.width - 40);
+        int cardLeft = this.width / 2 - cardWidth / 2;
+        boolean narrow = cardWidth < (2 * 110 + 12 + CARD_PADDING * 2);
+        int rowHeight = narrow ? 96 : ROW_HEIGHT;
+
         for (int index = 0; index < supportedServers.size(); index++) {
-            int buttonsY = y + ROW_HEIGHT - CARD_PADDING - 24; // bottom area of the card
+            int buttonsY = y + rowHeight - CARD_PADDING - 24; // baseline for bottom button row
 
-            int btnWidth = 110;
-            int btnSpacing = 12;
-            int totalBtnWidth = btnWidth * 2 + btnSpacing;
-            int btnStartX = this.width / 2 - (totalBtnWidth / 2);
+            if (narrow) {
+                int fullBtnWidth = cardWidth - CARD_PADDING * 2;
+                int btnX = cardLeft + CARD_PADDING;
+                // Stack buttons vertically to avoid overlap
+                this.buttonList.add(new GuiButton(101 + index * 2, btnX, buttonsY - 26, fullBtnWidth, 20, "Add to List"));
+                this.buttonList.add(new GuiButton(100 + index * 2, btnX, buttonsY, fullBtnWidth, 20, "Connect"));
+            } else {
+                int btnWidth = 110;
+                int btnSpacing = 12;
+                int totalBtnWidth = btnWidth * 2 + btnSpacing;
+                int btnStartX = this.width / 2 - (totalBtnWidth / 2);
+                this.buttonList.add(new GuiButton(101 + index * 2, btnStartX, buttonsY, btnWidth, 20, "Add to List"));
+                this.buttonList.add(new GuiButton(100 + index * 2, btnStartX + btnWidth + btnSpacing, buttonsY, btnWidth, 20, "Connect"));
+            }
 
-            this.buttonList.add(new GuiButton(101 + index * 2, btnStartX, buttonsY, btnWidth, 20, "Add to List"));
-            this.buttonList.add(new GuiButton(100 + index * 2, btnStartX + btnWidth + btnSpacing, buttonsY, btnWidth, 20, "Connect"));
-
-            y += ROW_HEIGHT;
+            y += rowHeight;
         }
     }
 
@@ -86,6 +97,19 @@ public class GuiSupportedServers extends GuiScreen {
     }
 
     @Override
+    public void onGuiClosed() {
+        
+    }
+
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) {
+        if (keyCode == 1) { 
+            this.mc.displayGuiScreen(parent);
+            return;
+        }
+        super.keyTyped(typedChar, keyCode);
+    }
+    @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRendererObj, "Supported Servers", this.width / 2, 18, 0xFFFFFF);
@@ -93,12 +117,15 @@ public class GuiSupportedServers extends GuiScreen {
 
         int y = START_Y;
         int cardWidth = Math.min(MAX_CARD_WIDTH, this.width - 40);
+        int cardLeft = this.width / 2 - cardWidth / 2;
+        boolean narrow = cardWidth < (2 * 110 + 12 + CARD_PADDING * 2);
+        int rowHeight = narrow ? 96 : ROW_HEIGHT;
+
         for (int i = 0; i < supportedServers.size(); i++) {
             ServerData data = supportedServers.get(i);
-            int cardLeft = this.width / 2 - cardWidth / 2;
             int cardRight = this.width / 2 + cardWidth / 2;
             int cardTop = y;
-            int cardBottom = y + ROW_HEIGHT - 8;
+            int cardBottom = y + rowHeight - 8;
 
             drawRect(cardLeft, cardTop, cardRight, cardBottom, 0x88000000);
             drawRect(cardLeft, cardTop, cardRight, cardTop + 1, 0x33FFFFFF);
@@ -113,7 +140,7 @@ public class GuiSupportedServers extends GuiScreen {
             this.fontRendererObj.drawString(data.serverName, textX, nameY, 0xFFFFFF);
             this.fontRendererObj.drawString(data.serverIP, textX, ipY, 0xCCCCCC);
 
-            y += ROW_HEIGHT;
+            y += rowHeight;
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

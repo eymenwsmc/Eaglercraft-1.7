@@ -13,7 +13,7 @@ public class GuiVideoSettings extends GuiScreen {
 			GameSettings.Options.GRAPHICS, GameSettings.Options.RENDER_DISTANCE, GameSettings.Options.AMBIENT_OCCLUSION,
 			GameSettings.Options.FRAMERATE_LIMIT, GameSettings.Options.ANAGLYPH, GameSettings.Options.VIEW_BOBBING,
 			GameSettings.Options.GUI_SCALE, GameSettings.Options.ADVANCED_OPENGL, GameSettings.Options.GAMMA,
-			GameSettings.Options.RENDER_CLOUDS, GameSettings.Options.PARTICLES, GameSettings.Options.USE_FULLSCREEN,
+			GameSettings.Options.RENDER_CLOUDS, GameSettings.Options.PARTICLES,
 			GameSettings.Options.ENABLE_VSYNC, GameSettings.Options.MIPMAP_LEVELS };
 	private static final String __OBFID = "CL_00000718";
 

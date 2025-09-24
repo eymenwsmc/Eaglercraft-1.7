@@ -23,7 +23,7 @@ public class Display {
 
 	private static long lastDPIUpdate = -250l;
 	private static float cacheDPI = 1.0f;
-	private static String title = "Minecraft 1.4.7";
+	private static String title = "Minecraft 1.7.10";
 
 	public static int getWidth() {
 		return PlatformInput.getWindowWidth();
@@ -152,7 +152,7 @@ public class Display {
 	}
 
 	public static String getTitle() {
-		return title != null ? title : "Minecraft 1.4.7";
+		return title != null ? title : "Minecraft 1.7.10";
 	}
 
 }

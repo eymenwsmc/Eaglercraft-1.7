@@ -134,9 +134,21 @@ public class PlatformRuntime {
 	}
 
 	public static void create() {
-		win = Window.current();
-		doc = win.getDocument();
-		PlatformApplication.setMCServerWindowGlobal(null);
+		try {
+			win = Window.current();
+			doc = win.getDocument();
+			PlatformApplication.setMCServerWindowGlobal(null);
+		} catch (Exception e) {
+			// Worker context'inde Window ve Document yok
+			logger.info("Running in worker context, skipping DOM initialization");
+			win = null;
+			doc = null;
+			try {
+				PlatformApplication.setMCServerWindowGlobal(null);
+			} catch (Exception e2) {
+				logger.info("Cannot set window global in worker context, skipping");
+			}
+		}
 		
 		ES6ShimStatus shimStatus = ES6ShimStatus.getRuntimeStatus();
 		if(shimStatus != null) {
@@ -164,6 +176,12 @@ public class PlatformRuntime {
 		}
 		
 		TeaVMBlobURLManager.initialize();
+		
+		// Worker context'inde DOM operasyonlarını atla
+		if (doc == null) {
+			logger.info("Running in worker context, skipping canvas and DOM setup");
+			return;
+		}
 		
 		logger.info("Creating main game canvas");
 		
