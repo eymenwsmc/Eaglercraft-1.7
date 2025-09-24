@@ -3,8 +3,18 @@ package net.eymenwsmc;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.lax1dude.eaglercraft.internal.EnumCursorType;
+import net.lax1dude.eaglercraft.sp.gui.GuiScreenLANConnect;
+import net.lax1dude.eaglercraft.sp.gui.GuiScreenLANInfo;
+import net.lax1dude.eaglercraft.sp.gui.GuiScreenLANNotSupported;
+import net.lax1dude.eaglercraft.sp.lan.LANServerController;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.input.Mouse;
 
 public class GuiFAQ extends GuiScreen {
@@ -25,7 +35,6 @@ public class GuiFAQ extends GuiScreen {
         this.buttonList.clear();
         this.items = new ArrayList<FAQItem>(FAQData.items());
 
-        this.buttonList.add(new GuiButton(BTN_BACK, this.width / 2 - 210, this.height - 28, 120, 20, "Back"));
         if (selectedIndex < 0 && !items.isEmpty()) selectedIndex = 0;
     }
 
@@ -54,6 +63,13 @@ public class GuiFAQ extends GuiScreen {
                 selectedIndex = idx;
             }
         }
+        String text = I18n.format("Back");
+		int w = mc.fontRenderer.getStringWidth(text);
+		if (mouseX > 2 && mouseY > 2 && mouseX < (w * 3 / 4) + 5 && mouseY < 12) {
+			mc.displayGuiScreen(parent);
+			mc.getSoundHandler().playSound(
+					PositionedSoundRecord.createPositionedSoundRecord(new ResourceLocation("gui.button.press"), 1.0F));
+		}
     }
 
     @Override
@@ -98,6 +114,15 @@ public class GuiFAQ extends GuiScreen {
             String clipped = this.fontRendererObj.trimStringToWidth(q, listW - 10);
             this.fontRendererObj.drawString(clipped, left + 6, top + 8, 0xFFFFFF);
         }
+        
+		String text = I18n.format("Back");
+		int w = mc.fontRenderer.getStringWidth(text);
+		boolean hover = mouseX > 1 && mouseY > 1 && mouseX < (w * 3 / 4) + 7 && mouseY < 12;
+		if (hover) {
+			Mouse.showCursor(EnumCursorType.HAND);
+		}
+
+		drawString(mc.fontRenderer, EnumChatFormatting.UNDERLINE + text, 5, 5, hover ? 0xFFEEEE22 : 0xFFCCCCCC);
 
         // Right viewer labels and content
         int rightX = leftPanelWidth + 16;
