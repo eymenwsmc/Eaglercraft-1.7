@@ -130,7 +130,6 @@ public class ChunkProviderServer implements IChunkProvider {
 			this.loadedChunks.add(var5);
 			var5.onChunkLoad();
 			
-			// Singleplayer chunk population fix - GÜVENLİ YAKLAŞIM
 			var5.populateChunk(this, this, p_73158_1_, p_73158_2_);
 		}
 

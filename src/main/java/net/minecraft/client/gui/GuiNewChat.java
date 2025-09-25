@@ -91,7 +91,6 @@ public class GuiNewChat extends Gui {
 					}
 				}
 
-				// Do not modify GL_ALPHA_TEST state here to avoid unintended transparency side-effects
 
 				if (var3) {
 					var9 = this.field_146247_f.fontRenderer.FONT_HEIGHT;

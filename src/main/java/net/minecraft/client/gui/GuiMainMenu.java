@@ -522,9 +522,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		this.mc.getTextureManager().bindTexture(backgroundTexture2);
 		this.rotateAndBlurSkybox(parFloat1);
 
-		// it is unintentionally discarded and the previous iteration is used
 
-		// this.rotateAndBlurSkybox(parFloat1);
 
 		_wglBindFramebuffer(0x8D40, null);
 

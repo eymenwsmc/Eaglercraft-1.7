@@ -149,7 +149,6 @@ public final class SpawnerAnimals {
 																return var5;
 															}
 
-															// Null check for entity creation
 															if (var41 == null) {
 																continue;
 															}
@@ -251,7 +250,6 @@ public final class SpawnerAnimals {
 								continue;
 							}
 
-							// Null check for entity creation
 							if (var22 == null) {
 								continue;
 							}
