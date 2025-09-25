@@ -26,7 +26,6 @@ public class PlayerUsageSnooper {
 	private final IPlayerUsage playerStatsCollector;
 
 	/** set to fire the snooperThread every 15 mins */
-	private final Timer threadTrigger = new Timer("Snooper Timer", true);
 	private final Object syncLock = new Object();
 	private final long minecraftStartTimeMilis;
 	private boolean isRunning;
@@ -53,29 +52,6 @@ public class PlayerUsageSnooper {
 		if (!this.isRunning) {
 			this.isRunning = true;
 			this.func_152766_h();
-			this.threadTrigger.schedule(new TimerTask() {
-				private static final String __OBFID = "CL_00001516";
-
-				public void run() {
-					if (PlayerUsageSnooper.this.playerStatsCollector.isSnooperEnabled()) {
-						HashMap var1;
-
-						synchronized (PlayerUsageSnooper.this.syncLock) {
-							var1 = new HashMap(PlayerUsageSnooper.this.field_152774_b);
-
-							if (PlayerUsageSnooper.this.selfCounter == 0) {
-								var1.putAll(PlayerUsageSnooper.this.field_152773_a);
-							}
-
-							var1.put("snooper_count",
-									Integer.valueOf(PlayerUsageSnooper.access$308(PlayerUsageSnooper.this)));
-							var1.put("snooper_token", PlayerUsageSnooper.this.uniqueID);
-						}
-
-						HttpUtil.func_151226_a(PlayerUsageSnooper.this.serverUrl, var1, true);
-					}
-				}
-			}, 0L, 900000L);
 		}
 	}
 
@@ -145,7 +121,6 @@ public class PlayerUsageSnooper {
 	}
 
 	public void stopSnooper() {
-		this.threadTrigger.cancel();
 	}
 
 	public String getUniqueID() {

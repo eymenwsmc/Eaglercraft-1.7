@@ -868,6 +868,10 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
 		float var9 = (float) (p_147281_1_.func_149030_m() * 360) / 256.0F;
 		EntityLivingBase var10 = (EntityLivingBase) EntityList.createEntityByID(p_147281_1_.func_149025_e(),
 				this.gameController.theWorld);
+		if (var10 == null) {
+			logger.warn("Skipping Entity with id {}", Integer.valueOf(p_147281_1_.func_149025_e()));
+			return;
+		}
 		var10.serverPosX = p_147281_1_.func_149023_f();
 		var10.serverPosY = p_147281_1_.func_149034_g();
 		var10.serverPosZ = p_147281_1_.func_149029_h();

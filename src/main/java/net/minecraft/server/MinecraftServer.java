@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import net.lax1dude.eaglercraft.EagRuntime;
+import net.lax1dude.eaglercraft.EagUtils;
 import net.lax1dude.eaglercraft.Random;
 import java.util.concurrent.Callable;
 
@@ -454,7 +457,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 						}
 					}
 
-					Thread.sleep(Math.max(1L, 50L - var50));
+					EagUtils.sleep(Math.max(1L, 50L - var50));
 					this.serverIsRunning = true;
 				}
 			} else {
@@ -630,16 +633,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
 	public boolean getAllowNether() {
 		return true;
-	}
-
-	public void startServerThread() {
-		(new Thread("Server thread") {
-			private static final String __OBFID = "CL_00001418";
-
-			public void run() {
-				MinecraftServer.this.run();
-			}
-		}).start();
 	}
 
 	/**

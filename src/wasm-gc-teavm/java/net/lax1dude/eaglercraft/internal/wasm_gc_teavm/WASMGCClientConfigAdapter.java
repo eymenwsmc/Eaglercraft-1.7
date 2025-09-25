@@ -21,7 +21,10 @@ import net.lax1dude.eaglercraft.internal.IClientConfigAdapterHooks;
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.opts.JSEaglercraftXOptsHooks;
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.opts.JSEaglercraftXOptsRoot;
 import net.lax1dude.eaglercraft.EaglercraftVersion;
+import net.lax1dude.eaglercraft.sp.relay.RelayEntry;
 import org.teavm.jso.JSObject;
+
+import java.util.List;
 
 public class WASMGCClientConfigAdapter implements IClientConfigAdapter {
 
@@ -168,5 +171,25 @@ public class WASMGCClientConfigAdapter implements IClientConfigAdapter {
 	@Override
 	public IClientConfigAdapterHooks getHooks() {
 		return hooks;
+	}
+
+	@Override
+	public boolean isEnableServerCookies() {
+		return false;
+	}
+
+	@Override
+	public List<RelayEntry> getRelays() {
+		return List.of();
+	}
+
+	@Override
+	public boolean isForceWebViewSupport() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnableWebViewCSP() {
+		return false;
 	}
 }

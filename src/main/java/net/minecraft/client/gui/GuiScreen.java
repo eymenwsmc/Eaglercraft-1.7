@@ -305,6 +305,13 @@ public class GuiScreen extends Gui {
 
 	public void func_146270_b(int p_146270_1_) {
 		if (this.mc.theWorld != null) {
+			GlStateManager.disableLighting();
+			GlStateManager.disableFog();
+			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
 			this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
 		} else {
 			this.func_146278_c(p_146270_1_);
@@ -312,7 +319,6 @@ public class GuiScreen extends Gui {
 	}
 
 	public void func_146278_c(int p_146278_1_) {
-		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_FOG);
 		Tessellator var2 = Tessellator.instance;
 		this.mc.getTextureManager().bindTexture(optionsBackground);

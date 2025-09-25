@@ -446,11 +446,10 @@ public class GuiIngame extends Gui {
 		    int maxNameWidth = 0;
 		    for (GuiPlayerInfo p : var42) {
 		        ScorePlayerTeam t = this.mc.theWorld.getScoreboard().getPlayersTeam(p.name);
-		        String nm = ScorePlayerTeam.formatPlayerName(t, p.name);
-		        maxNameWidth = Math.max(maxNameWidth, this.mc.fontRenderer.getStringWidth(nm));
+		        maxNameWidth = Math.max(maxNameWidth, var8.getStringWidth(ScorePlayerTeam.formatPlayerName(t, p.name)));
 		    }
-		    int var46 = Math.min(200, Math.max(120, maxNameWidth + 12));
-
+		    // Now compute the final column width based on the widest formatted name measured above
+		    int var46 = Math.min(Math.max(120, maxNameWidth + 30), Math.max(120, var6 - 20));
 		    int var19 = (var6 - columns * var46) / 2;
 		    int var47 = 10;
 
@@ -469,6 +468,16 @@ public class GuiIngame extends Gui {
 		        GuiPlayerInfo var48 = var42.get(i);
 		        ScorePlayerTeam var49 = this.mc.theWorld.getScoreboard().getPlayersTeam(var48.name);
 		        String var50 = ScorePlayerTeam.formatPlayerName(var49, var48.name);
+		        // If there are no color codes at all but the team defines a color, prepend it
+		        String stripped = StringUtils.stripControlCodes(var50);
+		        if (stripped == null) stripped = "";
+		        if (stripped.trim().isEmpty()) {
+		        	// Completely blank after stripping -> ensure visibility
+		        	var50 = EnumChatFormatting.RESET + var48.name;
+		        } else if (var49 != null && var50.equals(stripped)) {
+		        	// Team exists but formatted name contains no color codes -> apply team color prefix
+		        	var50 = var49.getColorPrefix() + var50;
+		        }
 		        var8.drawStringWithShadow(var50, var221, var231, 0xFFFFFF);
 
 		        if (var37 != null) {

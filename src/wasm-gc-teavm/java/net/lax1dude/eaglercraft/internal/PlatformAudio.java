@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.MathHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.teavm.interop.Address;
@@ -47,7 +48,6 @@ import net.lax1dude.eaglercraft.internal.buffer.WASMGCDirectArrayCopy;
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.BetterJSStringConverter;
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.JOrbisAudioBufferDecoder;
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.WASMGCClientConfigAdapter;
-import net.minecraft.src.MathHelper;
 import net.lax1dude.eaglercraft.EagRuntime;
 
 public class PlatformAudio {

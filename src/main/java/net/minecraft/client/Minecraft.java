@@ -360,21 +360,7 @@ public class Minecraft implements IPlayerUsage {
 	}
 
 	private void startTimerHackThread() {
-		Thread var1 = new Thread("Timer hack thread") {
-			private static final String __OBFID = "CL_00000632";
 
-			public void run() {
-				while (Minecraft.this.running) {
-					try {
-						Thread.sleep(2147483647L);
-					} catch (InterruptedException var2) {
-						;
-					}
-				}
-			}
-		};
-		var1.setDaemon(true);
-		var1.start();
 	}
 
 	public void crashed(CrashReport p_71404_1_) {
@@ -893,7 +879,6 @@ public class Minecraft implements IPlayerUsage {
 		GL11.glPopMatrix();
 		this.mcProfiler.startSection("root");
 		this.func_147120_f();
-		Thread.yield();
 		this.mcProfiler.startSection("stream");
 		this.mcProfiler.startSection("update");
 		this.mcProfiler.endStartSection("submit");
@@ -2312,9 +2297,6 @@ public class Minecraft implements IPlayerUsage {
 		return this.func_152343_a(Executors.callable(p_152344_1_));
 	}
 
-	public boolean func_152345_ab() {
-		return Thread.currentThread() == this.field_152352_aC;
-	}
 
 	public MinecraftSessionService func_152347_ac() {
 		return this.field_152355_az;

@@ -18,13 +18,7 @@ package net.lax1dude.eaglercraft.internal.buffer;
 
 import org.teavm.interop.Address;
 import org.teavm.interop.Import;
-import org.teavm.jso.typedarrays.Float32Array;
-import org.teavm.jso.typedarrays.Int16Array;
-import org.teavm.jso.typedarrays.Int32Array;
-import org.teavm.jso.typedarrays.Int8Array;
-import org.teavm.jso.typedarrays.Uint16Array;
-import org.teavm.jso.typedarrays.Uint8Array;
-import org.teavm.jso.typedarrays.Uint8ClampedArray;
+import org.teavm.jso.typedarrays.*;
 import org.teavm.runtime.heap.Heap;
 
 public class WASMGCBufferAllocator {
