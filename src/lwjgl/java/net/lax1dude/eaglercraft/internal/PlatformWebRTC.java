@@ -18,6 +18,8 @@ package net.lax1dude.eaglercraft.internal;
 
 import dev.onvoid.webrtc.*;
 import dev.onvoid.webrtc.internal.NativeLoader;
+import dev.onvoid.webrtc.media.audio.AudioDeviceModule;
+import dev.onvoid.webrtc.media.audio.AudioLayer;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.sp.internal.ClientPlatformSingleplayer;
 import net.lax1dude.eaglercraft.sp.lan.LANPeerEvent;
@@ -58,27 +60,124 @@ public class PlatformWebRTC {
 	}
 
 	public static PeerConnectionFactory pcFactory;
+	private static AudioDeviceModule audioDeviceModule;
 
+	private static final Object initLock = new Object();
+	private static Boolean nativeLibraryLoaded = null;
 	private static boolean supported = true;
 
-	public static boolean supported() {
-		if (supported && pcFactory == null) {
+	private static void markNativeLibraryLoaded() throws Exception {
+		Field f = NativeLoader.class.getDeclaredField("LOADED_LIB_SET");
+		f.setAccessible(true);
+		((Set<String>) f.get(null)).add("webrtc-java");
+	}
+
+	private static boolean loadNativeLibrary() {
+		if (nativeLibraryLoaded != null) {
+			return nativeLibraryLoaded.booleanValue();
+		}
+		synchronized (initLock) {
+			if (nativeLibraryLoaded != null) {
+				return nativeLibraryLoaded.booleanValue();
+			}
 			try {
-				System.load(Paths.get(SystemUtils.IS_OS_WINDOWS ? "webrtc-java.dll" : "libwebrtc-java.so")
-						.toAbsolutePath().toString());
-				Field f = NativeLoader.class.getDeclaredField("LOADED_LIB_SET");
-				f.setAccessible(true);
-				((Set<String>) f.get(null)).add("webrtc-java");
-				pcFactory = new PeerConnectionFactory();
-				Runtime.getRuntime().addShutdownHook(new Thread(() -> pcFactory.dispose()));
+				String libName = SystemUtils.IS_OS_WINDOWS ? "webrtc-java.dll" : "libwebrtc-java.so";
+				try {
+					System.load(Paths.get(libName).toAbsolutePath().toString());
+					markNativeLibraryLoaded();
+				} catch (Throwable localLoadErr) {
+					try {
+						NativeLoader.loadLibrary("webrtc-java");
+					} catch (Throwable jarLoadErr) {
+						localLoadErr.addSuppressed(jarLoadErr);
+						throw localLoadErr;
+					}
+				}
+				nativeLibraryLoaded = Boolean.TRUE;
 				supported = true;
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				logger.error("Failed to load WebRTC native library!");
 				logger.error(e);
+				nativeLibraryLoaded = Boolean.FALSE;
 				supported = false;
 			}
 		}
-		return supported;
+		return nativeLibraryLoaded.booleanValue();
+	}
+
+	private static void ensureFactory() {
+		if (!loadNativeLibrary()) {
+			throw new IllegalStateException("WebRTC native library is not available");
+		}
+		if (pcFactory == null) {
+			synchronized (initLock) {
+				if (pcFactory == null) {
+					audioDeviceModule = new AudioDeviceModule(AudioLayer.kDummyAudio);
+					pcFactory = new PeerConnectionFactory(audioDeviceModule);
+					Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+						if (pcFactory != null) {
+							pcFactory.dispose();
+							pcFactory = null;
+						}
+						if (audioDeviceModule != null) {
+							audioDeviceModule.dispose();
+							audioDeviceModule = null;
+						}
+					}));
+				}
+			}
+		}
+	}
+
+	public static boolean supported() {
+		return loadNativeLibrary();
+	}
+
+	public static boolean isInitialized() {
+		return pcFactory != null;
+	}
+
+	public static void releaseFactory() {
+		synchronized (initLock) {
+			if (rtcLANClient != null) {
+				try {
+					rtcLANClient.signalRemoteDisconnect(true);
+				} catch (Throwable ignored) {
+				}
+				rtcLANClient = null;
+			}
+			if (rtcLANServer != null) {
+				try {
+					rtcLANServer.signalRemoteDisconnect("");
+				} catch (Throwable ignored) {
+				}
+				rtcLANServer = null;
+			}
+			synchronized (serverLANEventBuffer) {
+				serverLANEventBuffer.clear();
+			}
+			synchronized (clientLANPacketBuffer) {
+				clientLANPacketBuffer.clear();
+			}
+			if (pcFactory != null) {
+				try {
+					pcFactory.dispose();
+				} catch (Throwable ignored) {
+				}
+				pcFactory = null;
+			}
+			if (audioDeviceModule != null) {
+				try {
+					audioDeviceModule.dispose();
+				} catch (Throwable ignored) {
+				}
+				audioDeviceModule = null;
+			}
+		}
+	}
+
+	private static void runOnMainThread(Runnable runnable) {
+		scheduleTask(-1L, runnable);
 	}
 
 	private static final Comparator<ScheduledRunnable> sortTasks = (r1, r2) -> {
@@ -161,45 +260,49 @@ public class PlatformWebRTC {
 					this.peerConnection = pcFactory.createPeerConnection(rtcConfig, new PeerConnectionObserver() {
 						@Override
 						public void onIceCandidate(RTCIceCandidate iceCandidate) {
-							synchronized (lock1) {
-								if (iceCandidate.sdp != null && !iceCandidate.sdp.isEmpty()) {
-									if (iceCandidates.isEmpty()) {
-										final int[] candidateState = new int[2];
-										final Runnable[] runnable = new Runnable[1];
-										scheduleTask(2000l, runnable[0] = () -> {
-											synchronized (lock1) {
-												if (peerConnection != null && peerConnection
-														.getConnectionState() != RTCPeerConnectionState.DISCONNECTED) {
-													int trial = ++candidateState[1];
-													if (candidateState[0] != iceCandidates.size() && trial < 3) {
-														candidateState[0] = iceCandidates.size();
-														scheduleTask(2000l, runnable[0]);
-														return;
+							runOnMainThread(() -> {
+								synchronized (lock1) {
+									if (iceCandidate.sdp != null && !iceCandidate.sdp.isEmpty()) {
+										if (iceCandidates.isEmpty()) {
+											final int[] candidateState = new int[2];
+											final Runnable[] runnable = new Runnable[1];
+											scheduleTask(2000l, runnable[0] = () -> {
+												synchronized (lock1) {
+													if (peerConnection != null && peerConnection
+															.getConnectionState() != RTCPeerConnectionState.DISCONNECTED) {
+														int trial = ++candidateState[1];
+														if (candidateState[0] != iceCandidates.size() && trial < 3) {
+															candidateState[0] = iceCandidates.size();
+															scheduleTask(2000l, runnable[0]);
+															return;
+														}
+														clientICECandidate = JSONWriter.valueToString(iceCandidates);
+														iceCandidates.clear();
 													}
-													clientICECandidate = JSONWriter.valueToString(iceCandidates);
-													iceCandidates.clear();
 												}
-											}
-										});
+											});
+										}
+										Map<String, String> m = new HashMap<>();
+										m.put("sdpMLineIndex", "" + iceCandidate.sdpMLineIndex);
+										m.put("candidate", iceCandidate.sdp);
+										iceCandidates.add(m);
 									}
-									Map<String, String> m = new HashMap<>();
-									m.put("sdpMLineIndex", "" + iceCandidate.sdpMLineIndex);
-									m.put("candidate", iceCandidate.sdp);
-									iceCandidates.add(m);
 								}
-							}
+							});
 						}
 
 						@Override
 						public void onConnectionChange(RTCPeerConnectionState connectionState) {
-							if (connectionState == RTCPeerConnectionState.DISCONNECTED) {
-								signalRemoteDisconnect(false);
-							} else if (connectionState == RTCPeerConnectionState.CONNECTED) {
-								readyState = READYSTATE_CONNECTED;
-							} else if (connectionState == RTCPeerConnectionState.FAILED) {
-								readyState = READYSTATE_FAILED;
-								signalRemoteDisconnect(false);
-							}
+							runOnMainThread(() -> {
+								if (connectionState == RTCPeerConnectionState.DISCONNECTED) {
+									signalRemoteDisconnect(false);
+								} else if (connectionState == RTCPeerConnectionState.CONNECTED) {
+									readyState = READYSTATE_CONNECTED;
+								} else if (connectionState == RTCPeerConnectionState.FAILED) {
+									readyState = READYSTATE_FAILED;
+									signalRemoteDisconnect(false);
+								}
+							});
 						}
 					});
 				}
@@ -251,27 +354,29 @@ public class PlatformWebRTC {
 
 				@Override
 				public void onStateChange() {
-					if (dataChannel != null && dataChannel.getState() == RTCDataChannelState.OPEN) {
-						final Runnable[] retry = new Runnable[1];
-						final int[] loopCount = new int[1];
-						scheduleTask(-1l, retry[0] = () -> {
-							f: {
-								synchronized (lock1) {
-									if (iceCandidates.isEmpty()) {
-										break f;
+					runOnMainThread(() -> {
+						if (dataChannel != null && dataChannel.getState() == RTCDataChannelState.OPEN) {
+							final Runnable[] retry = new Runnable[1];
+							final int[] loopCount = new int[1];
+							scheduleTask(-1l, retry[0] = () -> {
+								f: {
+									synchronized (lock1) {
+										if (iceCandidates.isEmpty()) {
+											break f;
+										}
 									}
+									if (++loopCount[0] < 5) {
+										scheduleTask(1000l, retry[0]);
+									}
+									return;
 								}
-								if (++loopCount[0] < 5) {
-									scheduleTask(1000l, retry[0]);
+								synchronized (lock2) {
+									clientDataChannelClosed = false;
+									clientDataChannelOpen = true;
 								}
-								return;
-							}
-							synchronized (lock2) {
-								clientDataChannelClosed = false;
-								clientDataChannelOpen = true;
-							}
-						});
-					}
+							});
+						}
+					});
 				}
 
 				@Override
@@ -280,38 +385,46 @@ public class PlatformWebRTC {
 						return;
 					byte[] data = new byte[buffer.data.remaining()];
 					buffer.data.get(data);
-					synchronized (clientLANPacketBuffer) {
-						clientLANPacketBuffer.add(data);
-					}
+					runOnMainThread(() -> {
+						synchronized (clientLANPacketBuffer) {
+							clientLANPacketBuffer.add(data);
+						}
+					});
 				}
 			});
 
 			peerConnection.createOffer(new RTCOfferOptions(), new CreateSessionDescriptionObserver() {
 				@Override
 				public void onSuccess(RTCSessionDescription desc) {
-					peerConnection.setLocalDescription(desc, new SetSessionDescriptionObserver() {
+					runOnMainThread(() -> peerConnection.setLocalDescription(desc, new SetSessionDescriptionObserver() {
 						@Override
 						public void onSuccess() {
-							JSONObject descJson = new JSONObject();
-							descJson.put("type", desc.sdpType.name().toLowerCase());
-							descJson.put("sdp", desc.sdp);
-							clientDescription = descJson.toString();
+							runOnMainThread(() -> {
+								JSONObject descJson = new JSONObject();
+								descJson.put("type", desc.sdpType.name().toLowerCase());
+								descJson.put("sdp", desc.sdp);
+								clientDescription = descJson.toString();
+							});
 						}
 
 						@Override
 						public void onFailure(String s) {
-							logger.error("Failed to set local description! {}", s);
-							readyState = READYSTATE_FAILED;
-							signalRemoteDisconnect(false);
+							runOnMainThread(() -> {
+								logger.error("Failed to set local description! {}", s);
+								readyState = READYSTATE_FAILED;
+								signalRemoteDisconnect(false);
+							});
 						}
-					});
+					}));
 				}
 
 				@Override
 				public void onFailure(String s) {
-					logger.error("Failed to set create offer! {}", s);
-					readyState = READYSTATE_FAILED;
-					signalRemoteDisconnect(false);
+					runOnMainThread(() -> {
+						logger.error("Failed to set create offer! {}", s);
+						readyState = READYSTATE_FAILED;
+						signalRemoteDisconnect(false);
+					});
 				}
 			});
 		}
@@ -330,9 +443,11 @@ public class PlatformWebRTC {
 
 							@Override
 							public void onFailure(String s) {
-								logger.error(s);
-								readyState = READYSTATE_FAILED;
-								signalRemoteDisconnect(false);
+								runOnMainThread(() -> {
+									logger.error(s);
+									readyState = READYSTATE_FAILED;
+									signalRemoteDisconnect(false);
+								});
 							}
 						});
 			} catch (Throwable t) {
@@ -411,49 +526,60 @@ public class PlatformWebRTC {
 						new SetSessionDescriptionObserver() {
 							@Override
 							public void onSuccess() {
-								if (remoteDesc.has("type") && "offer".equals(remoteDesc.getString("type"))) {
-									peerConnection.createAnswer(new RTCAnswerOptions(),
-											new CreateSessionDescriptionObserver() {
-												@Override
-												public void onSuccess(RTCSessionDescription desc) {
-													peerConnection.setLocalDescription(desc,
-															new SetSessionDescriptionObserver() {
-																@Override
-																public void onSuccess() {
-																	JSONObject descJson = new JSONObject();
-																	descJson.put("type",
-																			desc.sdpType.name().toLowerCase());
-																	descJson.put("sdp", desc.sdp);
-																	LANPeerEvent.LANPeerDescriptionEvent e = new LANPeerEvent.LANPeerDescriptionEvent(
-																			peerId, descJson.toString());
-																	synchronized (serverLANEventBuffer) {
-																		serverLANEventBuffer.put(peerId, e);
+								runOnMainThread(() -> {
+									if (remoteDesc.has("type") && "offer".equals(remoteDesc.getString("type"))) {
+										peerConnection.createAnswer(new RTCAnswerOptions(),
+												new CreateSessionDescriptionObserver() {
+													@Override
+													public void onSuccess(RTCSessionDescription desc) {
+														runOnMainThread(() -> peerConnection.setLocalDescription(desc,
+																new SetSessionDescriptionObserver() {
+																	@Override
+																	public void onSuccess() {
+																		runOnMainThread(() -> {
+																			JSONObject descJson = new JSONObject();
+																			descJson.put("type",
+																					desc.sdpType.name().toLowerCase());
+																			descJson.put("sdp", desc.sdp);
+																			LANPeerEvent.LANPeerDescriptionEvent e = new LANPeerEvent.LANPeerDescriptionEvent(
+																					peerId, descJson.toString());
+																			synchronized (serverLANEventBuffer) {
+																				serverLANEventBuffer.put(peerId, e);
+																			}
+																		});
 																	}
-																}
 
-																@Override
-																public void onFailure(String s) {
-																	logger.error(
-																			"Failed to set local description for \"{}\"! {}",
-																			peerId, s);
-																	client.signalRemoteDisconnect(peerId);
-																}
-															});
-												}
+																	@Override
+																	public void onFailure(String s) {
+																		runOnMainThread(() -> {
+																			logger.error(
+																					"Failed to set local description for \"{}\"! {}",
+																					peerId, s);
+																			client.signalRemoteDisconnect(peerId);
+																		});
+																	}
+																}));
+													}
 
-												@Override
-												public void onFailure(String s) {
-													logger.error("Failed to create answer for \"{}\"! {}", peerId, s);
-													client.signalRemoteDisconnect(peerId);
-												}
-											});
-								}
+													@Override
+													public void onFailure(String s) {
+														runOnMainThread(() -> {
+															logger.error("Failed to create answer for \"{}\"! {}",
+																	peerId, s);
+															client.signalRemoteDisconnect(peerId);
+														});
+													}
+												});
+									}
+								});
 							}
 
 							@Override
 							public void onFailure(String s) {
-								logger.error("Failed to set remote description for \"{}\"! {}", peerId, s);
-								client.signalRemoteDisconnect(peerId);
+								runOnMainThread(() -> {
+									logger.error("Failed to set remote description for \"{}\"! {}", peerId, s);
+									client.signalRemoteDisconnect(peerId);
+								});
 							}
 						});
 			} catch (Throwable err) {
@@ -561,103 +687,112 @@ public class PlatformWebRTC {
 				peerConnection[0] = pcFactory.createPeerConnection(rtcConfig, new PeerConnectionObserver() {
 					@Override
 					public void onIceCandidate(RTCIceCandidate iceCandidate) {
-						synchronized (lock3) {
-							if (iceCandidate.sdp != null && !iceCandidate.sdp.isEmpty()) {
-								if (iceCandidates.isEmpty()) {
-									final int[] candidateState = new int[2];
-									final Runnable[] runnable = new Runnable[1];
-									scheduleTask(2000l, runnable[0] = () -> {
-										synchronized (lock3) {
-											if (peerConnection[0] != null && peerConnection[0]
-													.getConnectionState() != RTCPeerConnectionState.DISCONNECTED) {
-												int trial = ++candidateState[1];
-												if (candidateState[0] != iceCandidates.size() && trial < 3) {
-													candidateState[0] = iceCandidates.size();
-													scheduleTask(2000l, runnable[0]);
-													return;
+						runOnMainThread(() -> {
+							synchronized (lock3) {
+								if (iceCandidate.sdp != null && !iceCandidate.sdp.isEmpty()) {
+									if (iceCandidates.isEmpty()) {
+										final int[] candidateState = new int[2];
+										final Runnable[] runnable = new Runnable[1];
+										scheduleTask(2000l, runnable[0] = () -> {
+											synchronized (lock3) {
+												if (peerConnection[0] != null && peerConnection[0]
+														.getConnectionState() != RTCPeerConnectionState.DISCONNECTED) {
+													int trial = ++candidateState[1];
+													if (candidateState[0] != iceCandidates.size() && trial < 3) {
+														candidateState[0] = iceCandidates.size();
+														scheduleTask(2000l, runnable[0]);
+														return;
+													}
+													LANPeerEvent.LANPeerICECandidateEvent e = new LANPeerEvent.LANPeerICECandidateEvent(
+															peerId, JSONWriter.valueToString(iceCandidates));
+													synchronized (serverLANEventBuffer) {
+														serverLANEventBuffer.put(peerId, e);
+													}
+													iceCandidates.clear();
 												}
-												LANPeerEvent.LANPeerICECandidateEvent e = new LANPeerEvent.LANPeerICECandidateEvent(
-														peerId, JSONWriter.valueToString(iceCandidates));
-												synchronized (serverLANEventBuffer) {
-													serverLANEventBuffer.put(peerId, e);
-												}
-												iceCandidates.clear();
 											}
-										}
-									});
+										});
+									}
+									Map<String, String> m = new HashMap<>();
+									m.put("sdpMLineIndex", "" + iceCandidate.sdpMLineIndex);
+									m.put("candidate", iceCandidate.sdp);
+									iceCandidates.add(m);
 								}
-								Map<String, String> m = new HashMap<>();
-								m.put("sdpMLineIndex", "" + iceCandidate.sdpMLineIndex);
-								m.put("candidate", iceCandidate.sdp);
-								iceCandidates.add(m);
 							}
-						}
+						});
 					}
 
 					@Override
 					public void onDataChannel(RTCDataChannel dataChannel) {
-						final Runnable[] retry = new Runnable[1];
-						final int[] loopCount = new int[1];
-						scheduleTask(-1l, retry[0] = () -> {
-							f: {
-								synchronized (lock3) {
-									if (iceCandidates.isEmpty()) {
-										break f;
-									}
-								}
-								if (++loopCount[0] < 5) {
-									scheduleTask(1000l, retry[0]);
-								}
-								return;
-							}
-							if (dataChannel == null)
-								return;
-							if (peerInstance[0].dataChannel != null) {
-								dataChannel.close();
-								return;
-							}
-							peerInstance[0].dataChannel = dataChannel;
-							synchronized (serverLANEventBuffer) {
-								serverLANEventBuffer.put(peerId, new LANPeerEvent.LANPeerDataChannelEvent(peerId));
-							}
-							dataChannel.registerObserver(new RTCDataChannelObserver() {
-								@Override
-								public void onBufferedAmountChange(long l) {
-									//
-								}
-
-								@Override
-								public void onStateChange() {
-									//
-								}
-
-								@Override
-								public void onMessage(RTCDataChannelBuffer buffer) {
-									if (!buffer.binary)
-										return;
-									byte[] data = new byte[buffer.data.remaining()];
-									buffer.data.get(data);
-									LANPeer peer = peerInstance[0];
-									if (peer.ipcChannel != null) {
-										ClientPlatformSingleplayer.sendPacket(new IPCPacketData(peer.ipcChannel, data));
-									} else {
-										LANPeerEvent.LANPeerPacketEvent e = new LANPeerEvent.LANPeerPacketEvent(peerId,
-												data);
-										synchronized (serverLANEventBuffer) {
-											serverLANEventBuffer.put(peerId, e);
+						runOnMainThread(() -> {
+							final Runnable[] retry = new Runnable[1];
+							final int[] loopCount = new int[1];
+							scheduleTask(-1l, retry[0] = () -> {
+								f: {
+									synchronized (lock3) {
+										if (iceCandidates.isEmpty()) {
+											break f;
 										}
 									}
+									if (++loopCount[0] < 5) {
+										scheduleTask(1000l, retry[0]);
+									}
+									return;
 								}
+								if (dataChannel == null)
+									return;
+								if (peerInstance[0].dataChannel != null) {
+									dataChannel.close();
+									return;
+								}
+								peerInstance[0].dataChannel = dataChannel;
+								synchronized (serverLANEventBuffer) {
+									serverLANEventBuffer.put(peerId, new LANPeerEvent.LANPeerDataChannelEvent(peerId));
+								}
+								dataChannel.registerObserver(new RTCDataChannelObserver() {
+									@Override
+									public void onBufferedAmountChange(long l) {
+										//
+									}
+
+									@Override
+									public void onStateChange() {
+										//
+									}
+
+									@Override
+									public void onMessage(RTCDataChannelBuffer buffer) {
+										if (!buffer.binary)
+											return;
+										byte[] data = new byte[buffer.data.remaining()];
+										buffer.data.get(data);
+										runOnMainThread(() -> {
+											LANPeer peer = peerInstance[0];
+											if (peer.ipcChannel != null) {
+												ClientPlatformSingleplayer.sendPacket(
+														new IPCPacketData(peer.ipcChannel, data));
+											} else {
+												LANPeerEvent.LANPeerPacketEvent e = new LANPeerEvent.LANPeerPacketEvent(
+														peerId, data);
+												synchronized (serverLANEventBuffer) {
+													serverLANEventBuffer.put(peerId, e);
+												}
+											}
+										});
+									}
+								});
 							});
 						});
 					}
 
 					@Override
 					public void onConnectionChange(RTCPeerConnectionState connectionState) {
-						if (connectionState == RTCPeerConnectionState.DISCONNECTED
-								|| connectionState == RTCPeerConnectionState.FAILED) {
-							LANServer.this.signalRemoteDisconnect(peerId);
-						}
+						runOnMainThread(() -> {
+							if (connectionState == RTCPeerConnectionState.DISCONNECTED
+									|| connectionState == RTCPeerConnectionState.FAILED) {
+								LANServer.this.signalRemoteDisconnect(peerId);
+							}
+						});
 					}
 				});
 				peerInstance[0] = new LANPeer(this, peerId, peerConnection[0]);
@@ -752,6 +887,7 @@ public class PlatformWebRTC {
 	private static LANClient rtcLANClient = null;
 
 	public static void startRTCLANClient() {
+		ensureFactory();
 		if (rtcLANClient == null) {
 			rtcLANClient = new LANClient();
 		}
@@ -861,6 +997,7 @@ public class PlatformWebRTC {
 	private static LANServer rtcLANServer = null;
 
 	public static void startRTCLANServer() {
+		ensureFactory();
 		if (rtcLANServer == null) {
 			rtcLANServer = new LANServer();
 		}

@@ -22,6 +22,7 @@ import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.opts.JSEaglercraftXOptsHo
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.opts.JSEaglercraftXOptsRoot;
 import net.lax1dude.eaglercraft.EaglercraftVersion;
 import net.lax1dude.eaglercraft.sp.relay.RelayEntry;
+import org.json.JSONObject;
 import org.teavm.jso.JSObject;
 
 import java.util.List;
@@ -191,5 +192,10 @@ public class WASMGCClientConfigAdapter implements IClientConfigAdapter {
 	@Override
 	public boolean isEnableWebViewCSP() {
 		return false;
+	}
+
+	@Override
+	public JSONObject getIntegratedServerOpts() {
+		return null;
 	}
 }

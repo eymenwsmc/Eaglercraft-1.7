@@ -168,23 +168,24 @@ public class EaglerIntegratedServerWorker {
 						newWorldSettings == null ? GameType.SURVIVAL : newWorldSettings.getGameType());
 				currentProcess.startServer();
 
+				String worldNameOnly = VFile2.splitPath(pkt.worldName)[VFile2.splitPath(pkt.worldName).length - 1];
 				String[] worlds = EaglerSaveFormat.worldsList.getAllLines();
 				if (worlds == null || (worlds.length == 1 && worlds[0].trim().length() <= 0)) {
 					worlds = null;
 				}
 				if (worlds == null) {
-					EaglerSaveFormat.worldsList.setAllChars(pkt.worldName);
+					EaglerSaveFormat.worldsList.setAllChars(worldNameOnly);
 				} else {
 					boolean found = false;
 					for (int i = 0; i < worlds.length; ++i) {
-						if (worlds[i].equals(pkt.worldName)) {
+						if (worlds[i].equals(worldNameOnly) || worlds[i].equals(pkt.worldName)) {
 							found = true;
 							break;
 						}
 					}
 					if (!found) {
 						String[] s = new String[worlds.length + 1];
-						s[0] = pkt.worldName;
+						s[0] = worldNameOnly;
 						System.arraycopy(worlds, 0, s, 1, worlds.length);
 						EaglerSaveFormat.worldsList.setAllChars(String.join("\n", s));
 					}
@@ -219,7 +220,8 @@ public class EaglerIntegratedServerWorker {
 			case IPCPacket03DeleteWorld.ID: {
 				tryStopServer();
 				IPCPacket03DeleteWorld pkt = (IPCPacket03DeleteWorld) ipc;
-				if (!saveFormat.deleteWorldDirectory(pkt.worldName)) {
+				String worldNameOnly = VFile2.splitPath(pkt.worldName)[VFile2.splitPath(pkt.worldName).length - 1];
+				if (!saveFormat.deleteWorldDirectory(worldNameOnly)) {
 					sendTaskFailed();
 					break;
 				}
@@ -228,7 +230,7 @@ public class EaglerIntegratedServerWorker {
 					List<String> newWorlds = new ArrayList<>();
 					for (int i = 0; i < worldsTxt.length; ++i) {
 						String str = worldsTxt[i];
-						if (!str.equalsIgnoreCase(pkt.worldName)) {
+						if (!str.equalsIgnoreCase(worldNameOnly) && !str.equalsIgnoreCase(pkt.worldName)) {
 							newWorlds.add(str);
 						}
 					}
@@ -240,10 +242,11 @@ public class EaglerIntegratedServerWorker {
 			case IPCPacket05RequestData.ID: {
 				tryStopServer();
 				IPCPacket05RequestData pkt = (IPCPacket05RequestData) ipc;
+				String worldNameOnly = VFile2.splitPath(pkt.worldName)[VFile2.splitPath(pkt.worldName).length - 1];
 				if (pkt.request == IPCPacket05RequestData.REQUEST_LEVEL_EAG) {
-					sendIPCPacket(new IPCPacket09RequestResponse(WorldConverterEPK.exportWorld(pkt.worldName)));
+					sendIPCPacket(new IPCPacket09RequestResponse(WorldConverterEPK.exportWorld(worldNameOnly)));
 				} else if (pkt.request == IPCPacket05RequestData.REQUEST_LEVEL_MCA) {
-					sendIPCPacket(new IPCPacket09RequestResponse(WorldConverterMCA.exportWorld(pkt.worldName)));
+					sendIPCPacket(new IPCPacket09RequestResponse(WorldConverterMCA.exportWorld(worldNameOnly)));
 				} else {
 					logger.error("Unknown IPCPacket05RequestData type {}", ((int) pkt.request & 0xFF));
 					sendTaskFailed();
@@ -253,11 +256,12 @@ public class EaglerIntegratedServerWorker {
 			case IPCPacket06RenameWorldNBT.ID: {
 				tryStopServer();
 				IPCPacket06RenameWorldNBT pkt = (IPCPacket06RenameWorldNBT) ipc;
+				String worldNameOnly = VFile2.splitPath(pkt.worldName)[VFile2.splitPath(pkt.worldName).length - 1];
 				boolean b = false;
 				if (pkt.duplicate) {
-					b = saveFormat.duplicateWorld(pkt.worldName, pkt.displayName);
+					b = saveFormat.duplicateWorld(worldNameOnly, pkt.displayName);
 				} else {
-					b = saveFormat.renameWorld(pkt.worldName, pkt.displayName);
+					b = saveFormat.renameWorld(worldNameOnly, pkt.displayName);
 				}
 				if (!b) {
 					sendTaskFailed();
@@ -400,8 +404,11 @@ public class EaglerIntegratedServerWorker {
 
 				IPCPacket17ConfigureLAN pkt = (IPCPacket17ConfigureLAN) ipc;
 
-				// currentProcess.getConfigurationManager().configureLAN(pkt.gamemode,
-				// pkt.cheats); // don't use iceServers
+				if (!isServerStopped()) {
+					currentProcess.getConfigurationManager()
+							.func_152604_a(net.minecraft.world.WorldSettings.GameType.getByID(pkt.gamemode));
+					currentProcess.getConfigurationManager().setCommandsAllowedForAll(pkt.cheats);
+				}
 
 				break;
 			}

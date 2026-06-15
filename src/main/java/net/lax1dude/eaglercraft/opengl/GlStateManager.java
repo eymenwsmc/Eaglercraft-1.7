@@ -264,7 +264,6 @@ public class GlStateManager extends RealOpenGLEnums {
 	}
 
 	public static void glScissor(int x, int y, int width, int height) {
-	  _wglScissor(x, y, width, height);
 	}
 	public static void alphaFunc(int func, float ref) {
 		if (func != GL_GREATER) {

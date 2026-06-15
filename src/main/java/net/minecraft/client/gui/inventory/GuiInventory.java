@@ -104,7 +104,7 @@ public class GuiInventory extends InventoryEffectRenderer {
 		rendermanager.func_147940_a(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
 
 		if (ent instanceof net.minecraft.client.entity.AbstractClientPlayer) {
-			((net.minecraft.client.entity.AbstractClientPlayer) ent).setHideCape(1, hideCape);
+		        ((net.minecraft.client.entity.AbstractClientPlayer) ent).setHideCape(1, hideCape);
 		}
 		ent.renderYawOffset = f;
 		ent.rotationYaw = f1;
@@ -117,6 +117,8 @@ public class GuiInventory extends InventoryEffectRenderer {
 		GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 		GlStateManager.disableTexture2D();
 		GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+		GlStateManager.enableTexture2D();
+		GlStateManager.disableColorMaterial();
 	}
 
 	protected void actionPerformed(GuiButton p_146284_1_) {

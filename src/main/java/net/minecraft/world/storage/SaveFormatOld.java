@@ -123,24 +123,22 @@ public class SaveFormatOld implements ISaveFormat {
 	public boolean renameWorld(String dirName, String newName) {
 		VFile2 file1 = WorldsDB.newVFile(this.savesDirectory, dirName);
 		VFile2 file2 = WorldsDB.newVFile(file1, "level.dat");
-		{
-			if (file2.exists()) {
-				try {
-					NBTTagCompound nbttagcompound;
-					try (InputStream is = file2.getInputStream()) {
-						nbttagcompound = CompressedStreamTools.readCompressed(is);
-					}
-					NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("Data");
-					nbttagcompound1.setString("LevelName", newName);
-					try (OutputStream os = file2.getOutputStream()) {
-						CompressedStreamTools.writeCompressed(nbttagcompound, os);
-					}
-				} catch (Throwable exception) {
-					logger.error("Failed to rename world \"{}\"!", dirName);
-					logger.error(exception);
+		if (file2.exists()) {
+			try {
+				NBTTagCompound nbttagcompound;
+				try (InputStream is = file2.getInputStream()) {
+					nbttagcompound = CompressedStreamTools.readCompressed(is);
 				}
+				NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("Data");
+				nbttagcompound1.setString("LevelName", newName);
+				try (OutputStream os = file2.getOutputStream()) {
+					CompressedStreamTools.writeCompressed(nbttagcompound, os);
+				}
+				return true;
+			} catch (Throwable exception) {
+				logger.error("Failed to rename world \"{}\"!", dirName);
+				logger.error(exception);
 			}
-
 		}
 		return false;
 	}

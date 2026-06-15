@@ -43,9 +43,9 @@ public class EaglerMinecraftServer extends MinecraftServer {
 
 	public EaglerMinecraftServer(String world, String owner, int viewDistance, WorldSettings currentWorldSettings,
 			boolean demo) {
-		// Use empty base directory - worlds stored directly in WorldsDB filesystem
-		super(new VFile2(""), null);
-		this.saveHandler = new EaglerSaveHandler(new VFile2(""), world);
+		// Use 'worlds' base directory to be consistent with Eaglercraft structure
+		super(WorldsDB.newVFile("worlds"), null);
+		this.saveHandler = new EaglerSaveHandler(WorldsDB.newVFile("worlds"), world);
 		Bootstrap.func_151354_b();
 		EaglerPlayerList playerList = new EaglerPlayerList(this, viewDistance);
 		this.setServerOwner(owner);
@@ -56,7 +56,7 @@ public class EaglerMinecraftServer extends MinecraftServer {
 		this.serverConfigManager = (playerList);
 		this.newWorldSettings = currentWorldSettings;
 		// Set only the world name (not path) for folderName and worldName
-		String worldNameOnly = new File(world).getName();
+		String worldNameOnly = VFile2.splitPath(world)[VFile2.splitPath(world).length - 1];
 		this.setFolderName(worldNameOnly);
 		this.setWorldName(worldNameOnly);
 	}
@@ -96,8 +96,12 @@ public class EaglerMinecraftServer extends MinecraftServer {
 
 		this.setUserMessage("menu.generatingTerrain");
 		logger.info("Preparing minimal start region for Eagler integrated server");
-		int radiusBlocks = 48;
-		int chunksPerAxis = radiusBlocks * 2 / 16 + 1;
+		int viewDistance = this.getConfigurationManager().getViewDistance();
+		if (viewDistance < 3) viewDistance = 3;
+		if (viewDistance > 12) viewDistance = 12; // Cap at 12 for performance
+		
+		int radiusBlocks = viewDistance * 16;
+		int chunksPerAxis = (radiusBlocks * 2) / 16 + 1;
 		int totalChunks = chunksPerAxis * chunksPerAxis;
 		int loadedChunks = 0;
 		long lastProgress = MinecraftServer.getCurrentTimeMillis();
@@ -108,20 +112,20 @@ public class EaglerMinecraftServer extends MinecraftServer {
 				long now = MinecraftServer.getCurrentTimeMillis();
 
 				if (now - lastProgress > 250L) {
-					this.outputPercentRemaining("Preparing spawn area", loadedChunks * 100 / totalChunks);
+					this.outputPercentRemaining("Preparing spawn area", (loadedChunks * 100) / totalChunks);
 					lastProgress = now;
 				}
 
 				++loadedChunks;
-				worldServer.theChunkProviderServer.loadChunk(spawn.posX + x >> 4, spawn.posZ + z >> 4);
+				worldServer.theChunkProviderServer.loadChunk((spawn.posX + x) >> 4, (spawn.posZ + z) >> 4);
 			}
 		}
 
 		List<net.minecraft.world.ChunkCoordIntPair> chunksToPopulate = new LinkedList<net.minecraft.world.ChunkCoordIntPair>();
 		for (int x = -radiusBlocks; x <= radiusBlocks && this.isServerRunning(); x += 16) {
 			for (int z = -radiusBlocks; z <= radiusBlocks && this.isServerRunning(); z += 16) {
-				int chunkX = spawn.posX + x >> 4;
-				int chunkZ = spawn.posZ + z >> 4;
+				int chunkX = (spawn.posX + x) >> 4;
+				int chunkZ = (spawn.posZ + z) >> 4;
 				net.minecraft.world.chunk.Chunk chunk = worldServer.theChunkProviderServer.loadChunk(chunkX, chunkZ);
 				if (chunk != null && !chunk.isTerrainPopulated) {
 					chunksToPopulate.add(new net.minecraft.world.ChunkCoordIntPair(chunkX, chunkZ));
@@ -140,6 +144,9 @@ public class EaglerMinecraftServer extends MinecraftServer {
 
 		EaglerIntegratedServerWorker.sendProgress("singleplayer.busy.startingIntegratedServer", 1.0f);
 		this.clearCurrentTask();
+		
+		// Reset currentTime after initial load to prevent massive TPS catch-up spikes
+		this.currentTime = MinecraftServer.getCurrentTimeMillis();
 	}
 
 	public void mainLoop(boolean singleThreadMode) {

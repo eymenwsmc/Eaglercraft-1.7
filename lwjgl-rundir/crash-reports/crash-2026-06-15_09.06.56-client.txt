@@ -1,0 +1,71 @@
+---- Minecraft Crash Report ----
+// There are four lights!
+
+Time: 15.06.2026 09:06
+Description: Unexpected error
+
+java.lang.NullPointerException: Cannot read field "item" because the return value of "java.util.LinkedList.node(int)" is null
+	at java.base/java.util.LinkedList.get(LinkedList.java:488)
+	at net.lax1dude.eaglercraft.sp.socket.ClientIntegratedServerNetworkManager.processReceivedPackets(ClientIntegratedServerNetworkManager.java:104)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.updateController(PlayerControllerMP.java:307)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1343)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:819)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:759)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at java.base/java.util.LinkedList.get(LinkedList.java:488)
+	at net.lax1dude.eaglercraft.sp.socket.ClientIntegratedServerNetworkManager.processReceivedPackets(ClientIntegratedServerNetworkManager.java:104)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.updateController(PlayerControllerMP.java:307)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['eymenwsmc'/3399, l='MpServer', x=-223,96, y=65,62, z=-10,81]]
+	Chunk stats: MultiplayerChunkCache: 213, 213
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-188,64,212), Chunk: (at 4,4,4 in -12,13; contains blocks -192,0,208 to -177,255,223), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 12036 game time, 12036 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 53 total; [EntityBat['Bat'/28945, l='MpServer', x=-181,54, y=43,45, z=-20,75], EntitySpider['Spider'/22808, l='MpServer', x=-261,06, y=30,00, z=53,03], EntityItem['item.item.seeds'/18721, l='MpServer', x=-244,50, y=60,12, z=-57,16], EntityCreeper['Creeper'/29989, l='MpServer', x=-248,50, y=32,00, z=63,50], EntitySkeleton['Skeleton'/29990, l='MpServer', x=-247,50, y=32,00, z=61,50], EntitySkeleton['Skeleton'/29991, l='MpServer', x=-246,50, y=32,00, z=65,50], EntitySkeleton['Skeleton'/29992, l='MpServer', x=-247,50, y=32,00, z=65,50], EntityPig['Pig'/17964, l='MpServer', x=-279,50, y=64,00, z=-54,50], EntityPig['Pig'/17965, l='MpServer', x=-279,50, y=64,00, z=-54,50], EntityPig['Pig'/17966, l='MpServer', x=-276,50, y=62,00, z=-52,50], EntityPig['Pig'/17967, l='MpServer', x=-278,50, y=62,00, z=-51,50], EntityZombie['Zombie'/29760, l='MpServer', x=-149,50, y=25,00, z=20,50], EntityXPOrb['Experience Orb'/14407, l='MpServer', x=-1703,00, y=2016,00, z=3597,00], EntityPig['Pig'/17997, l='MpServer', x=-289,78, y=73,00, z=25,22], EntityClientPlayerMP['eymenwsmc'/3399, l='MpServer', x=-223,96, y=65,62, z=-10,81], EntityPig['Pig'/17998, l='MpServer', x=-288,19, y=73,00, z=26,81], EntityXPOrb['Experience Orb'/30030, l='MpServer', x=-266,66, y=64,25, z=-3,03], EntitySkeleton['Skeleton'/28494, l='MpServer', x=-177,09, y=48,00, z=58,50], EntityPig['Pig'/17999, l='MpServer', x=-288,50, y=74,00, z=24,50], EntityXPOrb['Experience Orb'/15696, l='MpServer', x=-2567,00, y=2016,00, z=1162,00], EntityPig['Pig'/18000, l='MpServer', x=-291,50, y=72,00, z=26,50], EntitySheep['Sheep'/18001, l='MpServer', x=-298,25, y=72,00, z=5,16], EntitySheep['Sheep'/18002, l='MpServer', x=-291,50, y=73,00, z=9,50], EntitySheep['Sheep'/18003, l='MpServer', x=-289,50, y=74,00, z=11,50], EntitySheep['Sheep'/18004, l='MpServer', x=-287,50, y=74,00, z=13,50], EntityPig['Pig'/25436, l='MpServer', x=-208,59, y=63,00, z=-80,12], EntityItem['item.item.seeds'/18302, l='MpServer', x=-174,50, y=63,12, z=-41,03], EntityPig['Pig'/17280, l='MpServer', x=-206,53, y=64,00, z=-15,04], EntityPig['Pig'/17281, l='MpServer', x=-214,84, y=66,00, z=-2,66], EntityPig['Pig'/17282, l='MpServer', x=-221,41, y=64,00, z=-15,78], EntityPig['Pig'/17283, l='MpServer', x=-214,62, y=64,00, z=-9,00], EntityPig['Pig'/17036, l='MpServer', x=-200,50, y=63,00, z=-72,50], EntityPig['Pig'/17037, l='MpServer', x=-204,31, y=63,00, z=-77,84], EntityItem['item.item.seeds'/19342, l='MpServer', x=-242,78, y=62,12, z=-60,25], EntityZombie['Zombie'/23442, l='MpServer', x=-197,50, y=14,00, z=41,50], EntityEnderman['Enderman'/23460, l='MpServer', x=-252,50, y=15,00, z=-77,50], EntityItem['item.item.seeds'/25518, l='MpServer', x=-248,94, y=64,12, z=-64,50], EntityZombie['Zombie'/23234, l='MpServer', x=-259,50, y=16,00, z=-65,50], EntityPig['Pig'/18132, l='MpServer', x=-285,59, y=65,00, z=-24,22], EntityPig['Pig'/18133, l='MpServer', x=-294,62, y=64,00, z=-29,25], EntityPig['Pig'/18134, l='MpServer', x=-284,16, y=65,00, z=-23,78], EntityPig['Pig'/18135, l='MpServer', x=-292,16, y=65,00, z=-29,91], EntityPig['Pig'/18136, l='MpServer', x=-295,50, y=77,00, z=66,53], EntityPig['Pig'/18137, l='MpServer', x=-295,50, y=77,00, z=65,19], EntityPig['Pig'/18138, l='MpServer', x=-295,50, y=87,00, z=61,50], EntityPig['Pig'/18139, l='MpServer', x=-292,50, y=80,00, z=62,50], EntityCreeper['Creeper'/29675, l='MpServer', x=-185,50, y=25,00, z=2,50], EntityCreeper['Creeper'/29933, l='MpServer', x=-250,00, y=12,00, z=9,59], EntitySquid['Squid'/23789, l='MpServer', x=-192,88, y=56,22, z=-74,19], EntitySquid['Squid'/23790, l='MpServer', x=-195,50, y=56,00, z=-76,66], EntitySquid['Squid'/23791, l='MpServer', x=-190,50, y=57,34, z=-76,72], EntityBat['Bat'/25080, l='MpServer', x=-249,59, y=15,00, z=-66,68], EntityCreeper['Creeper'/25081, l='MpServer', x=-251,50, y=15,00, z=-81,50]]
+	Retry entities: 11 total; [EntityXPOrb['Experience Orb'/15696, l='MpServer', x=-2567,00, y=2016,00, z=1162,00], EntityXPOrb['Experience Orb'/16566, l='MpServer', x=-2707,00, y=2016,00, z=1081,00], EntityXPOrb['Experience Orb'/16966, l='MpServer', x=-2628,00, y=2048,00, z=910,00], EntityXPOrb['Experience Orb'/14407, l='MpServer', x=-1703,00, y=2016,00, z=3597,00], EntityXPOrb['Experience Orb'/16567, l='MpServer', x=-2707,00, y=2016,00, z=1081,00], EntityXPOrb['Experience Orb'/29591, l='MpServer', x=-8018,00, y=2144,00, z=366,00], EntityXPOrb['Experience Orb'/30233, l='MpServer', x=-7522,00, y=2048,00, z=-545,00], EntityXPOrb['Experience Orb'/16332, l='MpServer', x=-2088,00, y=2048,00, z=922,00], EntityXPOrb['Experience Orb'/29324, l='MpServer', x=-7729,00, y=2080,00, z=386,00], EntityXPOrb['Experience Orb'/29325, l='MpServer', x=-7729,00, y=2080,00, z=386,00], EntityXPOrb['Experience Orb'/30030, l='MpServer', x=-266,66, y=64,25, z=-3,03]]
+	Server brand: vanilla
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:367)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2088)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:780)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Linux (amd64) version 6.18.7-200.fc43.x86_64
+	Java Version: 21.0.9, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 199903184 bytes (190 MB) / 486539264 bytes (464 MB) up to 4116709376 bytes (3926 MB)
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 1, tcache: 1, allocated: 12, tallocated: 94
+	Launched Version: 1.7.10
+	LWJGL: 2.9.4
+	OpenGL: Mesa Intel(R) Iris(R) Xe Graphics (ADL GT2) GL version OpenGL ES 3.2 Mesa 26.0.6 (git-0e095aab43), Intel
+	Is Modded: vanilla
+	Type: Client (map_client.txt)
+	Resource Packs: [Xray Ultimate 1_8]
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

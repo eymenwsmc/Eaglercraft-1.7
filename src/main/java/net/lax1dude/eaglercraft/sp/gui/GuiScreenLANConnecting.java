@@ -67,6 +67,9 @@ public class GuiScreenLANConnecting extends GuiScreen {
 	}
 
 	public void updateScreen() {
+		if (PlatformWebRTC.isInitialized()) {
+			PlatformWebRTC.runScheduledTasks();
+		}
 		if (networkManager != null) {
 			if (networkManager.isChannelOpen()) {
 				try {

@@ -44,20 +44,26 @@ public class RelayManager {
 	private long lastPingThrough = 0l;
 
 	public void load(byte[] relayConfig) {
+        logger.info("Loading relay config. Config is null: {}", (relayConfig == null));
 		NBTTagCompound relays = null;
 		if (relayConfig != null) {
 			try {
 				relays = CompressedStreamTools.readCompressed(new EaglerInputStream(relayConfig));
+                logger.info("Successfully read compressed relay NBT.");
 			} catch (IOException ex) {
+                logger.error("Failed to read compressed relay NBT, loading defaults.", ex);
 			}
 		}
 		if (relays != null && relays.hasKey("relays")) {
+            logger.info("Relay NBT has 'relays' key. Loading list.");
 			load(relays.getTagList("relays", 10));
 			if (!relays.getBoolean("f")) {
 				fixBullshit();
 			}
 		} else {
-			sort(); // loads defaults
+            logger.info("Relay config missing or invalid. Loading defaults.");
+			loadDefaults(); // Ensure defaults are loaded if config is missing/invalid
+			sort(); 
 			save();
 		}
 	}
@@ -376,16 +382,20 @@ public class RelayManager {
 
 	public void loadDefaults() {
 		List<RelayEntry> defaultRelays = EagRuntime.getConfiguration().getRelays();
-		eee: for (int i = 0, l = defaultRelays.size(); i < l; ++i) {
-			RelayEntry etr = defaultRelays.get(i);
-			for (int j = 0, l2 = relays.size(); j < l2; ++j) {
-				if (relays.get(j).address.equalsIgnoreCase(etr.address)) {
-					continue eee;
+		for (RelayEntry etr : defaultRelays) {
+			boolean exists = false;
+			for (RelayServer srv : relays) {
+				if (srv.address.equalsIgnoreCase(etr.address)) {
+					exists = true;
+					break;
 				}
 			}
-			relays.add(new RelayServer(etr));
+			if (!exists) {
+				relays.add(new RelayServer(etr));
+			}
 		}
 		sort();
+        save(); // Ensure they are saved immediately
 	}
 
 	public String makeNewRelayName() {

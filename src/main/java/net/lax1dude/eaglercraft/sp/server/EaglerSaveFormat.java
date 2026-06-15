@@ -37,8 +37,7 @@ public class EaglerSaveFormat extends SaveFormatOld {
 	}
 
 	public static final VFile2 worldsList = WorldsDB.newVFile("worlds_list.txt");
-	// Empty string - parent class SaveFormatOld will handle the directory structure
-	public static final VFile2 worldsFolder = new VFile2("");
+	public static final VFile2 worldsFolder = WorldsDB.newVFile("worlds");
 
 	public String getName() {
 		return "eagler";

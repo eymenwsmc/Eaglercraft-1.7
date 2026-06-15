@@ -67,6 +67,13 @@ public class GuiScreenRelay extends GuiScreen implements GuiYesNoCallback {
 			hasPinged = true;
 			slots.relayManager.ping();
 		}
+		slots.relayManager.loadDefaults();
+		long millis = EagRuntime.steadyTimeMillis();
+		if(millis - lastRefresh > 700l) {
+			lastRefresh = millis;
+			slots.relayManager.ping();
+		}
+		lastRefresh += 60l;
 	}
 
 	void updateButtons() {
@@ -136,7 +143,7 @@ public class GuiScreenRelay extends GuiScreen implements GuiYesNoCallback {
 	public void drawScreen(int par1, int par2, float par3) {
 		mx = par1;
 		my = par2;
-		slots.drawSlot(par1, par2, (int) par3);
+		slots.func_148128_a(par1, par2, par3);
 
 		if(tooltipString != null) {
 			int ww = mc.fontRenderer.getStringWidth(tooltipString);

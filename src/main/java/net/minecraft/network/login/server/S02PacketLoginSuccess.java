@@ -69,7 +69,7 @@ public class S02PacketLoginSuccess extends Packet<INetHandlerLoginClient> {
 
 	@Override
 	public void processPacket(INetHandler p_148833_1_) {
-
+		this.processPacket((INetHandlerLoginClient) p_148833_1_);
 	}
 
 	/**

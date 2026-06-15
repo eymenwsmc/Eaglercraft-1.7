@@ -121,7 +121,7 @@ public class StatBase {
 	public IChatComponent func_150955_j() {
 		IChatComponent var1 = this.func_150951_e();
 		IChatComponent var2 = (new ChatComponentText("[")).appendSibling(var1).appendText("]");
-		var2.setChatStyle(var1.getChatStyle());
+		var2.setChatStyle(var1.getChatStyle().createShallowCopy());
 		return var2;
 	}
 

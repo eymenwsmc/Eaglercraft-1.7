@@ -26,7 +26,6 @@ public class ServerList {
 
 	/** The Minecraft instance. */
 	private final Minecraft mc;
-
 	/** List of ServerData instances. */
 	private final List servers = new ArrayList();
 	private static final String __OBFID = "CL_00000891";
@@ -35,6 +34,8 @@ public class ServerList {
 		this.mc = p_i1194_1_;
 		this.loadServerList();
 	}
+
+
 
 	/**
 	 * Loads a list of servers from servers.dat, by running
@@ -86,6 +87,8 @@ public class ServerList {
 	public ServerData getServerData(int p_78850_1_) {
 		return (ServerData) this.servers.get(p_78850_1_);
 	}
+
+
 
 	/**
 	 * Removes the ServerData instance stored for the given index in the list.

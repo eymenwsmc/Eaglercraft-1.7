@@ -430,6 +430,9 @@ public class PlatformRuntime {
 		return 1073741824l;
 	}
 
+	public static void requestGarbageCollection() {
+	}
+
 	public static String getCallingClass(int i) {
 		return null;
 	}

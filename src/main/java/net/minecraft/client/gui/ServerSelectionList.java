@@ -63,7 +63,10 @@ public class ServerSelectionList extends GuiListExtended {
 		this.field_148199_m.clear();
 		Iterator var2 = p_148194_1_.iterator();
 
-	
+		while (var2.hasNext()) {
+			GuiListExtended.IGuiListEntry var3 = (GuiListExtended.IGuiListEntry) var2.next();
+			this.field_148199_m.add(var3);
+		}
 	}
 
 	protected int func_148137_d() {

@@ -1,0 +1,1748 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fbd020e960e, pid=37059, tid=37101
+#
+# JRE version: OpenJDK Runtime Environment Temurin-17.0.18+8 (17.0.18+8) (build 17.0.18+8)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-17.0.18+8 (17.0.18+8, mixed mode, tiered, serial gc, linux-amd64)
+# Problematic frame:
+# C  [libEGL_nvidia.so.0+0xb660e]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d %F" (or dumping to /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/core.37059)
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/adoptium/adoptium-support/issues
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Djava.library.path=/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir -XX:+UseSerialGC -XX:+DisableExplicitGC -XX:-UseCompressedOops -XX:-UseCompressedClassPointers -Dfile.encoding=UTF-8 -Duser.country=TR -Duser.language=tr -Duser.variant net.lax1dude.eaglercraft.internal.MainClass
+
+Host: 12th Gen Intel(R) Core(TM) i7-12700H, 20 cores, 15G, Fedora release 43 (Forty Three)
+Time: Mon Jun 15 11:44:55 2026 CEST elapsed time: 60.272626 seconds (0d 0h 1m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread is native thread
+
+Stack: [0x00007fbd01797000,0x00007fbd01f97000],  sp=0x00007fbd01f95e10,  free space=8187k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libEGL_nvidia.so.0+0xb660e]
+
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000000040
+
+Registers:
+RAX=0x0000000000000000, RBX=0x00007fbd01794f80, RCX=0x0000000000000001, RDX=0x00007fbca7f7d7dc
+RSP=0x00007fbd01f95e10, RBP=0x00007fbd00e74040, RSI=0x00007fbd020dc840, RDI=0x00007fbd021754a8
+R8 =0x00007fbe1d282010, R9 =0x00000000008fad38, R10=0x0000000000000000, R11=0x00007fbe1d282000
+R12=0x00007fbca7f82a60, R13=0x00007fbd00e74040, R14=0x00007fbd01795380, R15=0x0000000000000000
+RIP=0x00007fbd020e960e, EFLAGS=0x0000000000010206, CSGSFS=0x002b000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+XMM[0]=0x0000000000000000 0x000000004c5a7fbd
+XMM[1]=0x0000000000000000 0x0007000700070007
+XMM[2]=0x0000000000000000 0x00000000000000ff
+XMM[3]=0x0000000000000000 0x00000000000000ff
+XMM[4]=0x0000000000000000 0x00007fbe14000090
+XMM[5]=0x0000000000000000 0x0000000000000000
+XMM[6]=0x0000000000000000 0x0000000000000000
+XMM[7]=0x0000000000000000 0x0000000000000000
+XMM[8]=0x00007fbca64089f0 0x00007fbca64089e0
+XMM[9]=0xffffffffffffffff 0xffff0000000000ff
+XMM[10]=0x0000000000000000 0x0000000000000000
+XMM[11]=0x0000000000000000 0x00000000000000a0
+XMM[12]=0x0000000000000000 0x00000000000000a0
+XMM[13]=0x0000000000000000 0x00000000000000a0
+XMM[14]=0x0000000000000000 0x0000000000000280
+XMM[15]=0x0000000000000000 0x0000000000000000
+  MXCSR=0x00001fa0
+
+
+Top of Stack: (sp=0x00007fbd01f95e10)
+0x00007fbd01f95e10:   00007fbca7f7f8c0 00007fbca6810fda
+0x00007fbd01f95e20:   00007fbca7f7f8c0 00007fbca663729f
+0x00007fbd01f95e30:   00007fbe14769280 00007fbca7f2bcc0
+0x00007fbd01f95e40:   00007fbd01f966c0 00017fbc00000000
+0x00007fbd01f95e50:   00007fbe14767d30 00007fbd01795380
+0x00007fbd01f95e60:   00007fbca6812480 00007fbd01f966c0
+0x00007fbd01f95e70:   00007fbe1bbfbb00 00007fbd01f96ce4
+0x00007fbd01f95e80:   00007fbe1bbfbc07 00007fbca681345a
+0x00007fbd01f95e90:   00007fbd01f966c0 00007fbd01f966c0
+0x00007fbd01f95ea0:   00007fbd01f95f70 00007fbe1d0c2464
+0x00007fbd01f95eb0:   0000000000801000 00007fbd01796000
+0x00007fbd01f95ec0:   0000000000000000 0000008000000000
+0x00007fbd01f95ed0:   ffffffffffffff40 0000000000000000
+0x00007fbd01f95ee0:   0000000000000020 00007fbd01f966c0
+0x00007fbd01f95ef0:   00007fbd01f966c0 a06f8d091cfd95b5
+0x00007fbd01f95f00:   00007fbd01f966c0 00007fbe1bbfbb00
+0x00007fbd01f95f10:   0000000000000000 00007fbe1bbfbc07
+0x00007fbd01f95f20:   a06f8d091f7d95b5 a069b4e3e6f795b5
+0x00007fbd01f95f30:   0000000000000000 0000000000000000
+0x00007fbd01f95f40:   0000000000000000 0000000000000000
+0x00007fbd01f95f50:   0000000000000000 c3efbe401ec6de00
+0x00007fbd01f95f60:   00007fbe1d0c2180 0000000000000000
+0x00007fbd01f95f70:   0000000000000000 00007fbe1d1455ec
+0x00007fbd01f95f80:   0000000000000000 0000000000000000
+0x00007fbd01f95f90:   0000000000000000 0000000000000000
+0x00007fbd01f95fa0:   0000000000000000 0000000000000000
+0x00007fbd01f95fb0:   0000000000000000 0000000000000000
+0x00007fbd01f95fc0:   0000000000000000 0000000000000000
+0x00007fbd01f95fd0:   0000000000000000 0000000000000000
+0x00007fbd01f95fe0:   0000000000000000 0000000000000000
+0x00007fbd01f95ff0:   0000000000000000 0000000000000000
+0x00007fbd01f96000:   0000000000000000 0000000000000000 
+
+Instructions: (pc=0x00007fbd020e960e)
+0x00007fbd020e950e:   4c 24 08 48 85 c0 48 89 c2 74 61 48 89 08 49 8b
+0x00007fbd020e951e:   44 24 40 48 83 c2 08 48 85 c0 74 41 41 8b 4c 24
+0x00007fbd020e952e:   34 31 c0 85 c9 74 19 49 8b 74 24 40 89 c1 83 c0
+0x00007fbd020e953e:   01 48 8b 34 ce 48 89 34 ca 41 39 44 24 34 77 e7
+0x00007fbd020e954e:   49 8b 44 24 40 48 85 c0 74 13 48 8d 78 f8 48 89
+0x00007fbd020e955e:   54 24 08 e8 1a a8 00 00 48 8b 54 24 08 45 89 7c
+0x00007fbd020e956e:   24 34 49 89 54 24 40 e9 9a fe ff ff 45 8b 74 24
+0x00007fbd020e957e:   34 e9 90 fe ff ff 66 2e 0f 1f 84 00 00 00 00 00
+0x00007fbd020e958e:   66 90 48 8b 07 48 39 f0 74 58 55 48 89 fd 53 48
+0x00007fbd020e959e:   89 f3 48 83 ec 08 48 85 c0 74 15 48 8d 78 08 ff
+0x00007fbd020e95ae:   50 18 85 c0 75 0a 48 8b 7d 00 48 8b 07 ff 50 08
+0x00007fbd020e95be:   48 89 5d 00 48 85 db 74 19 48 8b 43 10 48 83 c4
+0x00007fbd020e95ce:   08 48 8d 7b 08 5b 5d ff e0 66 0f 1f 84 00 00 00
+0x00007fbd020e95de:   00 00 48 83 c4 08 5b 5d c3 66 0f 1f 84 00 00 00
+0x00007fbd020e95ee:   00 00 c3 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f
+0x00007fbd020e95fe:   40 00 48 83 ec 08 bf 01 00 00 00 e8 62 4a ff ff
+0x00007fbd020e960e:   8b 70 40 48 8d 78 30 48 83 c4 08 e9 62 68 f8 ff
+0x00007fbd020e961e:   66 90 48 83 ec 18 48 8b 87 b0 04 00 00 ba 04 00
+0x00007fbd020e962e:   00 00 be 01 00 00 00 48 8d 4c 24 0c bf 01 00 00
+0x00007fbd020e963e:   00 ff 90 d8 00 00 00 48 83 c4 18 c3 66 0f 1f 44
+0x00007fbd020e964e:   00 00 49 89 fa 41 89 d1 40 0f b6 fe 89 ca 49 8b
+0x00007fbd020e965e:   82 b0 04 00 00 4c 89 c1 44 89 ce 48 8b 80 d8 00
+0x00007fbd020e966e:   00 00 ff e0 66 66 2e 0f 1f 84 00 00 00 00 00 0f
+0x00007fbd020e967e:   1f 00 55 40 0f b6 f6 53 48 89 fb 48 83 ec 08 48
+0x00007fbd020e968e:   8b af b0 04 00 00 e8 b7 ff ff ff ff 95 00 01 00
+0x00007fbd020e969e:   00 8b 10 89 53 28 48 83 c4 08 5b 5d c3 0f 1f 44
+0x00007fbd020e96ae:   00 00 41 57 41 56 49 89 fe bf 01 00 00 00 41 55
+0x00007fbd020e96be:   49 89 f5 41 54 55 53 48 83 ec 58 48 89 14 24 e8
+0x00007fbd020e96ce:   9e 49 ff ff 48 c7 44 24 18 00 00 00 00 83 b8 a0
+0x00007fbd020e96de:   04 00 00 03 4c 8b b8 b0 04 00 00 48 89 c3 44 8b
+0x00007fbd020e96ee:   60 38 0f 84 02 01 00 00 48 8d 4c 24 20 48 8d 70
+0x00007fbd020e96fe:   30 ba 01 00 00 00 48 89 cf 48 89 4c 24 08 e8 7f 
+
+
+
+---------------  P R O C E S S  ---------------
+
+VM state: at safepoint (shutting down)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007fbe14027660] Threads_lock - owner thread: 0x00007fbe140b8000
+[0x00007fbe14027e10] Heap_lock - owner thread: 0x00007fbce0000fa0
+
+GC Precious Log:
+<Skipped>
+
+Heap:
+ def new generation   total 75648K, used 18116K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,  26% used [0x00007fbd07c00000, 0x00007fbd08db1030, 0x00007fbd0bdb0000)
+  from space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 28256K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  16% used [0x00007fbd598a0000, 0x00007fbd5b438278, 0x00007fbd5b438400, 0x00007fbd63ca0000)
+ Metaspace       used 38757K, committed 38848K, reserved 65536K
+
+Card table byte_map: [0x00007fbe1b129000,0x00007fbe1b8d5000] _byte_map_base: 0x00007f7e3c8eb000
+
+Polling page: 0x00007fbe1d261000
+
+Metaspace:
+
+Usage:
+   37,85 MB used.
+
+Virtual space:
+     64,00 MB reserved,      37,94 MB ( 59%) committed,  1 nodes.
+
+Chunk freelists:
+10,02 MB
+
+MaxMetaspaceSize: unlimited
+No class space
+Initial GC threshold: 21,00 MB
+Current GC threshold: 58,38 MB
+CDS: off
+MetaspaceReclaimPolicy: balanced
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - new_chunks_are_fully_committed: 0.
+ - uncommit_free_chunks: 1.
+ - use_allocation_guard: 0.
+ - handle_deallocations: 1.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 6.
+num_arena_births: 152.
+num_arena_deaths: 0.
+num_vsnodes_births: 1.
+num_vsnodes_deaths: 0.
+num_space_committed: 607.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 6.
+num_chunks_taken_from_freelist: 805.
+num_chunk_merges: 3.
+num_chunk_splits: 589.
+num_chunks_enlarged: 476.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=119168Kb used=1858Kb max_used=1858Kb free=117309Kb
+ bounds [0x00007fbe04da0000, 0x00007fbe05010000, 0x00007fbe0c200000]
+CodeHeap 'profiled nmethods': size=119164Kb used=8558Kb max_used=8558Kb free=110605Kb
+ bounds [0x00007fbdfd200000, 0x00007fbdfda60000, 0x00007fbe0465f000]
+CodeHeap 'non-nmethods': size=7428Kb used=1916Kb max_used=3620Kb free=5511Kb
+ bounds [0x00007fbe0465f000, 0x00007fbe049ef000, 0x00007fbe04da0000]
+ total_blobs=5645 nmethods=4203 adapters=1357
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 55,304 Thread 0x00007fbe140f6720 4198   !   3       sun.awt.X11.XToolkit::dispatchEvent (191 bytes)
+Event: 55,305 Thread 0x00007fbe140f6720 nmethod 4198 0x00007fbdfda40e90 code [0x00007fbdfda41300, 0x00007fbdfda43190]
+Event: 55,305 Thread 0x00007fbe140f6720 4194       3       sun.awt.X11.XDropTargetEventProcessor::processEvent (18 bytes)
+Event: 55,306 Thread 0x00007fbe140f6720 nmethod 4194 0x00007fbdfda43d90 code [0x00007fbdfda43f40, 0x00007fbdfda440c0]
+Event: 55,306 Thread 0x00007fbe140f6720 4195   !   3       sun.awt.X11.XDragSourceContextPeer::processEvent (34 bytes)
+Event: 55,306 Thread 0x00007fbe140f6720 nmethod 4195 0x00007fbdfda44190 code [0x00007fbdfda44460, 0x00007fbdfda45230]
+Event: 55,306 Thread 0x00007fbe140f6720 4196   !   3       sun.awt.X11.XDragSourceContextPeer::doProcessEvent (689 bytes)
+Event: 55,310 Thread 0x00007fbe140f6720 nmethod 4196 0x00007fbdfda45710 code [0x00007fbdfda46ac0, 0x00007fbdfda52160]
+Event: 55,310 Thread 0x00007fbe140f6720 4197       3       sun.awt.X11.XDragSourceContextPeer::processProxyModeEvent (102 bytes)
+Event: 55,311 Thread 0x00007fbe140f6720 nmethod 4197 0x00007fbdfda56d90 code [0x00007fbdfda570a0, 0x00007fbdfda58000]
+Event: 55,311 Thread 0x00007fbe140f6720 4199       3       sun.awt.X11.XBaseWindow::dispatchToWindow (44 bytes)
+Event: 55,311 Thread 0x00007fbe140f6720 nmethod 4199 0x00007fbdfda58590 code [0x00007fbdfda587e0, 0x00007fbdfda58fa0]
+Event: 55,311 Thread 0x00007fbe140f6720 4200   !   3       sun.awt.X11.XToolkit::notifyListeners (100 bytes)
+Event: 55,311 Thread 0x00007fbe140f6720 nmethod 4200 0x00007fbdfda59310 code [0x00007fbdfda59680, 0x00007fbdfda5aa70]
+Event: 55,681 Thread 0x00007fbe140f5220 4201       4       net.minecraft.client.gui.ScaledResolution::<init> (185 bytes)
+Event: 55,683 Thread 0x00007fbe140f5220 nmethod 4201 0x00007fbe04f70490 code [0x00007fbe04f70640, 0x00007fbe04f70878]
+Event: 58,355 Thread 0x00007fbe140f6720 4202       3       net.lax1dude.eaglercraft.internal.PlatformOpenGL::_wglBufferData (8 bytes)
+Event: 58,355 Thread 0x00007fbe140f6720 nmethod 4202 0x00007fbdfda5b490 code [0x00007fbdfda5b640, 0x00007fbdfda5b760]
+Event: 58,355 Thread 0x00007fbe140f6720 4203       3       org.lwjgl.opengles.GLES20::glBufferData (8 bytes)
+Event: 58,355 Thread 0x00007fbe140f6720 nmethod 4203 0x00007fbdfda5b810 code [0x00007fbdfda5b9c0, 0x00007fbdfda5bae0]
+
+GC Heap History (18 events):
+Event: 3,848 GC heap before
+{Heap before GC invocations=0 (full 0):
+ def new generation   total 75584K, used 41208K [0x00007fbd07c00000, 0x00007fbd0ce00000, 0x00007fbd598a0000)
+  eden space 67200K,  61% used [0x00007fbd07c00000, 0x00007fbd0a43e0f0, 0x00007fbd0bda0000)
+  from space 8384K,   0% used [0x00007fbd0bda0000, 0x00007fbd0bda0000, 0x00007fbd0c5d0000)
+  to   space 8384K,   0% used [0x00007fbd0c5d0000, 0x00007fbd0c5d0000, 0x00007fbd0ce00000)
+ tenured generation   total 167936K, used 0K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,   0% used [0x00007fbd598a0000, 0x00007fbd598a0000, 0x00007fbd598a0200, 0x00007fbd63ca0000)
+ Metaspace       used 21429K, committed 21504K, reserved 65536K
+}
+Event: 3,867 GC heap after
+{Heap after GC invocations=1 (full 1):
+ def new generation   total 75648K, used 0K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 15693K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,   9% used [0x00007fbd598a0000, 0x00007fbd5a7f36b8, 0x00007fbd5a7f3800, 0x00007fbd63ca0000)
+ Metaspace       used 21429K, committed 21504K, reserved 65536K
+}
+Event: 4,183 GC heap before
+{Heap before GC invocations=1 (full 1):
+ def new generation   total 75648K, used 67264K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K, 100% used [0x00007fbd07c00000, 0x00007fbd0bdb0000, 0x00007fbd0bdb0000)
+  from space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 15693K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,   9% used [0x00007fbd598a0000, 0x00007fbd5a7f36b8, 0x00007fbd5a7f3800, 0x00007fbd63ca0000)
+ Metaspace       used 27845K, committed 27904K, reserved 65536K
+}
+Event: 4,192 GC heap after
+{Heap after GC invocations=2 (full 1):
+ def new generation   total 75648K, used 6521K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,  77% used [0x00007fbd0c5e0000, 0x00007fbd0cc3e5b0, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 15693K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,   9% used [0x00007fbd598a0000, 0x00007fbd5a7f36b8, 0x00007fbd5a7f3800, 0x00007fbd63ca0000)
+ Metaspace       used 27845K, committed 27904K, reserved 65536K
+}
+Event: 4,362 GC heap before
+{Heap before GC invocations=2 (full 1):
+ def new generation   total 75648K, used 58682K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,  77% used [0x00007fbd07c00000, 0x00007fbd0aef0520, 0x00007fbd0bdb0000)
+  from space 8384K,  77% used [0x00007fbd0c5e0000, 0x00007fbd0cc3e5b0, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 15693K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,   9% used [0x00007fbd598a0000, 0x00007fbd5a7f36b8, 0x00007fbd5a7f3800, 0x00007fbd63ca0000)
+ Metaspace       used 28182K, committed 28288K, reserved 65536K
+}
+Event: 4,368 GC heap after
+{Heap after GC invocations=3 (full 1):
+ def new generation   total 75648K, used 1388K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,  16% used [0x00007fbd0bdb0000, 0x00007fbd0bf0b228, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 28182K, committed 28288K, reserved 65536K
+}
+Event: 4,512 GC heap before
+{Heap before GC invocations=3 (full 1):
+ def new generation   total 75648K, used 60532K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,  87% used [0x00007fbd07c00000, 0x00007fbd0b5c2170, 0x00007fbd0bdb0000)
+  from space 8384K,  16% used [0x00007fbd0bdb0000, 0x00007fbd0bf0b228, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 29615K, committed 29760K, reserved 65536K
+}
+Event: 4,515 GC heap after
+{Heap after GC invocations=4 (full 1):
+ def new generation   total 75648K, used 3307K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,  39% used [0x00007fbd0c5e0000, 0x00007fbd0c91ad50, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 29615K, committed 29760K, reserved 65536K
+}
+Event: 7,553 GC heap before
+{Heap before GC invocations=4 (full 1):
+ def new generation   total 75648K, used 57214K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,  80% used [0x00007fbd07c00000, 0x00007fbd0b0a4ae8, 0x00007fbd0bdb0000)
+  from space 8384K,  39% used [0x00007fbd0c5e0000, 0x00007fbd0c91ad50, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 30123K, committed 30208K, reserved 65536K
+}
+Event: 7,556 GC heap after
+{Heap after GC invocations=5 (full 1):
+ def new generation   total 75648K, used 3428K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,  40% used [0x00007fbd0bdb0000, 0x00007fbd0c109388, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 30123K, committed 30208K, reserved 65536K
+}
+Event: 8,195 GC heap before
+{Heap before GC invocations=5 (full 1):
+ def new generation   total 75648K, used 55469K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,  77% used [0x00007fbd07c00000, 0x00007fbd0aed2148, 0x00007fbd0bdb0000)
+  from space 8384K,  40% used [0x00007fbd0bdb0000, 0x00007fbd0c109388, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 30183K, committed 30272K, reserved 65536K
+}
+Event: 8,197 GC heap after
+{Heap after GC invocations=6 (full 1):
+ def new generation   total 75648K, used 3743K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,  44% used [0x00007fbd0c5e0000, 0x00007fbd0c987d50, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 30183K, committed 30272K, reserved 65536K
+}
+Event: 8,205 GC heap before
+{Heap before GC invocations=6 (full 1):
+ def new generation   total 75648K, used 55476K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,  76% used [0x00007fbd07c00000, 0x00007fbd0ae855d0, 0x00007fbd0bdb0000)
+  from space 8384K,  44% used [0x00007fbd0c5e0000, 0x00007fbd0c987d50, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 30183K, committed 30272K, reserved 65536K
+}
+Event: 8,206 GC heap after
+{Heap after GC invocations=7 (full 1):
+ def new generation   total 75648K, used 3680K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,  43% used [0x00007fbd0bdb0000, 0x00007fbd0c1481e0, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 30183K, committed 30272K, reserved 65536K
+}
+Event: 18,356 GC heap before
+{Heap before GC invocations=7 (full 1):
+ def new generation   total 75648K, used 70944K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K, 100% used [0x00007fbd07c00000, 0x00007fbd0bdb0000, 0x00007fbd0bdb0000)
+  from space 8384K,  43% used [0x00007fbd0bdb0000, 0x00007fbd0c1481e0, 0x00007fbd0c5e0000)
+  to   space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 34458K, committed 34624K, reserved 65536K
+}
+Event: 18,361 GC heap after
+{Heap after GC invocations=8 (full 1):
+ def new generation   total 75648K, used 6130K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,  73% used [0x00007fbd0c5e0000, 0x00007fbd0cbdc9a0, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 34458K, committed 34624K, reserved 65536K
+}
+Event: 18,386 GC heap before
+{Heap before GC invocations=8 (full 1):
+ def new generation   total 75648K, used 10625K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   6% used [0x00007fbd07c00000, 0x00007fbd08063ba8, 0x00007fbd0bdb0000)
+  from space 8384K,  73% used [0x00007fbd0c5e0000, 0x00007fbd0cbdc9a0, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 21764K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  12% used [0x00007fbd598a0000, 0x00007fbd5ade11e0, 0x00007fbd5ade1200, 0x00007fbd63ca0000)
+ Metaspace       used 35755K, committed 35840K, reserved 65536K
+}
+Event: 18,412 GC heap after
+{Heap after GC invocations=9 (full 2):
+ def new generation   total 75648K, used 0K [0x00007fbd07c00000, 0x00007fbd0ce10000, 0x00007fbd598a0000)
+  eden space 67264K,   0% used [0x00007fbd07c00000, 0x00007fbd07c00000, 0x00007fbd0bdb0000)
+  from space 8384K,   0% used [0x00007fbd0c5e0000, 0x00007fbd0c5e0000, 0x00007fbd0ce10000)
+  to   space 8384K,   0% used [0x00007fbd0bdb0000, 0x00007fbd0bdb0000, 0x00007fbd0c5e0000)
+ tenured generation   total 167936K, used 28256K [0x00007fbd598a0000, 0x00007fbd63ca0000, 0x00007fbdfd200000)
+   the space 167936K,  16% used [0x00007fbd598a0000, 0x00007fbd5b438278, 0x00007fbd5b438400, 0x00007fbd63ca0000)
+ Metaspace       used 35755K, committed 35840K, reserved 65536K
+}
+
+Dll operation events (17 events):
+Event: 0,001 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libjava.so
+Event: 0,012 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libjsvml.so
+Event: 0,042 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libnio.so
+Event: 0,045 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libzip.so
+Event: 0,069 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement.so
+Event: 0,074 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement_ext.so
+Event: 0,095 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libjimage.so
+Event: 0,096 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libawt.so
+Event: 0,099 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libawt_xawt.so
+Event: 0,122 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libfontmanager.so
+Event: 0,245 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libnet.so
+Event: 2,917 Loaded shared library /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/linux/x64/org/lwjgl/liblwjgl.so
+Event: 2,935 Loaded shared library /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libUnsafeMemcpy.so
+Event: 3,141 Loaded shared library /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/liblwjgl_opengles.so
+Event: 3,166 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libverify.so
+Event: 10,189 Loaded shared library /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libwebrtc-java.so
+Event: 18,212 Loaded shared library /usr/lib/jvm/java-17-temurin-jdk/lib/libextnet.so
+
+Deoptimization events (20 events):
+Event: 19,028 Thread 0x00007fbc6803c920 Uncommon trap: trap_request=0xffffff45 fr.pc=0x00007fbe04ead6c4 relative=0x00000000000000a4
+Event: 19,028 Thread 0x00007fbc6803c920 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fbe04ead6c4 method=java.lang.Integer.stringSize(I)I @ 3 c2
+Event: 19,028 Thread 0x00007fbc6803c920 DEOPT PACKING pc=0x00007fbe04ead6c4 sp=0x00007fbc7effbc70
+Event: 19,028 Thread 0x00007fbc6803c920 DEOPT UNPACKING pc=0x00007fbe046b5399 sp=0x00007fbc7effbc18 mode 2
+Event: 19,028 Thread 0x00007fbc6803c920 Uncommon trap: trap_request=0xffffff45 fr.pc=0x00007fbe04eadae0 relative=0x00000000000001c0
+Event: 19,028 Thread 0x00007fbc6803c920 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fbe04eadae0 method=java.lang.Integer.getChars(II[B)I @ 4 c2
+Event: 19,028 Thread 0x00007fbc6803c920 DEOPT PACKING pc=0x00007fbe04eadae0 sp=0x00007fbc7effbc50
+Event: 19,028 Thread 0x00007fbc6803c920 DEOPT UNPACKING pc=0x00007fbe046b5399 sp=0x00007fbc7effbc00 mode 2
+Event: 21,626 Thread 0x00007fbe1575e2a0 Uncommon trap: trap_request=0xffffffcc fr.pc=0x00007fbe04f5aa8c relative=0x00000000000002ec
+Event: 21,626 Thread 0x00007fbe1575e2a0 Uncommon trap: reason=intrinsic_or_type_checked_inlining action=make_not_entrant pc=0x00007fbe04f5aa8c method=java.util.Arrays.copyOf([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object; @ 35 c2
+Event: 21,626 Thread 0x00007fbe1575e2a0 DEOPT PACKING pc=0x00007fbe04f5aa8c sp=0x00007fbd02ffe3d0
+Event: 21,626 Thread 0x00007fbe1575e2a0 DEOPT UNPACKING pc=0x00007fbe046b5399 sp=0x00007fbd02ffe360 mode 2
+Event: 22,724 Thread 0x00007fbe1575e2a0 DEOPT PACKING pc=0x00007fbdfd8d6aff sp=0x00007fbc882fabe0
+Event: 22,724 Thread 0x00007fbe1575e2a0 DEOPT UNPACKING pc=0x00007fbe046b5b2f sp=0x00007fbc882fa058 mode 0
+Event: 23,854 Thread 0x00007fbc6c10b440 DEOPT PACKING pc=0x00007fbdfd9968fb sp=0x00007fbc882fb140
+Event: 23,854 Thread 0x00007fbc6c10b440 DEOPT UNPACKING pc=0x00007fbe046b5b2f sp=0x00007fbc882fa590 mode 0
+Event: 24,317 Thread 0x00007fbe1402a540 Uncommon trap: trap_request=0xffffff45 fr.pc=0x00007fbe04e757f0 relative=0x0000000000000970
+Event: 24,317 Thread 0x00007fbe1402a540 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fbe04e757f0 method=org.json.JSONTokener.nextString(C)Ljava/lang/String; @ 14 c2
+Event: 24,317 Thread 0x00007fbe1402a540 DEOPT PACKING pc=0x00007fbe04e757f0 sp=0x00007fbe1bbfe070
+Event: 24,317 Thread 0x00007fbe1402a540 DEOPT UNPACKING pc=0x00007fbe046b5399 sp=0x00007fbe1bbfe058 mode 2
+
+Classes loaded (20 events):
+Event: 19,027 Loading class sun/security/ssl/Alert
+Event: 19,027 Loading class sun/security/ssl/Alert done
+Event: 19,027 Loading class sun/security/ssl/Alert$AlertConsumer
+Event: 19,028 Loading class sun/security/ssl/Alert$AlertConsumer done
+Event: 19,028 Loading class sun/security/ssl/Alert$Level
+Event: 19,028 Loading class sun/security/ssl/Alert$Level done
+Event: 19,028 Loading class java/net/SocketException
+Event: 19,028 Loading class java/net/SocketException done
+Event: 19,059 Loading class java/util/concurrent/LinkedBlockingQueue$Itr
+Event: 19,059 Loading class java/util/concurrent/LinkedBlockingQueue$Itr done
+Event: 28,415 Loading class java/util/concurrent/locks/AbstractQueuedSynchronizer$SharedNode
+Event: 28,415 Loading class java/util/concurrent/locks/AbstractQueuedSynchronizer$SharedNode done
+Event: 28,575 Loading class sun/security/ssl/Alert$AlertMessage
+Event: 28,576 Loading class sun/security/ssl/Alert$AlertMessage done
+Event: 59,960 Loading class jdk/internal/misc/Signal$1
+Event: 59,960 Loading class jdk/internal/misc/Signal$1 done
+Event: 59,961 Loading class sun/awt/X11/XSystemTrayPeer
+Event: 59,961 Loading class java/awt/peer/SystemTrayPeer
+Event: 59,962 Loading class java/awt/peer/SystemTrayPeer done
+Event: 59,962 Loading class sun/awt/X11/XSystemTrayPeer done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 4,339 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NullPointerException'{0x00007fbd09a6d588}> (0x00007fbd09a6d588) 
+thrown [src/hotspot/share/runtime/sharedRuntime.cpp, line 631]
+Event: 4,349 Thread 0x00007fbe1402a540 Implicit null exception at 0x00007fbdfd5e8974 to 0x00007fbdfd5e8a86
+Event: 4,349 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NullPointerException'{0x00007fbd09beecd0}> (0x00007fbd09beecd0) 
+thrown [src/hotspot/share/runtime/sharedRuntime.cpp, line 631]
+Event: 4,351 Thread 0x00007fbe1402a540 Implicit null exception at 0x00007fbdfd5e8974 to 0x00007fbdfd5e8a86
+Event: 4,351 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NullPointerException'{0x00007fbd09c40338}> (0x00007fbd09c40338) 
+thrown [src/hotspot/share/runtime/sharedRuntime.cpp, line 631]
+Event: 4,357 Thread 0x00007fbe1402a540 Implicit null exception at 0x00007fbdfd5e8974 to 0x00007fbdfd5e8a86
+Event: 4,357 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NullPointerException'{0x00007fbd09d47f90}> (0x00007fbd09d47f90) 
+thrown [src/hotspot/share/runtime/sharedRuntime.cpp, line 631]
+Event: 4,504 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd0b507d50}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00007fbd0b507d50) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+Event: 7,528 Thread 0x00007fbe14a64a80 Exception <a 'java/lang/InterruptedException'{0x00007fbd09e18270}: sleep interrupted> (0x00007fbd09e18270) 
+thrown [src/hotspot/share/prims/jvm.cpp, line 3064]
+Event: 7,547 Thread 0x00007fbe14a64a80 Exception <a 'java/lang/ExceptionInInitializerError'{0x00007fbd0a055e08}> (0x00007fbd0a055e08) 
+thrown [src/hotspot/share/oops/instanceKlass.cpp, line 1221]
+Event: 7,547 Thread 0x00007fbe1402a540 Implicit null exception at 0x00007fbe04ec4076 to 0x00007fbe04ec4a6c
+Event: 8,916 Thread 0x00007fbe15857670 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd0aedaad0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, int)'> (0x00007fbd0aedaad0) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+Event: 9,012 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd09e480a0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00007fbd09e480a0) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+Event: 9,013 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd09e4c5d0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00007fbd09e4c5d0) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+Event: 18,206 Thread 0x00007fbe1402a540 Exception <a 'java/lang/NoClassDefFoundError'{0x00007fbd0b44f470}: org/slf4j/impl/StaticLoggerBinder> (0x00007fbd0b44f470) 
+thrown [src/hotspot/share/classfile/systemDictionary.cpp, line 245]
+Event: 18,304 Thread 0x00007fbe1410a3f0 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd0b828be0}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00007fbd0b828be0) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+Event: 18,304 Thread 0x00007fbe1410a3f0 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd0b835558}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeInterface(java.lang.Object, java.lang.Object)'> (0x00007fbd0b835558) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+Event: 18,304 Thread 0x00007fbe1410a3f0 Exception <a 'java/lang/IncompatibleClassChangeError'{0x00007fbd0b839e80}: Found class java.lang.Object, but interface was expected> (0x00007fbd0b839e80) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 826]
+Event: 18,305 Thread 0x00007fbe1410a3f0 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd0b83e218}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object)'> (0x00007fbd0b83e218) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+Event: 18,305 Thread 0x00007fbe1410a3f0 Exception <a 'java/lang/NoSuchMethodError'{0x00007fbd0b846440}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object)'> (0x00007fbd0b846440) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 758]
+
+VM Operations (20 events):
+Event: 20,412 Executing VM operation: Cleanup done
+Event: 22,412 Executing VM operation: Cleanup
+Event: 22,412 Executing VM operation: Cleanup done
+Event: 23,412 Executing VM operation: Cleanup
+Event: 23,412 Executing VM operation: Cleanup done
+Event: 23,776 Executing VM operation: HandshakeAllThreads
+Event: 23,776 Executing VM operation: HandshakeAllThreads done
+Event: 23,852 Executing VM operation: HandshakeAllThreads
+Event: 23,852 Executing VM operation: HandshakeAllThreads done
+Event: 24,852 Executing VM operation: Cleanup
+Event: 24,852 Executing VM operation: Cleanup done
+Event: 28,853 Executing VM operation: Cleanup
+Event: 28,853 Executing VM operation: Cleanup done
+Event: 33,853 Executing VM operation: Cleanup
+Event: 33,853 Executing VM operation: Cleanup done
+Event: 42,854 Executing VM operation: Cleanup
+Event: 42,854 Executing VM operation: Cleanup done
+Event: 58,856 Executing VM operation: Cleanup
+Event: 58,856 Executing VM operation: Cleanup done
+Event: 59,962 Executing VM operation: Exit
+
+Memory protections (20 events):
+Event: 18,422 Protecting memory [0x00007fbc880fd000,0x00007fbc88101000] with protection modes 0
+Event: 18,422 Protecting memory [0x00007fbc881fd000,0x00007fbc88201000] with protection modes 0
+Event: 18,422 Protecting memory [0x00007fbc7eefe000,0x00007fbc7ef02000] with protection modes 0
+Event: 18,500 Protecting memory [0x00007fbc7edfe000,0x00007fbc7ee02000] with protection modes 0
+Event: 18,876 Protecting memory [0x00007fbd070ef000,0x00007fbd070f3000] with protection modes 0
+Event: 19,045 Protecting memory [0x00007fbc7eefe000,0x00007fbc7ef02000] with protection modes 0
+Event: 21,562 Protecting memory [0x00007fbd02f00000,0x00007fbd02f04000] with protection modes 0
+Event: 21,626 Protecting memory [0x00007fbc881fd000,0x00007fbc88201000] with protection modes 0
+Event: 21,696 Protecting memory [0x00007fbd02d00000,0x00007fbd02d04000] with protection modes 0
+Event: 22,282 Protecting memory [0x00007fbd02d00000,0x00007fbd02d04000] with protection modes 0
+Event: 22,548 Protecting memory [0x00007fbc881fd000,0x00007fbc88201000] with protection modes 0
+Event: 22,602 Protecting memory [0x00007fbd02f00000,0x00007fbd02f04000] with protection modes 0
+Event: 22,603 Protecting memory [0x00007fbd02d00000,0x00007fbd02d04000] with protection modes 0
+Event: 23,152 Protecting memory [0x00007fbd02f00000,0x00007fbd02f04000] with protection modes 0
+Event: 23,209 Protecting memory [0x00007fbc881fd000,0x00007fbc88201000] with protection modes 0
+Event: 23,609 Protecting memory [0x00007fbc7eefe000,0x00007fbc7ef02000] with protection modes 0
+Event: 23,810 Protecting memory [0x00007fbc7f800000,0x00007fbc7f804000] with protection modes 0
+Event: 59,961 Protecting memory [0x00007fbc881fd000,0x00007fbc88201000] with protection modes 0
+Event: 59,961 Protecting memory [0x00007fbc7eefe000,0x00007fbc7ef02000] with protection modes 0
+Event: 59,961 Protecting memory [0x00007fbd02f00000,0x00007fbd02f04000] with protection modes 0
+
+Nmethod flushes (0 events):
+No events
+
+Events (20 events):
+Event: 22,548 Thread 0x00007fbe1402a540 Thread added: 0x00007fbe1575e2a0
+Event: 22,602 Thread 0x00007fbe1575e2a0 Thread added: 0x00007fbc58001320
+Event: 22,602 Thread 0x00007fbe140f5220 Thread added: 0x00007fbcd027cf90
+Event: 23,134 Thread 0x00007fbe1575e2a0 Thread exited: 0x00007fbe1575e2a0
+Event: 23,135 Thread 0x00007fbc58001320 Thread exited: 0x00007fbc58001320
+Event: 23,152 Thread 0x00007fbe1402a540 Thread added: 0x00007fbe1575e2a0
+Event: 23,209 Thread 0x00007fbe1575e2a0 Thread added: 0x00007fbc6c10b440
+Event: 23,609 Thread 0x00007fbe1575e2a0 Thread added: 0x00007fbc6c044e90
+Event: 23,810 Thread 0x00007fbc800137f0 Thread added: 0x00007fbc800137f0
+Event: 26,872 Thread 0x00007fbcd027cf90 Thread exited: 0x00007fbcd027cf90
+Event: 28,576 Thread 0x00007fbe1575e2a0 Thread exited: 0x00007fbe1575e2a0
+Event: 28,576 Thread 0x00007fbc6c044e90 Thread exited: 0x00007fbc6c044e90
+Event: 28,576 Thread 0x00007fbc6c10b440 Thread exited: 0x00007fbc6c10b440
+Event: 59,961 Thread 0x00007fbe140e6c10 Thread added: 0x00007fbce0000fa0
+Event: 59,961 Thread 0x00007fbce0000fa0 Thread added: 0x00007fbc50006950
+Event: 59,961 Thread 0x00007fbce0000fa0 Thread added: 0x00007fbc50002930
+Event: 59,961 Thread 0x00007fbc800137f0 Thread exited: 0x00007fbc800137f0
+Event: 59,962 Thread 0x00007fbc50006950 Thread exited: 0x00007fbc50006950
+Event: 59,962 Thread 0x00007fbc50002930 Thread exited: 0x00007fbc50002930
+Event: 59,962 Thread 0x00007fbce0000fa0 Before exit entered
+
+
+Dynamic libraries:
+172200000000-172200201000 ---p 00000000 00:00 0 
+172200201000-172200202000 rw-p 00000000 00:00 0 
+172200202000-17220020c000 ---p 00000000 00:00 0 
+17220020c000-17220021f000 rw-p 00000000 00:00 0 
+17220021f000-172200220000 ---p 00000000 00:00 0 
+172200220000-17220025f000 rw-p 00000000 00:00 0 
+17220025f000-172200260000 ---p 00000000 00:00 0 
+172200260000-17220027b000 rw-p 00000000 00:00 0 
+17220027b000-17220027c000 ---p 00000000 00:00 0 
+17220027c000-172200283000 rw-p 00000000 00:00 0 
+172200283000-172200284000 ---p 00000000 00:00 0 
+172200284000-1722002a3000 rw-p 00000000 00:00 0 
+1722002a3000-1722002a4000 ---p 00000000 00:00 0 
+1722002a4000-1722002b3000 rw-p 00000000 00:00 0 
+1722002b3000-1722002b4000 ---p 00000000 00:00 0 
+1722002b4000-1722002c3000 rw-p 00000000 00:00 0 
+1722002c3000-1722002c4000 ---p 00000000 00:00 0 
+1722002c4000-1722002f3000 rw-p 00000000 00:00 0 
+1722002f3000-1722002f4000 ---p 00000000 00:00 0 
+1722002f4000-172200303000 rw-p 00000000 00:00 0 
+172200303000-172200304000 ---p 00000000 00:00 0 
+172200304000-172200313000 rw-p 00000000 00:00 0 
+172200313000-172200314000 ---p 00000000 00:00 0 
+172200314000-17220031f000 rw-p 00000000 00:00 0 
+17220031f000-172200320000 ---p 00000000 00:00 0 
+172200320000-17220032f000 rw-p 00000000 00:00 0 
+17220032f000-172200330000 ---p 00000000 00:00 0 
+172200330000-172200337000 rw-p 00000000 00:00 0 
+172200337000-172200338000 ---p 00000000 00:00 0 
+172200338000-17220033f000 rw-p 00000000 00:00 0 
+17220033f000-172200340000 ---p 00000000 00:00 0 
+172200340000-17220035f000 rw-p 00000000 00:00 0 
+17220035f000-172200360000 ---p 00000000 00:00 0 
+172200360000-172200367000 rw-p 00000000 00:00 0 
+172200367000-172200368000 ---p 00000000 00:00 0 
+172200368000-1722003b0000 rw-p 00000000 00:00 0 
+1722003b0000-172400000000 ---p 00000000 00:00 0 
+2557fffff000-255a00000000 ---p 00000000 00:00 0 
+5601cce40000-5601cce41000 r--p 00000000 00:22 960523                     /usr/lib/jvm/java-17-temurin-jdk/bin/java
+5601cce41000-5601cce42000 r-xp 00001000 00:22 960523                     /usr/lib/jvm/java-17-temurin-jdk/bin/java
+5601cce42000-5601cce43000 r--p 00002000 00:22 960523                     /usr/lib/jvm/java-17-temurin-jdk/bin/java
+5601cce43000-5601cce44000 r--p 00002000 00:22 960523                     /usr/lib/jvm/java-17-temurin-jdk/bin/java
+5601cce44000-5601cce45000 rw-p 00003000 00:22 960523                     /usr/lib/jvm/java-17-temurin-jdk/bin/java
+5601d634e000-5601d6397000 rw-p 00000000 00:00 0                          [heap]
+7fbc48000000-7fbc48023000 rw-p 00000000 00:00 0 
+7fbc48023000-7fbc4c000000 ---p 00000000 00:00 0 
+7fbc4c000000-7fbc4c023000 rw-p 00000000 00:00 0 
+7fbc4c023000-7fbc50000000 ---p 00000000 00:00 0 
+7fbc50000000-7fbc50021000 rw-p 00000000 00:00 0 
+7fbc50021000-7fbc54000000 ---p 00000000 00:00 0 
+7fbc54000000-7fbc54033000 rw-p 00000000 00:00 0 
+7fbc54033000-7fbc58000000 ---p 00000000 00:00 0 
+7fbc58000000-7fbc58021000 rw-p 00000000 00:00 0 
+7fbc58021000-7fbc5c000000 ---p 00000000 00:00 0 
+7fbc5c000000-7fbc5c021000 rw-p 00000000 00:00 0 
+7fbc5c021000-7fbc60000000 ---p 00000000 00:00 0 
+7fbc60000000-7fbc607e5000 rw-p 00000000 00:00 0 
+7fbc607e5000-7fbc64000000 ---p 00000000 00:00 0 
+7fbc64000000-7fbc64021000 rw-p 00000000 00:00 0 
+7fbc64021000-7fbc68000000 ---p 00000000 00:00 0 
+7fbc68000000-7fbc68071000 rw-p 00000000 00:00 0 
+7fbc68071000-7fbc6c000000 ---p 00000000 00:00 0 
+7fbc6c000000-7fbc6c11b000 rw-p 00000000 00:00 0 
+7fbc6c11b000-7fbc70000000 ---p 00000000 00:00 0 
+7fbc70000000-7fbc701a3000 rw-p 00000000 00:00 0 
+7fbc701a3000-7fbc74000000 ---p 00000000 00:00 0 
+7fbc74000000-7fbc74059000 rw-p 00000000 00:00 0 
+7fbc74059000-7fbc78000000 ---p 00000000 00:00 0 
+7fbc78000000-7fbc78021000 rw-p 00000000 00:00 0 
+7fbc78021000-7fbc7c000000 ---p 00000000 00:00 0 
+7fbc7d5f4000-7fbc7e5f6000 rw-p 00000000 00:00 0 
+7fbc7eafb000-7fbc7edfe000 rw-p 00000000 00:00 0 
+7fbc7eefe000-7fbc7ef02000 ---p 00000000 00:00 0 
+7fbc7ef02000-7fbc7effe000 rw-p 00000000 00:00 0 
+7fbc80000000-7fbc80080000 rw-p 00000000 00:00 0 
+7fbc80080000-7fbc84000000 ---p 00000000 00:00 0 
+7fbc84000000-7fbc84021000 rw-p 00000000 00:00 0 
+7fbc84021000-7fbc88000000 ---p 00000000 00:00 0 
+7fbc881fd000-7fbc88201000 ---p 00000000 00:00 0 
+7fbc88201000-7fbc882fd000 rw-p 00000000 00:00 0 
+7fbc883fd000-7fbc884fe000 rw-p 00000000 00:00 0 
+7fbc88cff000-7fbc88e00000 rw-p 00000000 00:00 0 
+7fbc88e00000-7fbc88fba000 r--p 00000000 00:22 1316914                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libwebrtc-java.so
+7fbc88fba000-7fbc8a286000 r-xp 001ba000 00:22 1316914                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libwebrtc-java.so
+7fbc8a286000-7fbc8a69d000 r--p 01486000 00:22 1316914                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libwebrtc-java.so
+7fbc8a69d000-7fbc8a70f000 r--p 0189c000 00:22 1316914                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libwebrtc-java.so
+7fbc8a70f000-7fbc8a71d000 rw-p 0190e000 00:22 1316914                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libwebrtc-java.so
+7fbc8a71d000-7fbc8a888000 rw-p 00000000 00:00 0 
+7fbc8a92a000-7fbc8a95e000 r-xp 00000000 00:22 44455                      /usr/lib64/libmp3lame.so.0.0.0
+7fbc8a95e000-7fbc8a973000 r--p 00034000 00:22 44455                      /usr/lib64/libmp3lame.so.0.0.0
+7fbc8a973000-7fbc8a975000 r--p 00048000 00:22 44455                      /usr/lib64/libmp3lame.so.0.0.0
+7fbc8a975000-7fbc8a9a3000 rw-p 00000000 00:00 0 
+7fbc8a9a3000-7fbc8a9e1000 r-xp 00000000 00:22 44477                      /usr/lib64/libmpg123.so.0.48.3
+7fbc8a9e1000-7fbc8a9fe000 r--p 0003e000 00:22 44477                      /usr/lib64/libmpg123.so.0.48.3
+7fbc8a9fe000-7fbc8a9ff000 r--p 0005b000 00:22 44477                      /usr/lib64/libmpg123.so.0.48.3
+7fbc8a9ff000-7fbc8aa00000 rw-p 0005c000 00:22 44477                      /usr/lib64/libmpg123.so.0.48.3
+7fbc8aa00000-7fbc8c000000 rw-p 00000000 00:00 0 
+7fbc8c000000-7fbc8c069000 rw-p 00000000 00:00 0 
+7fbc8c069000-7fbc90000000 ---p 00000000 00:00 0 
+7fbc90000000-7fbc90200000 rw-s 118e16000 00:10 2081                      anon_inode:i915.gem
+7fbc90200000-7fbc90400000 rw-p 00000000 00:00 0 
+7fbc90400000-7fbc941f7000 r--p 00000000 00:22 795720                     /usr/lib64/libLLVM.so.21.1
+7fbc941f7000-7fbc98a80000 r-xp 03df6000 00:22 795720                     /usr/lib64/libLLVM.so.21.1
+7fbc98a80000-7fbc98c8c000 r--p 0867e000 00:22 795720                     /usr/lib64/libLLVM.so.21.1
+7fbc98c8c000-7fbc98cd1000 rw-p 08889000 00:22 795720                     /usr/lib64/libLLVM.so.21.1
+7fbc98cd1000-7fbc98d76000 rw-p 00000000 00:00 0 
+7fbc98d95000-7fbc98de9000 r-xp 00000000 00:22 44572                      /usr/lib64/libopus.so.0.10.1
+7fbc98de9000-7fbc98dfe000 r--p 00054000 00:22 44572                      /usr/lib64/libopus.so.0.10.1
+7fbc98dfe000-7fbc98dff000 r--p 00068000 00:22 44572                      /usr/lib64/libopus.so.0.10.1
+7fbc98dff000-7fbc98e00000 rw-p 00000000 00:00 0 
+7fbc98e00000-7fbc9ab5d000 r-xp 00000000 00:22 299866                     /usr/lib64/libgallium-25.2.7.so
+7fbc9ab5d000-7fbc9bbb4000 r--p 01d5d000 00:22 299866                     /usr/lib64/libgallium-25.2.7.so
+7fbc9bbb4000-7fbc9bd00000 r--p 02db4000 00:22 299866                     /usr/lib64/libgallium-25.2.7.so
+7fbc9bd00000-7fbc9bd2e000 rw-p 02f00000 00:22 299866                     /usr/lib64/libgallium-25.2.7.so
+7fbc9bd2e000-7fbc9bef9000 rw-p 00000000 00:00 0 
+7fbc9bf16000-7fbc9bf19000 r-xp 00000000 00:22 44979                      /usr/lib64/libvorbisenc.so.2.0.12
+7fbc9bf19000-7fbc9bf91000 r--p 00003000 00:22 44979                      /usr/lib64/libvorbisenc.so.2.0.12
+7fbc9bf91000-7fbc9bfad000 r--p 0007a000 00:22 44979                      /usr/lib64/libvorbisenc.so.2.0.12
+7fbc9bfad000-7fbc9bfae000 rw-p 00096000 00:22 44979                      /usr/lib64/libvorbisenc.so.2.0.12
+7fbc9bfae000-7fbc9bfee000 r-xp 00000000 00:22 281691                     /usr/lib64/libFLAC.so.14.0.0
+7fbc9bfee000-7fbc9bffe000 r--p 00040000 00:22 281691                     /usr/lib64/libFLAC.so.14.0.0
+7fbc9bffe000-7fbc9bfff000 r--p 00050000 00:22 281691                     /usr/lib64/libFLAC.so.14.0.0
+7fbc9bfff000-7fbc9c000000 rw-p 00051000 00:22 281691                     /usr/lib64/libFLAC.so.14.0.0
+7fbc9c000000-7fbc9c021000 rw-p 00000000 00:00 0 
+7fbc9c021000-7fbca0000000 ---p 00000000 00:00 0 
+7fbca0000000-7fbca005d000 r-xp 00000000 00:22 44770                      /usr/lib64/libsndfile.so.1.0.37
+7fbca005d000-7fbca007a000 r--p 0005d000 00:22 44770                      /usr/lib64/libsndfile.so.1.0.37
+7fbca007a000-7fbca007d000 r--p 0007a000 00:22 44770                      /usr/lib64/libsndfile.so.1.0.37
+7fbca007d000-7fbca007e000 rw-p 0007d000 00:22 44770                      /usr/lib64/libsndfile.so.1.0.37
+7fbca007e000-7fbca0080000 rw-p 00000000 00:00 0 
+7fbca0080000-7fbca00c0000 rw-s 10f0c3000 00:10 2081                      anon_inode:i915.gem
+7fbca0100000-7fbca0300000 rw-s 11a850000 00:10 2081                      anon_inode:i915.gem
+7fbca0300000-7fbca0500000 rw-s 11ae1b000 00:10 2081                      anon_inode:i915.gem
+7fbca0500000-7fbca0e00000 rw-p 00000000 00:00 0 
+7fbca0e27000-7fbca0e4c000 r-xp 00000000 00:22 242492                     /usr/lib64/libnss_resolve.so.2
+7fbca0e4c000-7fbca0e59000 r--p 00025000 00:22 242492                     /usr/lib64/libnss_resolve.so.2
+7fbca0e59000-7fbca0e5c000 r--p 00032000 00:22 242492                     /usr/lib64/libnss_resolve.so.2
+7fbca0e5c000-7fbca0e5d000 rw-p 00035000 00:22 242492                     /usr/lib64/libnss_resolve.so.2
+7fbca0e5d000-7fbca0e6d000 rw-s 11aa5a000 00:10 2081                      anon_inode:i915.gem
+7fbca0e7f000-7fbca0eff000 rw-s 100344000 00:10 2081                      anon_inode:i915.gem
+7fbca0fff000-7fbca1800000 rw-p 00000000 00:00 0 
+7fbca1800000-7fbca1aab000 r--p 00000000 00:22 464076                     /usr/lib64/libnvidia-gpucomp.so.580.119.02
+7fbca1aab000-7fbca4b98000 r-xp 002ab000 00:22 464076                     /usr/lib64/libnvidia-gpucomp.so.580.119.02
+7fbca4b98000-7fbca5a08000 r--p 03398000 00:22 464076                     /usr/lib64/libnvidia-gpucomp.so.580.119.02
+7fbca5a08000-7fbca5a09000 ---p 04208000 00:22 464076                     /usr/lib64/libnvidia-gpucomp.so.580.119.02
+7fbca5a09000-7fbca5be0000 r--p 04208000 00:22 464076                     /usr/lib64/libnvidia-gpucomp.so.580.119.02
+7fbca5be0000-7fbca5ceb000 rw-p 043df000 00:22 464076                     /usr/lib64/libnvidia-gpucomp.so.580.119.02
+7fbca5ceb000-7fbca5d8b000 rw-p 00000000 00:00 0 
+7fbca5da8000-7fbca5db0000 rw-s 11a0ea000 00:10 2081                      anon_inode:i915.gem
+7fbca5dc0000-7fbca5e00000 rw-s 1151c3000 00:10 2081                      anon_inode:i915.gem
+7fbca5e00000-7fbca6042000 r--p 00000000 00:22 464070                     /usr/lib64/libnvidia-eglcore.so.580.119.02
+7fbca6042000-7fbca6d06000 r-xp 00242000 00:22 464070                     /usr/lib64/libnvidia-eglcore.so.580.119.02
+7fbca6d06000-7fbca7da8000 r--p 00f06000 00:22 464070                     /usr/lib64/libnvidia-eglcore.so.580.119.02
+7fbca7da8000-7fbca7f20000 r--p 01fa7000 00:22 464070                     /usr/lib64/libnvidia-eglcore.so.580.119.02
+7fbca7f20000-7fbca7f74000 rw-p 0211f000 00:22 464070                     /usr/lib64/libnvidia-eglcore.so.580.119.02
+7fbca7f74000-7fbca7f8a000 rw-p 00000000 00:00 0 
+7fbca7f8e000-7fbca7f90000 rw-s 109ca4000 00:10 2081                      anon_inode:i915.gem
+7fbca7f91000-7fbca7fd1000 rw-s 100497000 00:10 2081                      anon_inode:i915.gem
+7fbca8000000-7fbca81be000 rw-p 00000000 00:00 0 
+7fbca81be000-7fbcac000000 ---p 00000000 00:00 0 
+7fbcac000000-7fbcac2a2000 rw-p 00000000 00:00 0 
+7fbcac2a2000-7fbcb0000000 ---p 00000000 00:00 0 
+7fbcb0000000-7fbcb05a2000 rw-p 00000000 00:00 0 
+7fbcb05a2000-7fbcb4000000 ---p 00000000 00:00 0 
+7fbcb4000000-7fbcb41be000 rw-p 00000000 00:00 0 
+7fbcb41be000-7fbcb8000000 ---p 00000000 00:00 0 
+7fbcb8000000-7fbcb8021000 rw-p 00000000 00:00 0 
+7fbcb8021000-7fbcbc000000 ---p 00000000 00:00 0 
+7fbcbc000000-7fbcbc021000 rw-p 00000000 00:00 0 
+7fbcbc021000-7fbcc0000000 ---p 00000000 00:00 0 
+7fbcc0000000-7fbcc0021000 rw-p 00000000 00:00 0 
+7fbcc0021000-7fbcc4000000 ---p 00000000 00:00 0 
+7fbcc4000000-7fbcc4021000 rw-p 00000000 00:00 0 
+7fbcc4021000-7fbcc8000000 ---p 00000000 00:00 0 
+7fbcc8000000-7fbcc8021000 rw-p 00000000 00:00 0 
+7fbcc8021000-7fbccc000000 ---p 00000000 00:00 0 
+7fbccc000000-7fbccc021000 rw-p 00000000 00:00 0 
+7fbccc021000-7fbcd0000000 ---p 00000000 00:00 0 
+7fbcd0000000-7fbcd0b41000 rw-p 00000000 00:00 0 
+7fbcd0b41000-7fbcd4000000 ---p 00000000 00:00 0 
+7fbcd4000000-7fbcd4640000 rw-p 00000000 00:00 0 
+7fbcd4640000-7fbcd8000000 ---p 00000000 00:00 0 
+7fbcd8000000-7fbcd8021000 rw-p 00000000 00:00 0 
+7fbcd8021000-7fbcdc000000 ---p 00000000 00:00 0 
+7fbcdc000000-7fbcdc021000 rw-p 00000000 00:00 0 
+7fbcdc021000-7fbce0000000 ---p 00000000 00:00 0 
+7fbce0000000-7fbce0021000 rw-p 00000000 00:00 0 
+7fbce0021000-7fbce4000000 ---p 00000000 00:00 0 
+7fbce400c000-7fbce405a000 r-xp 00000000 00:22 51973                      /usr/lib64/pulseaudio/libpulsecommon-17.0.so
+7fbce405a000-7fbce408c000 r--p 0004e000 00:22 51973                      /usr/lib64/pulseaudio/libpulsecommon-17.0.so
+7fbce408c000-7fbce408f000 r--p 0007f000 00:22 51973                      /usr/lib64/pulseaudio/libpulsecommon-17.0.so
+7fbce408f000-7fbce4090000 rw-p 00082000 00:22 51973                      /usr/lib64/pulseaudio/libpulsecommon-17.0.so
+7fbce4090000-7fbce40bb000 r-xp 00000000 00:22 242497                     /usr/lib64/libudev.so.1.7.11
+7fbce40bb000-7fbce40d4000 r--p 0002b000 00:22 242497                     /usr/lib64/libudev.so.1.7.11
+7fbce40d4000-7fbce40d9000 r--p 00044000 00:22 242497                     /usr/lib64/libudev.so.1.7.11
+7fbce40d9000-7fbce40da000 rw-p 00049000 00:22 242497                     /usr/lib64/libudev.so.1.7.11
+7fbce40e6000-7fbce40ff000 r-xp 00000000 00:22 242491                     /usr/lib64/libnss_myhostname.so.2
+7fbce40ff000-7fbce4110000 r--p 00019000 00:22 242491                     /usr/lib64/libnss_myhostname.so.2
+7fbce4110000-7fbce4115000 r--p 0002a000 00:22 242491                     /usr/lib64/libnss_myhostname.so.2
+7fbce4115000-7fbce4116000 rw-p 0002f000 00:22 242491                     /usr/lib64/libnss_myhostname.so.2
+7fbce412f000-7fbce413f000 rw-s 10a61d000 00:10 2081                      anon_inode:i915.gem
+7fbce4151000-7fbce416b000 r-xp 00000000 00:22 44978                      /usr/lib64/libvorbis.so.0.4.9
+7fbce416b000-7fbce417e000 r--p 0001a000 00:22 44978                      /usr/lib64/libvorbis.so.0.4.9
+7fbce417e000-7fbce417f000 r--p 0002d000 00:22 44978                      /usr/lib64/libvorbis.so.0.4.9
+7fbce417f000-7fbce4180000 rw-p 00000000 00:00 0 
+7fbce4180000-7fbce4600000 rw-p 00000000 00:00 0 
+7fbce460c000-7fbce460e000 r-xp 00000000 00:22 44535                      /usr/lib64/libnss_mdns4_minimal.so.2
+7fbce460e000-7fbce460f000 r--p 00002000 00:22 44535                      /usr/lib64/libnss_mdns4_minimal.so.2
+7fbce460f000-7fbce4610000 r--p 00003000 00:22 44535                      /usr/lib64/libnss_mdns4_minimal.so.2
+7fbce4610000-7fbce4611000 rw-p 00000000 00:00 0 
+7fbce4611000-7fbce4643000 r-xp 00000000 00:22 44681                      /usr/lib64/libpulse.so.0.24.3
+7fbce4643000-7fbce465e000 r--p 00032000 00:22 44681                      /usr/lib64/libpulse.so.0.24.3
+7fbce465e000-7fbce4660000 r--p 0004d000 00:22 44681                      /usr/lib64/libpulse.so.0.24.3
+7fbce4660000-7fbce4661000 rw-p 0004f000 00:22 44681                      /usr/lib64/libpulse.so.0.24.3
+7fbce46e1000-7fbce46e3000 rw-s 10cac5000 00:10 2081                      anon_inode:i915.gem
+7fbce46e3000-7fbce46e6000 r-xp 00000000 00:22 243249                     /usr/lib64/libogg.so.0.8.6
+7fbce46e6000-7fbce46eb000 r--p 00003000 00:22 243249                     /usr/lib64/libogg.so.0.8.6
+7fbce46eb000-7fbce46ec000 r--p 00007000 00:22 243249                     /usr/lib64/libogg.so.0.8.6
+7fbce46ec000-7fbce46ed000 rw-p 00000000 00:00 0 
+7fbce46ed000-7fbce46f5000 rw-s 10c7e5000 00:10 2081                      anon_inode:i915.gem
+7fbce46f5000-7fbce46fd000 rw-s 10a5eb000 00:10 2081                      anon_inode:i915.gem
+7fbce46fd000-7fbce4701000 ---p 00000000 00:00 0 
+7fbce4701000-7fbce6000000 rw-p 00000000 00:00 0 
+7fbce6000000-7fbcf3e70000 r--p 00000000 00:22 242461                     /usr/lib/locale/locale-archive
+7fbcf3e71000-7fbcf3e73000 rw-s 10ac0c000 00:10 2081                      anon_inode:i915.gem
+7fbcf3e73000-7fbcf3e7d000 r-xp 00000000 00:22 44160                      /usr/lib64/libgsm.so.1.0.23
+7fbcf3e7d000-7fbcf3e7f000 r--p 0000a000 00:22 44160                      /usr/lib64/libgsm.so.1.0.23
+7fbcf3e7f000-7fbcf3e80000 r--p 0000c000 00:22 44160                      /usr/lib64/libgsm.so.1.0.23
+7fbcf3e80000-7fbcf3e81000 rw-p 0000d000 00:22 44160                      /usr/lib64/libgsm.so.1.0.23
+7fbcf3e85000-7fbcf3e86000 r--p 00000000 00:22 960983                     /usr/lib/jvm/java-17-temurin-jdk/lib/libextnet.so
+7fbcf3e86000-7fbcf3e87000 r-xp 00001000 00:22 960983                     /usr/lib/jvm/java-17-temurin-jdk/lib/libextnet.so
+7fbcf3e87000-7fbcf3e88000 r--p 00002000 00:22 960983                     /usr/lib/jvm/java-17-temurin-jdk/lib/libextnet.so
+7fbcf3e88000-7fbcf3e89000 r--p 00002000 00:22 960983                     /usr/lib/jvm/java-17-temurin-jdk/lib/libextnet.so
+7fbcf3e89000-7fbcf3e8a000 rw-p 00003000 00:22 960983                     /usr/lib/jvm/java-17-temurin-jdk/lib/libextnet.so
+7fbcf3e9a000-7fbcf3e9e000 rw-s 112e5e000 00:10 2081                      anon_inode:i915.gem
+7fbcf3eb0000-7fbcf3eb8000 rw-s 10bce3000 00:10 2081                      anon_inode:i915.gem
+7fbcf3eb8000-7fbcf3ec0000 rw-s 105284000 00:10 2081                      anon_inode:i915.gem
+7fbcf3ec0000-7fbcf3f00000 rw-s 10e850000 00:10 2081                      anon_inode:i915.gem
+7fbcf3f00000-7fbcf3f04000 ---p 00000000 00:00 0 
+7fbcf3f04000-7fbcf4000000 rw-p 00000000 00:00 0 
+7fbcf4000000-7fbcf4021000 rw-p 00000000 00:00 0 
+7fbcf4021000-7fbcf8000000 ---p 00000000 00:00 0 
+7fbcf8000000-7fbcf8021000 rw-p 00000000 00:00 0 
+7fbcf8021000-7fbcfc000000 ---p 00000000 00:00 0 
+7fbcfc000000-7fbcfc054000 rw-p 00000000 00:00 0 
+7fbcfc054000-7fbd00000000 ---p 00000000 00:00 0 
+7fbd00001000-7fbd00003000 rw-s 105326000 00:10 2081                      anon_inode:i915.gem
+7fbd00003000-7fbd00005000 rw-s 10cabe000 00:10 2081                      anon_inode:i915.gem
+7fbd00005000-7fbd00085000 rw-s 11b01b000 00:10 2081                      anon_inode:i915.gem
+7fbd00085000-7fbd00095000 rw-s 10e7c6000 00:10 2081                      anon_inode:i915.gem
+7fbd00095000-7fbd0009a000 r-xp 00000000 00:22 42218                      /usr/lib64/libGLESv2.so.2.1.0
+7fbd0009a000-7fbd000a1000 r--p 00005000 00:22 42218                      /usr/lib64/libGLESv2.so.2.1.0
+7fbd000a1000-7fbd000a3000 r--p 0000c000 00:22 42218                      /usr/lib64/libGLESv2.so.2.1.0
+7fbd000a3000-7fbd000a4000 rw-p 0000e000 00:22 42218                      /usr/lib64/libGLESv2.so.2.1.0
+7fbd000a5000-7fbd000ad000 rw-s 115a83000 00:10 2081                      anon_inode:i915.gem
+7fbd000ad000-7fbd000b1000 r--p 00000000 00:22 961013                     /usr/lib/jvm/java-17-temurin-jdk/lib/libverify.so
+7fbd000b1000-7fbd000b8000 r-xp 00004000 00:22 961013                     /usr/lib/jvm/java-17-temurin-jdk/lib/libverify.so
+7fbd000b8000-7fbd000ba000 r--p 0000b000 00:22 961013                     /usr/lib/jvm/java-17-temurin-jdk/lib/libverify.so
+7fbd000ba000-7fbd000bc000 r--p 0000c000 00:22 961013                     /usr/lib/jvm/java-17-temurin-jdk/lib/libverify.so
+7fbd000bc000-7fbd000bd000 rw-p 0000e000 00:22 961013                     /usr/lib/jvm/java-17-temurin-jdk/lib/libverify.so
+7fbd000bd000-7fbd000d2000 r--p 00000000 00:22 1316995                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/liblwjgl_opengles.so
+7fbd000d2000-7fbd000db000 r-xp 00015000 00:22 1316995                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/liblwjgl_opengles.so
+7fbd000db000-7fbd000e2000 r--p 0001e000 00:22 1316995                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/liblwjgl_opengles.so
+7fbd000e2000-7fbd000e3000 r--p 00024000 00:22 1316995                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/liblwjgl_opengles.so
+7fbd000e3000-7fbd000e4000 rw-p 00025000 00:22 1316995                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/liblwjgl_opengles.so
+7fbd00104000-7fbd00114000 rw-s 1191d3000 00:10 2081                      anon_inode:i915.gem
+7fbd00114000-7fbd00314000 rw-s 11ac1b000 00:10 2081                      anon_inode:i915.gem
+7fbd00314000-7fbd003df000 rw-p 00000000 00:00 0 
+7fbd003df000-7fbd003ff000 rw-s 10e055000 00:10 2081                      anon_inode:i915.gem
+7fbd0041f000-7fbd0043f000 rw-s 11a51e000 00:10 2081                      anon_inode:i915.gem
+7fbd00442000-7fbd00445000 r-xp 00000000 00:22 43711                      /usr/lib64/libasyncns.so.0.3.1
+7fbd00445000-7fbd00447000 r--p 00003000 00:22 43711                      /usr/lib64/libasyncns.so.0.3.1
+7fbd00447000-7fbd00448000 r--p 00004000 00:22 43711                      /usr/lib64/libasyncns.so.0.3.1
+7fbd00448000-7fbd00449000 rw-p 00000000 00:00 0 
+7fbd00449000-7fbd00459000 rw-s 10b056000 00:10 2081                      anon_inode:i915.gem
+7fbd00459000-7fbd00479000 rw-s 10a709000 00:10 2081                      anon_inode:i915.gem
+7fbd00479000-7fbd0047b000 rw-s 119b72000 00:10 2081                      anon_inode:i915.gem
+7fbd0047f000-7fbd0048f000 rw-s 10a983000 00:10 2081                      anon_inode:i915.gem
+7fbd0048f000-7fbd0049f000 rw-s 119eb0000 00:10 2081                      anon_inode:i915.gem
+7fbd0049f000-7fbd004bf000 rw-s 10dd68000 00:10 2081                      anon_inode:i915.gem
+7fbd004bf000-7fbd00600000 rw-s 00000000 00:22 333                        /home/eymen/.cache/mesa_shader_cache/index
+7fbd00600000-7fbd00800000 rw-s 11b71b000 00:10 2081                      anon_inode:i915.gem
+7fbd00800000-7fbd00941000 r-xp 00000000 00:22 789177                     /usr/lib64/libstdc++.so.6.0.34
+7fbd00941000-7fbd00a61000 r--p 00141000 00:22 789177                     /usr/lib64/libstdc++.so.6.0.34
+7fbd00a61000-7fbd00a72000 r--p 00260000 00:22 789177                     /usr/lib64/libstdc++.so.6.0.34
+7fbd00a72000-7fbd00a73000 rw-p 00271000 00:22 789177                     /usr/lib64/libstdc++.so.6.0.34
+7fbd00a73000-7fbd00a77000 rw-p 00000000 00:00 0 
+7fbd00a78000-7fbd00a88000 rw-s 1086f7000 00:10 2081                      anon_inode:i915.gem
+7fbd00a88000-7fbd00ac8000 rw-s 10e613000 00:10 2081                      anon_inode:i915.gem
+7fbd00ac8000-7fbd00ad1000 r-xp 00000000 00:22 45029                      /usr/lib64/libxcb-glx.so.0.0.0
+7fbd00ad1000-7fbd00ae1000 r--p 00009000 00:22 45029                      /usr/lib64/libxcb-glx.so.0.0.0
+7fbd00ae1000-7fbd00ae3000 r--p 00019000 00:22 45029                      /usr/lib64/libxcb-glx.so.0.0.0
+7fbd00ae3000-7fbd00ae4000 rw-p 0001b000 00:22 45029                      /usr/lib64/libxcb-glx.so.0.0.0
+7fbd00ae4000-7fbd00af9000 r-xp 00000000 00:22 44881                      /usr/lib64/libtinfo.so.6.5
+7fbd00af9000-7fbd00b0c000 r--p 00015000 00:22 44881                      /usr/lib64/libtinfo.so.6.5
+7fbd00b0c000-7fbd00b10000 r--p 00028000 00:22 44881                      /usr/lib64/libtinfo.so.6.5
+7fbd00b10000-7fbd00b11000 rw-p 0002c000 00:22 44881                      /usr/lib64/libtinfo.so.6.5
+7fbd00b11000-7fbd00b16000 r-xp 00000000 00:22 44608                      /usr/lib64/libpciaccess.so.0.11.1
+7fbd00b16000-7fbd00b19000 r--p 00005000 00:22 44608                      /usr/lib64/libpciaccess.so.0.11.1
+7fbd00b19000-7fbd00b1a000 r--p 00008000 00:22 44608                      /usr/lib64/libpciaccess.so.0.11.1
+7fbd00b1a000-7fbd00b1b000 rw-p 00000000 00:00 0 
+7fbd00b1b000-7fbd00b3d000 r-xp 00000000 00:22 243236                     /usr/lib64/libedit.so.0.0.76
+7fbd00b3d000-7fbd00b4f000 r--p 00022000 00:22 243236                     /usr/lib64/libedit.so.0.0.76
+7fbd00b4f000-7fbd00b51000 r--p 00034000 00:22 243236                     /usr/lib64/libedit.so.0.0.76
+7fbd00b51000-7fbd00b52000 rw-p 00036000 00:22 243236                     /usr/lib64/libedit.so.0.0.76
+7fbd00b52000-7fbd00b55000 rw-p 00000000 00:00 0 
+7fbd00b55000-7fbd00b6d000 r-xp 00000000 00:22 795752                     /usr/lib64/libdrm_intel.so.1.131.0
+7fbd00b6d000-7fbd00b79000 r--p 00018000 00:22 795752                     /usr/lib64/libdrm_intel.so.1.131.0
+7fbd00b79000-7fbd00b7a000 r--p 00023000 00:22 795752                     /usr/lib64/libdrm_intel.so.1.131.0
+7fbd00b7a000-7fbd00b7b000 rw-p 00024000 00:22 795752                     /usr/lib64/libdrm_intel.so.1.131.0
+7fbd00b7b000-7fbd00b8e000 r-xp 00000000 00:22 242758                     /usr/lib64/libelf-0.194.so
+7fbd00b8e000-7fbd00b95000 r--p 00013000 00:22 242758                     /usr/lib64/libelf-0.194.so
+7fbd00b95000-7fbd00b96000 r--p 00019000 00:22 242758                     /usr/lib64/libelf-0.194.so
+7fbd00b96000-7fbd00b97000 rw-p 00000000 00:00 0 
+7fbd00b97000-7fbd00b9e000 r-xp 00000000 00:22 795750                     /usr/lib64/libdrm_amdgpu.so.1.131.0
+7fbd00b9e000-7fbd00ba3000 r--p 00007000 00:22 795750                     /usr/lib64/libdrm_amdgpu.so.1.131.0
+7fbd00ba3000-7fbd00ba4000 r--p 0000b000 00:22 795750                     /usr/lib64/libdrm_amdgpu.so.1.131.0
+7fbd00ba4000-7fbd00ba5000 rw-p 00000000 00:00 0 
+7fbd00ba5000-7fbd00ba6000 r-xp 00000000 00:22 45078                      /usr/lib64/libxshmfence.so.1.0.0
+7fbd00ba6000-7fbd00ba7000 r--p 00001000 00:22 45078                      /usr/lib64/libxshmfence.so.1.0.0
+7fbd00ba7000-7fbd00ba8000 r--p 00001000 00:22 45078                      /usr/lib64/libxshmfence.so.1.0.0
+7fbd00ba8000-7fbd00ba9000 rw-p 00002000 00:22 45078                      /usr/lib64/libxshmfence.so.1.0.0
+7fbd00ba9000-7fbd00bac000 r-xp 00000000 00:22 45042                      /usr/lib64/libxcb-sync.so.1.0.0
+7fbd00bac000-7fbd00baf000 r--p 00003000 00:22 45042                      /usr/lib64/libxcb-sync.so.1.0.0
+7fbd00baf000-7fbd00bb0000 r--p 00006000 00:22 45042                      /usr/lib64/libxcb-sync.so.1.0.0
+7fbd00bb0000-7fbd00bb1000 rw-p 00007000 00:22 45042                      /usr/lib64/libxcb-sync.so.1.0.0
+7fbd00bb1000-7fbd00bb9000 r-xp 00000000 00:22 44747                      /usr/lib64/libsensors.so.4.5.0
+7fbd00bb9000-7fbd00bbe000 r--p 00008000 00:22 44747                      /usr/lib64/libsensors.so.4.5.0
+7fbd00bbe000-7fbd00bbf000 r--p 0000d000 00:22 44747                      /usr/lib64/libsensors.so.4.5.0
+7fbd00bbf000-7fbd00bc0000 rw-p 0000e000 00:22 44747                      /usr/lib64/libsensors.so.4.5.0
+7fbd00bc0000-7fbd00cbc000 r-xp 00000000 00:22 281308                     /usr/lib64/libSPIRV-Tools.so
+7fbd00cbc000-7fbd00d45000 r--p 000fc000 00:22 281308                     /usr/lib64/libSPIRV-Tools.so
+7fbd00d45000-7fbd00d48000 r--p 00184000 00:22 281308                     /usr/lib64/libSPIRV-Tools.so
+7fbd00d48000-7fbd00d49000 rw-p 00187000 00:22 281308                     /usr/lib64/libSPIRV-Tools.so
+7fbd00d49000-7fbd00df9000 r-xp 00000000 00:22 45093                      /usr/lib64/libzstd.so.1.5.7
+7fbd00df9000-7fbd00e0a000 r--p 000b0000 00:22 45093                      /usr/lib64/libzstd.so.1.5.7
+7fbd00e0a000-7fbd00e0b000 r--p 000c0000 00:22 45093                      /usr/lib64/libzstd.so.1.5.7
+7fbd00e0b000-7fbd00e0c000 rw-p 00000000 00:00 0 
+7fbd00e0c000-7fbd00e0f000 r-xp 00000000 00:22 45045                      /usr/lib64/libxcb-xfixes.so.0.0.0
+7fbd00e0f000-7fbd00e13000 r--p 00003000 00:22 45045                      /usr/lib64/libxcb-xfixes.so.0.0.0
+7fbd00e13000-7fbd00e14000 r--p 00007000 00:22 45045                      /usr/lib64/libxcb-xfixes.so.0.0.0
+7fbd00e14000-7fbd00e15000 rw-p 00008000 00:22 45045                      /usr/lib64/libxcb-xfixes.so.0.0.0
+7fbd00e15000-7fbd00e3d000 r-xp 00000000 00:22 405233                     /usr/lib64/libEGL_mesa.so.0.0.0
+7fbd00e3d000-7fbd00e53000 r--p 00028000 00:22 405233                     /usr/lib64/libEGL_mesa.so.0.0.0
+7fbd00e53000-7fbd00e5f000 r--p 0003e000 00:22 405233                     /usr/lib64/libEGL_mesa.so.0.0.0
+7fbd00e5f000-7fbd00e60000 rw-p 0004a000 00:22 405233                     /usr/lib64/libEGL_mesa.so.0.0.0
+7fbd00e74000-7fbd01796000 rw-p 00000000 00:00 0 
+7fbd01796000-7fbd01f97000 rw-p 00000000 00:00 0 
+7fbd01f97000-7fbd01fa7000 r--p 00000000 00:22 464074                     /usr/lib64/libnvidia-glsi.so.580.119.02
+7fbd01fa7000-7fbd02007000 r-xp 00010000 00:22 464074                     /usr/lib64/libnvidia-glsi.so.580.119.02
+7fbd02007000-7fbd02024000 r--p 00070000 00:22 464074                     /usr/lib64/libnvidia-glsi.so.580.119.02
+7fbd02024000-7fbd0202a000 r--p 0008c000 00:22 464074                     /usr/lib64/libnvidia-glsi.so.580.119.02
+7fbd0202a000-7fbd0202b000 rw-p 00092000 00:22 464074                     /usr/lib64/libnvidia-glsi.so.580.119.02
+7fbd0202b000-7fbd02033000 rw-p 00000000 00:00 0 
+7fbd02033000-7fbd02067000 r--p 00000000 00:22 464058                     /usr/lib64/libEGL_nvidia.so.580.119.02
+7fbd02067000-7fbd020fe000 r-xp 00034000 00:22 464058                     /usr/lib64/libEGL_nvidia.so.580.119.02
+7fbd020fe000-7fbd02152000 r--p 000cb000 00:22 464058                     /usr/lib64/libEGL_nvidia.so.580.119.02
+7fbd02152000-7fbd02153000 ---p 0011f000 00:22 464058                     /usr/lib64/libEGL_nvidia.so.580.119.02
+7fbd02153000-7fbd0215b000 r--p 0011f000 00:22 464058                     /usr/lib64/libEGL_nvidia.so.580.119.02
+7fbd0215b000-7fbd02171000 rw-p 00127000 00:22 464058                     /usr/lib64/libEGL_nvidia.so.580.119.02
+7fbd02171000-7fbd02176000 rw-p 00000000 00:00 0 
+7fbd02176000-7fbd02184000 r--p 00000000 00:22 1316992                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libglfw.so
+7fbd02184000-7fbd021a3000 r-xp 0000e000 00:22 1316992                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libglfw.so
+7fbd021a3000-7fbd021d6000 r--p 0002d000 00:22 1316992                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libglfw.so
+7fbd021d6000-7fbd021d7000 ---p 00060000 00:22 1316992                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libglfw.so
+7fbd021d7000-7fbd021da000 r--p 00060000 00:22 1316992                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libglfw.so
+7fbd021da000-7fbd021dd000 rw-p 00063000 00:22 1316992                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libglfw.so
+7fbd021dd000-7fbd02200000 rw-p 00000000 00:00 0 
+7fbd02200000-7fbd02a00000 rw-p 00000000 00:00 0 
+7fbd02a00000-7fbd02a08000 r--p 00000000 00:22 1316993                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libjemalloc.so
+7fbd02a08000-7fbd02a5d000 r-xp 00008000 00:22 1316993                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libjemalloc.so
+7fbd02a5d000-7fbd02a6d000 r--p 0005d000 00:22 1316993                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libjemalloc.so
+7fbd02a6d000-7fbd02a6e000 ---p 0006d000 00:22 1316993                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libjemalloc.so
+7fbd02a6e000-7fbd02a74000 r--p 0006d000 00:22 1316993                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libjemalloc.so
+7fbd02a74000-7fbd02a75000 rw-p 00073000 00:22 1316993                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libjemalloc.so
+7fbd02a75000-7fbd02c7f000 rw-p 00000000 00:00 0 
+7fbd02c7f000-7fbd02c85000 r-xp 00000000 00:22 45034                      /usr/lib64/libxcb-randr.so.0.1.0
+7fbd02c85000-7fbd02c8f000 r--p 00006000 00:22 45034                      /usr/lib64/libxcb-randr.so.0.1.0
+7fbd02c8f000-7fbd02c90000 r--p 00010000 00:22 45034                      /usr/lib64/libxcb-randr.so.0.1.0
+7fbd02c90000-7fbd02c91000 rw-p 00011000 00:22 45034                      /usr/lib64/libxcb-randr.so.0.1.0
+7fbd02c91000-7fbd02c93000 r-xp 00000000 00:22 45027                      /usr/lib64/libxcb-dri3.so.0.1.0
+7fbd02c93000-7fbd02c95000 r--p 00002000 00:22 45027                      /usr/lib64/libxcb-dri3.so.0.1.0
+7fbd02c95000-7fbd02c96000 r--p 00004000 00:22 45027                      /usr/lib64/libxcb-dri3.so.0.1.0
+7fbd02c96000-7fbd02c97000 rw-p 00005000 00:22 45027                      /usr/lib64/libxcb-dri3.so.0.1.0
+7fbd02caa000-7fbd02cc8000 r-xp 00000000 00:22 242729                     /usr/lib64/libexpat.so.1.11.1
+7fbd02cc8000-7fbd02cd2000 r--p 0001e000 00:22 242729                     /usr/lib64/libexpat.so.1.11.1
+7fbd02cd2000-7fbd02cd4000 r--p 00027000 00:22 242729                     /usr/lib64/libexpat.so.1.11.1
+7fbd02cd4000-7fbd02cd5000 rw-p 00000000 00:00 0 
+7fbd02cd5000-7fbd02ce2000 r-xp 00000000 00:22 795748                     /usr/lib64/libdrm.so.2.131.0
+7fbd02ce2000-7fbd02cea000 r--p 0000d000 00:22 795748                     /usr/lib64/libdrm.so.2.131.0
+7fbd02cea000-7fbd02ceb000 r--p 00015000 00:22 795748                     /usr/lib64/libdrm.so.2.131.0
+7fbd02ceb000-7fbd02cec000 rw-p 00000000 00:00 0 
+7fbd02f00000-7fbd02f04000 ---p 00000000 00:00 0 
+7fbd02f04000-7fbd03000000 rw-p 00000000 00:00 0 
+7fbd03000000-7fbd03500000 rw-p 00000000 00:00 0 
+7fbd03500000-7fbd03520000 rw-p 00000000 00:00 0 
+7fbd03520000-7fbd03540000 rw-p 00000000 00:00 0 
+7fbd03540000-7fbd03580000 rw-p 00000000 00:00 0 
+7fbd03580000-7fbd03700000 rw-p 00000000 00:00 0 
+7fbd03700000-7fbd03740000 rw-p 00000000 00:00 0 
+7fbd03740000-7fbd03780000 rw-p 00000000 00:00 0 
+7fbd03780000-7fbd03900000 rw-p 00000000 00:00 0 
+7fbd03900000-7fbd03920000 rw-p 00000000 00:00 0 
+7fbd03920000-7fbd03940000 rw-p 00000000 00:00 0 
+7fbd03940000-7fbd03980000 rw-p 00000000 00:00 0 
+7fbd03980000-7fbd03a20000 rw-p 00000000 00:00 0 
+7fbd03a20000-7fbd03a40000 rw-p 00000000 00:00 0 
+7fbd03a40000-7fbd03a80000 rw-p 00000000 00:00 0 
+7fbd03a80000-7fbd03b00000 rw-p 00000000 00:00 0 
+7fbd03b00000-7fbd03d00000 rw-p 00000000 00:00 0 
+7fbd03d00000-7fbd03d20000 rw-p 00000000 00:00 0 
+7fbd03d20000-7fbd03d40000 rw-p 00000000 00:00 0 
+7fbd03d40000-7fbd03d80000 rw-p 00000000 00:00 0 
+7fbd03d80000-7fbd03f00000 rw-p 00000000 00:00 0 
+7fbd03f00000-7fbd03f40000 rw-p 00000000 00:00 0 
+7fbd03f40000-7fbd03f80000 rw-p 00000000 00:00 0 
+7fbd03f80000-7fbd04100000 rw-p 00000000 00:00 0 
+7fbd04100000-7fbd04300000 rw-p 00000000 00:00 0 
+7fbd04300000-7fbd04400000 rw-p 00000000 00:00 0 
+7fbd04400000-7fbd04980000 rw-p 00000000 00:00 0 
+7fbd04980000-7fbd04a00000 rw-p 00000000 00:00 0 
+7fbd04a00000-7fbd04bc0000 rw-p 00000000 00:00 0 
+7fbd04bc0000-7fbd04c00000 rw-p 00000000 00:00 0 
+7fbd04c00000-7fbd04dc0000 rw-p 00000000 00:00 0 
+7fbd04dc0000-7fbd04e00000 rw-p 00000000 00:00 0 
+7fbd04e00000-7fbd04f00000 rw-p 00000000 00:00 0 
+7fbd04f00000-7fbd05100000 rw-p 00000000 00:00 0 
+7fbd05100000-7fbd05140000 rw-p 00000000 00:00 0 
+7fbd05140000-7fbd05180000 rw-p 00000000 00:00 0 
+7fbd05180000-7fbd05300000 rw-p 00000000 00:00 0 
+7fbd05300000-7fbd05340000 rw-p 00000000 00:00 0 
+7fbd05340000-7fbd05380000 rw-p 00000000 00:00 0 
+7fbd05380000-7fbd05500000 rw-p 00000000 00:00 0 
+7fbd05500000-7fbd05580000 rw-p 00000000 00:00 0 
+7fbd05580000-7fbd055f0000 rw-p 00000000 00:00 0 
+7fbd055f0000-7fbd07000000 ---p 00000000 00:00 0 
+7fbd07000000-7fbd07001000 rw-s 00000000 00:01 66632                      /memfd:xshmfence (deleted)
+7fbd07001000-7fbd07040000 r-xp 00000000 00:22 42222                      /usr/lib64/libGLdispatch.so.0.0.0
+7fbd07040000-7fbd07054000 r--p 0003f000 00:22 42222                      /usr/lib64/libGLdispatch.so.0.0.0
+7fbd07054000-7fbd07070000 r--p 00053000 00:22 42222                      /usr/lib64/libGLdispatch.so.0.0.0
+7fbd07070000-7fbd07071000 rw-p 0006f000 00:22 42222                      /usr/lib64/libGLdispatch.so.0.0.0
+7fbd07071000-7fbd07079000 rw-p 00000000 00:00 0 
+7fbd07079000-7fbd070a2000 r--p 00000000 00:22 1103553                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/linux/x64/org/lwjgl/liblwjgl.so
+7fbd070a2000-7fbd070d4000 r-xp 00029000 00:22 1103553                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/linux/x64/org/lwjgl/liblwjgl.so
+7fbd070d4000-7fbd070ed000 r--p 0005b000 00:22 1103553                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/linux/x64/org/lwjgl/liblwjgl.so
+7fbd070ed000-7fbd070ee000 r--p 00073000 00:22 1103553                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/linux/x64/org/lwjgl/liblwjgl.so
+7fbd070ee000-7fbd070ef000 rw-p 00074000 00:22 1103553                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/linux/x64/org/lwjgl/liblwjgl.so
+7fbd071ef000-7fbd07251000 r--s 00000000 00:22 47782                      /home/eymen/.cache/fontconfig/d63f98f14a274bd69a5425fc33aaac6b-le64.cache-9
+7fbd07251000-7fbd07253000 rw-s 11c8f9000 00:10 2081                      anon_inode:i915.gem
+7fbd07253000-7fbd07254000 r-xp 00000000 00:22 45033                      /usr/lib64/libxcb-present.so.0.0.0
+7fbd07254000-7fbd07256000 r--p 00001000 00:22 45033                      /usr/lib64/libxcb-present.so.0.0.0
+7fbd07256000-7fbd07257000 r--p 00002000 00:22 45033                      /usr/lib64/libxcb-present.so.0.0.0
+7fbd07257000-7fbd07258000 rw-p 00003000 00:22 45033                      /usr/lib64/libxcb-present.so.0.0.0
+7fbd0726c000-7fbd07276000 r-xp 00000000 00:22 42212                      /usr/lib64/libEGL.so.1.1.0
+7fbd07276000-7fbd0727b000 r--p 0000a000 00:22 42212                      /usr/lib64/libEGL.so.1.1.0
+7fbd0727b000-7fbd0727c000 r--p 0000e000 00:22 42212                      /usr/lib64/libEGL.so.1.1.0
+7fbd0727c000-7fbd0727d000 rw-p 0000f000 00:22 42212                      /usr/lib64/libEGL.so.1.1.0
+7fbd0727d000-7fbd0727e000 rw-p 00000000 00:00 0 
+7fbd0727e000-7fbd07280000 rw-s 10c1b5000 00:10 2081                      anon_inode:i915.gem
+7fbd07280000-7fbd07284000 rw-s 11a1ca000 00:10 2081                      anon_inode:i915.gem
+7fbd07284000-7fbd07286000 rw-s 10e7d6000 00:10 2081                      anon_inode:i915.gem
+7fbd07286000-7fbd07296000 rw-s 1190e3000 00:10 2081                      anon_inode:i915.gem
+7fbd07296000-7fbd072b3000 r--s 00000000 00:22 47808                      /home/eymen/.cache/fontconfig/123d59b33ddb0e7c76bb24004bd5cfac-le64.cache-9
+7fbd072b3000-7fbd07309000 r--s 00000000 00:22 47770                      /home/eymen/.cache/fontconfig/7ee6df7a8311986241317a58487e0145-le64.cache-9
+7fbd0730a000-7fbd0730c000 r-xp 00000000 00:22 299871                     /usr/lib64/libgbm.so.1.0.0
+7fbd0730c000-7fbd0730e000 r--p 00002000 00:22 299871                     /usr/lib64/libgbm.so.1.0.0
+7fbd0730e000-7fbd0730f000 r--p 00003000 00:22 299871                     /usr/lib64/libgbm.so.1.0.0
+7fbd0730f000-7fbd07310000 rw-p 00004000 00:22 299871                     /usr/lib64/libgbm.so.1.0.0
+7fbd07317000-7fbd07318000 r-xp 00000000 00:22 43352                      /usr/lib64/libX11-xcb.so.1.0.0
+7fbd07318000-7fbd07319000 r--p 00001000 00:22 43352                      /usr/lib64/libX11-xcb.so.1.0.0
+7fbd07319000-7fbd0731a000 r--p 00001000 00:22 43352                      /usr/lib64/libX11-xcb.so.1.0.0
+7fbd0731a000-7fbd0731b000 rw-p 00000000 00:00 0 
+7fbd0731b000-7fbd07323000 r--p 00000000 00:22 1316997                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libUnsafeMemcpy.so
+7fbd07323000-7fbd0732d000 r-xp 00008000 00:22 1316997                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libUnsafeMemcpy.so
+7fbd0732d000-7fbd07333000 r--p 00012000 00:22 1316997                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libUnsafeMemcpy.so
+7fbd07333000-7fbd07334000 r--p 00017000 00:22 1316997                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libUnsafeMemcpy.so
+7fbd07334000-7fbd07335000 rw-p 00018000 00:22 1316997                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/libUnsafeMemcpy.so
+7fbd07335000-7fbd0733a000 r--s 00000000 00:22 47810                      /home/eymen/.cache/fontconfig/cc8b894d3abbdf0310c48629c0737d80-le64.cache-9
+7fbd0733a000-7fbd0733f000 r--s 00000000 00:22 47806                      /home/eymen/.cache/fontconfig/131ab5cc1583381c4f7ce0194912c56d-le64.cache-9
+7fbd0733f000-7fbd07353000 r--s 00000000 00:22 47780                      /home/eymen/.cache/fontconfig/42536ef14367b24656ac994a93d66238-le64.cache-9
+7fbd07353000-7fbd0735f000 r--s 00000000 00:22 47778                      /home/eymen/.cache/fontconfig/efcfae1a52990961975415036867654f-le64.cache-9
+7fbd0735f000-7fbd07424000 r-xp 00000000 00:22 242495                     /usr/lib64/libsystemd.so.0.41.0
+7fbd07424000-7fbd0747b000 r--p 000c5000 00:22 242495                     /usr/lib64/libsystemd.so.0.41.0
+7fbd0747b000-7fbd07484000 r--p 0011b000 00:22 242495                     /usr/lib64/libsystemd.so.0.41.0
+7fbd07484000-7fbd07485000 rw-p 00124000 00:22 242495                     /usr/lib64/libsystemd.so.0.41.0
+7fbd07485000-7fbd07486000 rw-p 00000000 00:00 0 
+7fbd07486000-7fbd075be000 r-xp 00000000 00:22 44786                      /usr/lib64/libsqlite3.so.3.50.2
+7fbd075be000-7fbd075f7000 r--p 00138000 00:22 44786                      /usr/lib64/libsqlite3.so.3.50.2
+7fbd075f7000-7fbd075fb000 r--p 00170000 00:22 44786                      /usr/lib64/libsqlite3.so.3.50.2
+7fbd075fb000-7fbd075ff000 rw-p 00174000 00:22 44786                      /usr/lib64/libsqlite3.so.3.50.2
+7fbd075ff000-7fbd07600000 rw-p 00000000 00:00 0 
+7fbd07600000-7fbd07967000 r-xp 00000000 00:22 296549                     /usr/lib64/libglycin-2.so.0
+7fbd07967000-7fbd07a27000 r--p 00367000 00:22 296549                     /usr/lib64/libglycin-2.so.0
+7fbd07a27000-7fbd07a44000 r--p 00427000 00:22 296549                     /usr/lib64/libglycin-2.so.0
+7fbd07a44000-7fbd07a47000 rw-p 00444000 00:22 296549                     /usr/lib64/libglycin-2.so.0
+7fbd07a47000-7fbd07a49000 rw-s 10c1c7000 00:10 2081                      anon_inode:i915.gem
+7fbd07a49000-7fbd07a4a000 rw-p 00000000 00:00 0 
+7fbd07a4a000-7fbd07a5e000 r--s 00000000 00:22 47776                      /home/eymen/.cache/fontconfig/c4be257954870c0bf6972134c1de66d5-le64.cache-9
+7fbd07a5e000-7fbd07a5f000 r-xp 00059000 00:22 1103553                    /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/linux/x64/org/lwjgl/liblwjgl.so
+7fbd07a5f000-7fbd07a60000 rw-p 00000000 00:00 0 
+7fbd07a60000-7fbd07a63000 r-xp 00000000 00:22 43377                      /usr/lib64/libXxf86vm.so.1.0.0
+7fbd07a63000-7fbd07a65000 r--p 00003000 00:22 43377                      /usr/lib64/libXxf86vm.so.1.0.0
+7fbd07a65000-7fbd07a66000 r--p 00004000 00:22 43377                      /usr/lib64/libXxf86vm.so.1.0.0
+7fbd07a66000-7fbd07a67000 rw-p 00005000 00:22 43377                      /usr/lib64/libXxf86vm.so.1.0.0
+7fbd07a67000-7fbd07a6c000 r--s 00000000 00:22 47794                      /home/eymen/.cache/fontconfig/29c8f5b6bf15d25ebb2e963855ab41be-le64.cache-9
+7fbd07a6c000-7fbd07a6d000 rw-s 00000000 00:01 66631                      /memfd:xshmfence (deleted)
+7fbd07a6d000-7fbd07a6f000 r--s 00000000 00:22 47802                      /home/eymen/.cache/fontconfig/01d40cee498be4726842ba21cbce24ab-le64.cache-9
+7fbd07a6f000-7fbd07a70000 rw-s 106f43000 00:10 2081                      anon_inode:i915.gem
+7fbd07a70000-7fbd07a71000 rw-s 10bcef000 00:10 2081                      anon_inode:i915.gem
+7fbd07a71000-7fbd07a7a000 r--s 00000000 00:22 47768                      /home/eymen/.cache/fontconfig/6ee3103884cce7b2fe6f32eba9089175-le64.cache-9
+7fbd07a7a000-7fbd07a7b000 rw-s 10bcee000 00:10 2081                      anon_inode:i915.gem
+7fbd07a7b000-7fbd07a7e000 r--s 00000000 00:22 47790                      /home/eymen/.cache/fontconfig/71fe2b50576cdbc5f931776365d4a6ea-le64.cache-9
+7fbd07a7e000-7fbd07a7f000 rw-s 10bced000 00:10 2081                      anon_inode:i915.gem
+7fbd07a7f000-7fbd07a81000 r--s 00000000 00:22 47798                      /home/eymen/.cache/fontconfig/9d9e7a658cb1f50f02561d1ed3ca8bca-le64.cache-9
+7fbd07a81000-7fbd07a83000 r--s 00000000 00:22 47788                      /home/eymen/.cache/fontconfig/e5da922122f90e18ce9aab86d5c2b324-le64.cache-9
+7fbd07a83000-7fbd07a84000 r-xp 00000000 00:22 281325                     /usr/lib64/libbrotlicommon.so.1.2.0
+7fbd07a84000-7fbd07aa4000 r--p 00001000 00:22 281325                     /usr/lib64/libbrotlicommon.so.1.2.0
+7fbd07aa4000-7fbd07aa5000 r--p 00020000 00:22 281325                     /usr/lib64/libbrotlicommon.so.1.2.0
+7fbd07aa5000-7fbd07aa6000 rw-p 00000000 00:00 0 
+7fbd07aa6000-7fbd07ab6000 r-xp 00000000 00:22 44743                      /usr/lib64/libseccomp.so.2.6.0
+7fbd07ab6000-7fbd07ad0000 r--p 00010000 00:22 44743                      /usr/lib64/libseccomp.so.2.6.0
+7fbd07ad0000-7fbd07ad1000 r--p 0002a000 00:22 44743                      /usr/lib64/libseccomp.so.2.6.0
+7fbd07ad1000-7fbd07ad2000 rw-p 0002b000 00:22 44743                      /usr/lib64/libseccomp.so.2.6.0
+7fbd07ad2000-7fbd07b18000 r-xp 00000000 00:22 44388                      /usr/lib64/liblcms2.so.2.0.16
+7fbd07b18000-7fbd07b33000 r--p 00046000 00:22 44388                      /usr/lib64/liblcms2.so.2.0.16
+7fbd07b33000-7fbd07b36000 r--p 00060000 00:22 44388                      /usr/lib64/liblcms2.so.2.0.16
+7fbd07b36000-7fbd07b39000 rw-p 00063000 00:22 44388                      /usr/lib64/liblcms2.so.2.0.16
+7fbd07b39000-7fbd07b3a000 rw-p 00000000 00:00 0 
+7fbd07b3a000-7fbd07b5f000 r-xp 00000000 00:22 242567                     /usr/lib64/liblzma.so.5.8.1
+7fbd07b5f000-7fbd07b6d000 r--p 00025000 00:22 242567                     /usr/lib64/liblzma.so.5.8.1
+7fbd07b6d000-7fbd07b6e000 r--p 00033000 00:22 242567                     /usr/lib64/liblzma.so.5.8.1
+7fbd07b6e000-7fbd07b6f000 rw-p 00034000 00:22 242567                     /usr/lib64/liblzma.so.5.8.1
+7fbd07b6f000-7fbd07b95000 r-xp 00000000 00:22 242686                     /usr/lib64/libblkid.so.1.1.0
+7fbd07b95000-7fbd07ba2000 r--p 00026000 00:22 242686                     /usr/lib64/libblkid.so.1.1.0
+7fbd07ba2000-7fbd07ba8000 r--p 00033000 00:22 242686                     /usr/lib64/libblkid.so.1.1.0
+7fbd07ba8000-7fbd07ba9000 rw-p 00039000 00:22 242686                     /usr/lib64/libblkid.so.1.1.0
+7fbd07ba9000-7fbd07bc1000 r-xp 00000000 00:22 285126                     /usr/lib64/libjson-glib-1.0.so.0.1000.8
+7fbd07bc1000-7fbd07bd2000 r--p 00018000 00:22 285126                     /usr/lib64/libjson-glib-1.0.so.0.1000.8
+7fbd07bd2000-7fbd07bd3000 r--p 00029000 00:22 285126                     /usr/lib64/libjson-glib-1.0.so.0.1000.8
+7fbd07bd3000-7fbd07bd4000 rw-p 00000000 00:00 0 
+7fbd07bd4000-7fbd07bf7000 r-xp 00000000 00:22 789135                     /usr/lib64/libgcc_s-15-20260123.so.1
+7fbd07bf7000-7fbd07bfe000 r--p 00023000 00:22 789135                     /usr/lib64/libgcc_s-15-20260123.so.1
+7fbd07bfe000-7fbd07bff000 r--p 0002a000 00:22 789135                     /usr/lib64/libgcc_s-15-20260123.so.1
+7fbd07bff000-7fbd0ce10000 rw-p 00000000 00:00 0 
+7fbd0ce10000-7fbd598a0000 ---p 00000000 00:00 0 
+7fbd598a0000-7fbd63ca0000 rw-p 00000000 00:00 0 
+7fbd63ca0000-7fbdfd200000 ---p 00000000 00:00 0 
+7fbdfd200000-7fbdfda60000 rwxp 00000000 00:00 0 
+7fbdfda60000-7fbe0465f000 ---p 00000000 00:00 0 
+7fbe0465f000-7fbe049ef000 rwxp 00000000 00:00 0 
+7fbe049ef000-7fbe04da0000 ---p 00000000 00:00 0 
+7fbe04da0000-7fbe05010000 rwxp 00000000 00:00 0 
+7fbe05010000-7fbe0c200000 ---p 00000000 00:00 0 
+7fbe0c200000-7fbe13e24000 r--s 00000000 00:22 961015                     /usr/lib/jvm/java-17-temurin-jdk/lib/modules
+7fbe13e24000-7fbe13e25000 rw-p 00000000 00:00 0 
+7fbe13e25000-7fbe13e2e000 r--s 00000000 00:22 47760                      /home/eymen/.cache/fontconfig/6cdba951d5a16891afaaf2fee13e80e7-le64.cache-9
+7fbe13e2e000-7fbe13e34000 r-xp 00000000 00:22 43883                      /usr/lib64/libcap.so.2.76
+7fbe13e34000-7fbe13e38000 r--p 00006000 00:22 43883                      /usr/lib64/libcap.so.2.76
+7fbe13e38000-7fbe13e39000 r--p 00009000 00:22 43883                      /usr/lib64/libcap.so.2.76
+7fbe13e39000-7fbe13e3a000 rw-p 0000a000 00:22 43883                      /usr/lib64/libcap.so.2.76
+7fbe13e3a000-7fbe13e49000 r-xp 00000000 00:22 43870                      /usr/lib64/libbz2.so.1.0.8
+7fbe13e49000-7fbe13e4c000 r--p 0000f000 00:22 43870                      /usr/lib64/libbz2.so.1.0.8
+7fbe13e4c000-7fbe13e4d000 r--p 00011000 00:22 43870                      /usr/lib64/libbz2.so.1.0.8
+7fbe13e4d000-7fbe13e4e000 rw-p 00012000 00:22 43870                      /usr/lib64/libbz2.so.1.0.8
+7fbe13e4e000-7fbe13e82000 r-xp 00000000 00:22 43947                      /usr/lib64/libdbus-1.so.3.38.3
+7fbe13e82000-7fbe13e9f000 r--p 00034000 00:22 43947                      /usr/lib64/libdbus-1.so.3.38.3
+7fbe13e9f000-7fbe13ea1000 r--p 00051000 00:22 43947                      /usr/lib64/libdbus-1.so.3.38.3
+7fbe13ea1000-7fbe13ea2000 rw-p 00053000 00:22 43947                      /usr/lib64/libdbus-1.so.3.38.3
+7fbe13ea2000-7fbe13f94000 r-xp 00000000 00:22 45063                      /usr/lib64/libxml2.so.2.12.10
+7fbe13f94000-7fbe13ff3000 r--p 000f2000 00:22 45063                      /usr/lib64/libxml2.so.2.12.10
+7fbe13ff3000-7fbe13ffe000 r--p 00150000 00:22 45063                      /usr/lib64/libxml2.so.2.12.10
+7fbe13ffe000-7fbe13fff000 rw-p 0015b000 00:22 45063                      /usr/lib64/libxml2.so.2.12.10
+7fbe13fff000-7fbe15b82000 rw-p 00000000 00:00 0 
+7fbe15b82000-7fbe18000000 ---p 00000000 00:00 0 
+7fbe18000000-7fbe18001000 r--s 00000000 00:22 47804                      /home/eymen/.cache/fontconfig/b2307de753f1224d9542f27e8b3975ae-le64.cache-9
+7fbe18001000-7fbe18002000 r--s 00000000 00:22 47800                      /home/eymen/.cache/fontconfig/39377a11d38956c26ecfe23db50b3cd3-le64.cache-9
+7fbe18002000-7fbe1800b000 r-xp 00000000 00:22 281327                     /usr/lib64/libbrotlidec.so.1.2.0
+7fbe1800b000-7fbe1800e000 r--p 00009000 00:22 281327                     /usr/lib64/libbrotlidec.so.1.2.0
+7fbe1800e000-7fbe1800f000 r--p 0000c000 00:22 281327                     /usr/lib64/libbrotlidec.so.1.2.0
+7fbe1800f000-7fbe18010000 rw-p 00000000 00:00 0 
+7fbe18010000-7fbe18014000 r-xp 00000000 00:22 43944                      /usr/lib64/libdatrie.so.1.4.0
+7fbe18014000-7fbe18016000 r--p 00004000 00:22 43944                      /usr/lib64/libdatrie.so.1.4.0
+7fbe18016000-7fbe18017000 r--p 00005000 00:22 43944                      /usr/lib64/libdatrie.so.1.4.0
+7fbe18017000-7fbe18018000 rw-p 00000000 00:00 0 
+7fbe18018000-7fbe18034000 r-xp 00000000 00:22 288886                     /usr/lib64/libatspi.so.0.0.1
+7fbe18034000-7fbe1804e000 r--p 0001c000 00:22 288886                     /usr/lib64/libatspi.so.0.0.1
+7fbe1804e000-7fbe18052000 r--p 00036000 00:22 288886                     /usr/lib64/libatspi.so.0.0.1
+7fbe18052000-7fbe18053000 rw-p 0003a000 00:22 288886                     /usr/lib64/libatspi.so.0.0.1
+7fbe18053000-7fbe180e5000 r-xp 00000000 00:22 44627                      /usr/lib64/libpixman-1.so.0.46.2
+7fbe180e5000-7fbe180f9000 r--p 00092000 00:22 44627                      /usr/lib64/libpixman-1.so.0.46.2
+7fbe180f9000-7fbe18101000 r--p 000a6000 00:22 44627                      /usr/lib64/libpixman-1.so.0.46.2
+7fbe18101000-7fbe18102000 rw-p 000ae000 00:22 44627                      /usr/lib64/libpixman-1.so.0.46.2
+7fbe18102000-7fbe18103000 r-xp 00000000 00:22 45041                      /usr/lib64/libxcb-shm.so.0.0.0
+7fbe18103000-7fbe18104000 r--p 00001000 00:22 45041                      /usr/lib64/libxcb-shm.so.0.0.0
+7fbe18104000-7fbe18105000 r--p 00002000 00:22 45041                      /usr/lib64/libxcb-shm.so.0.0.0
+7fbe18105000-7fbe18106000 rw-p 00003000 00:22 45041                      /usr/lib64/libxcb-shm.so.0.0.0
+7fbe18106000-7fbe1810c000 r-xp 00000000 00:22 45037                      /usr/lib64/libxcb-render.so.0.0.0
+7fbe1810c000-7fbe18113000 r--p 00006000 00:22 45037                      /usr/lib64/libxcb-render.so.0.0.0
+7fbe18113000-7fbe18114000 r--p 0000d000 00:22 45037                      /usr/lib64/libxcb-render.so.0.0.0
+7fbe18114000-7fbe18115000 rw-p 0000e000 00:22 45037                      /usr/lib64/libxcb-render.so.0.0.0
+7fbe18115000-7fbe18140000 r-xp 00000000 00:22 242528                     /usr/lib64/libpng16.so.16.53.0
+7fbe18140000-7fbe1814e000 r--p 0002b000 00:22 242528                     /usr/lib64/libpng16.so.16.53.0
+7fbe1814e000-7fbe1814f000 r--p 00038000 00:22 242528                     /usr/lib64/libpng16.so.16.53.0
+7fbe1814f000-7fbe18150000 rw-p 00000000 00:00 0 
+7fbe18150000-7fbe18168000 r-xp 00000000 00:22 44157                      /usr/lib64/libgraphite2.so.3.2.1
+7fbe18168000-7fbe1816c000 r--p 00018000 00:22 44157                      /usr/lib64/libgraphite2.so.3.2.1
+7fbe1816c000-7fbe1816e000 r--p 0001c000 00:22 44157                      /usr/lib64/libgraphite2.so.3.2.1
+7fbe1816e000-7fbe1816f000 rw-p 00000000 00:00 0 
+7fbe1816f000-7fbe18205000 r-xp 00000000 00:22 44083                      /usr/lib64/libfreetype.so.6.20.2
+7fbe18205000-7fbe18230000 r--p 00096000 00:22 44083                      /usr/lib64/libfreetype.so.6.20.2
+7fbe18230000-7fbe18238000 r--p 000c1000 00:22 44083                      /usr/lib64/libfreetype.so.6.20.2
+7fbe18238000-7fbe18239000 rw-p 00000000 00:00 0 
+7fbe18239000-7fbe1823e000 r-xp 00000000 00:22 44873                      /usr/lib64/libthai.so.0.3.1
+7fbe1823e000-7fbe18242000 r--p 00005000 00:22 44873                      /usr/lib64/libthai.so.0.3.1
+7fbe18242000-7fbe18243000 r--p 00009000 00:22 44873                      /usr/lib64/libthai.so.0.3.1
+7fbe18243000-7fbe18244000 rw-p 0000a000 00:22 44873                      /usr/lib64/libthai.so.0.3.1
+7fbe18244000-7fbe18264000 r-xp 00000000 00:22 44745                      /usr/lib64/libselinux.so.1
+7fbe18264000-7fbe18271000 r--p 00020000 00:22 44745                      /usr/lib64/libselinux.so.1
+7fbe18271000-7fbe18272000 r--p 0002d000 00:22 44745                      /usr/lib64/libselinux.so.1
+7fbe18272000-7fbe18273000 rw-p 0002e000 00:22 44745                      /usr/lib64/libselinux.so.1
+7fbe18273000-7fbe18275000 rw-p 00000000 00:00 0 
+7fbe18275000-7fbe182b0000 r-xp 00000000 00:22 242691                     /usr/lib64/libmount.so.1.1.0
+7fbe182b0000-7fbe182c7000 r--p 0003b000 00:22 242691                     /usr/lib64/libmount.so.1.1.0
+7fbe182c7000-7fbe182c9000 r--p 00052000 00:22 242691                     /usr/lib64/libmount.so.1.1.0
+7fbe182c9000-7fbe182ca000 rw-p 00054000 00:22 242691                     /usr/lib64/libmount.so.1.1.0
+7fbe182ca000-7fbe182e6000 r-xp 00000000 00:22 242485                     /usr/lib64/libz.so.1.3.1.zlib-ng
+7fbe182e6000-7fbe182f0000 r--p 0001c000 00:22 242485                     /usr/lib64/libz.so.1.3.1.zlib-ng
+7fbe182f0000-7fbe182f1000 r--p 00026000 00:22 242485                     /usr/lib64/libz.so.1.3.1.zlib-ng
+7fbe182f1000-7fbe182f2000 rw-p 00027000 00:22 242485                     /usr/lib64/libz.so.1.3.1.zlib-ng
+7fbe182f2000-7fbe182fd000 r-xp 00000000 00:22 243244                     /usr/lib64/libffi.so.8.2.0
+7fbe182fd000-7fbe18300000 r--p 0000b000 00:22 243244                     /usr/lib64/libffi.so.8.2.0
+7fbe18300000-7fbe18301000 r--p 0000d000 00:22 243244                     /usr/lib64/libffi.so.8.2.0
+7fbe18301000-7fbe18302000 rw-p 0000e000 00:22 243244                     /usr/lib64/libffi.so.8.2.0
+7fbe18302000-7fbe18380000 r-xp 00000000 00:22 282775                     /usr/lib64/libpcre2-8.so.0.15.0
+7fbe18380000-7fbe183ad000 r--p 0007e000 00:22 282775                     /usr/lib64/libpcre2-8.so.0.15.0
+7fbe183ad000-7fbe183ae000 r--p 000aa000 00:22 282775                     /usr/lib64/libpcre2-8.so.0.15.0
+7fbe183ae000-7fbe183af000 rw-p 000ab000 00:22 282775                     /usr/lib64/libpcre2-8.so.0.15.0
+7fbe183af000-7fbe183b7000 r-xp 00000000 00:22 43370                      /usr/lib64/libXrandr.so.2.2.0
+7fbe183b7000-7fbe183ba000 r--p 00008000 00:22 43370                      /usr/lib64/libXrandr.so.2.2.0
+7fbe183ba000-7fbe183bb000 r--p 0000a000 00:22 43370                      /usr/lib64/libXrandr.so.2.2.0
+7fbe183bb000-7fbe183bc000 rw-p 0000b000 00:22 43370                      /usr/lib64/libXrandr.so.2.2.0
+7fbe183bc000-7fbe183bd000 r-xp 00000000 00:22 43357                      /usr/lib64/libXcomposite.so.1.0.0
+7fbe183bd000-7fbe183be000 r--p 00001000 00:22 43357                      /usr/lib64/libXcomposite.so.1.0.0
+7fbe183be000-7fbe183bf000 r--p 00001000 00:22 43357                      /usr/lib64/libXcomposite.so.1.0.0
+7fbe183bf000-7fbe183c0000 rw-p 00000000 00:00 0 
+7fbe183c0000-7fbe183c1000 r-xp 00000000 00:22 43359                      /usr/lib64/libXdamage.so.1.1.0
+7fbe183c1000-7fbe183c2000 r--p 00001000 00:22 43359                      /usr/lib64/libXdamage.so.1.1.0
+7fbe183c2000-7fbe183c3000 r--p 00001000 00:22 43359                      /usr/lib64/libXdamage.so.1.1.0
+7fbe183c3000-7fbe183c4000 rw-p 00000000 00:00 0 
+7fbe183c4000-7fbe183c7000 r-xp 00000000 00:22 45000                      /usr/lib64/libwayland-cursor.so.0.24.0
+7fbe183c7000-7fbe183c9000 r--p 00003000 00:22 45000                      /usr/lib64/libwayland-cursor.so.0.24.0
+7fbe183c9000-7fbe183ca000 r--p 00004000 00:22 45000                      /usr/lib64/libwayland-cursor.so.0.24.0
+7fbe183ca000-7fbe183ce000 rw-p 00005000 00:22 45000                      /usr/lib64/libwayland-cursor.so.0.24.0
+7fbe183ce000-7fbe183fa000 r-xp 00000000 00:22 45060                      /usr/lib64/libxkbcommon.so.0.11.0
+7fbe183fa000-7fbe18424000 r--p 0002c000 00:22 45060                      /usr/lib64/libxkbcommon.so.0.11.0
+7fbe18424000-7fbe18426000 r--p 00056000 00:22 45060                      /usr/lib64/libxkbcommon.so.0.11.0
+7fbe18426000-7fbe18427000 rw-p 00058000 00:22 45060                      /usr/lib64/libxkbcommon.so.0.11.0
+7fbe18427000-7fbe184a8000 r-xp 00000000 00:22 285219                     /usr/lib64/libtinysparql-3.0.so.0.1001.0
+7fbe184a8000-7fbe184ec000 r--p 00081000 00:22 285219                     /usr/lib64/libtinysparql-3.0.so.0.1001.0
+7fbe184ec000-7fbe184fa000 r--p 000c5000 00:22 285219                     /usr/lib64/libtinysparql-3.0.so.0.1001.0
+7fbe184fa000-7fbe184fb000 rw-p 000d3000 00:22 285219                     /usr/lib64/libtinysparql-3.0.so.0.1001.0
+7fbe184fb000-7fbe18507000 r-xp 00000000 00:22 43900                      /usr/lib64/libcloudproviders.so.0.3.6
+7fbe18507000-7fbe18512000 r--p 0000c000 00:22 43900                      /usr/lib64/libcloudproviders.so.0.3.6
+7fbe18512000-7fbe18513000 r--p 00017000 00:22 43900                      /usr/lib64/libcloudproviders.so.0.3.6
+7fbe18513000-7fbe18514000 rw-p 00018000 00:22 43900                      /usr/lib64/libcloudproviders.so.0.3.6
+7fbe18514000-7fbe18530000 r-xp 00000000 00:22 406636                     /usr/lib64/libatk-bridge-2.0.so.0.0.0
+7fbe18530000-7fbe1854d000 r--p 0001c000 00:22 406636                     /usr/lib64/libatk-bridge-2.0.so.0.0.0
+7fbe1854d000-7fbe1854f000 r--p 00039000 00:22 406636                     /usr/lib64/libatk-bridge-2.0.so.0.0.0
+7fbe1854f000-7fbe18551000 rw-p 0003b000 00:22 406636                     /usr/lib64/libatk-bridge-2.0.so.0.0.0
+7fbe18551000-7fbe185be000 r-xp 00000000 00:22 44010                      /usr/lib64/libepoxy.so.0.0.0
+7fbe185be000-7fbe1864e000 r--p 0006d000 00:22 44010                      /usr/lib64/libepoxy.so.0.0.0
+7fbe1864e000-7fbe18656000 r--p 000fc000 00:22 44010                      /usr/lib64/libepoxy.so.0.0.0
+7fbe18656000-7fbe1865d000 rw-p 00104000 00:22 44010                      /usr/lib64/libepoxy.so.0.0.0
+7fbe1865d000-7fbe1866d000 r-xp 00000000 00:22 289005                     /usr/lib64/libatk-1.0.so.0.25812.1
+7fbe1866d000-7fbe1867f000 r--p 00010000 00:22 289005                     /usr/lib64/libatk-1.0.so.0.25812.1
+7fbe1867f000-7fbe18682000 r--p 00021000 00:22 289005                     /usr/lib64/libatk-1.0.so.0.25812.1
+7fbe18682000-7fbe18683000 rw-p 00024000 00:22 289005                     /usr/lib64/libatk-1.0.so.0.25812.1
+7fbe18683000-7fbe1869f000 r-xp 00000000 00:22 296557                     /usr/lib64/libgdk_pixbuf-2.0.so.0.4400.4
+7fbe1869f000-7fbe186ae000 r--p 0001c000 00:22 296557                     /usr/lib64/libgdk_pixbuf-2.0.so.0.4400.4
+7fbe186ae000-7fbe186b0000 r--p 0002a000 00:22 296557                     /usr/lib64/libgdk_pixbuf-2.0.so.0.4400.4
+7fbe186b0000-7fbe186b1000 rw-p 0002c000 00:22 296557                     /usr/lib64/libgdk_pixbuf-2.0.so.0.4400.4
+7fbe186b1000-7fbe186e2000 r-xp 00000000 00:22 44066                      /usr/lib64/libfontconfig.so.1.16.0
+7fbe186e2000-7fbe186fe000 r--p 00031000 00:22 44066                      /usr/lib64/libfontconfig.so.1.16.0
+7fbe186fe000-7fbe18700000 r--p 0004d000 00:22 44066                      /usr/lib64/libfontconfig.so.1.16.0
+7fbe18700000-7fbe18701000 rw-p 0004f000 00:22 44066                      /usr/lib64/libfontconfig.so.1.16.0
+7fbe18701000-7fbe187f7000 r-xp 00000000 00:22 43876                      /usr/lib64/libcairo.so.2.11804.4
+7fbe187f7000-7fbe18838000 r--p 000f6000 00:22 43876                      /usr/lib64/libcairo.so.2.11804.4
+7fbe18838000-7fbe1883c000 r--p 00137000 00:22 43876                      /usr/lib64/libcairo.so.2.11804.4
+7fbe1883c000-7fbe1883e000 rw-p 0013b000 00:22 43876                      /usr/lib64/libcairo.so.2.11804.4
+7fbe1883e000-7fbe1883f000 rw-p 00000000 00:00 0 
+7fbe1883f000-7fbe1892d000 r-xp 00000000 00:22 285041                     /usr/lib64/libharfbuzz.so.0.61151.0
+7fbe1892d000-7fbe18970000 r--p 000ee000 00:22 285041                     /usr/lib64/libharfbuzz.so.0.61151.0
+7fbe18970000-7fbe18972000 r--p 00130000 00:22 285041                     /usr/lib64/libharfbuzz.so.0.61151.0
+7fbe18972000-7fbe18973000 rw-p 00132000 00:22 285041                     /usr/lib64/libharfbuzz.so.0.61151.0
+7fbe18973000-7fbe189b2000 r-xp 00000000 00:22 44593                      /usr/lib64/libpango-1.0.so.0.5700.0
+7fbe189b2000-7fbe189d8000 r--p 0003f000 00:22 44593                      /usr/lib64/libpango-1.0.so.0.5700.0
+7fbe189d8000-7fbe189dc000 r--p 00065000 00:22 44593                      /usr/lib64/libpango-1.0.so.0.5700.0
+7fbe189dc000-7fbe189dd000 rw-p 00069000 00:22 44593                      /usr/lib64/libpango-1.0.so.0.5700.0
+7fbe189dd000-7fbe18afc000 r-xp 00000000 00:22 284587                     /usr/lib64/libgio-2.0.so.0.8600.3
+7fbe18afc000-7fbe18ba4000 r--p 0011f000 00:22 284587                     /usr/lib64/libgio-2.0.so.0.8600.3
+7fbe18ba4000-7fbe18bad000 r--p 001c6000 00:22 284587                     /usr/lib64/libgio-2.0.so.0.8600.3
+7fbe18bad000-7fbe18bae000 rw-p 001cf000 00:22 284587                     /usr/lib64/libgio-2.0.so.0.8600.3
+7fbe18bae000-7fbe18bb0000 rw-p 00000000 00:00 0 
+7fbe18bb0000-7fbe18c56000 r-xp 00000000 00:22 284591                     /usr/lib64/libglib-2.0.so.0.8600.3
+7fbe18c56000-7fbe18d03000 r--p 000a6000 00:22 284591                     /usr/lib64/libglib-2.0.so.0.8600.3
+7fbe18d03000-7fbe18d04000 r--p 00153000 00:22 284591                     /usr/lib64/libglib-2.0.so.0.8600.3
+7fbe18d04000-7fbe18d05000 rw-p 00154000 00:22 284591                     /usr/lib64/libglib-2.0.so.0.8600.3
+7fbe18d05000-7fbe18d06000 rw-p 00000000 00:00 0 
+7fbe18d06000-7fbe18d93000 r-xp 00000000 00:22 44122                      /usr/lib64/libgdk-3.so.0.2419.32
+7fbe18d93000-7fbe18df4000 r--p 0008d000 00:22 44122                      /usr/lib64/libgdk-3.so.0.2419.32
+7fbe18df4000-7fbe18dfe000 r--p 000ed000 00:22 44122                      /usr/lib64/libgdk-3.so.0.2419.32
+7fbe18dfe000-7fbe18e00000 rw-p 000f7000 00:22 44122                      /usr/lib64/libgdk-3.so.0.2419.32
+7fbe18e00000-7fbe191b8000 r-xp 00000000 00:22 44205                      /usr/lib64/libgtk-3.so.0.2419.32
+7fbe191b8000-7fbe194ec000 r--p 003b8000 00:22 44205                      /usr/lib64/libgtk-3.so.0.2419.32
+7fbe194ec000-7fbe194ff000 r--p 006eb000 00:22 44205                      /usr/lib64/libgtk-3.so.0.2419.32
+7fbe194ff000-7fbe19501000 rw-p 006fe000 00:22 44205                      /usr/lib64/libgtk-3.so.0.2419.32
+7fbe19501000-7fbe19506000 rw-p 00000000 00:00 0 
+7fbe19506000-7fbe19508000 r--s 00000000 00:22 47786                      /home/eymen/.cache/fontconfig/9162ae45def2e036f06e4d1913f17ba7-le64.cache-9
+7fbe19508000-7fbe19509000 r-xp 00000000 00:22 45001                      /usr/lib64/libwayland-egl.so.1.24.0
+7fbe19509000-7fbe1950a000 r--p 00001000 00:22 45001                      /usr/lib64/libwayland-egl.so.1.24.0
+7fbe1950a000-7fbe1950b000 r--p 00001000 00:22 45001                      /usr/lib64/libwayland-egl.so.1.24.0
+7fbe1950b000-7fbe1950c000 rw-p 00000000 00:00 0 
+7fbe1950c000-7fbe19513000 r-xp 00000000 00:22 44999                      /usr/lib64/libwayland-client.so.0.24.0
+7fbe19513000-7fbe19518000 r--p 00007000 00:22 44999                      /usr/lib64/libwayland-client.so.0.24.0
+7fbe19518000-7fbe1951a000 r--p 0000c000 00:22 44999                      /usr/lib64/libwayland-client.so.0.24.0
+7fbe1951a000-7fbe1951b000 rw-p 0000e000 00:22 44999                      /usr/lib64/libwayland-client.so.0.24.0
+7fbe1951b000-7fbe1951d000 r-xp 00000000 00:22 43874                      /usr/lib64/libcairo-gobject.so.2.11804.4
+7fbe1951d000-7fbe19521000 r--p 00002000 00:22 43874                      /usr/lib64/libcairo-gobject.so.2.11804.4
+7fbe19521000-7fbe19523000 r--p 00005000 00:22 43874                      /usr/lib64/libcairo-gobject.so.2.11804.4
+7fbe19523000-7fbe19524000 rw-p 00000000 00:00 0 
+7fbe19524000-7fbe1952a000 r-xp 00000000 00:22 44084                      /usr/lib64/libfribidi.so.0.4.0
+7fbe1952a000-7fbe19542000 r--p 00006000 00:22 44084                      /usr/lib64/libfribidi.so.0.4.0
+7fbe19542000-7fbe19543000 r--p 0001d000 00:22 44084                      /usr/lib64/libfribidi.so.0.4.0
+7fbe19543000-7fbe19544000 rw-p 0001e000 00:22 44084                      /usr/lib64/libfribidi.so.0.4.0
+7fbe19544000-7fbe19553000 r-xp 00000000 00:22 44595                      /usr/lib64/libpangoft2-1.0.so.0.5700.0
+7fbe19553000-7fbe1955e000 r--p 0000f000 00:22 44595                      /usr/lib64/libpangoft2-1.0.so.0.5700.0
+7fbe1955e000-7fbe1955f000 r--p 0001a000 00:22 44595                      /usr/lib64/libpangoft2-1.0.so.0.5700.0
+7fbe1955f000-7fbe19560000 rw-p 00000000 00:00 0 
+7fbe19560000-7fbe19568000 r-xp 00000000 00:22 44594                      /usr/lib64/libpangocairo-1.0.so.0.5700.0
+7fbe19568000-7fbe1956e000 r--p 00008000 00:22 44594                      /usr/lib64/libpangocairo-1.0.so.0.5700.0
+7fbe1956e000-7fbe1956f000 r--p 0000e000 00:22 44594                      /usr/lib64/libpangocairo-1.0.so.0.5700.0
+7fbe1956f000-7fbe19570000 rw-p 0000f000 00:22 44594                      /usr/lib64/libpangocairo-1.0.so.0.5700.0
+7fbe19570000-7fbe195a8000 r-xp 00000000 00:22 284595                     /usr/lib64/libgobject-2.0.so.0.8600.3
+7fbe195a8000-7fbe195cb000 r--p 00038000 00:22 284595                     /usr/lib64/libgobject-2.0.so.0.8600.3
+7fbe195cb000-7fbe195ce000 r--p 0005a000 00:22 284595                     /usr/lib64/libgobject-2.0.so.0.8600.3
+7fbe195ce000-7fbe195cf000 rw-p 0005d000 00:22 284595                     /usr/lib64/libgobject-2.0.so.0.8600.3
+7fbe195cf000-7fbe195d1000 r-xp 00000000 00:22 284593                     /usr/lib64/libgmodule-2.0.so.0.8600.3
+7fbe195d1000-7fbe195d3000 r--p 00002000 00:22 284593                     /usr/lib64/libgmodule-2.0.so.0.8600.3
+7fbe195d3000-7fbe195d4000 r--p 00003000 00:22 284593                     /usr/lib64/libgmodule-2.0.so.0.8600.3
+7fbe195d4000-7fbe195d5000 rw-p 00004000 00:22 284593                     /usr/lib64/libgmodule-2.0.so.0.8600.3
+7fbe195d5000-7fbe195d9000 ---p 00000000 00:00 0 
+7fbe195d9000-7fbe196d5000 rw-p 00000000 00:00 0 
+7fbe196d5000-7fbe196d9000 ---p 00000000 00:00 0 
+7fbe196d9000-7fbe197d5000 rw-p 00000000 00:00 0 
+7fbe197d5000-7fbe197d8000 r-xp 00000000 00:22 43362                      /usr/lib64/libXfixes.so.3.1.0
+7fbe197d8000-7fbe197da000 r--p 00003000 00:22 43362                      /usr/lib64/libXfixes.so.3.1.0
+7fbe197da000-7fbe197db000 r--p 00004000 00:22 43362                      /usr/lib64/libXfixes.so.3.1.0
+7fbe197db000-7fbe197dc000 rw-p 00005000 00:22 43362                      /usr/lib64/libXfixes.so.3.1.0
+7fbe197dc000-7fbe197dd000 r--s 00000000 00:22 47796                      /home/eymen/.cache/fontconfig/6fcb01a03a016cc71057b587cdea6709-le64.cache-9
+7fbe197dd000-7fbe197df000 r--s 00000000 00:22 944732                     /usr/lib/fontconfig/cache/de3fc716275e870cc68457cf08da2de7-le64.cache-9
+7fbe197df000-7fbe197e1000 r--s 00000000 00:22 47766                      /home/eymen/.cache/fontconfig/383aa4c3ea81d46e4a1459cd427fba23-le64.cache-9
+7fbe197e1000-7fbe197e3000 r--s 00000000 00:22 47764                      /home/eymen/.cache/fontconfig/cc4435afd06e20625c417ffcddec4f51-le64.cache-9
+7fbe197e3000-7fbe197e9000 r--s 00000000 00:22 961171                     /usr/lib/fontconfig/cache/221930ae9526a9cb8049af2916f03412-le64.cache-9
+7fbe197e9000-7fbe197ec000 r--s 00000000 00:22 47758                      /home/eymen/.cache/fontconfig/feeafda3627faad7596d025cfacea73f-le64.cache-9
+7fbe197ec000-7fbe197ef000 r--s 00000000 00:22 47756                      /home/eymen/.cache/fontconfig/18f520a508f13854f77176faf7889ae9-le64.cache-9
+7fbe197ef000-7fbe197f2000 r--s 00000000 00:22 47754                      /home/eymen/.cache/fontconfig/3196f05a030874ca00722cbf1e991434-le64.cache-9
+7fbe197f2000-7fbe197f5000 r--s 00000000 00:22 47752                      /home/eymen/.cache/fontconfig/a11fef9c6b59ddb48eba670bb9bf2c6a-le64.cache-9
+7fbe197f5000-7fbe19806000 r--p 00000000 00:22 960985                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfreetype.so
+7fbe19806000-7fbe19876000 r-xp 00011000 00:22 960985                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfreetype.so
+7fbe19876000-7fbe19899000 r--p 00081000 00:22 960985                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfreetype.so
+7fbe19899000-7fbe1989f000 r--p 000a3000 00:22 960985                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfreetype.so
+7fbe1989f000-7fbe198a0000 rw-p 000a9000 00:22 960985                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfreetype.so
+7fbe198a0000-7fbe198a6000 r--p 00000000 00:22 960984                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfontmanager.so
+7fbe198a6000-7fbe19a02000 r-xp 00006000 00:22 960984                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfontmanager.so
+7fbe19a02000-7fbe19a3d000 r--p 00162000 00:22 960984                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfontmanager.so
+7fbe19a3d000-7fbe19a3e000 ---p 0019d000 00:22 960984                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfontmanager.so
+7fbe19a3e000-7fbe19a40000 r--p 0019d000 00:22 960984                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfontmanager.so
+7fbe19a40000-7fbe19a41000 rw-p 0019f000 00:22 960984                     /usr/lib/jvm/java-17-temurin-jdk/lib/libfontmanager.so
+7fbe19a41000-7fbe19a42000 rw-p 00000000 00:00 0 
+7fbe19a42000-7fbe19a65000 r--p 00000000 00:22 242456                     /usr/share/locale/tr/LC_MESSAGES/libc.mo
+7fbe19a65000-7fbe19a79000 r-xp 00000000 00:22 45053                      /usr/lib64/libxcb.so.1.1.0
+7fbe19a79000-7fbe19a8d000 r--p 00014000 00:22 45053                      /usr/lib64/libxcb.so.1.1.0
+7fbe19a8d000-7fbe19a8e000 r--p 00028000 00:22 45053                      /usr/lib64/libxcb.so.1.1.0
+7fbe19a8e000-7fbe19a8f000 rw-p 00029000 00:22 45053                      /usr/lib64/libxcb.so.1.1.0
+7fbe19a8f000-7fbe19a9c000 r-xp 00000000 00:22 43365                      /usr/lib64/libXi.so.6.1.0
+7fbe19a9c000-7fbe19aa0000 r--p 0000d000 00:22 43365                      /usr/lib64/libXi.so.6.1.0
+7fbe19aa0000-7fbe19aa1000 r--p 00011000 00:22 43365                      /usr/lib64/libXi.so.6.1.0
+7fbe19aa1000-7fbe19aa2000 rw-p 00012000 00:22 43365                      /usr/lib64/libXi.so.6.1.0
+7fbe19aa2000-7fbe19aa6000 r-xp 00000000 00:22 43374                      /usr/lib64/libXtst.so.6.1.0
+7fbe19aa6000-7fbe19aa8000 r--p 00004000 00:22 43374                      /usr/lib64/libXtst.so.6.1.0
+7fbe19aa8000-7fbe19aa9000 r--p 00005000 00:22 43374                      /usr/lib64/libXtst.so.6.1.0
+7fbe19aa9000-7fbe19aaa000 rw-p 00006000 00:22 43374                      /usr/lib64/libXtst.so.6.1.0
+7fbe19aaa000-7fbe19ab1000 r-xp 00000000 00:22 43371                      /usr/lib64/libXrender.so.1.3.0
+7fbe19ab1000-7fbe19ab4000 r--p 00007000 00:22 43371                      /usr/lib64/libXrender.so.1.3.0
+7fbe19ab4000-7fbe19ab5000 r--p 00009000 00:22 43371                      /usr/lib64/libXrender.so.1.3.0
+7fbe19ab5000-7fbe19ab6000 rw-p 0000a000 00:22 43371                      /usr/lib64/libXrender.so.1.3.0
+7fbe19ab6000-7fbe19b4f000 r-xp 00000000 00:22 43353                      /usr/lib64/libX11.so.6.4.0
+7fbe19b4f000-7fbe19bf4000 r--p 00099000 00:22 43353                      /usr/lib64/libX11.so.6.4.0
+7fbe19bf4000-7fbe19bf7000 r--p 0013d000 00:22 43353                      /usr/lib64/libX11.so.6.4.0
+7fbe19bf7000-7fbe19bfb000 rw-p 00140000 00:22 43353                      /usr/lib64/libX11.so.6.4.0
+7fbe19bfb000-7fbe19c07000 r-xp 00000000 00:22 43361                      /usr/lib64/libXext.so.6.4.0
+7fbe19c07000-7fbe19c0d000 r--p 0000c000 00:22 43361                      /usr/lib64/libXext.so.6.4.0
+7fbe19c0d000-7fbe19c0e000 r--p 00011000 00:22 43361                      /usr/lib64/libXext.so.6.4.0
+7fbe19c0e000-7fbe19c0f000 rw-p 00012000 00:22 43361                      /usr/lib64/libXext.so.6.4.0
+7fbe19c0f000-7fbe19c10000 r--s 00000000 00:22 47792                      /home/eymen/.cache/fontconfig/2a90ec7ec7fc01d3a9f58fddf8db0237-le64.cache-9
+7fbe19c10000-7fbe19c17000 r-xp 00000000 00:22 43358                      /usr/lib64/libXcursor.so.1.0.2
+7fbe19c17000-7fbe19c1b000 r--p 00007000 00:22 43358                      /usr/lib64/libXcursor.so.1.0.2
+7fbe19c1b000-7fbe19c1c000 r--p 0000b000 00:22 43358                      /usr/lib64/libXcursor.so.1.0.2
+7fbe19c1c000-7fbe19c1d000 rw-p 00000000 00:00 0 
+7fbe19c1d000-7fbe19c1e000 r-xp 00000000 00:22 43366                      /usr/lib64/libXinerama.so.1.0.0
+7fbe19c1e000-7fbe19c1f000 r--p 00001000 00:22 43366                      /usr/lib64/libXinerama.so.1.0.0
+7fbe19c1f000-7fbe19c20000 r--p 00001000 00:22 43366                      /usr/lib64/libXinerama.so.1.0.0
+7fbe19c20000-7fbe19c21000 rw-p 00002000 00:22 43366                      /usr/lib64/libXinerama.so.1.0.0
+7fbe19c21000-7fbe19c28000 r--s 00000000 00:22 420968                     /usr/lib64/gconv/gconv-modules.cache
+7fbe19c28000-7fbe19c3c000 r--p 00000000 00:22 960981                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt_xawt.so
+7fbe19c3c000-7fbe19c84000 r-xp 00014000 00:22 960981                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt_xawt.so
+7fbe19c84000-7fbe19c9d000 r--p 0005c000 00:22 960981                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt_xawt.so
+7fbe19c9d000-7fbe19ca3000 r--p 00074000 00:22 960981                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt_xawt.so
+7fbe19ca3000-7fbe19ca5000 rw-p 0007a000 00:22 960981                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt_xawt.so
+7fbe19ca5000-7fbe19ca7000 rw-p 00000000 00:00 0 
+7fbe19ca7000-7fbe19cd4000 r--p 00000000 00:22 960979                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt.so
+7fbe19cd4000-7fbe19d57000 r-xp 0002d000 00:22 960979                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt.so
+7fbe19d57000-7fbe19d64000 r--p 000b0000 00:22 960979                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt.so
+7fbe19d64000-7fbe19d65000 r--p 000bc000 00:22 960979                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt.so
+7fbe19d65000-7fbe19d70000 rw-p 000bd000 00:22 960979                     /usr/lib/jvm/java-17-temurin-jdk/lib/libawt.so
+7fbe19d70000-7fbe19d95000 rw-p 00000000 00:00 0 
+7fbe19d95000-7fbe19d97000 r--p 00000000 00:22 961003                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement_ext.so
+7fbe19d97000-7fbe19d9a000 r-xp 00002000 00:22 961003                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement_ext.so
+7fbe19d9a000-7fbe19d9b000 r--p 00005000 00:22 961003                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement_ext.so
+7fbe19d9b000-7fbe19d9c000 ---p 00006000 00:22 961003                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement_ext.so
+7fbe19d9c000-7fbe19d9d000 r--p 00006000 00:22 961003                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement_ext.so
+7fbe19d9d000-7fbe19d9e000 rw-p 00007000 00:22 961003                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement_ext.so
+7fbe19d9e000-7fbe19da0000 r--p 00000000 00:22 961014                     /usr/lib/jvm/java-17-temurin-jdk/lib/libzip.so
+7fbe19da0000-7fbe19db2000 r-xp 00002000 00:22 961014                     /usr/lib/jvm/java-17-temurin-jdk/lib/libzip.so
+7fbe19db2000-7fbe19dba000 r--p 00014000 00:22 961014                     /usr/lib/jvm/java-17-temurin-jdk/lib/libzip.so
+7fbe19dba000-7fbe19dbb000 r--p 0001b000 00:22 961014                     /usr/lib/jvm/java-17-temurin-jdk/lib/libzip.so
+7fbe19dbb000-7fbe19dbc000 rw-p 0001c000 00:22 961014                     /usr/lib/jvm/java-17-temurin-jdk/lib/libzip.so
+7fbe19dbc000-7fbe19ded000 rw-p 00000000 00:00 0 
+7fbe19ded000-7fbe19df1000 r--p 00000000 00:22 961005                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnet.so
+7fbe19df1000-7fbe19dff000 r-xp 00004000 00:22 961005                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnet.so
+7fbe19dff000-7fbe19e03000 r--p 00012000 00:22 961005                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnet.so
+7fbe19e03000-7fbe19e04000 r--p 00015000 00:22 961005                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnet.so
+7fbe19e04000-7fbe19e05000 rw-p 00016000 00:22 961005                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnet.so
+7fbe19e05000-7fbe19e0c000 r--p 00000000 00:22 961006                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnio.so
+7fbe19e0c000-7fbe19e15000 r-xp 00007000 00:22 961006                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnio.so
+7fbe19e15000-7fbe19e19000 r--p 00010000 00:22 961006                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnio.so
+7fbe19e19000-7fbe19e1a000 ---p 00014000 00:22 961006                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnio.so
+7fbe19e1a000-7fbe19e1b000 r--p 00014000 00:22 961006                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnio.so
+7fbe19e1b000-7fbe19e1c000 rw-p 00015000 00:22 961006                     /usr/lib/jvm/java-17-temurin-jdk/lib/libnio.so
+7fbe19e1c000-7fbe19e20000 ---p 00000000 00:00 0 
+7fbe19e20000-7fbe1a01d000 rw-p 00000000 00:00 0 
+7fbe1a01d000-7fbe1a021000 ---p 00000000 00:00 0 
+7fbe1a021000-7fbe1a11d000 rw-p 00000000 00:00 0 
+7fbe1a11d000-7fbe1a121000 ---p 00000000 00:00 0 
+7fbe1a121000-7fbe1a21d000 rw-p 00000000 00:00 0 
+7fbe1a21d000-7fbe1a221000 ---p 00000000 00:00 0 
+7fbe1a221000-7fbe1a31d000 rw-p 00000000 00:00 0 
+7fbe1a31d000-7fbe1a321000 ---p 00000000 00:00 0 
+7fbe1a321000-7fbe1a41d000 rw-p 00000000 00:00 0 
+7fbe1a41d000-7fbe1a421000 ---p 00000000 00:00 0 
+7fbe1a421000-7fbe1a51d000 rw-p 00000000 00:00 0 
+7fbe1a51d000-7fbe1a521000 ---p 00000000 00:00 0 
+7fbe1a521000-7fbe1a61d000 rw-p 00000000 00:00 0 
+7fbe1a61d000-7fbe1a621000 ---p 00000000 00:00 0 
+7fbe1a621000-7fbe1a71d000 rw-p 00000000 00:00 0 
+7fbe1a71d000-7fbe1a721000 ---p 00000000 00:00 0 
+7fbe1a721000-7fbe1a81d000 rw-p 00000000 00:00 0 
+7fbe1a81d000-7fbe1a821000 ---p 00000000 00:00 0 
+7fbe1a821000-7fbe1aa1e000 rw-p 00000000 00:00 0 
+7fbe1aa1e000-7fbe1aa23000 r--p 00000000 00:22 960999                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjsvml.so
+7fbe1aa23000-7fbe1aa64000 r-xp 00005000 00:22 960999                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjsvml.so
+7fbe1aa64000-7fbe1aaed000 r--p 00046000 00:22 960999                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjsvml.so
+7fbe1aaed000-7fbe1aaee000 r--p 000ce000 00:22 960999                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjsvml.so
+7fbe1aaee000-7fbe1aaef000 rw-p 000cf000 00:22 960999                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjsvml.so
+7fbe1aaef000-7fbe1ac5f000 rw-p 00000000 00:00 0 
+7fbe1ac5f000-7fbe1b129000 ---p 00000000 00:00 0 
+7fbe1b129000-7fbe1b153000 rw-p 00000000 00:00 0 
+7fbe1b153000-7fbe1b3b7000 ---p 00000000 00:00 0 
+7fbe1b3b7000-7fbe1b40a000 rw-p 00000000 00:00 0 
+7fbe1b40a000-7fbe1b8d4000 ---p 00000000 00:00 0 
+7fbe1b8d4000-7fbe1b8da000 rw-p 00000000 00:00 0 
+7fbe1b8da000-7fbe1b9be000 ---p 00000000 00:00 0 
+7fbe1b9be000-7fbe1b9cf000 rw-p 00000000 00:00 0 
+7fbe1b9cf000-7fbe1baa7000 ---p 00000000 00:00 0 
+7fbe1baa7000-7fbe1baaf000 rw-p 00000000 00:00 0 
+7fbe1baaf000-7fbe1bab6000 ---p 00000000 00:00 0 
+7fbe1bab6000-7fbe1bac4000 r--p 00000000 00:22 960991                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjava.so
+7fbe1bac4000-7fbe1bad6000 r-xp 0000e000 00:22 960991                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjava.so
+7fbe1bad6000-7fbe1badc000 r--p 00020000 00:22 960991                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjava.so
+7fbe1badc000-7fbe1badd000 ---p 00026000 00:22 960991                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjava.so
+7fbe1badd000-7fbe1bade000 r--p 00026000 00:22 960991                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjava.so
+7fbe1bade000-7fbe1badf000 rw-p 00027000 00:22 960991                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjava.so
+7fbe1badf000-7fbe1bae0000 rw-p 00000000 00:00 0 
+7fbe1bae0000-7fbe1bae4000 r--p 00000000 00:22 960995                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjimage.so
+7fbe1bae4000-7fbe1baf7000 r-xp 00004000 00:22 960995                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjimage.so
+7fbe1baf7000-7fbe1bafd000 r--p 00017000 00:22 960995                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjimage.so
+7fbe1bafd000-7fbe1baff000 r--p 0001c000 00:22 960995                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjimage.so
+7fbe1baff000-7fbe1bb00000 rw-p 0001e000 00:22 960995                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjimage.so
+7fbe1bb00000-7fbe1bb04000 ---p 00000000 00:00 0 
+7fbe1bb04000-7fbe1bc00000 rw-p 00000000 00:00 0 
+7fbe1bc00000-7fbe1be53000 r--p 00000000 00:22 961027                     /usr/lib/jvm/java-17-temurin-jdk/lib/server/libjvm.so
+7fbe1be53000-7fbe1cb7b000 r-xp 00253000 00:22 961027                     /usr/lib/jvm/java-17-temurin-jdk/lib/server/libjvm.so
+7fbe1cb7b000-7fbe1ce08000 r--p 00f7b000 00:22 961027                     /usr/lib/jvm/java-17-temurin-jdk/lib/server/libjvm.so
+7fbe1ce08000-7fbe1ce09000 ---p 01208000 00:22 961027                     /usr/lib/jvm/java-17-temurin-jdk/lib/server/libjvm.so
+7fbe1ce09000-7fbe1cec2000 r--p 01208000 00:22 961027                     /usr/lib/jvm/java-17-temurin-jdk/lib/server/libjvm.so
+7fbe1cec2000-7fbe1cef7000 rw-p 012c1000 00:22 961027                     /usr/lib/jvm/java-17-temurin-jdk/lib/server/libjvm.so
+7fbe1cef7000-7fbe1cf52000 rw-p 00000000 00:00 0 
+7fbe1cf52000-7fbe1cf53000 r--s 00000000 00:22 47784                      /home/eymen/.cache/fontconfig/22f06f3be2d16d058da85b73ae1dc5b1-le64.cache-9
+7fbe1cf53000-7fbe1cf54000 r--s 00000000 00:22 47774                      /home/eymen/.cache/fontconfig/a1059391c956b3cbc42a78cac70f430a-le64.cache-9
+7fbe1cf54000-7fbe1cf55000 r--s 00000000 00:22 47772                      /home/eymen/.cache/fontconfig/aa02322cc1375fea2382deabf4339973-le64.cache-9
+7fbe1cf55000-7fbe1cfd7000 r-xp 00000000 00:22 241866                     /usr/lib64/libm.so.6
+7fbe1cfd7000-7fbe1d048000 r--p 00082000 00:22 241866                     /usr/lib64/libm.so.6
+7fbe1d048000-7fbe1d049000 r--p 000f2000 00:22 241866                     /usr/lib64/libm.so.6
+7fbe1d049000-7fbe1d04a000 rw-p 000f3000 00:22 241866                     /usr/lib64/libm.so.6
+7fbe1d04a000-7fbe1d04b000 r-xp 00000000 00:22 241874                     /usr/lib64/librt.so.1
+7fbe1d04b000-7fbe1d04c000 r--p 00001000 00:22 241874                     /usr/lib64/librt.so.1
+7fbe1d04c000-7fbe1d04d000 r--p 00001000 00:22 241874                     /usr/lib64/librt.so.1
+7fbe1d04d000-7fbe1d050000 rw-p 00000000 00:00 0 
+7fbe1d050000-7fbe1d1bf000 r-xp 00000000 00:22 241864                     /usr/lib64/libc.so.6
+7fbe1d1bf000-7fbe1d235000 r--p 0016f000 00:22 241864                     /usr/lib64/libc.so.6
+7fbe1d235000-7fbe1d239000 r--p 001e4000 00:22 241864                     /usr/lib64/libc.so.6
+7fbe1d239000-7fbe1d23b000 rw-p 001e8000 00:22 241864                     /usr/lib64/libc.so.6
+7fbe1d23b000-7fbe1d243000 rw-p 00000000 00:00 0 
+7fbe1d243000-7fbe1d244000 r-xp 00000000 00:22 241865                     /usr/lib64/libdl.so.2
+7fbe1d244000-7fbe1d245000 r--p 00001000 00:22 241865                     /usr/lib64/libdl.so.2
+7fbe1d245000-7fbe1d246000 r--p 00001000 00:22 241865                     /usr/lib64/libdl.so.2
+7fbe1d246000-7fbe1d247000 rw-p 00000000 00:00 0 
+7fbe1d247000-7fbe1d248000 r-xp 00000000 00:22 241872                     /usr/lib64/libpthread.so.0
+7fbe1d248000-7fbe1d249000 r--p 00001000 00:22 241872                     /usr/lib64/libpthread.so.0
+7fbe1d249000-7fbe1d24a000 r--p 00001000 00:22 241872                     /usr/lib64/libpthread.so.0
+7fbe1d24a000-7fbe1d24b000 rw-p 00000000 00:00 0 
+7fbe1d24b000-7fbe1d24c000 r--s 00000000 00:22 47762                      /home/eymen/.cache/fontconfig/0f80fa86029ae75a63f21d682b864529-le64.cache-9
+7fbe1d24c000-7fbe1d24d000 rw-p 00000000 00:00 0 
+7fbe1d24d000-7fbe1d24f000 r-xp 00000000 00:22 43355                      /usr/lib64/libXau.so.6.0.0
+7fbe1d24f000-7fbe1d250000 r--p 00002000 00:22 43355                      /usr/lib64/libXau.so.6.0.0
+7fbe1d250000-7fbe1d251000 r--p 00003000 00:22 43355                      /usr/lib64/libXau.so.6.0.0
+7fbe1d251000-7fbe1d252000 rw-p 00000000 00:00 0 
+7fbe1d252000-7fbe1d255000 r--p 00000000 00:22 961001                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement.so
+7fbe1d255000-7fbe1d256000 r-xp 00003000 00:22 961001                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement.so
+7fbe1d256000-7fbe1d257000 r--p 00004000 00:22 961001                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement.so
+7fbe1d257000-7fbe1d258000 r--p 00004000 00:22 961001                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement.so
+7fbe1d258000-7fbe1d259000 rw-p 00005000 00:22 961001                     /usr/lib/jvm/java-17-temurin-jdk/lib/libmanagement.so
+7fbe1d259000-7fbe1d261000 rw-s 00000000 00:28 3397                       /tmp/hsperfdata_eymen/37059 (deleted)
+7fbe1d261000-7fbe1d262000 ---p 00000000 00:00 0 
+7fbe1d262000-7fbe1d263000 r--p 00000000 00:00 0 
+7fbe1d263000-7fbe1d264000 ---p 00000000 00:00 0 
+7fbe1d264000-7fbe1d267000 r--p 00000000 00:22 960996                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjli.so
+7fbe1d267000-7fbe1d277000 r-xp 00003000 00:22 960996                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjli.so
+7fbe1d277000-7fbe1d27e000 r--p 00013000 00:22 960996                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjli.so
+7fbe1d27e000-7fbe1d27f000 r--p 00019000 00:22 960996                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjli.so
+7fbe1d27f000-7fbe1d280000 rw-p 0001a000 00:22 960996                     /usr/lib/jvm/java-17-temurin-jdk/lib/libjli.so
+7fbe1d280000-7fbe1d282000 rw-p 00000000 00:00 0 
+7fbe1d282000-7fbe1d286000 r--p 00000000 00:00 0                          [vvar]
+7fbe1d286000-7fbe1d288000 r--p 00000000 00:00 0                          [vvar_vclock]
+7fbe1d288000-7fbe1d28a000 r-xp 00000000 00:00 0                          [vdso]
+7fbe1d28a000-7fbe1d2b4000 r-xp 00000000 00:22 241861                     /usr/lib64/ld-linux-x86-64.so.2
+7fbe1d2b4000-7fbe1d2c0000 r--p 0002a000 00:22 241861                     /usr/lib64/ld-linux-x86-64.so.2
+7fbe1d2c0000-7fbe1d2c2000 r--p 00035000 00:22 241861                     /usr/lib64/ld-linux-x86-64.so.2
+7fbe1d2c2000-7fbe1d2c3000 rw-p 00037000 00:22 241861                     /usr/lib64/ld-linux-x86-64.so.2
+7fbe1d2c3000-7fbe1d2c4000 rw-p 00000000 00:00 0 
+7ffd67c5e000-7ffd67c80000 rw-p 00000000 00:00 0                          [stack]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
+
+
+VM Arguments:
+jvm_args: -Djava.library.path=/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir -XX:+UseSerialGC -XX:+DisableExplicitGC -XX:-UseCompressedOops -XX:-UseCompressedClassPointers -Dfile.encoding=UTF-8 -Duser.country=TR -Duser.language=tr -Duser.variant 
+java_command: net.lax1dude.eaglercraft.internal.MainClass
+java_class_path (initial): /home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/codecjorbis-20101023.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/codecwav-20101023.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/CompileEPK.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/Java-WebSocket-1.5.1-with-dependencies.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/lwjgl-egl.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/lwjgl-jemalloc.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/lwjgl-openal.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/lwjgl-opengles.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/lwjgl.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/MakeOfflineDownload.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/UnsafeMemcpy.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/webrtc-java-0.10.0.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/soundsystem-20120107.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/lwjgl-rundir/lwjgl-glfw.jar:/home/eymen/Masaüstü/Projects/Eagler-1710/build/classes/java/eagler:/home/eymen/Masaüstü/Projects/Eagler-1710/build/resources/eagler
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 12                                        {product} {ergonomic}
+     bool DisableExplicitGC                        = true                                      {product} {command line}
+   size_t InitialHeapSize                          = 257949696                                 {product} {ergonomic}
+   size_t MaxHeapSize                              = 4116709376                                {product} {ergonomic}
+   size_t MaxNewSize                               = 1372192768                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 196608                                    {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+   size_t NewSize                                  = 85983232                                  {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 7602480                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122027880                              {pd product} {ergonomic}
+   size_t OldSize                                  = 171966464                                 {product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122027880                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4116709376                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = false                          {product lp64_product} {command line}
+     bool UseCompressedOops                        = false                          {product lp64_product} {command line}
+     bool UseSerialGC                              = true                                      {product} {command line}
+
+Logging:
+Log output configuration:
+ #0: stdout all=off uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=/home/eymen/.nvm/versions/node/v24.13.0/bin:/home/eymen/.local/bin:/home/eymen/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/eymen/.lmstudio/bin:/home/eymen/.local/share/JetBrains/Toolbox/scripts:/home/eymen/.lmstudio/bin:/home/eymen/.lmstudio/bin
+SHELL=/bin/bash
+DISPLAY=:0
+LANG=tr_TR.UTF-8
+TERM=xterm-256color
+
+Active Locale:
+LC_ALL=tr_TR.UTF-8
+LC_COLLATE=tr_TR.UTF-8
+LC_CTYPE=tr_TR.UTF-8
+LC_MESSAGES=tr_TR.UTF-8
+LC_MONETARY=tr_TR.UTF-8
+LC_NUMERIC=tr_TR.UTF-8
+LC_TIME=tr_TR.UTF-8
+
+Signal Handlers:
+   SIGSEGV: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGBUS: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGFPE: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGPIPE: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGXFSZ: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGILL: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGUSR2: SR_handler in libjvm.so, mask=00100000000000000000000000000000, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGHUP: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGINT: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGTERM: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGQUIT: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGTRAP: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+
+
+Periodic native trim disabled
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+Fedora release 43 (Forty Three)
+uname: Linux 6.18.7-200.fc43.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Jan 23 16:42:34 UTC 2026 x86_64
+OS uptime: 0 days 1:21 hours
+libc: glibc 2.42 NPTL 2.42 
+rlimit (soft/hard): STACK 8192k/infinity , CORE infinity/infinity , NPROC 62182/62182 , NOFILE 524288/524288 , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK 8192k/8192k
+load average: 2,90 2,94 2,33
+
+/proc/meminfo:
+MemTotal:       16078540 kB
+MemFree:          433136 kB
+MemAvailable:    2019796 kB
+Buffers:             572 kB
+Cached:          3128880 kB
+SwapCached:         4932 kB
+Active:          3705636 kB
+Inactive:        7048612 kB
+Active(anon):    2925432 kB
+Inactive(anon):  6123088 kB
+Active(file):     780204 kB
+Inactive(file):   925524 kB
+Unevictable:      582440 kB
+Mlocked:             348 kB
+SwapTotal:       8388604 kB
+SwapFree:         317464 kB
+Zswap:                 0 kB
+Zswapped:              0 kB
+Dirty:              4016 kB
+Writeback:             0 kB
+AnonPages:       8204340 kB
+Mapped:           612004 kB
+Shmem:           1590816 kB
+KReclaimable:     225792 kB
+Slab:             653272 kB
+SReclaimable:     225792 kB
+SUnreclaim:       427480 kB
+KernelStack:       45232 kB
+PageTables:       148020 kB
+SecPageTables:      2084 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    16427872 kB
+Committed_AS:   44229104 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      185644 kB
+VmallocChunk:          0 kB
+Percpu:            18960 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:   266240 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+Unaccepted:            0 kB
+Balloon:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:     3482488 kB
+DirectMap2M:    13012992 kB
+DirectMap1G:           0 kB
+
+/sys/kernel/mm/transparent_hugepage/enabled: always [madvise] never
+/sys/kernel/mm/transparent_hugepage/hpage_pmd_size: 2097152
+/sys/kernel/mm/transparent_hugepage/defrag (defrag/compaction efforts parameter): always defer defer+madvise [madvise] never
+
+Process Memory:
+Virtual Size: 24404820K (peak: 24438708K)
+Resident Set Size: 370672K (peak: 370672K) (anon: 253936K, file: 116696K, shmem: 40K)
+Swapped out: 0K
+C-Heap outstanding allocations: 44498K, retained: 41445K
+glibc malloc tunables: (default)
+
+/proc/sys/kernel/threads-max (system-wide limit on the number of threads): 124364
+/proc/sys/vm/max_map_count (maximum number of memory map areas a process may have): 1048576
+/proc/sys/vm/swappiness (control to define how aggressively the kernel swaps out anonymous memory): 60
+/proc/sys/kernel/pid_max (system-wide limit on number of process identifiers): 4194304
+
+container (cgroup) information:
+container_type: cgroupv2
+cpu_cpuset_cpus: not supported
+cpu_memory_nodes: not supported
+active_processor_count: 12
+cpu_quota: no quota
+cpu_period: 100000
+cpu_shares: no shares
+memory_limit_in_bytes: unlimited
+memory_and_swap_limit_in_bytes: unlimited
+memory_soft_limit_in_bytes: 0
+memory_usage_in_bytes: 2098360 k
+memory_max_usage_in_bytes: not supported
+rss_usage_in_bytes: 1781968 k
+cache_usage_in_bytes: 284840 k
+memory_swap_current_in_bytes: 1133300 k
+memory_swap_max_limit_in_bytes: unlimited
+maximum number of tasks: unlimited
+current number of tasks: 119
+
+Steal ticks since vm start: 0
+Steal ticks percentage since vm start:  0,000
+
+CPU: total 20 (initial active 20) (20 cores per cpu, 1 threads per core) family 6 model 154 stepping 3 microcode 0x437, cx8, cmov, fxsr, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt, clwb
+CPU Model and flags from /proc/cpuinfo:
+model name	: 12th Gen Intel(R) Core(TM) i7-12700H
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize arch_lbr ibt flush_l1d arch_capabilities
+
+Online cpus: 0-19
+Offline cpus: 
+BIOS frequency limitation: <Not Available>
+Frequency switch latency (ns): 0
+Available cpu frequencies: <Not Available>
+Current governor: powersave
+Core performance/turbo boost: <Not Available>
+
+Memory: 4k page, physical 16078540k(432164k free), swap 8388604k(317472k free)
+Page Sizes: 4k
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.18+8) for linux-amd64 JRE (17.0.18+8), built on Jan 20 2026 00:00:00 by "admin" with gcc 10.3.0
+
+END.

@@ -39,8 +39,7 @@ public class EaglerSaveFormat extends SaveFormatOld {
 	}
 
 	public static final VFile2 worldsList = WorldsDB.newVFile("worlds_list.txt");
-	// Don't use subdirectory - store worlds directly in WorldsDB filesystem root
-	public static final VFile2 worldsFolder = new VFile2("");
+	public static final VFile2 worldsFolder = WorldsDB.newVFile("worlds");
 
 	public String getName() {
 		return "eagler";

@@ -20,7 +20,6 @@ public class S26PacketMapChunkBulk extends Packet {
 	private byte[][] field_149260_f;
 	private int field_149261_g;
 	private boolean field_149267_h;
-	private static byte[] field_149268_i = new byte[0];
 	private static final String __OBFID = "CL_00001306";
 
 	public S26PacketMapChunkBulk() {
@@ -35,18 +34,13 @@ public class S26PacketMapChunkBulk extends Packet {
 		this.field_149260_f = new byte[var2][];
 		this.field_149267_h = !p_i45197_1_.isEmpty() && !((Chunk) p_i45197_1_.get(0)).worldObj.provider.hasNoSky;
 		int var3 = 0;
+		byte[] bulkData = new byte[S21PacketChunkData.func_149275_c() * var2];
 
 		for (int var4 = 0; var4 < var2; ++var4) {
 			Chunk var5 = (Chunk) p_i45197_1_.get(var4);
 			S21PacketChunkData.Extracted var6 = S21PacketChunkData.func_149269_a(var5, true, 65535);
 
-			if (field_149268_i.length < var3 + var6.field_150282_a.length) {
-				byte[] var7 = new byte[var3 + var6.field_150282_a.length];
-				System.arraycopy(field_149268_i, 0, var7, 0, field_149268_i.length);
-				field_149268_i = var7;
-			}
-
-			System.arraycopy(var6.field_150282_a, 0, field_149268_i, var3, var6.field_150282_a.length);
+			System.arraycopy(var6.field_150282_a, 0, bulkData, var3, var6.field_150282_a.length);
 			var3 += var6.field_150282_a.length;
 			this.field_149266_a[var4] = var5.xPosition;
 			this.field_149264_b[var4] = var5.zPosition;
@@ -58,7 +52,7 @@ public class S26PacketMapChunkBulk extends Packet {
 		Deflater var11 = new Deflater(-1);
 
 		try {
-			var11.setInput(field_149268_i, 0, var3);
+			var11.setInput(bulkData, 0, var3);
 			var11.finish();
 			this.field_149263_e = new byte[var3];
 			this.field_149261_g = var11.deflate(this.field_149263_e);
@@ -84,14 +78,11 @@ public class S26PacketMapChunkBulk extends Packet {
 		this.field_149262_d = new int[var2];
 		this.field_149260_f = new byte[var2][];
 
-		if (field_149268_i.length < this.field_149261_g) {
-			field_149268_i = new byte[this.field_149261_g];
-		}
-
-		p_148837_1_.readBytes(field_149268_i, 0, this.field_149261_g);
+		byte[] compressedData = new byte[this.field_149261_g];
+		p_148837_1_.readBytes(compressedData, 0, this.field_149261_g);
 		byte[] var3 = new byte[S21PacketChunkData.func_149275_c() * var2];
 		Inflater var4 = new Inflater();
-		var4.setInput(field_149268_i, 0, this.field_149261_g);
+		var4.setInput(compressedData, 0, this.field_149261_g);
 
 		try {
 			var4.inflate(var3);

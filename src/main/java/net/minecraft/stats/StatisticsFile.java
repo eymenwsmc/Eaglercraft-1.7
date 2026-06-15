@@ -42,15 +42,21 @@ public class StatisticsFile extends StatFileWriter {
 	}
 
 	public void func_150882_a() {
-		try {
-			this.field_150875_a.clear();
-		} catch (JSONException var3) {
-			logger.error("Couldn't parse statistics file " + this.field_150887_d, var3);
+		if (this.field_150887_d.exists()) {
+			try {
+				this.field_150875_a.putAll(this.func_150881_a(this.field_150887_d.getAllChars()));
+			} catch (Exception var2) {
+				logger.error("Couldn't read statistics file " + this.field_150887_d, var2);
+			}
 		}
-
 	}
 
 	public void func_150883_b() {
+		try {
+			this.field_150887_d.setAllChars(func_150880_a(this.field_150875_a));
+		} catch (Exception var2) {
+			logger.error("Couldn't save statistics file " + this.field_150887_d, var2);
+		}
 	}
 
 	public void func_150873_a(EntityPlayer p_150873_1_, StatBase p_150873_2_, int p_150873_3_) {

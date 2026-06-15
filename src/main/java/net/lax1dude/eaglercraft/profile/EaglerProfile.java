@@ -159,6 +159,7 @@ public class EaglerProfile {
 	}
 
 	public static void setName(String str) {
+		System.out.println("EaglerProfile.setName: " + str);
 		username = str;
 		Minecraft mc = Minecraft.getMinecraft();
 		if (mc != null && mc.getSession() != null) {
@@ -352,6 +353,7 @@ public class EaglerProfile {
 			customCapeId = profile.getInteger("customCape");
 
 		String loadUsername = profile.getString("username").trim();
+		System.out.println("EaglerProfile.read: loadUsername='" + loadUsername + "'");
 
 		if (!loadUsername.isEmpty()) {
 			username = loadUsername.replaceAll("[^A-Za-z0-9]", "_");

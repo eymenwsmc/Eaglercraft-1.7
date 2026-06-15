@@ -23,6 +23,8 @@ import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 
+import net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay;
+import net.lax1dude.eaglercraft.sp.relay.RelayManager;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -275,7 +277,6 @@ public class Minecraft implements IPlayerUsage {
 
 	/** Join player counter */
 	private int joinPlayerCounter;
-	private final boolean jvm64bit;
 	private final boolean isDemo;
 	private EaglercraftNetworkManager myNetworkManager;
 	private boolean integratedServerIsRunning;
@@ -321,6 +322,8 @@ public class Minecraft implements IPlayerUsage {
 
 	private ResourceLocation mojangLogo;
 
+	private RelayManager relayManager;
+
 	public Minecraft() {
 		theMinecraft = this;
 		this.mcDataDir = new VFile2("mc");
@@ -335,25 +338,10 @@ public class Minecraft implements IPlayerUsage {
 		logger.info("(Session ID is " + session.getSessionID() + ")");
 		this.isDemo = false;
 		this.fullscreen = false;
-		this.jvm64bit = isJvm64bit();
+		this.relayManager = RelayManager.relayManager;
 	}
 
-	private static boolean isJvm64bit() {
-		String[] var0 = new String[] { "sun.arch.data.model", "com.ibm.vm.bitmode", "os.arch" };
-		String[] var1 = var0;
-		int var2 = var0.length;
 
-		for (int var3 = 0; var3 < var2; ++var3) {
-			String var4 = var1[var3];
-			String var5 = System.getProperty(var4);
-
-			if (var5 != null && var5.contains("64")) {
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 	private void startTimerHackThread() {
 
@@ -546,8 +534,8 @@ public class Minecraft implements IPlayerUsage {
 		this.ingameGUI = new GuiIngame(this);
 
 			this.displayGuiScreen(new GuiAlert("NOTICE", "This is EymenWSMC. This project has no longer \n been developing. Because I leaked the 1.12 source for no reason and I left the community", new GuiScreenEditProfile(new GuiMainMenu())));
-		
 
+		this.relayManager.loadDefaults();
 		this.field_152354_ay = null;
 		this.loadingScreen = new LoadingScreenRenderer(this);
 
@@ -735,7 +723,7 @@ public class Minecraft implements IPlayerUsage {
 			}
 		}
 
-		System.gc();
+		EagRuntime.requestGarbageCollection();
 	}
 
 	public void run() {
@@ -760,7 +748,7 @@ public class Minecraft implements IPlayerUsage {
 						} catch (OutOfMemoryError var10) {
 							this.freeMemory();
 							this.displayGuiScreen(new GuiMemoryErrorScreen());
-							System.gc();
+							EagRuntime.requestGarbageCollection();
 						}
 
 						continue;
@@ -927,19 +915,19 @@ public class Minecraft implements IPlayerUsage {
 		}
 
 		try {
-			System.gc();
+			EagRuntime.requestGarbageCollection();
 		} catch (Throwable var3) {
 			;
 		}
 
 		try {
-			System.gc();
+			EagRuntime.requestGarbageCollection();
 			this.loadWorld((WorldClient) null);
 		} catch (Throwable var2) {
 			;
 		}
 
-		System.gc();
+		EagRuntime.requestGarbageCollection();
 	}
 
 	/**
@@ -1817,7 +1805,7 @@ public class Minecraft implements IPlayerUsage {
 			this.renderViewEntity = null;
 		}
 
-		System.gc();
+		EagRuntime.requestGarbageCollection();
 		this.systemTime = 0L;
 	}
 
@@ -2206,10 +2194,6 @@ public class Minecraft implements IPlayerUsage {
 		return this.session;
 	}
 
-	public Multimap func_152341_N() {
-		return this.field_152356_J;
-	}
-
 	public TextureManager getTextureManager() {
 		return this.renderEngine;
 	}
@@ -2230,9 +2214,6 @@ public class Minecraft implements IPlayerUsage {
 		return this.textureMapBlocks;
 	}
 
-	public boolean isJava64bit() {
-		return this.jvm64bit;
-	}
 
 	public boolean func_147113_T() {
 		return this.isGamePaused;

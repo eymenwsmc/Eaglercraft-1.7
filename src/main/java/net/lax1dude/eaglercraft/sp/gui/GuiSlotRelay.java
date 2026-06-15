@@ -39,6 +39,7 @@ class GuiSlotRelay extends GuiSlot {
 		this.relayManager = RelayManager.relayManager;
 	}
 
+
 	@Override
 	protected int getSize() {
 		return relayManager.count();

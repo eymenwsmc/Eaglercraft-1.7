@@ -95,6 +95,13 @@ public class PlatformWebRTC {
 		return supportedImpl != WEBRTC_SUPPORT_NONE;
 	}
 
+	public static boolean isInitialized() {
+		return false;
+	}
+
+	public static void releaseFactory() {
+	}
+
 	@JSBody(params = { "item" }, script = "item.close();")
 	static native void closeIt(JSObject item);
 

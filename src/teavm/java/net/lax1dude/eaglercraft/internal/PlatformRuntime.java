@@ -1020,6 +1020,9 @@ public class PlatformRuntime {
 	public static long freeMemory() {
 		return 1073741824l;
 	}
+
+	public static void requestGarbageCollection() {
+	}
 	
 	public static String getCallingClass(int backTrace) {
 		return null;

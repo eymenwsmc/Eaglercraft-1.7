@@ -17,6 +17,7 @@
 package net.lax1dude.eaglercraft.sp.socket;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 
 	private int debugPacketCounter = 0;
 	private final List<byte[]> recievedPacketBuffer = new LinkedList<>();
+	private final Object recievedPacketBufferLock = new Object();
 	private final List<byte[]> deferredPacketBuffer = new LinkedList<>();
 	private boolean playerSpawned = false;
 	public boolean isPlayerChannelOpen = false;
@@ -91,7 +93,12 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 	}
 
 	public void addRecievedPacket(byte[] next) {
-		recievedPacketBuffer.add(next);
+		if (next == null) {
+			return;
+		}
+		synchronized (recievedPacketBufferLock) {
+			recievedPacketBuffer.add(next);
+		}
 	}
 
 	@Override
@@ -100,13 +107,21 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 			return;
 		}
 
-		while (!recievedPacketBuffer.isEmpty()) {
-			if (recievedPacketBuffer.get(0) == null) {
-				recievedPacketBuffer.remove(0);
+		List<byte[]> packetsToProcess;
+		synchronized (recievedPacketBufferLock) {
+			if (recievedPacketBuffer.isEmpty()) {
+				return;
+			}
+			packetsToProcess = new ArrayList<>(recievedPacketBuffer);
+			recievedPacketBuffer.clear();
+		}
+
+		for (int packetIndex = 0; packetIndex < packetsToProcess.size(); ++packetIndex) {
+			byte[] next = packetsToProcess.get(packetIndex);
+			if (next == null) {
 				continue;
 			}
-			
-			byte[] next = recievedPacketBuffer.remove(0);
+
 			++debugPacketCounter;
 			try {
 				if (injectedController != null && injectedController.handlePacket(next, 0)) {
@@ -152,7 +167,9 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 						posPacket.writePacketData(tempPacketBuf);
 						byte[] packetBytes = new byte[tempBuf.writerIndex()];
 						tempBuf.getBytes(0, packetBytes);
-						recievedPacketBuffer.add(packetBytes);
+						synchronized (recievedPacketBufferLock) {
+							recievedPacketBuffer.add(packetBytes);
+						}
 					} catch(Exception e) {
 						logger.error("Failed to inject S08 packet", e);
 					}
@@ -194,7 +211,9 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 					// Process deferred packets
 					synchronized(deferredPacketBuffer) {
 						if (!deferredPacketBuffer.isEmpty()) {
-							recievedPacketBuffer.addAll(0, deferredPacketBuffer);
+							synchronized (recievedPacketBufferLock) {
+								recievedPacketBuffer.addAll(0, deferredPacketBuffer);
+							}
 							deferredPacketBuffer.clear();
 						}
 					}
@@ -267,7 +286,9 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 	}
 
 	public void clearRecieveQueue() {
-		recievedPacketBuffer.clear();
+		synchronized (recievedPacketBufferLock) {
+			recievedPacketBuffer.clear();
+		}
 		synchronized(deferredPacketBuffer) {
 			deferredPacketBuffer.clear();
 		}

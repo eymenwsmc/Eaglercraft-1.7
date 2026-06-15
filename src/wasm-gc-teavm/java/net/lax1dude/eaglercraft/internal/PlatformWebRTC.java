@@ -48,6 +48,13 @@ public class PlatformWebRTC {
 		return isSupported;
 	}
 
+	public static boolean isInitialized() {
+		return false;
+	}
+
+	public static void releaseFactory() {
+	}
+
 	@Import(module = "platformWebRTC", name = "supported")
 	private static native boolean supported0();
 

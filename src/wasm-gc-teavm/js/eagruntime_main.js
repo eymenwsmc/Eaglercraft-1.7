@@ -23,7 +23,11 @@ const eagruntimeImpl = {
 	platformInput: {},
 	platformNetworking: {},
 	platformOpenGL: {},
-	platformRuntime: {}
+	platformRuntime: {},
+	platformWebRTC: {},
+	platformWebView: {},
+	clientPlatformSingleplayer: {},
+	serverPlatformSingleplayer: {}
 };
 
 /** @type {WebAssembly.Module} */
@@ -151,6 +155,10 @@ async function initializeContext() {
 	
 	await initializePlatfRuntime();
 	initializePlatfApplication(eagruntimeImpl.platformApplication);
+	initializePlatfWebRTC(eagruntimeImpl.platformWebRTC);
+	initializePlatfWebView(eagruntimeImpl.platformWebView);
+	initializeClientPlatfSP(eagruntimeImpl.clientPlatformSingleplayer);
+	initializeNoServerPlatfSP(eagruntimeImpl.serverPlatformSingleplayer);
 	
 	rootElement.classList.add("_eaglercraftX_root_element");
 	rootElement.style.overflow = "hidden";
@@ -434,6 +442,10 @@ async function initializeContextWorker() {
 	setNoAudioContext(eagruntimeImpl.platformAudio);
 	initNoPlatformInput(eagruntimeImpl.platformInput);
 	setNoGLContext(eagruntimeImpl.platformOpenGL);
+	initializePlatfWebRTC(eagruntimeImpl.platformWebRTC);
+	initializeNoPlatfWebView(eagruntimeImpl.platformWebView);
+	initializeNoClientPlatfSP(eagruntimeImpl.clientPlatformSingleplayer);
+	initializeServerPlatfSP(eagruntimeImpl.serverPlatformSingleplayer);
 	
 	eagInfo("EagRuntime worker JS context initialization complete");
 }

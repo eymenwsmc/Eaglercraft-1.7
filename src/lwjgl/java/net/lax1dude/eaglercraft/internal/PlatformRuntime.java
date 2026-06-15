@@ -583,6 +583,12 @@ public class PlatformRuntime {
 		return Runtime.getRuntime().freeMemory();
 	}
 
+	public static void requestGarbageCollection() {
+		if (!PlatformWebRTC.isInitialized()) {
+			System.gc();
+		}
+	}
+
 	public static String getCallingClass(int backTrace) {
 		StackTraceElement[] astacktraceelement = Thread.currentThread().getStackTrace();
 		StackTraceElement stacktraceelement = astacktraceelement[Math.min(backTrace + 1, astacktraceelement.length)];

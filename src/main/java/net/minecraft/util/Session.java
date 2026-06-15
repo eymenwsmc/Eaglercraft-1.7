@@ -45,14 +45,19 @@ public class Session {
 	}
 
 	public void reset() {
+		System.out.println("Session.reset called, new username='" + EaglerProfile.username + "'");
 		update(EaglerProfile.username, outOfGameUUID);
 	}
 
 	public GameProfile func_148256_e() {
+		System.out.println("Session.func_148256_e: EaglerProfile.username='" + EaglerProfile.username + "'");
 		try {
 			EaglercraftUUID var1 = UUIDTypeAdapter.fromString(this.getPlayerID());
-			return new GameProfile(var1, EaglerProfile.username);
+			GameProfile profile = new GameProfile(var1, EaglerProfile.username);
+			System.out.println("Session.func_148256_e: Created profile with name='" + profile.getName() + "'");
+			return profile;
 		} catch (IllegalArgumentException var2) {
+			System.out.println("Session.func_148256_e: IllegalArgumentException, returning profile with name='" + EaglerProfile.username + "'");
 			return new GameProfile((EaglercraftUUID) null, EaglerProfile.username);
 		}
 	}

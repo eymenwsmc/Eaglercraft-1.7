@@ -60,6 +60,7 @@ teavm.js {
 
 tasks.register('runclient', JavaExec) {
     jvmArgs "-Djava.library.path=" + System.getProperty("user.dir") + "/lwjgl-rundir"
+    jvmArgs "-XX:+UseSerialGC", "-XX:+DisableExplicitGC", "-XX:-UseCompressedOops", "-XX:-UseCompressedClassPointers"
     classpath = sourceSets.eagler.compileClasspath
     group = "Eaglercraft-0.30"
     description = "Runs the client"
@@ -74,6 +75,7 @@ tasks.register('runclient', JavaExec) {
 
 tasks.register('runclien2', JavaExec) {
     jvmArgs "-Djava.library.path=" + System.getProperty("user.dir") + "/lwjgl-rundir"
+    jvmArgs "-XX:+UseSerialGC", "-XX:+DisableExplicitGC", "-XX:-UseCompressedOops", "-XX:-UseCompressedClassPointers"
     classpath = sourceSets.eagler.compileClasspath
     group = "Eaglercraft-0.30"
     description = "Runs the client"

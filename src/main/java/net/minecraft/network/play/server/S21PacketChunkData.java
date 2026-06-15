@@ -21,7 +21,6 @@ public class S21PacketChunkData extends Packet {
 	private byte[] field_149278_f;
 	private boolean field_149279_g;
 	private int field_149285_h;
-	private static byte[] field_149286_i = new byte[196864];
 	private static final String __OBFID = "CL_00001304";
 
 	public S21PacketChunkData() {
@@ -32,7 +31,7 @@ public class S21PacketChunkData extends Packet {
 		this.field_149282_b = p_i45196_1_.zPosition;
 		this.field_149279_g = p_i45196_2_;
 		S21PacketChunkData.Extracted var4 = func_149269_a(p_i45196_1_, p_i45196_2_, p_i45196_3_);
-		Deflater var5 = new Deflater(-1);
+		Deflater var5 = new Deflater(1);
 		this.field_149280_d = var4.field_150281_c;
 		this.field_149283_c = var4.field_150280_b;
 
@@ -62,11 +61,8 @@ public class S21PacketChunkData extends Packet {
 		this.field_149280_d = p_148837_1_.readShort();
 		this.field_149285_h = p_148837_1_.readInt();
 
-		if (field_149286_i.length < this.field_149285_h) {
-			field_149286_i = new byte[this.field_149285_h];
-		}
-
-		p_148837_1_.readBytes(field_149286_i, 0, this.field_149285_h);
+		byte[] compressedData = new byte[this.field_149285_h];
+		p_148837_1_.readBytes(compressedData, 0, this.field_149285_h);
 		int var2 = 0;
 		int var3;
 
@@ -82,7 +78,7 @@ public class S21PacketChunkData extends Packet {
 
 		this.field_149278_f = new byte[var3];
 		Inflater var4 = new Inflater();
-		var4.setInput(field_149286_i, 0, this.field_149285_h);
+		var4.setInput(compressedData, 0, this.field_149285_h);
 
 		try {
 			var4.inflate(this.field_149278_f);
@@ -130,7 +126,7 @@ public class S21PacketChunkData extends Packet {
 		ExtendedBlockStorage[] var4 = p_149269_0_.getBlockStorageArray();
 		int var5 = 0;
 		S21PacketChunkData.Extracted var6 = new S21PacketChunkData.Extracted();
-		byte[] var7 = field_149286_i;
+		byte[] var7 = new byte[func_149275_c()];
 
 		if (p_149269_1_) {
 			p_149269_0_.sendUpdates = true;

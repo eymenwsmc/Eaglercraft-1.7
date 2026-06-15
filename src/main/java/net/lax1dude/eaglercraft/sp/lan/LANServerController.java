@@ -45,6 +45,10 @@ public class LANServerController {
 
 	public static String shareToLAN(Consumer<String> progressCallback, String worldName, boolean worldHidden) {
 		currentCode = null;
+		if (!PlatformWebRTC.supported()) {
+			logger.error("WebRTC is not supported on this platform, cannot share world");
+			return null;
+		}
 		RelayServerSocket sock = RelayManager.relayManager.getWorkingRelay(
 				(str) -> progressCallback.accept("Connecting: " + str), RelayManager.preferredRelayVersion,
 				worldName + (worldHidden ? ";1" : ";0"));
@@ -60,6 +64,7 @@ public class LANServerController {
 			progressCallback.accept("Opened '" + code + "' on " + sock.getURI());
 			long millis = EagRuntime.steadyTimeMillis();
 			do {
+				PlatformWebRTC.runScheduledTasks();
 				sock.update();
 				if (sock.isClosed()) {
 					logger.info("Relay [{}] connection lost", sock.getURI());
@@ -102,11 +107,12 @@ public class LANServerController {
 	}
 
 	public static void closeLAN() {
-		closeLANNoKick();
-		cleanupLAN();
-		if (isLANOpen()) {
+		if (PlatformWebRTC.isInitialized()) {
 			PlatformWebRTC.serverLANCloseServer();
 		}
+		closeLANNoKick();
+		cleanupLAN();
+		PlatformWebRTC.releaseFactory();
 	}
 
 	public static void closeLANNoKick() {
@@ -140,6 +146,9 @@ public class LANServerController {
 	private static final Map<String, LANClientPeer> clients = new HashMap<>();
 
 	public static void updateLANServer() {
+		if (PlatformWebRTC.isInitialized()) {
+			PlatformWebRTC.runScheduledTasks();
+		}
 		if (lanRelaySocket != null) {
 			lanRelaySocket.update();
 			RelayPacket pkt;

@@ -287,6 +287,10 @@ public class EagRuntime {
 		return PlatformRuntime.freeMemory();
 	}
 
+	public static void requestGarbageCollection() {
+		PlatformRuntime.requestGarbageCollection();
+	}
+
 	public static boolean requireSSL() {
 		return ssl;
 	}

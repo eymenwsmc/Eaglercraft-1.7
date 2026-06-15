@@ -24,8 +24,6 @@ import java.util.List;
 
 import net.lax1dude.eaglercraft.EaglerOutputStream;
 import net.lax1dude.eaglercraft.EaglerZLIB;
-import net.lax1dude.eaglercraft.EagRuntime;
-import net.lax1dude.eaglercraft.internal.EnumPlatformType;
 import net.lax1dude.eaglercraft.internal.EnumEaglerConnectionState;
 import net.lax1dude.eaglercraft.internal.IPCPacketData;
 import net.minecraft.client.renderer.texture.ITickable;
@@ -71,7 +69,7 @@ public class IntegratedServerPlayerNetworkManager {
 
 	public IntegratedServerPlayerNetworkManager(String playerChannel) {
 		super(); // server side
-		this.playerChannel = "~!LOCAL_PLAYER";
+		this.playerChannel = playerChannel;
 		if (temporaryBuffer == null) {
 			temporaryBuffer = new PacketBuffer(Unpooled.buffer(0x1FFFF));
 		}
@@ -253,22 +251,15 @@ public class IntegratedServerPlayerNetworkManager {
         } else if (pkt instanceof S26PacketMapChunkBulk) {
             logger.debug("Server->Client: S26PacketMapChunkBulk bytes={} state={}", len, packetState);
         }
-        // Desktop (LWJGL): direct enqueue into client manager
-        if (EagRuntime.getPlatformType() == EnumPlatformType.DESKTOP) {
-            net.lax1dude.eaglercraft.sp.SingleplayerServerController.localPlayerNetworkManager.addRecievedPacket(bytes);
+        if (enableSendCompression) {
+            injectRawFrame(bytes);
         } else {
-            // TeaVM (Web Worker): deliver via IPC back to UI thread
             ServerPlatformSingleplayer.sendPacket(new IPCPacketData(playerChannel, bytes));
         }
     }
 
     public void injectRawFrame(byte[] data) {
         if (!isChannelOpen()) {
-            return;
-        }
-        // Desktop (LWJGL): direct enqueue raw frame
-        if (EagRuntime.getPlatformType() == EnumPlatformType.DESKTOP) {
-            net.lax1dude.eaglercraft.sp.SingleplayerServerController.localPlayerNetworkManager.addRecievedPacket(data);
             return;
         }
         if (enableSendCompression) {

@@ -18,6 +18,7 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
 	private GuiScreen field_146798_g;
 	private ServerSelectionList field_146803_h;
 	private ServerList field_146804_i;
+    private static net.lax1dude.eaglercraft.sp.lan.LANServerList field_146800_H = null;
 	private GuiButton field_146810_r;
 	private GuiButton field_146809_s;
 	private GuiButton field_146808_t;
@@ -52,6 +53,11 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
 			this.field_146803_h = new ServerSelectionList(this, this.mc, this.width, this.height, 32, this.height - 64,
 					36);
 			this.field_146803_h.func_148195_a(this.field_146804_i);
+            
+            if (field_146800_H == null) {
+                field_146800_H = new net.lax1dude.eaglercraft.sp.lan.LANServerList();
+            }
+            field_146800_H.forceRefresh();
 		} else {
 			this.field_146803_h.func_148122_a(this.width, this.height, 32, this.height - 64);
 		}
@@ -86,6 +92,13 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
 		super.updateScreen();
 
 		this.field_146804_i.updateServerPing();
+        if (field_146800_H != null && field_146800_H.update()) {
+            java.util.List servers = new java.util.ArrayList();
+            for(int i = 0; i < field_146800_H.countServers(); ++i) {
+                servers.add(new ServerListEntryLanDetected(this, field_146800_H.getServer(i)));
+            }
+            this.field_146803_h.func_148194_a(servers);
+        }
 	}
 
 	/**
@@ -289,7 +302,10 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
 
 		if (var1 instanceof ServerListEntryNormal) {
 			this.func_146791_a(((ServerListEntryNormal) var1).func_148296_a());
-		} 
+		} else if (var1 instanceof ServerListEntryLanDetected) {
+            net.lax1dude.eaglercraft.sp.lan.LANServerList.LanServer var2 = ((ServerListEntryLanDetected) var1).func_148285_a();
+            this.mc.displayGuiScreen(new net.lax1dude.eaglercraft.sp.gui.GuiScreenLANConnecting(this, var2.getLanServerCode(), var2.getLanServerRelay()));
+        }
 	}
 
 	private void func_146791_a(ServerData p_146791_1_) {

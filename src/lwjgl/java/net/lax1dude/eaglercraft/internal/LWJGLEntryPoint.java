@@ -65,9 +65,9 @@ public class LWJGLEntryPoint {
 
 		File[] f = new File("resources", "sound").listFiles();
 
-		for (File f1 : f) {
-			addSoundsToAudioMap(f1);
-		}
+		//for (File f1 : f) {
+		//	addSoundsToAudioMap(f1);
+		//}
 
 		new Minecraft().run();
 

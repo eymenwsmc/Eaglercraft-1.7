@@ -235,7 +235,7 @@ public class GameSettings {
 		this.mc = p_i46326_1_;
 		this.optionsFile = new VFile2(p_i46326_2_, "options.txt");
 		GameSettings.Options.RENDER_DISTANCE.setValueMax(16.0F);
-		this.renderDistanceChunks = p_i46326_1_.isJava64bit() ? 12 : 8;
+		this.renderDistanceChunks = 4;
 		this.loadOptions();
 	}
 
