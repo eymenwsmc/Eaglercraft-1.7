@@ -161,37 +161,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
 	}
 
 	public boolean func_177460_a(IChunkProvider var1, Chunk chunk, int i, int j) {
-
-		int baseX = i * 16;
-		int baseZ = j * 16;
-
-		this.rand.setSeed(this.worldObj.getSeed());
-		long k = this.rand.nextLong() / 2L * 2L + 1L;
-		long l = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed((long) i * k + (long) j * l ^ this.worldObj.getSeed());
-
-		BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(baseX + 16, baseZ + 16);
-
-		biome.decorate(this.worldObj, this.rand, baseX, baseZ);
-		SpawnerAnimals.performWorldGenSpawning(this.worldObj, biome, baseX + 8, baseZ + 8, 16, 16, this.rand);
-
-		int x0 = baseX + 8;
-		int z0 = baseZ + 8;
-		for (int dx = 0; dx < 16; ++dx) {
-			for (int dz = 0; dz < 16; ++dz) {
-				int h = this.worldObj.getPrecipitationHeight(x0 + dx, z0 + dz);
-
-				if (this.worldObj.isBlockFreezable(dx + x0, h - 1, dz + z0)) {
-					this.worldObj.setBlock(dx + x0, h - 1, dz + z0, Blocks.ice, 0, 2);
-				}
-
-				if (this.worldObj.func_147478_e(dx + x0, h, dz + z0, true)) {
-					this.worldObj.setBlock(dx + x0, h, dz + z0, Blocks.snow_layer, 0, 2);
-				}
-			}
-		}
-
-		return true;
+		return false;
 	}
 
 	public void func_147422_a(int p_147422_1_, int p_147422_2_, Block[] p_147422_3_, byte[] p_147422_4_,
@@ -231,6 +201,24 @@ public class ChunkProviderGenerate implements IChunkProvider {
 				x * 16, z * 16, 16, 16);
 		this.func_147422_a(x, z, blocks, metadata, this.biomesForGeneration);
 
+		for (int dx = 0; dx < 16; ++dx) {
+			for (int dz = 0; dz < 16; ++dz) {
+				BiomeGenBase biome = this.biomesForGeneration[dx + dz * 16];
+				boolean cold = biome.getFloatTemperature(x * 16 + dx, 63, z * 16 + dz) < 0.15F;
+				for (int y0 = 62; y0 >= 0; --y0) {
+					int idx = (dx * 16 + dz) * 256 + y0;
+					if (blocks[idx] == null) {
+						blocks[idx] = cold ? Blocks.ice : Blocks.water;
+						if (cold && y0 == 62) {
+							cold = false;
+						}
+					} else {
+						break;
+					}
+				}
+			}
+		}
+
 		this.caveGenerator.func_151539_a(this, this.worldObj, x, z, blocks);
 		this.ravineGenerator.func_151539_a(this, this.worldObj, x, z, blocks);
 		if (this.mapFeaturesEnabled) {
@@ -240,30 +228,6 @@ public class ChunkProviderGenerate implements IChunkProvider {
 			this.scatteredFeatureGenerator.func_151539_a(this, this.worldObj, x, z, blocks);
 		}
 
-		final int baseX = x * 16;
-		final int baseZ = z * 16;
-		for (int dx = 0; dx < 16; ++dx) {
-			for (int dz = 0; dz < 16; ++dz) {
-
-				int worldX = baseX + dx;
-				int worldZ = baseZ + dz;
-				boolean cold = this.worldObj.getBiomeGenForCoords(worldX, worldZ).getFloatTemperature(worldX, 63,
-						worldZ) < 0.15F;
-				for (int y0 = 62; y0 >= 0; --y0) {
-					int idx = (dz * 16 + dx) * 256 + y0;
-					if (blocks[idx] == null) {
-						blocks[idx] = cold ? Blocks.ice : Blocks.water;
-						if (cold && y0 == 62) {
-
-							cold = false;
-						}
-					} else {
-
-						break;
-					}
-				}
-			}
-		}
 		Chunk chunk = new Chunk(this.worldObj, blocks, metadata, x, z);
 		byte[] biomeArray = chunk.getBiomeArray();
 		for (int i = 0; i < biomeArray.length; ++i) {
@@ -311,7 +275,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
 							var27 = 1.0F + var27 * 4.0F;
 						}
 
-						float var28 = this.parabolicField[var23 + 2 + (var24 + 2) * 5] / (var26 + 2.0F);
+						float var28 = this.parabolicField[var23 + 2 + (var24 + 2) * 5] / (var26 + 2.001F);
 
 						if (var25.minHeight > var22.minHeight) {
 							var28 /= 2.0F;
@@ -355,6 +319,8 @@ public class ChunkProviderGenerate implements IChunkProvider {
 				++var13;
 				double var47 = (double) var19;
 				double var48 = (double) var18;
+				if (var48 < 0.01D)
+					var48 = 0.01D;
 				var47 += var46 * 0.2D;
 				var47 = var47 * 8.5D / 8.0D;
 				double var29 = 8.5D + var47 * 4.0D;

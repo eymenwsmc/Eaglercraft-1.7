@@ -121,7 +121,6 @@ public abstract class ServerConfigurationManager {
 
 	public void initializeConnectionToPlayer(IntegratedServerPlayerNetworkManager p_72355_1_,
 			EntityPlayerMP p_72355_2_) {
-		System.out.println("[SERVER] initializeConnectionToPlayer çağrıldı: " + p_72355_2_.getCommandSenderName());
 		GameProfile var3 = p_72355_2_.getGameProfile();
 		PlayerProfileCache var4 = this.mcServer.func_152358_ax();
 		GameProfile var5 = var4.func_152652_a(var3.getId());
@@ -251,8 +250,11 @@ public abstract class ServerConfigurationManager {
 		NBTTagCompound var3;
 
 		if (p_72380_1_.getCommandSenderName().equals(this.mcServer.getServerOwner()) && var2 != null) {
-			p_72380_1_.readFromNBT(var2);
-			var3 = var2;
+			var3 = this.playerNBTManagerObj.readPlayerData(p_72380_1_);
+			if (var3 == null) {
+				p_72380_1_.readFromNBT(var2);
+				var3 = var2;
+			}
 			logger.debug("loading single player");
 		} else {
 			var3 = this.playerNBTManagerObj.readPlayerData(p_72380_1_);
@@ -281,6 +283,7 @@ public abstract class ServerConfigurationManager {
 		this.func_148540_a(new S38PacketPlayerListItem(p_72377_1_.getCommandSenderName(), true, 1000));
 		this.playerEntityList.add(p_72377_1_);
 		WorldServer var2 = this.mcServer.worldServerForDimension(p_72377_1_.dimension);
+
 		var2.spawnEntityInWorld(p_72377_1_);
 		this.func_72375_a(p_72377_1_, (WorldServer) null);
 
@@ -631,7 +634,6 @@ public abstract class ServerConfigurationManager {
 	public boolean func_152596_g(GameProfile p_152596_1_) {
 		return this.ops.func_152692_d(p_152596_1_)
 				|| this.mcServer.isSinglePlayer() && this.mcServer.worldServers[0].getWorldInfo().areCommandsAllowed()
-						&& this.mcServer.getServerOwner().equalsIgnoreCase(p_152596_1_.getName())
 				|| this.commandsAllowedForAll;
 	}
 

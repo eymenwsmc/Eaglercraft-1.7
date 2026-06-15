@@ -240,12 +240,18 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter {
 		this.zLevel = 0.0F;
 		GL11.glDepthFunc(GL11.GL_GEQUAL);
 		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_SCISSOR_TEST);
+		net.minecraft.client.gui.ScaledResolution sr = new net.minecraft.client.gui.ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+		int scale = sr.getScaleFactor();
+		GL11.glScissor(var8 * scale, this.mc.displayHeight - (var9 + 155) * scale, 224 * scale, 155 * scale);
 		GL11.glTranslatef((float) var8, (float) var9, -200.0F);
 		GL11.glScalef(1.0F / this.field_146570_r, 1.0F / this.field_146570_r, 0.0F);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 		int var10 = var4 + 288 >> 4;
 		int var11 = var5 + 288 >> 4;
 		int var12 = (var4 + 288) % 16;
@@ -399,6 +405,8 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter {
 
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL11.GL_CULL_FACE);
+				GL11.glEnable(GL11.GL_ALPHA_TEST);
+				GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 				var36.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(), var41.theItemStack,
 						var43 + 3, var44 + 3);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -419,6 +427,7 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter {
 
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.disableScissor();
 		GL11.glPopMatrix();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(field_146561_C);

@@ -721,6 +721,12 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer {
 		Entity var3 = p_147340_1_.func_149564_a(var2);
 		this.playerEntity.func_143004_u();
 
+		// DEBUG: Entity lookup failed
+		if (var3 == null) {
+			System.out.println("DEBUG: Entity not found! Packet entity ID: " + p_147340_1_.toString());
+			return;
+		}
+
 		if (var3 != null) {
 			boolean var4 = this.playerEntity.canEntityBeSeen(var3);
 			double var5 = 36.0D;

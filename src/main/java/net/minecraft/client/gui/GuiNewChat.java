@@ -129,7 +129,11 @@ public class GuiNewChat extends Gui {
 	}
 
 	private String func_146235_b(String p_146235_1_) {
-		return Minecraft.getMinecraft().gameSettings.chatColours ? p_146235_1_
+		boolean chatColours = Minecraft.getMinecraft().gameSettings.chatColours;
+		if (Minecraft.getMinecraft().isSingleplayer()) {
+			chatColours = true;
+		}
+		return chatColours ? p_146235_1_
 				: EnumChatFormatting.getTextWithoutFormattingCodes(p_146235_1_);
 	}
 

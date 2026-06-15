@@ -81,8 +81,11 @@ public class GuiScreenSingleplayerConnecting extends GuiScreen {
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
-
+	@Override
 	public void updateScreen() {
+		// Worker -> UI IPC kuyruğunu her frame boşalt
+		SingleplayerServerController.runTick();
+	
 		++timer;
 		if (timer > 1) {
 			if (this.networkManager == null) {
@@ -91,8 +94,7 @@ public class GuiScreenSingleplayerConnecting extends GuiScreen {
 				if (this.networkManager == null) {
 					System.out.println("[CLIENT] SingleplayerServerController.localPlayerNetworkManager NULL!");
 				} else {
-					this.networkManager
-							.setNetHandler(new NetHandlerSingleplayerLogin(this.networkManager, this.mc, this.menu));
+					this.networkManager.setNetHandler(new NetHandlerSingleplayerLogin(this.networkManager, this.mc, this.menu));
 					this.networkManager.setConnectionState(EnumConnectionState.LOGIN);
 					this.networkManager.connect();
 				}
@@ -118,7 +120,7 @@ public class GuiScreenSingleplayerConnecting extends GuiScreen {
 				}
 			}
 		}
-
+	
 		long millis = EagRuntime.steadyTimeMillis();
 		if (millis - startStartTime > 6000l && SingleplayerServerController.canKillWorker()) {
 			killTask.enabled = true;

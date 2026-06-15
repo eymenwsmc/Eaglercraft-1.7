@@ -71,7 +71,6 @@ public class S01PacketJoinGame extends Packet {
 	}
 
 	public void processPacket(INetHandlerPlayClient p_148833_1_) {
-		System.out.println("HaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHai");
 		p_148833_1_.handleJoinGame(this);
 	}
 

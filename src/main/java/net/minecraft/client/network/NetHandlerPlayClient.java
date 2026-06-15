@@ -218,8 +218,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
 	private int lastChestWindowId = -1;
 	private String lastChestTitle = null;
 	private long lastChestClickMillis = 0L;
-	private boolean enableChestCloseDebounce = true; // set false to quickly disable suppression for testing
-
+	private boolean enableChestCloseDebounce = true;
 	/** Called by PlayerControllerMP after sending a click packet */
 	public void noteWindowClick(int windowId, int slotId, int mouseButton, int modifier) {
 		this.lastChestClickMillis = System.currentTimeMillis();
@@ -326,15 +325,16 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
 		this.gameController.gameSettings.sendSettingsToServer();
 		this.addToSendQueue(new C17PacketCustomPayload("EAG|MySkin", EaglerProfile.getSkinPacket(5)));
 		this.addToSendQueue(new C17PacketCustomPayload("EAG|MyCape", EaglerProfile.getCapePacket()));
-		System.out.println("You fucking bitch you better work or im raping you");
-
-	}
+		}
 
 	/**
 	 * Spawns an instance of the objecttype indicated by the packet and sets its
 	 * position and momentum
 	 */
 	public void handleSpawnObject(S0EPacketSpawnObject p_147235_1_) {
+		if (this.clientWorldController == null) {
+			return;
+		}
 		double var2 = (double) p_147235_1_.func_148997_d() / 32.0D;
 		double var4 = (double) p_147235_1_.func_148998_e() / 32.0D;
 		double var6 = (double) p_147235_1_.func_148994_f() / 32.0D;
@@ -444,6 +444,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
 	 * Spawns an experience orb and sets its value (amount of XP)
 	 */
 	public void handleSpawnExperienceOrb(S11PacketSpawnExperienceOrb p_147286_1_) {
+		if (this.clientWorldController == null) {
+			return;
+		}
 		EntityXPOrb var2 = new EntityXPOrb(this.clientWorldController, (double) p_147286_1_.func_148984_d(),
 				(double) p_147286_1_.func_148983_e(), (double) p_147286_1_.func_148982_f(),
 				p_147286_1_.func_148986_g());
@@ -484,6 +487,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
 	 * Handles the spawning of a painting object
 	 */
 	public void handleSpawnPainting(S10PacketSpawnPainting p_147288_1_) {
+		if (this.clientWorldController == null) {
+			return;
+		}
 		EntityPainting var2 = new EntityPainting(this.clientWorldController, p_147288_1_.func_148964_d(),
 				p_147288_1_.func_148963_e(), p_147288_1_.func_148962_f(), p_147288_1_.func_148966_g(),
 				p_147288_1_.func_148961_h());
@@ -861,13 +867,16 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
 	 * specified in the packet
 	 */
 	public void handleSpawnMob(S0FPacketSpawnMob p_147281_1_) {
+		if (this.clientWorldController == null) {
+			return;
+		}
 		double var2 = (double) p_147281_1_.func_149023_f() / 32.0D;
 		double var4 = (double) p_147281_1_.func_149034_g() / 32.0D;
 		double var6 = (double) p_147281_1_.func_149029_h() / 32.0D;
 		float var8 = (float) (p_147281_1_.func_149028_l() * 360) / 256.0F;
 		float var9 = (float) (p_147281_1_.func_149030_m() * 360) / 256.0F;
 		EntityLivingBase var10 = (EntityLivingBase) EntityList.createEntityByID(p_147281_1_.func_149025_e(),
-				this.gameController.theWorld);
+				this.clientWorldController);
 		if (var10 == null) {
 			logger.warn("Skipping Entity with id {}", Integer.valueOf(p_147281_1_.func_149025_e()));
 			return;

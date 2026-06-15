@@ -28,6 +28,7 @@ public class EaglerPlayerList extends ServerConfigurationManager {
 
 	public EaglerPlayerList(MinecraftServer par1MinecraftServer, int viewDistance) {
 		super(par1MinecraftServer);
+		this.func_152611_a(viewDistance);
 	}
 
 	protected void writePlayerData(EntityPlayerMP par1EntityPlayerMP) {

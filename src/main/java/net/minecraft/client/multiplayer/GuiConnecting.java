@@ -134,7 +134,6 @@ public class GuiConnecting extends GuiScreen {
 		++timer;
 		if (timer > 1) {
 			if (this.currentAddress == null) {
-				System.out.println("[GuiConnecting] currentAddress null, rate limit kick");
 				mc.displayGuiScreen(GuiDisconnected.createRateLimitKick(previousGuiScreen));
 			} else if (webSocket == null) {
 				logger.info("Connecting to: {}", currentAddress);
@@ -181,7 +180,6 @@ public class GuiConnecting extends GuiScreen {
 				}
 			}
 			if (timer > 200) {
-				System.out.println("[GuiConnecting] Handshake timeout!");
 				if (webSocket != null) {
 					webSocket.close();
 				}
@@ -246,7 +244,6 @@ public class GuiConnecting extends GuiScreen {
 			if (strFrames != null) {
 				for (int i = 0; i < strFrames.size(); ++i) {
 					String str = strFrames.get(i).getString();
-					System.out.println("[GuiConnecting] checkRatelimit frame: " + str);
 					if (str.equalsIgnoreCase("BLOCKED")) {
 						RateLimitTracker.registerBlock(currentAddress);
 						mc.displayGuiScreen(GuiDisconnected.createRateLimitKick(previousGuiScreen));

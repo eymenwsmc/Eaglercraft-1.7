@@ -907,7 +907,9 @@ public abstract class EntityLivingBase extends Entity {
 				var4 = EnchantmentHelper.getLootingModifier((EntityLivingBase) var2);
 			}
 
-			if (this.func_146066_aG() && this.worldObj.getGameRules().getGameRuleBooleanValue("doMobLoot")) {
+			boolean canDrop = this.func_146066_aG();
+			boolean mobLootRule = this.worldObj.getGameRules().getGameRuleBooleanValue("doMobLoot");
+			if (canDrop && mobLootRule) {
 				this.dropFewItems(this.recentlyHit > 0, var4);
 				this.dropEquipment(this.recentlyHit > 0, var4);
 

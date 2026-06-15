@@ -16,6 +16,7 @@ import java.util.List;
 
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.EagUtils;
+import net.lax1dude.eaglercraft.EaglerSaveFormat;
 import net.lax1dude.eaglercraft.Random;
 import java.util.concurrent.Callable;
 
@@ -51,7 +52,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldServerMulti;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.chunk.storage.AnvilSaveConverter;
 import net.minecraft.world.demo.DemoWorldServer;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
@@ -170,7 +170,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 		this.anvilFile = p_i46400_1_;
 		this.field_147144_o = new NetworkSystem(this);
 		this.commandManager = new ServerCommandManager();
-		this.anvilConverterForAnvilFile = new AnvilSaveConverter(p_i46400_1_);
+		this.anvilConverterForAnvilFile = new EaglerSaveFormat(p_i46400_1_);
 	}
 
 	protected static long getCurrentTimeMillis() {
@@ -223,26 +223,23 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 		return this.userMessage;
 	}
 
-	protected void loadAllWorlds(String p_71247_1_, String p_71247_2_, long p_71247_3_, WorldType p_71247_5_,
-			String p_71247_6_) {
-		this.convertMapIfNeeded(p_71247_1_);
+	protected void loadAllWorlds(ISaveHandler isavehandler, String s1, WorldSettings worldsettings) {
 		this.setUserMessage("menu.loadingLevel");
 		this.worldServers = new WorldServer[3];
 		this.timeOfLastDimensionTick = new long[this.worldServers.length][100];
-		ISaveHandler var7 = this.anvilConverterForAnvilFile.getSaveLoader(p_71247_1_, true);
-		WorldInfo var9 = var7.loadWorldInfo();
-		WorldSettings var8;
+		WorldInfo worldinfo = isavehandler.loadWorldInfo();
 
-		if (var9 == null) {
-			var8 = new WorldSettings(p_71247_3_, this.getGameType(), this.canStructuresSpawn(), this.isHardcore(),
-					p_71247_5_);
-			var8.func_82750_a(p_71247_6_);
+		if (worldinfo == null) {
+			if (this.isDemo() || worldsettings == null) {
+				worldsettings = DemoWorldServer.demoWorldSettings;
+			}
+			worldinfo = new WorldInfo(worldsettings, s1);
 		} else {
-			var8 = new WorldSettings(var9);
+			worldinfo.setWorldName(s1);
+			worldsettings = new WorldSettings(worldinfo);
 		}
-
 		if (this.enableBonusChest) {
-			var8.enableBonusChest();
+			worldsettings.enableBonusChest();
 		}
 
 		for (int var10 = 0; var10 < this.worldServers.length; ++var10) {
@@ -258,12 +255,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
 			if (var10 == 0) {
 				if (this.isDemo()) {
-					this.worldServers[var10] = new DemoWorldServer(this, var7, p_71247_2_, var11, this.theProfiler);
+					this.worldServers[var10] = new DemoWorldServer(this, isavehandler, s1, var11, this.theProfiler);
 				} else {
-					this.worldServers[var10] = new WorldServer(this, var7, p_71247_2_, var11, var8, this.theProfiler);
+					this.worldServers[var10] = new WorldServer(this, isavehandler, s1, var11, worldsettings, this.theProfiler);
 				}
 			} else {
-				this.worldServers[var10] = new WorldServerMulti(this, var7, p_71247_2_, var11, var8,
+				this.worldServers[var10] = new WorldServerMulti(this, isavehandler, s1, var11, worldsettings,
 						this.worldServers[0], this.theProfiler);
 			}
 
@@ -303,7 +300,33 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 				}
 
 				++var5;
-				var7.theChunkProviderServer.loadChunk(var8.posX + var11 >> 4, var8.posZ + var12 >> 4);
+				int chunkX = var8.posX + var11 >> 4;
+				int chunkZ = var8.posZ + var12 >> 4;
+				var7.theChunkProviderServer.loadChunk(chunkX, chunkZ);
+			}
+		}
+
+		logger.info("Populating spawn chunks...");
+		java.util.List<net.minecraft.world.ChunkCoordIntPair> chunksToPopulate = new java.util.ArrayList<net.minecraft.world.ChunkCoordIntPair>();
+
+		for (int var11 = -192; var11 <= 192; var11 += 16) {
+			for (int var12 = -192; var12 <= 192; var12 += 16) {
+				int chunkX = (var8.posX + var11) >> 4;
+				int chunkZ = (var8.posZ + var12) >> 4;
+				net.minecraft.world.chunk.Chunk chunk = var7.theChunkProviderServer.loadChunk(chunkX, chunkZ);
+				if (chunk != null) {
+
+					chunksToPopulate.add(new net.minecraft.world.ChunkCoordIntPair(chunkX, chunkZ));
+				}
+			}
+		}
+
+		logger.info("Populating " + chunksToPopulate.size() + " chunks...");
+		for (net.minecraft.world.ChunkCoordIntPair coord : chunksToPopulate) {
+			try {
+				var7.theChunkProviderServer.populate(var7.theChunkProviderServer, coord.chunkXPos, coord.chunkZPos);
+			} catch (Exception e) {
+				logger.warn("Failed to populate chunk at " + coord.chunkXPos + "," + coord.chunkZPos + ": " + e.getMessage());
 			}
 		}
 
@@ -542,7 +565,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 			this.field_147147_p.func_151318_b().func_151330_a(var3);
 		}
 
-		if (this.tickCounter % 900 == 0) {
+		if (this.tickCounter % 1200 == 0) {
 			this.theProfiler.startSection("save");
 			this.serverConfigManager.saveAllPlayerData();
 			this.saveAllWorlds(true);
@@ -558,7 +581,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 			this.usageSnooper.startSnooper();
 		}
 
-		if (this.tickCounter % 6000 == 0) {
+		if (this.tickCounter % 12000 == 0) {
 			this.usageSnooper.addMemoryStatsToSnooper();
 		}
 

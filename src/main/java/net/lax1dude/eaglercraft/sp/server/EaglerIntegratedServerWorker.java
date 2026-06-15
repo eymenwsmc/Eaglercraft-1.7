@@ -156,15 +156,15 @@ public class EaglerIntegratedServerWorker {
 					currentProcess.stopServer();
 				}
 
-				// Ensure the world directory exists before creating the server
-				File worldDir = new File("worlds/" + pkt.worldName);
-				if (!worldDir.exists()) {
-					worldDir.mkdirs();
-				}
-				currentProcess = new EaglerMinecraftServer(worldDir.getPath(), pkt.ownerName, pkt.initialViewDistance,
+				// Pass only the world name, not the full path
+				// EaglerMinecraftServer will handle the "worlds/" prefix
+				currentProcess = new EaglerMinecraftServer(pkt.worldName, pkt.ownerName, pkt.initialViewDistance,
 						newWorldSettings, pkt.demoMode);
 
-				currentProcess.setBaseServerProperties(Minecraft.getMinecraft().gameSettings.difficulty,
+				// In worker context there is no client Minecraft instance; use the requested
+				// initial difficulty from the start packet rather than client game settings.
+				currentProcess.setBaseServerProperties(
+						EnumDifficulty.getDifficultyEnum(pkt.initialDifficulty),
 						newWorldSettings == null ? GameType.SURVIVAL : newWorldSettings.getGameType());
 				currentProcess.startServer();
 
@@ -295,6 +295,15 @@ public class EaglerIntegratedServerWorker {
 				}
 				break;
 			}
+			case IPCPacket1DSetViewDistance.ID: {
+				IPCPacket1DSetViewDistance pkt = (IPCPacket1DSetViewDistance) ipc;
+				if (!isServerStopped()) {
+					currentProcess.getConfigurationManager().func_152611_a(pkt.viewDistance);
+				} else {
+					logger.warn("Client tried to set view distance while server was stopped");
+				}
+				break;
+			}
 			case IPCPacket0BPause.ID: {
 				IPCPacket0BPause pkt = (IPCPacket0BPause) ipc;
 				if (!isServerStopped()) {
@@ -354,12 +363,11 @@ public class EaglerIntegratedServerWorker {
 									// shit fuck
 								}
 							}
-							rewrite = true;
-							logger.error("World level.dat for '{}' was not found, attempting to delete", w);
-							if (!saveFormat.deleteWorldDirectory(w)) {
-								logger.error("Failed to delete '{}'! It will be removed from the worlds list anyway",
-										w);
-							}
+							// Don't delete worlds just because level.dat is missing
+							// It might be a temporary issue or different save format
+							logger.warn("World level.dat for '{}' was not found, keeping world in list", w);
+							// Still add to list but mark as potentially corrupted
+							updatedList.add(w);
 						} else {
 							rewrite = true;
 						}

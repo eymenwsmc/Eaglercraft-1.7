@@ -3,12 +3,9 @@ package net.minecraft.server.management;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import net.lax1dude.eaglercraft.Random;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S21PacketChunkData;
-import net.minecraft.network.play.server.S26PacketMapChunkBulk;
 import net.minecraft.network.play.server.S22PacketMultiBlockChange;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.tileentity.TileEntity;
@@ -54,138 +51,10 @@ public class PlayerManager {
 	/** x, z direction vectors: east, south, west, north */
 	private final int[][] xzDirectionsConst = new int[][] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 	private static final String __OBFID = "CL_00001434";
-	
-	private static final java.util.Set<String> populatingChunks = new java.util.HashSet<String>();
 
 	public PlayerManager(WorldServer p_i1176_1_) {
 		this.theWorldServer = p_i1176_1_;
 		this.func_152622_a(p_i1176_1_.func_73046_m().getConfigurationManager().getViewDistance());
-		
-	}
-	
-	
-	/**
-	 * Manuel ağaç generation - biome decoration çalışmıyorsa direkt ağaç ekler
-	 */
-	private void generateTreesManually(net.minecraft.world.chunk.Chunk chunk, int chunkX, int chunkZ) {
-		try {
-			net.minecraft.world.WorldServer world = this.theWorldServer;
-			Random random = new Random(world.getSeed() + chunkX * 341873128712L + chunkZ * 132897987541L);
-			
-			int baseX = chunkX * 16;
-			int baseZ = chunkZ * 16;
-			
-			net.minecraft.world.biome.BiomeGenBase biome = world.getBiomeGenForCoords(baseX + 8, baseZ + 8);
-			
-			int treeCount = 0;
-			if (biome == net.minecraft.world.biome.BiomeGenBase.forest || 
-				biome == net.minecraft.world.biome.BiomeGenBase.forestHills) {
-				treeCount = 10 + random.nextInt(5); // 10-14 ağaç
-			} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150583_P || // Birch Forest
-					   biome == net.minecraft.world.biome.BiomeGenBase.field_150582_Q) { // Birch Forest Hills
-				treeCount = 8 + random.nextInt(4); // 8-11 ağaç
-			} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150585_R) { // Roofed Forest
-				treeCount = 15 + random.nextInt(5); // 15-19 ağaç
-			} else if (biome == net.minecraft.world.biome.BiomeGenBase.plains) {
-				treeCount = 1 + random.nextInt(2); // 1-2 ağaç
-			} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150588_X || // Savanna
-					   biome == net.minecraft.world.biome.BiomeGenBase.field_150587_Y) { // Savanna Plateau
-				treeCount = 2 + random.nextInt(3); // 2-4 ağaç
-			} else if (biome == net.minecraft.world.biome.BiomeGenBase.jungle ||
-					   biome == net.minecraft.world.biome.BiomeGenBase.jungleHills) {
-				treeCount = 12 + random.nextInt(6); // 12-17 ağaç
-			} else if (biome == net.minecraft.world.biome.BiomeGenBase.taiga ||
-					   biome == net.minecraft.world.biome.BiomeGenBase.taigaHills) {
-				treeCount = 6 + random.nextInt(4); // 6-9 ağaç
-			}
-			
-			field_152627_a.info("Manually generating {} trees for chunk ({}, {}) in biome {}", 
-				treeCount, chunkX, chunkZ, biome.biomeName);
-			
-			for (int i = 0; i < treeCount; i++) {
-				int x = baseX + random.nextInt(16);
-				int z = baseZ + random.nextInt(16);
-				int y = world.getHeightValue(x, z);
-				
-				if (y > 60 && y < 120) {
-					net.minecraft.block.Block groundBlock = world.getBlock(x, y - 1, z);
-					if (groundBlock == net.minecraft.init.Blocks.grass || 
-						groundBlock == net.minecraft.init.Blocks.dirt) {
-						
-						net.minecraft.world.gen.feature.WorldGenerator treeGen;
-						if (biome == net.minecraft.world.biome.BiomeGenBase.field_150583_P || // Birch Forest
-							biome == net.minecraft.world.biome.BiomeGenBase.field_150582_Q) { // Birch Forest Hills
-							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false, 5, 2, 2, false);
-						} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150585_R) { // Roofed Forest
-							treeGen = new net.minecraft.world.gen.feature.WorldGenCanopyTree(false);
-						} else if (biome == net.minecraft.world.biome.BiomeGenBase.jungle ||
-								   biome == net.minecraft.world.biome.BiomeGenBase.jungleHills) {
-							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false, 4, 3, 3, true);
-						} else if (biome == net.minecraft.world.biome.BiomeGenBase.field_150588_X || // Savanna
-								   biome == net.minecraft.world.biome.BiomeGenBase.field_150587_Y) { // Savanna Plateau
-							treeGen = new net.minecraft.world.gen.feature.WorldGenSavannaTree(false);
-						} else if (biome == net.minecraft.world.biome.BiomeGenBase.taiga ||
-								   biome == net.minecraft.world.biome.BiomeGenBase.taigaHills) {
-							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false, 6, 1, 1, false);
-						} else {
-							treeGen = new net.minecraft.world.gen.feature.WorldGenTrees(false);
-						}
-						
-						if (treeGen.generate(world, random, x, y, z)) {
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			field_152627_a.warn("Manual tree generation failed for chunk ({}, {}): {}", 
-				chunkX, chunkZ, e.getMessage());
-		}
-	}
-	
-	/**
-	 * Chunk'ın decoration'a ihtiyacı olup olmadığını kontrol eder
-	 */
-	private static boolean isChunkEmpty(net.minecraft.world.chunk.Chunk chunk) {
-		try {
-			int treeBlocks = 0;
-			int decorationBlocks = 0;
-			int totalSurfaceBlocks = 0;
-			
-			for (int x = 0; x < 16; x += 2) {
-				for (int z = 0; z < 16; z += 2) {
-					for (int y = 80; y >= 60; y--) {
-						net.minecraft.block.Block block = chunk.func_150810_a(x, y, z);
-						if (block != net.minecraft.init.Blocks.air) {
-							totalSurfaceBlocks++;
-							
-							if (block == net.minecraft.init.Blocks.log || 
-								block == net.minecraft.init.Blocks.log2 ||
-								block == net.minecraft.init.Blocks.leaves ||
-								block == net.minecraft.init.Blocks.leaves2) {
-								treeBlocks++;
-							}
-							
-							if (block != net.minecraft.init.Blocks.stone && 
-								block != net.minecraft.init.Blocks.dirt && 
-								block != net.minecraft.init.Blocks.grass &&
-								block != net.minecraft.init.Blocks.gravel &&
-								block != net.minecraft.init.Blocks.sand &&
-								block != net.minecraft.init.Blocks.sandstone) {
-								decorationBlocks++;
-							}
-							break; // Yüzeyi bulduk, bir sonraki x,z'ye geç
-						}
-					}
-				}
-			}
-			
-			boolean noTrees = treeBlocks == 0;
-			boolean lowDecoration = totalSurfaceBlocks > 0 && (decorationBlocks * 100 / totalSurfaceBlocks) < 15;
-			
-			return noTrees || lowDecoration;
-		} catch (Exception e) {
-			return true; // Hata durumunda decoration gerekli kabul et
-		}
 	}
 
 	public WorldServer getWorldServer() {
@@ -271,105 +140,6 @@ public class PlayerManager {
 
 		this.players.add(p_72683_1_);
 		this.filterChunkLoadQueue(p_72683_1_);
-
-		int eagerBatches = 0;
-		while (eagerBatches < 3 && !p_72683_1_.loadedChunks.isEmpty()) {
-			ArrayList chunks = new ArrayList();
-			ArrayList tileEntities = new ArrayList();
-
-			Iterator it = p_72683_1_.loadedChunks.iterator();
-			List readyFirst = new java.util.ArrayList();
-			List populatedSecond = new java.util.ArrayList();
-			List remaining = new java.util.ArrayList();
-
-			while (it.hasNext()) {
-				ChunkCoordIntPair cc = (ChunkCoordIntPair) it.next();
-				if (cc == null) {
-					it.remove();
-					continue;
-				}
-				if (this.theWorldServer.blockExists(cc.chunkXPos << 4, 0, cc.chunkZPos << 4)) {
-					Chunk ch = this.theWorldServer.getChunkFromChunkCoords(cc.chunkXPos, cc.chunkZPos);
-					if (ch.func_150802_k()) {
-						readyFirst.add(cc);
-					} else if (ch.isTerrainPopulated) {
-						populatedSecond.add(cc);
-					} else {
-						remaining.add(cc);
-					}
-				}
-			}
-
-			Iterator itReady = readyFirst.iterator();
-			while (itReady.hasNext() && chunks.size() < S26PacketMapChunkBulk.func_149258_c()) {
-				ChunkCoordIntPair cc = (ChunkCoordIntPair) itReady.next();
-				Chunk ch = this.theWorldServer.getChunkFromChunkCoords(cc.chunkXPos, cc.chunkZPos);
-				chunks.add(ch);
-				tileEntities.addAll(this.theWorldServer.func_147486_a(cc.chunkXPos * 16, 0, cc.chunkZPos * 16,
-						cc.chunkXPos * 16 + 16, 256, cc.chunkZPos * 16 + 16));
-				p_72683_1_.loadedChunks.remove(cc);
-			}
-
-			Iterator itPop = populatedSecond.iterator();
-			while (itPop.hasNext() && chunks.size() < S26PacketMapChunkBulk.func_149258_c()) {
-				ChunkCoordIntPair cc = (ChunkCoordIntPair) itPop.next();
-				Chunk ch = this.theWorldServer.getChunkFromChunkCoords(cc.chunkXPos, cc.chunkZPos);
-				chunks.add(ch);
-				tileEntities.addAll(this.theWorldServer.func_147486_a(cc.chunkXPos * 16, 0, cc.chunkZPos * 16,
-						cc.chunkXPos * 16 + 16, 256, cc.chunkZPos * 16 + 16));
-				p_72683_1_.loadedChunks.remove(cc);
-			}
-
-			Iterator itRem = remaining.iterator();
-			while (itRem.hasNext() && chunks.size() < S26PacketMapChunkBulk.func_149258_c()) {
-				ChunkCoordIntPair cc = (ChunkCoordIntPair) itRem.next();
-				Chunk ch = this.theWorldServer.getChunkFromChunkCoords(cc.chunkXPos, cc.chunkZPos);
-				
-				String chunkKey = cc.chunkXPos + "," + cc.chunkZPos;
-				if (!populatingChunks.contains(chunkKey)) {
-					boolean needsDecoration = !ch.isTerrainPopulated || isChunkEmpty(ch);
-					
-					if (needsDecoration) {
-						populatingChunks.add(chunkKey);
-						try {
-							PlayerManager.field_152627_a.info("SAFE remaining chunk population for ({}, {}) - populated: {}, empty: {}", 
-								cc.chunkXPos, cc.chunkZPos, ch.isTerrainPopulated, isChunkEmpty(ch));
-							
-							generateTreesManually(ch, cc.chunkXPos, cc.chunkZPos);
-							
-							ch.setChunkModified();
-						} catch (Exception e) {
-							PlayerManager.field_152627_a.warn("Safe remaining chunk population failed for chunk ({}, {}): {}", 
-								cc.chunkXPos, cc.chunkZPos, e.getMessage());
-						} finally {
-							populatingChunks.remove(chunkKey);
-						}
-					}
-				}
-				
-				chunks.add(ch);
-				tileEntities.addAll(this.theWorldServer.func_147486_a(cc.chunkXPos * 16, 0, cc.chunkZPos * 16,
-						cc.chunkXPos * 16 + 16, 256, cc.chunkZPos * 16 + 16));
-				p_72683_1_.loadedChunks.remove(cc);
-			}
-
-			if (chunks.isEmpty()) {
-				break;
-			}
-
-			p_72683_1_.playerNetServerHandler.sendPacket(new S26PacketMapChunkBulk(chunks));
-
-			Iterator teIt = tileEntities.iterator();
-			while (teIt.hasNext()) {
-				TileEntity te = (TileEntity) teIt.next();
-				Packet pkt = te.getDescriptionPacket();
-				if (pkt != null) {
-					p_72683_1_.playerNetServerHandler.sendPacket(pkt);
-				}
-			}
-
-			++eagerBatches;
-		}
 	}
 
 	/**
@@ -536,6 +306,12 @@ public class PlayerManager {
 			}
 
 			this.playerViewRadius = p_152622_1_;
+
+			var3 = this.players.iterator();
+
+			while (var3.hasNext()) {
+				this.filterChunkLoadQueue((EntityPlayerMP) var3.next());
+			}
 		}
 	}
 
@@ -558,31 +334,6 @@ public class PlayerManager {
 		public PlayerInstance(int p_i1518_2_, int p_i1518_3_) {
 			this.chunkLocation = new ChunkCoordIntPair(p_i1518_2_, p_i1518_3_);
 			PlayerManager.this.getWorldServer().theChunkProviderServer.loadChunk(p_i1518_2_, p_i1518_3_);
-		
-			String chunkKey = p_i1518_2_ + "," + p_i1518_3_;
-			if (!populatingChunks.contains(chunkKey)) {
-				populatingChunks.add(chunkKey);
-				try {
-					Chunk ch = PlayerManager.this.theWorldServer.getChunkFromChunkCoords(p_i1518_2_, p_i1518_3_);
-					if (ch != null) {
-						boolean needsDecoration = !ch.isTerrainPopulated || isChunkEmpty(ch);
-						
-						if (needsDecoration) {
-							PlayerManager.field_152627_a.info("SAFE chunk population for ({}, {}) - populated: {}, empty: {}", 
-								p_i1518_2_, p_i1518_3_, ch.isTerrainPopulated, isChunkEmpty(ch));
-							
-							generateTreesManually(ch, p_i1518_2_, p_i1518_3_);
-							
-							ch.setChunkModified();
-						}
-					}
-				} catch (Exception e) {
-					PlayerManager.field_152627_a.warn("Safe chunk population failed for chunk ({}, {}): {}", 
-						p_i1518_2_, p_i1518_3_, e.getMessage());
-				} finally {
-					populatingChunks.remove(chunkKey);
-				}
-			}
 		}
 
 		public void addPlayer(EntityPlayerMP p_73255_1_) {
@@ -598,23 +349,6 @@ public class PlayerManager {
 				this.playersWatchingChunk.add(p_73255_1_);
 				p_73255_1_.loadedChunks.add(this.chunkLocation);
 
-				if (PlayerManager.this.players.contains(p_73255_1_)) {
-					Chunk ch = PlayerManager.this.theWorldServer.getChunkFromChunkCoords(this.chunkLocation.chunkXPos,
-							this.chunkLocation.chunkZPos);
-
-					p_73255_1_.playerNetServerHandler.sendPacket(new S21PacketChunkData(ch, true, 0xFFFF));
-
-					int x1 = this.chunkLocation.chunkXPos * 16;
-					int z1 = this.chunkLocation.chunkZPos * 16;
-					List tes = PlayerManager.this.theWorldServer.func_147486_a(x1, 0, z1, x1 + 16, 256, z1 + 16);
-					for (int i = 0; i < tes.size(); ++i) {
-						TileEntity te = (TileEntity) tes.get(i);
-						Packet pkt = te.getDescriptionPacket();
-						if (pkt != null) {
-							p_73255_1_.playerNetServerHandler.sendPacket(pkt);
-						}
-					}
-				}
 			}
 		}
 

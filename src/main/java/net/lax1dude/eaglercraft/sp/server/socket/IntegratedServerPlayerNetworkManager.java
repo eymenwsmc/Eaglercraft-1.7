@@ -24,6 +24,8 @@ import java.util.List;
 
 import net.lax1dude.eaglercraft.EaglerOutputStream;
 import net.lax1dude.eaglercraft.EaglerZLIB;
+import net.lax1dude.eaglercraft.EagRuntime;
+import net.lax1dude.eaglercraft.internal.EnumPlatformType;
 import net.lax1dude.eaglercraft.internal.EnumEaglerConnectionState;
 import net.lax1dude.eaglercraft.internal.IPCPacketData;
 import net.minecraft.client.renderer.texture.ITickable;
@@ -227,49 +229,59 @@ public class IntegratedServerPlayerNetworkManager {
 		}
 	}
 
-	public void sendPacket(Packet pkt) {
-		if (!isChannelOpen())
-			return;
-		int i;
-		try {
-			i = packetState.getPacketId(EnumPacketDirection.CLIENTBOUND, pkt);
-		} catch (Throwable t) {
-			return;
-		}
-		temporaryBuffer.clear();
-		temporaryBuffer.writeVarIntToBuffer(i);
-		try {
-			pkt.writePacketData(temporaryBuffer);
-		} catch (IOException ex) {
-			return;
-		}
-		int len = temporaryBuffer.writerIndex();
-		byte[] bytes = new byte[len];
-		temporaryBuffer.getBytes(0, bytes);
-		if (pkt instanceof S21PacketChunkData) {
-			logger.debug("Server->Client: S21PacketChunkData bytes={} state={}", len, packetState);
-		} else if (pkt instanceof S26PacketMapChunkBulk) {
-			logger.debug("Server->Client: S26PacketMapChunkBulk bytes={} state={}", len, packetState);
-		}
-		net.lax1dude.eaglercraft.sp.SingleplayerServerController.localPlayerNetworkManager.addRecievedPacket(bytes);
-	}
+    public void sendPacket(Packet pkt) {
+        if (!isChannelOpen())
+            return;
+        int i;
+        try {
+            i = packetState.getPacketId(EnumPacketDirection.CLIENTBOUND, pkt);
+        } catch (Throwable t) {
+            return;
+        }
+        temporaryBuffer.clear();
+        temporaryBuffer.writeVarIntToBuffer(i);
+        try {
+            pkt.writePacketData(temporaryBuffer);
+        } catch (IOException ex) {
+            return;
+        }
+        int len = temporaryBuffer.writerIndex();
+        byte[] bytes = new byte[len];
+        temporaryBuffer.getBytes(0, bytes);
+        if (pkt instanceof S21PacketChunkData) {
+            logger.debug("Server->Client: S21PacketChunkData bytes={} state={}", len, packetState);
+        } else if (pkt instanceof S26PacketMapChunkBulk) {
+            logger.debug("Server->Client: S26PacketMapChunkBulk bytes={} state={}", len, packetState);
+        }
+        // Desktop (LWJGL): direct enqueue into client manager
+        if (EagRuntime.getPlatformType() == EnumPlatformType.DESKTOP) {
+            net.lax1dude.eaglercraft.sp.SingleplayerServerController.localPlayerNetworkManager.addRecievedPacket(bytes);
+        } else {
+            // TeaVM (Web Worker): deliver via IPC back to UI thread
+            ServerPlatformSingleplayer.sendPacket(new IPCPacketData(playerChannel, bytes));
+        }
+    }
 
-	public void injectRawFrame(byte[] data) {
-		if (!isChannelOpen()) {
-			return;
-		}
-		if (enableSendCompression) {
-			int len = data.length;
-			if (len > compressionThreshold) {
-				if (compressedPacketTmp == null || compressedPacketTmp.length < len) {
-					compressedPacketTmp = new byte[len];
-				}
-				int cmpLen;
-				try {
-					cmpLen = EaglerZLIB.deflateFull(data, 0, len, compressedPacketTmp, 0, compressedPacketTmp.length);
-				} catch (IOException ex) {
-					logger.error("Failed to compress injected frame!");
-					logger.error(ex);
+    public void injectRawFrame(byte[] data) {
+        if (!isChannelOpen()) {
+            return;
+        }
+        // Desktop (LWJGL): direct enqueue raw frame
+        if (EagRuntime.getPlatformType() == EnumPlatformType.DESKTOP) {
+            net.lax1dude.eaglercraft.sp.SingleplayerServerController.localPlayerNetworkManager.addRecievedPacket(data);
+            return;
+        }
+        if (enableSendCompression) {
+            int len = data.length;
+            if (len > compressionThreshold) {
+                if (compressedPacketTmp == null || compressedPacketTmp.length < len) {
+                    compressedPacketTmp = new byte[len];
+                }
+                int cmpLen;
+                try {
+                    cmpLen = EaglerZLIB.deflateFull(data, 0, len, compressedPacketTmp, 0, compressedPacketTmp.length);
+                } catch (IOException ex) {
+                    logger.error("Failed to compress injected frame!");
 					return;
 				}
 				byte[] compressedData = new byte[5 + cmpLen];

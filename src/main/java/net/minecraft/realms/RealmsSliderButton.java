@@ -60,7 +60,7 @@ public class RealmsSliderButton extends RealmsButton {
 	public void renderBg(int p_renderBg_1_, int p_renderBg_2_) {
 		if (this.getProxy().visible) {
 			if (this.sliding) {
-				this.value = (float) (p_renderBg_1_ - (this.getProxy().field_146128_h + 4))
+				this.value = (float) (p_renderBg_1_ - (this.getProxy().buttonX + 4))
 						/ (float) (this.getProxy().func_146117_b() - 8);
 
 				if (this.value < 0.0F) {
@@ -79,16 +79,16 @@ public class RealmsSliderButton extends RealmsButton {
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.blit(
-					this.getProxy().field_146128_h + (int) (this.value * (float) (this.getProxy().func_146117_b() - 8)),
-					this.getProxy().field_146129_i, 0, 66, 4, 20);
-			this.blit(this.getProxy().field_146128_h
+					this.getProxy().buttonX + (int) (this.value * (float) (this.getProxy().func_146117_b() - 8)),
+					this.getProxy().buttonY, 0, 66, 4, 20);
+			this.blit(this.getProxy().buttonX
 					+ (int) (this.value * (float) (this.getProxy().func_146117_b() - 8)) + 4,
-					this.getProxy().field_146129_i, 196, 66, 4, 20);
+					this.getProxy().buttonY, 196, 66, 4, 20);
 		}
 	}
 
 	public void clicked(int p_clicked_1_, int p_clicked_2_) {
-		this.value = (float) (p_clicked_1_ - (this.getProxy().field_146128_h + 4))
+		this.value = (float) (p_clicked_1_ - (this.getProxy().buttonX + 4))
 				/ (float) (this.getProxy().func_146117_b() - 8);
 
 		if (this.value < 0.0F) {

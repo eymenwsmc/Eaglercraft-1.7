@@ -40,7 +40,7 @@ public class GuiButtonRealmsProxy extends GuiButton {
 	}
 
 	public int func_154316_f() {
-		return super.field_146129_i;
+		return super.buttonY;
 	}
 
 	/**

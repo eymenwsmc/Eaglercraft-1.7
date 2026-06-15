@@ -34,7 +34,7 @@ public class ChunkCache implements IBlockAccess {
 
 		for (var11 = this.chunkX; var11 <= var9; ++var11) {
 			for (var12 = this.chunkZ; var12 <= var10; ++var12) {
-				var13 = p_i1964_1_.getChunkFromChunkCoords(var11, var12);
+				var13 = p_i1964_1_.chunkExists(var11, var12) ? p_i1964_1_.getChunkFromChunkCoords(var11, var12) : null;
 
 				if (var13 != null) {
 					this.chunkArray[var11 - this.chunkX][var12 - this.chunkZ] = var13;
@@ -82,7 +82,8 @@ public class ChunkCache implements IBlockAccess {
 	public TileEntity getTileEntity(int p_147438_1_, int p_147438_2_, int p_147438_3_) {
 		int var4 = (p_147438_1_ >> 4) - this.chunkX;
 		int var5 = (p_147438_3_ >> 4) - this.chunkZ;
-		return this.chunkArray[var4][var5].func_150806_e(p_147438_1_ & 15, p_147438_2_, p_147438_3_ & 15);
+		Chunk var6 = this.chunkArray[var4][var5];
+		return var6 == null ? null : var6.func_150806_e(p_147438_1_ & 15, p_147438_2_, p_147438_3_ & 15);
 	}
 
 	/**
@@ -110,7 +111,8 @@ public class ChunkCache implements IBlockAccess {
 		} else {
 			int var4 = (p_72805_1_ >> 4) - this.chunkX;
 			int var5 = (p_72805_3_ >> 4) - this.chunkZ;
-			return this.chunkArray[var4][var5].getBlockMetadata(p_72805_1_ & 15, p_72805_2_, p_72805_3_ & 15);
+			Chunk var6 = this.chunkArray[var4][var5];
+			return var6 == null ? 0 : var6.getBlockMetadata(p_72805_1_ & 15, p_72805_2_, p_72805_3_ & 15);
 		}
 	}
 
@@ -177,8 +179,9 @@ public class ChunkCache implements IBlockAccess {
 				} else {
 					var5 = (p_72810_2_ >> 4) - this.chunkX;
 					var6 = (p_72810_4_ >> 4) - this.chunkZ;
-					return this.chunkArray[var5][var6].getSavedLightValue(p_72810_1_, p_72810_2_ & 15, p_72810_3_,
-							p_72810_4_ & 15);
+					Chunk var10 = this.chunkArray[var5][var6];
+					return var10 == null ? p_72810_1_.defaultLightValue
+							: var10.getSavedLightValue(p_72810_1_, p_72810_2_ & 15, p_72810_3_, p_72810_4_ & 15);
 				}
 			}
 		} else {
@@ -202,8 +205,9 @@ public class ChunkCache implements IBlockAccess {
 				&& p_72812_2_ < 30000000 && p_72812_4_ <= 30000000) {
 			int var5 = (p_72812_2_ >> 4) - this.chunkX;
 			int var6 = (p_72812_4_ >> 4) - this.chunkZ;
-			return this.chunkArray[var5][var6].getSavedLightValue(p_72812_1_, p_72812_2_ & 15, p_72812_3_,
-					p_72812_4_ & 15);
+			Chunk var7 = this.chunkArray[var5][var6];
+			return var7 == null ? p_72812_1_.defaultLightValue
+					: var7.getSavedLightValue(p_72812_1_, p_72812_2_ & 15, p_72812_3_, p_72812_4_ & 15);
 		} else {
 			return p_72812_1_.defaultLightValue;
 		}

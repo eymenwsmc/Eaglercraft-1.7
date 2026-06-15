@@ -9,10 +9,10 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiButton extends Gui {
 	protected static final ResourceLocation field_146122_a = new ResourceLocation("textures/gui/widgets.png");
-	protected int field_146120_f;
+	public int field_146120_f;
 	protected int field_146121_g;
-	public int field_146128_h;
-	public int field_146129_i;
+	public int buttonX;
+	public int buttonY;
 
 	/** The string displayed on this control. */
 	public String displayString;
@@ -33,8 +33,8 @@ public class GuiButton extends Gui {
 		this.enabled = true;
 		this.visible = true;
 		this.id = p_i46323_1_;
-		this.field_146128_h = p_i46323_2_;
-		this.field_146129_i = p_i46323_3_;
+		this.buttonX = p_i46323_2_;
+		this.buttonY = p_i46323_3_;
 		this.field_146120_f = p_i46323_4_;
 		this.field_146121_g = p_i46323_5_;
 		this.displayString = p_i46323_6_;
@@ -60,15 +60,15 @@ public class GuiButton extends Gui {
 			FontRenderer var4 = p_146112_1_.fontRenderer;
 			p_146112_1_.getTextureManager().bindTexture(field_146122_a);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.field_146123_n = p_146112_2_ >= this.field_146128_h && p_146112_3_ >= this.field_146129_i
-					&& p_146112_2_ < this.field_146128_h + this.field_146120_f
-					&& p_146112_3_ < this.field_146129_i + this.field_146121_g;
+			this.field_146123_n = p_146112_2_ >= this.buttonX && p_146112_3_ >= this.buttonY
+					&& p_146112_2_ < this.buttonX + this.field_146120_f
+					&& p_146112_3_ < this.buttonY + this.field_146121_g;
 			int var5 = this.getHoverState(this.field_146123_n);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			this.drawTexturedModalRect(this.field_146128_h, this.field_146129_i, 0, 46 + var5 * 20,
+			this.drawTexturedModalRect(this.buttonX, this.buttonY, 0, 46 + var5 * 20,
 					this.field_146120_f / 2, this.field_146121_g);
-			this.drawTexturedModalRect(this.field_146128_h + this.field_146120_f / 2, this.field_146129_i,
+			this.drawTexturedModalRect(this.buttonX + this.field_146120_f / 2, this.buttonY,
 					200 - this.field_146120_f / 2, 46 + var5 * 20, this.field_146120_f / 2, this.field_146121_g);
 			this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
 			int var6 = 14737632;
@@ -79,8 +79,8 @@ public class GuiButton extends Gui {
 				var6 = 16777120;
 			}
 
-			this.drawCenteredString(var4, this.displayString, this.field_146128_h + this.field_146120_f / 2,
-					this.field_146129_i + (this.field_146121_g - 8) / 2, var6);
+			this.drawCenteredString(var4, this.displayString, this.buttonX + this.field_146120_f / 2,
+					this.buttonY + (this.field_146121_g - 8) / 2, var6);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);		}
 	}
 
@@ -107,9 +107,9 @@ public class GuiButton extends Gui {
 	 * MouseListener.mousePressed(MouseEvent e).
 	 */
 	public boolean mousePressed(Minecraft p_146116_1_, int p_146116_2_, int p_146116_3_) {
-		return this.enabled && this.visible && p_146116_2_ >= this.field_146128_h && p_146116_3_ >= this.field_146129_i
-				&& p_146116_2_ < this.field_146128_h + this.field_146120_f
-				&& p_146116_3_ < this.field_146129_i + this.field_146121_g;
+		return this.enabled && this.visible && p_146116_2_ >= this.buttonX && p_146116_3_ >= this.buttonY
+				&& p_146116_2_ < this.buttonX + this.field_146120_f
+				&& p_146116_3_ < this.buttonY + this.field_146121_g;
 	}
 
 	public boolean func_146115_a() {

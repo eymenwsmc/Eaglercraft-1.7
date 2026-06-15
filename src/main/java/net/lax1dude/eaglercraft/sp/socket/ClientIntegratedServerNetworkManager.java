@@ -38,6 +38,16 @@ import net.minecraft.network.login.INetHandlerLoginClient;
 import net.minecraft.network.login.server.S02PacketLoginSuccess;
 import net.minecraft.network.play.INetHandlerPlayClient;
 import net.minecraft.network.play.server.S01PacketJoinGame;
+import net.minecraft.network.play.server.S08PacketPlayerPosLook;
+import net.minecraft.network.play.server.S0EPacketSpawnObject;
+import net.minecraft.network.play.server.S0FPacketSpawnMob;
+import net.minecraft.network.play.server.S10PacketSpawnPainting;
+import net.minecraft.network.play.server.S11PacketSpawnExperienceOrb;
+import net.minecraft.network.play.server.S12PacketEntityVelocity;
+import net.minecraft.network.play.server.S14PacketEntity;
+import net.minecraft.network.play.server.S18PacketEntityTeleport;
+import net.minecraft.network.play.server.S1CPacketEntityMetadata;
+import net.minecraft.network.play.server.S20PacketEntityProperties;
 import net.minecraft.network.play.server.S21PacketChunkData;
 import net.minecraft.network.play.server.S26PacketMapChunkBulk;
 import net.minecraft.util.ChatComponentTranslation;
@@ -47,6 +57,8 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 
 	private int debugPacketCounter = 0;
 	private final List<byte[]> recievedPacketBuffer = new LinkedList<>();
+	private final List<byte[]> deferredPacketBuffer = new LinkedList<>();
+	private boolean playerSpawned = false;
 	public boolean isPlayerChannelOpen = false;
 
 	public ClientIntegratedServerNetworkManager(String channel) {
@@ -56,6 +68,7 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 	@Override
 	public void connect() {
 		clearRecieveQueue();
+		isPlayerChannelOpen = true; // Mark channel as open immediately
 		SingleplayerServerController.openLocalPlayerChannel();
 	}
 
@@ -83,14 +96,24 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 
 	@Override
 	public void processReceivedPackets() throws IOException {
-		if (nethandler == null)
+		if (nethandler == null) {
 			return;
+		}
 
 		while (!recievedPacketBuffer.isEmpty()) {
+			if (recievedPacketBuffer.get(0) == null) {
+				recievedPacketBuffer.remove(0);
+				continue;
+			}
+			
 			byte[] next = recievedPacketBuffer.remove(0);
 			++debugPacketCounter;
 			try {
 				if (injectedController != null && injectedController.handlePacket(next, 0)) {
+					continue;
+				}
+
+				if (next.length == 0) {
 					continue;
 				}
 
@@ -117,30 +140,72 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 					throw new IOException("Failed to read packet type '" + pkt.getClass().getSimpleName() + "'", t);
 				}
 
-				if (pkt instanceof S21PacketChunkData) {
-					logger.debug("Client<-Server: S21PacketChunkData bytes={} state={}", next.length, packetState);
-				} else if (pkt instanceof S26PacketMapChunkBulk) {
-					logger.debug("Client<-Server: S26PacketMapChunkBulk bytes={} state={}", next.length, packetState);
+				Minecraft mc = Minecraft.getMinecraft();
+
+				// CRITICAL: Inject S08 after S01 if server doesn't send it
+				if (pkt instanceof net.minecraft.network.play.server.S01PacketJoinGame) {
+					try {
+						S08PacketPlayerPosLook posPacket = new S08PacketPlayerPosLook(-8.5, 68.0, 229.5, 0.0f, 0.0f, false);
+						ByteBuf tempBuf = Unpooled.buffer();
+						PacketBuffer tempPacketBuf = new PacketBuffer(tempBuf);
+						tempPacketBuf.writeVarIntToBuffer(0x08);
+						posPacket.writePacketData(tempPacketBuf);
+						byte[] packetBytes = new byte[tempBuf.writerIndex()];
+						tempBuf.getBytes(0, packetBytes);
+						recievedPacketBuffer.add(packetBytes);
+					} catch(Exception e) {
+						logger.error("Failed to inject S08 packet", e);
+					}
 				}
 
-				if (pkt instanceof net.minecraft.network.login.server.S02PacketLoginSuccess) {
-					// Finish login handshake
-					pkt.processPacket((net.minecraft.network.login.INetHandlerLoginClient) nethandler);
-					// Switch to PLAY state and set the correct play handler immediately
-					this.packetState = EnumConnectionState.PLAY;
-					net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getMinecraft();
-					this.nethandler = new net.minecraft.client.network.NetHandlerPlayClient(mc, null, this);
-				} else if (pkt instanceof net.minecraft.network.play.server.S01PacketJoinGame) {
-					// Ensure play handler exists before processing join game (idempotent safety)
-					if (!(nethandler instanceof net.minecraft.network.play.INetHandlerPlayClient)) {
-						net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getMinecraft();
-						this.nethandler = new net.minecraft.client.network.NetHandlerPlayClient(mc, null, this);
+				// Defer packets that need player (ENTITY PACKETS IMMEDIATE for combat)
+				boolean needsPlayer = pkt instanceof net.minecraft.network.play.server.S39PacketPlayerAbilities
+						// REMOVED: S0EPacketSpawnObject - immediate for entity tracking
+						// REMOVED: S0FPacketSpawnMob - immediate for entity tracking
+						|| pkt instanceof net.minecraft.network.play.server.S10PacketSpawnPainting
+						|| pkt instanceof net.minecraft.network.play.server.S11PacketSpawnExperienceOrb
+						// REMOVED: S12PacketEntityVelocity - immediate for combat
+						// REMOVED: S14PacketEntity - immediate for entity updates
+						// REMOVED: S18PacketEntityTeleport - immediate for entity position
+						// REMOVED: S1CPacketEntityMetadata - immediate for combat
+						|| pkt instanceof net.minecraft.network.play.server.S20PacketEntityProperties;
+				
+				if (needsPlayer && !playerSpawned && (mc == null || mc.theWorld == null || mc.thePlayer == null)) {
+					synchronized(deferredPacketBuffer) {
+						deferredPacketBuffer.add(next);
 					}
-					pkt.processPacket((net.minecraft.network.play.INetHandlerPlayClient) nethandler);
-				} else if (this.packetState == EnumConnectionState.LOGIN) {
+					continue;
+				}
+
+				// Handle state transitions
+				if (pkt instanceof net.minecraft.network.login.server.S02PacketLoginSuccess) {
 					pkt.processPacket((net.minecraft.network.login.INetHandlerLoginClient) nethandler);
-				} else if (this.packetState == EnumConnectionState.PLAY) {
-					pkt.processPacket((net.minecraft.network.play.INetHandlerPlayClient) nethandler);
+					this.packetState = EnumConnectionState.PLAY;
+					this.nethandler = new net.minecraft.client.network.NetHandlerPlayClient(mc, null, this);
+				} else if (pkt instanceof net.minecraft.network.play.server.S08PacketPlayerPosLook) {
+					// Mark player as spawned BEFORE processing
+					playerSpawned = true;
+					try {
+						pkt.processPacket(nethandler);
+					} catch(Throwable t) {
+						logger.error("Failed to process {}! It'll be skipped for debug purposes.", pkt.getClass().getSimpleName());
+						logger.error(t);
+					}
+					// Process deferred packets
+					synchronized(deferredPacketBuffer) {
+						if (!deferredPacketBuffer.isEmpty()) {
+							recievedPacketBuffer.addAll(0, deferredPacketBuffer);
+							deferredPacketBuffer.clear();
+						}
+					}
+				} else {
+					// Standard packet processing (1.8 style)
+					try {
+						pkt.processPacket(nethandler);
+					} catch(Throwable t) {
+						logger.error("Failed to process {}! It'll be skipped for debug purposes.", pkt.getClass().getSimpleName());
+						logger.error(t);
+					}
 				}
 			} catch (Throwable t) {
 				logger.error("Failed to process socket frame {}! It'll be skipped for debug purposes.",
@@ -170,15 +235,15 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 		try {
 			pkt.writePacketData(temporaryBuffer);
 		} catch (IOException ex) {
-			logger.error("Failed to write packet {}!", pkt.getClass().getSimpleName());
+			logger.error("Failed to write packet {}!", pkt.getClass().getSimpleName(), ex);
 			return;
 		}
 
-		int len = temporaryBuffer.writerIndex();
-		byte[] bytes = new byte[len];
-		temporaryBuffer.getBytes(0, bytes);
-
-		ClientPlatformSingleplayer.sendPacket(new IPCPacketData(address, bytes));
+			int len = temporaryBuffer.writerIndex();
+			byte[] bytes = new byte[len];
+			temporaryBuffer.getBytes(0, bytes);
+			
+			ClientPlatformSingleplayer.sendPacket(new IPCPacketData(address, bytes));
 	}
 
 	@Override
@@ -203,6 +268,10 @@ public class ClientIntegratedServerNetworkManager extends EaglercraftNetworkMana
 
 	public void clearRecieveQueue() {
 		recievedPacketBuffer.clear();
+		synchronized(deferredPacketBuffer) {
+			deferredPacketBuffer.clear();
+		}
+		playerSpawned = false;
 	}
 
 	@Override

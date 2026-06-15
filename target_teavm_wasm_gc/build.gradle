@@ -38,7 +38,7 @@ def name = "classes.wasm"
 teavm.wasmGC {
     compileJava.options.encoding = "UTF-8"
     targetFileName = "../" + name
-    optimization = OptimizationLevel.AGGRESSIVE //AGGRESSIVE crashes
+    optimization = OptimizationLevel.BALANCED //AGGRESSIVE crashes
     outOfProcess = false
     fastGlobalAnalysis = false
     processMemory = 512

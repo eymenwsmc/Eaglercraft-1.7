@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import org.json.JSONObject;
+
 import net.lax1dude.eaglercraft.EaglercraftVersion;
 import net.lax1dude.eaglercraft.Random;
 import net.lax1dude.eaglercraft.internal.IClientConfigAdapter;
@@ -123,6 +125,11 @@ public class DesktopClientConfigAdapter implements IClientConfigAdapter {
 
 		}
 
+	}
+
+	@Override
+	public JSONObject getIntegratedServerOpts() {
+		return null;
 	}
 
 }

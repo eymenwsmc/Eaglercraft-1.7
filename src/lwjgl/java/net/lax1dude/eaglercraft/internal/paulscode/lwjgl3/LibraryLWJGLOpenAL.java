@@ -149,84 +149,84 @@ public class LibraryLWJGLOpenAL extends Library {
 
 		// TODO: eaglercraft
 
-		openALDevice = ALC11.alcOpenDevice((String) null);
-
-		ALCCapabilities caps;
-		if (openALDevice == 0l) {
-			logger.error("Unable to initialize OpenAL!");
-			throw new LibraryLWJGLOpenAL.Exception("Unable to initialize OpenAL", LibraryLWJGLOpenAL.Exception.CREATE);
-		} else {
-			caps = ALC.createCapabilities(openALDevice);
-			logger.info("Device opened: {}", openALDevice);
-		}
-
-		openALContext = ALC11.alcCreateContext(openALDevice, new int[] { SOFTHRTF.ALC_HRTF_SOFT, 1, 0 });
-		if (!ALC11.alcMakeContextCurrent(openALContext)) {
-			ALC11.alcCloseDevice(openALDevice);
-			logger.error("Unable to initialize AL context!");
-			throw new LibraryLWJGLOpenAL.Exception("Unable to initialize OpenAL", LibraryLWJGLOpenAL.Exception.CREATE);
-		}
-
-		AL.createCapabilities(caps);
-
-		// Let user know if the library loaded properly
-		if (errors)
-			importantMessage("OpenAL did not initialize properly!");
-		else
-			message("OpenAL initialized.");
-
-		// Listener is at the origin, facing along the z axis, no velocity:
-		listenerPositionAL = BufferUtils.createFloatBuffer(3)
-				.put(new float[] { listener.position.x, listener.position.y, listener.position.z });
-		listenerOrientation = BufferUtils.createFloatBuffer(6).put(new float[] { listener.lookAt.x, listener.lookAt.y,
-				listener.lookAt.z, listener.up.x, listener.up.y, listener.up.z });
-		listenerVelocity = BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f });
-
-		// Flip the buffers, so they can be used:
-		listenerPositionAL.flip();
-		listenerOrientation.flip();
-		listenerVelocity.flip();
-
-		// Pass the buffers to the sound system, and check for potential errors:
-		AL10.alListenerfv(AL10.AL_POSITION, listenerPositionAL);
-		errors = checkALError() || errors;
-		AL10.alListenerfv(AL10.AL_ORIENTATION, listenerOrientation);
-		errors = checkALError() || errors;
-		AL10.alListenerfv(AL10.AL_VELOCITY, listenerVelocity);
-		errors = checkALError() || errors;
-
-		AL10.alDopplerFactor(SoundSystemConfig.getDopplerFactor());
-		errors = checkALError() || errors;
-
-		AL10.alDopplerVelocity(SoundSystemConfig.getDopplerVelocity());
-		errors = checkALError() || errors;
-
-		// Let user know what caused the above error messages:
-		if (errors) {
-			importantMessage("OpenAL did not initialize properly!");
-			throw new LibraryLWJGLOpenAL.Exception("Problem encountered " + "while loading OpenAL or "
-					+ "creating the listener.  " + "Probable cause:  OpenAL not " + "supported",
-					LibraryLWJGLOpenAL.Exception.CREATE);
-		}
-
-		super.init();
-
-		// Check if we can use the AL_PITCH control:
-		ChannelLWJGLOpenAL channel = (ChannelLWJGLOpenAL) normalChannels.get(1);
-		try {
-			AL10.alSourcef(channel.ALSource.get(0), AL10.AL_PITCH, 1.0f);
-			if (checkALError()) {
-				alPitchSupported(SET, false);
-				throw new LibraryLWJGLOpenAL.Exception("OpenAL: AL_PITCH not " + "supported.",
-						LibraryLWJGLOpenAL.Exception.NO_AL_PITCH);
-			} else {
-				alPitchSupported(SET, true);
-			}
-		} catch (java.lang.Exception e) {
-			alPitchSupported(SET, false);
-			throw new LibraryLWJGLOpenAL.Exception("OpenAL: AL_PITCH not " + "supported.",
-					LibraryLWJGLOpenAL.Exception.NO_AL_PITCH);
-		}
+//		openALDevice = ALC11.alcOpenDevice((String) null);
+//
+//		ALCCapabilities caps;
+//		if (openALDevice == 0l) {
+//			logger.error("Unable to initialize OpenAL!");
+//			throw new LibraryLWJGLOpenAL.Exception("Unable to initialize OpenAL", LibraryLWJGLOpenAL.Exception.CREATE);
+//		} else {
+//			caps = ALC.createCapabilities(openALDevice);
+//			logger.info("Device opened: {}", openALDevice);
+//		}
+//
+//		openALContext = ALC11.alcCreateContext(openALDevice, new int[] { SOFTHRTF.ALC_HRTF_SOFT, 1, 0 });
+//		if (!ALC11.alcMakeContextCurrent(openALContext)) {
+//			ALC11.alcCloseDevice(openALDevice);
+//			logger.error("Unable to initialize AL context!");
+//			throw new LibraryLWJGLOpenAL.Exception("Unable to initialize OpenAL", LibraryLWJGLOpenAL.Exception.CREATE);
+//		}
+//
+//		AL.createCapabilities(caps);
+//
+//		// Let user know if the library loaded properly
+//		if (errors)
+//			importantMessage("OpenAL did not initialize properly!");
+//		else
+//			message("OpenAL initialized.");
+//
+//		// Listener is at the origin, facing along the z axis, no velocity:
+//		listenerPositionAL = BufferUtils.createFloatBuffer(3)
+//				.put(new float[] { listener.position.x, listener.position.y, listener.position.z });
+//		listenerOrientation = BufferUtils.createFloatBuffer(6).put(new float[] { listener.lookAt.x, listener.lookAt.y,
+//				listener.lookAt.z, listener.up.x, listener.up.y, listener.up.z });
+//		listenerVelocity = BufferUtils.createFloatBuffer(3).put(new float[] { 0.0f, 0.0f, 0.0f });
+//
+//		// Flip the buffers, so they can be used:
+//		listenerPositionAL.flip();
+//		listenerOrientation.flip();
+//		listenerVelocity.flip();
+//
+//		// Pass the buffers to the sound system, and check for potential errors:
+//		AL10.alListenerfv(AL10.AL_POSITION, listenerPositionAL);
+//		errors = checkALError() || errors;
+//		AL10.alListenerfv(AL10.AL_ORIENTATION, listenerOrientation);
+//		errors = checkALError() || errors;
+//		AL10.alListenerfv(AL10.AL_VELOCITY, listenerVelocity);
+//		errors = checkALError() || errors;
+//
+//		AL10.alDopplerFactor(SoundSystemConfig.getDopplerFactor());
+//		errors = checkALError() || errors;
+//
+//		AL10.alDopplerVelocity(SoundSystemConfig.getDopplerVelocity());
+//		errors = checkALError() || errors;
+//
+//		// Let user know what caused the above error messages:
+//		if (errors) {
+//			importantMessage("OpenAL did not initialize properly!");
+//			throw new LibraryLWJGLOpenAL.Exception("Problem encountered " + "while loading OpenAL or "
+//					+ "creating the listener.  " + "Probable cause:  OpenAL not " + "supported",
+//					LibraryLWJGLOpenAL.Exception.CREATE);
+//		}
+//
+//		super.init();
+//
+//		// Check if we can use the AL_PITCH control:
+//		ChannelLWJGLOpenAL channel = (ChannelLWJGLOpenAL) normalChannels.get(1);
+//		try {
+//			AL10.alSourcef(channel.ALSource.get(0), AL10.AL_PITCH, 1.0f);
+//			if (checkALError()) {
+//				alPitchSupported(SET, false);
+//				throw new LibraryLWJGLOpenAL.Exception("OpenAL: AL_PITCH not " + "supported.",
+//						LibraryLWJGLOpenAL.Exception.NO_AL_PITCH);
+//			} else {
+//				alPitchSupported(SET, true);
+//			}
+//		} catch (java.lang.Exception e) {
+//			alPitchSupported(SET, false);
+//			throw new LibraryLWJGLOpenAL.Exception("OpenAL: AL_PITCH not " + "supported.",
+//					LibraryLWJGLOpenAL.Exception.NO_AL_PITCH);
+//		}
 	}
 
 	/**

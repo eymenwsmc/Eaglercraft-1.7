@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eaglercraft Relay Sniffer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Eaglercraft Relay Sniffer</h1>
+            <p class="subtitle">Monitor and analyze Eaglercraft relay server connections</p>
+        </header>
+
+        <div class="main-content">
+            <div class="control-panel">
+                <div class="input-group">
+                    <label for="relayUrl">Relay Server URL</label>
+                    <select id="relaySelect" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem;">
+                        <option value="wss://relay.deev.is/">wss://relay.deev.is/ (lax1dude relay #1)</option>
+                        <option value="wss://relay.lax1dude.net/">wss://relay.lax1dude.net/ (lax1dude relay #2)</option>
+                        <option value="wss://relay.shhnowisnottheti.me/">wss://relay.shhnowisnottheti.me/ (ayunami relay #1)</option>
+                        <option value="custom">Custom URL...</option>
+                    </select>
+                    <input type="text" id="relayUrl" placeholder="Enter custom relay URL" style="display: none; margin-top: 10px;">
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <input type="checkbox" id="autoRefresh"> Auto-refresh every 
+                        <input type="number" id="refreshInterval" value="5" min="1" max="60" style="width: 60px; display: inline-block; margin: 0 5px;"> seconds
+                    </label>
+                    <small style="color: #666; margin-top: 4px; display: block;">Automatically query the relay for new worlds</small>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <input type="checkbox" id="scanMode"> 🔍 Scan Mode - Find ALL worlds by testing join codes
+                    </label>
+                    <small style="color: #666; margin-top: 4px; display: block;">Tests random 5-character codes to discover hidden worlds</small>
+                </div>
+
+                <div class="button-group">
+                    <button id="connectBtn" class="btn btn-primary">Start Scanning</button>
+                    <button id="disconnectBtn" class="btn btn-secondary" disabled>Stop</button>
+                    <button id="clearBtn" class="btn btn-danger">Clear Logs</button>
+                </div>
+
+                <div id="scanStats" style="display: none; background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <strong>📊 Scan Statistics:</strong><br>
+                    Codes tested: <span id="testedCount">0</span> | 
+                    Worlds found: <span id="foundCount">0</span> | 
+                    Speed: <span id="scanSpeed">0</span> codes/sec
+                </div>
+
+                <div class="status-bar">
+                    <span class="status-label">Status:</span>
+                    <span id="statusText" class="status-disconnected">Disconnected</span>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="packets">Packets</button>
+                <button class="tab-btn" data-tab="stats">Statistics</button>
+                <button class="tab-btn" data-tab="raw">Raw Data</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="packets-tab" class="tab-pane active">
+                    <div class="filter-bar">
+                        <label>
+                            <input type="checkbox" id="filterHandshake" checked> Handshake
+                        </label>
+                        <label>
+                            <input type="checkbox" id="filterICE" checked> ICE
+                        </label>
+                        <label>
+                            <input type="checkbox" id="filterDescription" checked> Description
+                        </label>
+                        <label>
+                            <input type="checkbox" id="filterClient" checked> Client Events
+                        </label>
+                        <label>
+                            <input type="checkbox" id="filterError" checked> Errors
+                        </label>
+                    </div>
+                    <div id="packetLog" class="log-container"></div>
+                </div>
+
+                <div id="stats-tab" class="tab-pane">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Total Packets</h3>
+                            <p id="totalPackets" class="stat-value">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Connection Time</h3>
+                            <p id="connectionTime" class="stat-value">0s</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Clients Connected</h3>
+                            <p id="clientCount" class="stat-value">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>ICE Candidates</h3>
+                            <p id="iceCount" class="stat-value">0</p>
+                        </div>
+                    </div>
+                    <div class="packet-breakdown">
+                        <h3>Packet Breakdown</h3>
+                        <canvas id="packetChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="raw-tab" class="tab-pane">
+                    <div id="rawLog" class="raw-log"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

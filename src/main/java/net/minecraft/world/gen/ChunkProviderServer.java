@@ -129,7 +129,6 @@ public class ChunkProviderServer implements IChunkProvider {
 			this.loadedChunkHashMap.add(var3, var5);
 			this.loadedChunks.add(var5);
 			var5.onChunkLoad();
-			
 			var5.populateChunk(this, this, p_73158_1_, p_73158_2_);
 		}
 

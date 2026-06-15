@@ -67,12 +67,12 @@ public class GuiOptionsRowList extends GuiListExtended {
 		public void func_148279_a(int p_148279_1_, int p_148279_2_, int p_148279_3_, int p_148279_4_, int p_148279_5_,
 				Tessellator p_148279_6_, int p_148279_7_, int p_148279_8_, boolean p_148279_9_) {
 			if (this.field_148323_b != null) {
-				this.field_148323_b.field_146129_i = p_148279_3_;
+				this.field_148323_b.buttonY = p_148279_3_;
 				this.field_148323_b.drawButton(this.field_148325_a, p_148279_7_, p_148279_8_);
 			}
 
 			if (this.field_148324_c != null) {
-				this.field_148324_c.field_146129_i = p_148279_3_;
+				this.field_148324_c.buttonY = p_148279_3_;
 				this.field_148324_c.drawButton(this.field_148325_a, p_148279_7_, p_148279_8_);
 			}
 		}

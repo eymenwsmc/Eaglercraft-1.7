@@ -115,7 +115,7 @@ public class ChunkProviderEnd implements IChunkProvider {
 				Block var10 = Blocks.end_stone;
 
 				for (int var11 = 127; var11 >= 0; --var11) {
-					int var12 = (var6 * 16 + var5) * 128 + var11;
+					int var12 = (var5 * 16 + var6) * 128 + var11;
 					Block var13 = p_147421_3_[var12];
 
 					if (var13 != null && var13.getMaterial() != Material.air) {

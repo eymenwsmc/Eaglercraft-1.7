@@ -63,7 +63,7 @@ class GuiSlotRelay extends GuiSlot {
 	@Override
 	protected void drawSlot(int id, int xx, int yy, int p_148126_4_, Tessellator p_148126_5_, int p_148126_6_,
 			int p_148126_7_) {
-
+drawSlot(id, xx, yy);
 	}
 
 	protected void drawSlot(int id, int xx, int yy) {

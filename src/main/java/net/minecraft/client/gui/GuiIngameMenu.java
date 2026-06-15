@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import net.lax1dude.eaglercraft.sp.SingleplayerServerController;
 import net.lax1dude.eaglercraft.sp.gui.GuiScreenLANInfo;
 import net.lax1dude.eaglercraft.sp.gui.GuiScreenLANNotSupported;
 import net.lax1dude.eaglercraft.sp.gui.GuiShareToLan;
@@ -36,7 +37,7 @@ public class GuiIngameMenu extends GuiScreen implements GuiYesNoCallback {
 		GuiButton var3;
 		this.buttonList.add(var3 = new GuiButton(7, this.width / 2 + 2, this.height / 4 + 96 + var1, 98, 20,
 				I18n.format("menu.shareToLan", new Object[0])));
-		if (mc.isIntegratedServerRunning()) {
+		if (SingleplayerServerController.instance.isWorldRunning()) {
 			var3.enabled = true;
 		} else {
 			var3.enabled = false;
@@ -54,10 +55,15 @@ public class GuiIngameMenu extends GuiScreen implements GuiYesNoCallback {
 			break;
 
 		case 1:
+			boolean flag = SingleplayerServerController.instance.isWorldRunning();
 			p_146284_1_.enabled = false;
 			this.mc.theWorld.sendQuittingDisconnectingPacket();
 			this.mc.loadWorld((WorldClient) null);
-			this.mc.displayGuiScreen(new GuiMainMenu());
+			if (flag) {
+				this.mc.shutdownIntegratedServer(new GuiMainMenu());
+			} else {
+				this.mc.shutdownIntegratedServer(new GuiMultiplayer(new GuiMainMenu()));
+			}
 
 		case 2:
 		case 3:

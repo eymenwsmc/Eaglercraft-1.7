@@ -264,7 +264,7 @@ public class IntegratedServer extends MinecraftServer {
 	 * Returns true if this integrated server is open to LAN
 	 */
 	public boolean getPublic() {
-		return this.isPublic;
+		return true;
 	}
 
 	/**

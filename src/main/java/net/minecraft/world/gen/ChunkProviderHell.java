@@ -169,7 +169,7 @@ public class ChunkProviderHell implements IChunkProvider {
 				Block var14 = Blocks.netherrack;
 
 				for (int var15 = 127; var15 >= 0; --var15) {
-					int var16 = (var8 * 16 + var7) * 128 + var15;
+					int var16 = (var7 * 16 + var8) * 128 + var15;
 
 					if (var15 < 127 - this.hellRNG.nextInt(5) && var15 > 0 + this.hellRNG.nextInt(5)) {
 						Block var17 = p_147418_3_[var16];

@@ -1468,7 +1468,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 		return (this.dataWatcher.getWatchableObjectByte(16) & 1 << p_82241_1_) != 0;
 	}
 
-	protected void setHideCape(int p_82239_1_, boolean p_82239_2_) {
+	public void setHideCape(int p_82239_1_, boolean p_82239_2_) {
 		byte var3 = this.dataWatcher.getWatchableObjectByte(16);
 
 		if (p_82239_2_) {

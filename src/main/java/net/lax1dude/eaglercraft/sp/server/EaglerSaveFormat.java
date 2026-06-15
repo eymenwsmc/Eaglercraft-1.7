@@ -22,26 +22,36 @@ import java.util.List;
 
 import net.minecraft.world.storage.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.Lists;
 
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 
 public class EaglerSaveFormat extends SaveFormatOld {
+	private static final Logger logger = LogManager.getLogger();
 
 	public EaglerSaveFormat(VFile2 parFile) {
 		super(parFile);
 	}
 
 	public static final VFile2 worldsList = WorldsDB.newVFile("worlds_list.txt");
-	public static final VFile2 worldsFolder = new VFile2("worlds");
+	// Empty string - parent class SaveFormatOld will handle the directory structure
+	public static final VFile2 worldsFolder = new VFile2("");
 
 	public String getName() {
 		return "eagler";
 	}
 
 	public ISaveHandler getSaveLoader(String s, boolean flag) {
-		return new SaveHandler(this.savesDirectory, s, flag);
+		// Debug: Log the paths
+		logger.info("[EaglerSaveFormat] getSaveLoader called:");
+		logger.info("  savesDirectory: " + this.savesDirectory.getPath());
+		logger.info("  world name: " + s);
+		SaveHandler handler = new SaveHandler(this.savesDirectory, s);
+		logger.info("  final worldDirectory: " + handler.getWorldDirectory().getPath());
+		return handler;
 	}
 
 	public List<SaveFormatComparator> getSaveList() {
@@ -50,6 +60,7 @@ public class EaglerSaveFormat extends SaveFormatOld {
 			String[] lines = worldsList.getAllLines();
 			for (int i = 0; i < lines.length; ++i) {
 				String s = lines[i];
+				// savesDirectory already points to "worlds", so just use the world name
 				WorldInfo worldinfo = this.getWorldInfo(s);
 				if (worldinfo != null && (worldinfo.getSaveVersion() == 19132 || worldinfo.getSaveVersion() == 19133)) {
 					boolean flag = worldinfo.getSaveVersion() != this.getSaveVersion();

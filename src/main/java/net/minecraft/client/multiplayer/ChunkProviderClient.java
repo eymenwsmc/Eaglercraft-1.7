@@ -50,7 +50,7 @@ public class ChunkProviderClient implements IChunkProvider {
 	 * Checks to see if a chunk exists at x, y
 	 */
 	public boolean chunkExists(int p_73149_1_, int p_73149_2_) {
-		return true;
+		return this.chunkMapping.containsItem(ChunkCoordIntPair.chunkXZ2Int(p_73149_1_, p_73149_2_));
 	}
 
 	public boolean func_177460_a(IChunkProvider var1, Chunk var2, int var3, int var4) {

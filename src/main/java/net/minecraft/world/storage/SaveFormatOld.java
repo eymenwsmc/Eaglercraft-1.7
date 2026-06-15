@@ -212,7 +212,7 @@ public class SaveFormatOld implements ISaveFormat {
 	 * + Returns back a loader for the specified save directory
 	 */
 	public ISaveHandler getSaveLoader(String s, boolean flag) {
-		return new SaveHandler(this.savesDirectory, s, flag);
+		return new SaveHandler(this.savesDirectory, s);
 	}
 
 	public boolean func_154334_a(String var1) {

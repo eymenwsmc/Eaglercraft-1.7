@@ -89,10 +89,15 @@ public class WorkerMain {
 			@Override
 			public void onMessage(String msg) {
 				ServerPlatformSingleplayer.register();
+				// Send ready signal to client after registration
+				sendWorkerReadySignal();
 				cb.complete(msg);
 			}
 
 		});
 	}
+
+	@JSBody(params = {}, script = "postMessage({ ch: '__WORKER_READY__', dat: null });")
+	private static native void sendWorkerReadySignal();
 
 }

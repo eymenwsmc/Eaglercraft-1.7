@@ -75,13 +75,15 @@ public class ClientPlatformSingleplayer {
 	private static boolean isSingleThreadMode = false;
 
 	private static Worker workerObj = null;
+	private static boolean workerReady = false;
+	private static final LinkedList<IPCPacketData> pendingPackets = new LinkedList<>();
 
 	@JSFunctor
 	private static interface WorkerBinaryPacketHandler extends JSObject {
 		public void onMessage(String channel, ArrayBuffer buf);
 	}
 
-	@JSBody(params = { "w", "wb" }, script = "w.addEventListener(\"message\", function(o) { wb(o.data.ch, o.data.dat); });")
+	@JSBody(params = { "w", "wb" }, script = "w.addEventListener(\"message\", function(o) { if(o.data && o.data.ch !== undefined) { wb(o.data.ch, o.data.dat || null); } });")
 	private static native void registerPacketHandler(Worker w, WorkerBinaryPacketHandler wb);
 
 	@JSBody(params = { "w", "ch", "dat" }, script = "w.postMessage({ ch: ch, dat : dat });")
@@ -94,12 +96,28 @@ public class ClientPlatformSingleplayer {
 		
 		public void onMessage(String channel, ArrayBuffer buf) {
 			if(channel == null) {
-				logger.error("Recieved IPC packet with null channel");
+				return;
+			}
+			
+			// Check for worker ready signal
+			if("__WORKER_READY__".equals(channel)) {
+				logger.info("Worker ready signal received");
+				workerReady = true;
+				
+				// Send all pending packets
+				synchronized(pendingPackets) {
+					if(!pendingPackets.isEmpty()) {
+						logger.info("Flushing {} pending packets to worker", pendingPackets.size());
+						while(!pendingPackets.isEmpty()) {
+							IPCPacketData packet = pendingPackets.removeFirst();
+							sendWorkerPacket(workerObj, packet.channel, TeaVMUtils.unwrapArrayBuffer(packet.contents));
+						}
+					}
+				}
 				return;
 			}
 			
 			if(buf == null) {
-				logger.error("Recieved IPC packet with null buffer");
 				return;
 			}
 			
@@ -123,7 +141,9 @@ public class ClientPlatformSingleplayer {
 	private static final String workerBootstrapCode = "\n\nmain([\"_worker_process_\"]);";
 
 	private static JSObject loadIntegratedServerSource() {
+		logger.info("Loading integrated server source...");
 		String str = loadIntegratedServerSourceOverrideURL();
+		logger.info("Override URL: {}", str);
 		if(str != null) {
 			ArrayBuffer buf = PlatformRuntime.downloadRemoteURI(str, true);
 			if(buf != null) {
@@ -135,6 +155,7 @@ public class ClientPlatformSingleplayer {
 			}
 		}
 		JSObject el = loadIntegratedServerSourceOverride();
+		logger.info("Override element: {}", el != null ? "FOUND" : "NULL");
 		if(el != null) {
 			String url = loadIntegratedServerSourceURL(el);
 			if(url == null) {
@@ -255,27 +276,65 @@ public class ClientPlatformSingleplayer {
 			}
 		}else {
 			if(!serverSourceLoaded) {
+				logger.info("Attempting to create worker URL...");
 				integratedServerSource = createIntegratedServerWorkerURL();
 				serverSourceLoaded = true;
+				logger.info("Worker URL created: {}", integratedServerSource != null ? "SUCCESS" : "FAILED");
 			}
-			
+
 			if(integratedServerSource == null) {
-				logger.error("Could not resolve the location of client's classes.js! Make sure client's classes.js is linked/embedded in a dedicated <script> tag. Define \"window.eaglercraftXClientScriptElement\" or \"window.eaglercraftXClientScriptURL\" to force");
-				logger.error("Falling back to single thread mode...");
-				startIntegratedServer(true);
-				return;
+				logger.error("Could not resolve the location of client's classes.js! Trying alternative approach...");
+				// Try to force worker creation by using inline script approach
+				try {
+					HTMLScriptElement sc = TeaVMUtils.tryResolveClassesSourceInline();
+					if(sc != null) {
+						String scriptContent = sc.getText();
+						if(scriptContent != null && !scriptContent.isEmpty()) {
+							JSObject blobObj = createBlobObj(TeaVMUtils.unwrapArrayBuffer(scriptContent.getBytes()), workerBootstrapCode);
+							integratedServerSource = TeaVMBlobURLManager.registerNewURLBlob(blobObj).toExternalForm();
+							logger.info("Using inline script as worker source");
+						}
+					}
+				} catch(Exception e) {
+					logger.error("Failed to create worker from inline script: {}", e.getMessage());
+				}
+				
+				if(integratedServerSource == null) {
+					logger.error("All worker creation methods failed. Falling back to single thread mode...");
+					startIntegratedServer(true);
+					return;
+				}
 			}
-			
+
+			logger.info("Creating worker with URL: {}", integratedServerSource);
+
 			workerObj = Worker.create(integratedServerSource);
+			
+			// Add comprehensive error handling for worker
 			workerObj.addEventListener("error", new EventListener<ErrorEvent>() {
 				@Override
 				public void handleEvent(ErrorEvent evt) {
 					logger.error("Worker Error: {}", evt.getError());
+					logger.error("Worker failed to initialize, falling back to single thread mode");
 					PlatformRuntime.printNativeExceptionToConsoleTeaVM(evt);
+					// Fallback to single thread mode if worker fails
+					killWorker();
+					startIntegratedServer(true);
 				}
 			});
+			
+			// Register packet handler for normal communication
 			registerPacketHandler(workerObj, new WorkerBinaryPacketHandlerImpl());
-//			sendWorkerStartPacket(workerObj, PlatformRuntime.getClientConfigAdapter().getIntegratedServerOpts().toString());
+			
+			// CRITICAL: Assume worker is ready immediately for TeaVM
+			// Worker ready signal may not arrive reliably
+			logger.info("Worker created, marking as ready immediately");
+			workerReady = true;
+			
+			// Send proper worker configuration - this triggers worker initialization
+			String workerConfig = PlatformRuntime.getClientConfigAdapter().getIntegratedServerOpts().toString();
+			logger.info("Sending worker startup configuration: {}", workerConfig);
+			sendWorkerStartPacket(workerObj, workerConfig);
 		}
 	}
 
@@ -291,8 +350,14 @@ public class ClientPlatformSingleplayer {
 		if(isSingleThreadMode) {
 			SingleThreadWorker.sendPacketToWorker(new IPCPacketData(channel, TeaVMUtils.wrapByteArrayBuffer(packet)));
 		}else {
-			if(workerObj != null) {
-				sendWorkerPacket(workerObj, channel, packet);
+			if(workerObj != null && channel != null && packet != null) {
+				if(!workerReady) {
+					synchronized(pendingPackets) {
+						pendingPackets.add(new IPCPacketData(channel, TeaVMUtils.wrapByteArrayBuffer(packet)));
+					}
+				} else {
+					sendWorkerPacket(workerObj, channel, packet);
+				}
 			}
 		}
 	}
@@ -317,6 +382,10 @@ public class ClientPlatformSingleplayer {
 		if(workerObj != null) {
 			workerObj.terminate();
 			workerObj = null;
+		}
+		workerReady = false;
+		synchronized(pendingPackets) {
+			pendingPackets.clear();
 		}
 	}
 

@@ -246,6 +246,26 @@ public class GlStateManager extends RealOpenGLEnums {
 		stateAlphaTest = true;
 	}
 
+
+	private static boolean scissorState = false;
+
+	public static void enableScissor() {
+	  if(!scissorState) {
+	    _wglEnable(RealOpenGLEnums.GL_SCISSOR_TEST);
+	    scissorState = true;
+	  }
+	}
+
+	public static void disableScissor() {
+	  if(scissorState) {
+	    _wglDisable(RealOpenGLEnums.GL_SCISSOR_TEST);
+	    scissorState = false;
+	  }
+	}
+
+	public static void glScissor(int x, int y, int width, int height) {
+	  _wglScissor(x, y, width, height);
+	}
 	public static void alphaFunc(int func, float ref) {
 		if (func != GL_GREATER) {
 			throw new UnsupportedOperationException("Only GL_GREATER alphaFunc is supported");

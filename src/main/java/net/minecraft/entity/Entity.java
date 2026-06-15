@@ -1,9 +1,11 @@
 package net.minecraft.entity;
 
 import java.util.List;
-import net.lax1dude.eaglercraft.Random;
-import net.lax1dude.eaglercraft.EaglercraftUUID;
 import java.util.concurrent.Callable;
+
+import net.lax1dude.eaglercraft.EaglercraftUUID;
+import net.lax1dude.eaglercraft.HString;
+import net.lax1dude.eaglercraft.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -2038,7 +2040,7 @@ public abstract class Entity {
 	}
 
 	public String toString() {
-		return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]",
+		return HString.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]",
 				new Object[] { this.getClass().getSimpleName(), this.getCommandSenderName(),
 						Integer.valueOf(this.field_145783_c),
 						this.worldObj == null ? "~NULL~" : this.worldObj.getWorldInfo().getWorldName(),
@@ -2163,12 +2165,12 @@ public abstract class Entity {
 				return Entity.this.getCommandSenderName();
 			}
 		});
-		p_85029_1_.addCrashSection("Entity\'s Exact location", String.format("%.2f, %.2f, %.2f",
+		p_85029_1_.addCrashSection("Entity\'s Exact location", HString.format("%.2f, %.2f, %.2f",
 				new Object[] { Double.valueOf(this.posX), Double.valueOf(this.posY), Double.valueOf(this.posZ) }));
 		p_85029_1_.addCrashSection("Entity\'s Block location",
 				CrashReportCategory.getLocationInfo(MathHelper.floor_double(this.posX),
 						MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)));
-		p_85029_1_.addCrashSection("Entity\'s Momentum", String.format("%.2f, %.2f, %.2f", new Object[] {
+		p_85029_1_.addCrashSection("Entity\'s Momentum", HString.format("%.2f, %.2f, %.2f", new Object[] {
 				Double.valueOf(this.motionX), Double.valueOf(this.motionY), Double.valueOf(this.motionZ) }));
 	}
 

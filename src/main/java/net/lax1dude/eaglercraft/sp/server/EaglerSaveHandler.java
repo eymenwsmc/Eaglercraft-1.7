@@ -17,21 +17,51 @@
 package net.lax1dude.eaglercraft.sp.server;
 
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.storage.IChunkLoader;
 import net.minecraft.world.storage.SaveHandler;
 import net.minecraft.world.storage.WorldInfo;
-import net.minecraft.nbt.NBTTagCompound;
-
-import java.io.File;
 
 public class EaglerSaveHandler extends SaveHandler {
 
 	public EaglerSaveHandler(VFile2 savesDirectory, String directoryName) {
-		super(savesDirectory, directoryName, false);
+		super(savesDirectory, directoryName);
 	}
 
+	public IChunkLoader getChunkLoader(WorldProvider p_75763_1_) {
+		// Use EaglerChunkLoader for all worlds
+		net.lax1dude.eaglercraft.internal.vfs2.VFile2 worldDirectory = this.getWorldDirectory();
+		
+		if (p_75763_1_ instanceof net.minecraft.world.WorldProviderHell) {
+			return new EaglerChunkLoader(
+				new net.lax1dude.eaglercraft.internal.vfs2.VFile2(worldDirectory, "DIM-1"));
+		} else if (p_75763_1_ instanceof net.minecraft.world.WorldProviderEnd) {
+			return new EaglerChunkLoader(
+				new net.lax1dude.eaglercraft.internal.vfs2.VFile2(worldDirectory, "DIM1"));
+		} else {
+			return new EaglerChunkLoader(worldDirectory);
+		}
+	}
 	public void saveWorldInfoWithPlayer(WorldInfo worldInformation, NBTTagCompound tagCompound) {
+		System.err.println("[EaglerSaveHandler] saveWorldInfoWithPlayer called for: " + worldInformation.getWorldName());
+		System.err.println("  worldDirectory: " + this.getWorldDirectory().getPath());
 		worldInformation.setSaveVersion(19133);
+		try {
+			super.saveWorldInfoWithPlayer(worldInformation, tagCompound);
+			System.err.println("  level.dat saved successfully!");
+		} catch (Exception e) {
+			System.err.println("  ERROR saving level.dat:");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Called to flush all changes to disk, waiting for them to complete.
+	 */
+	public void flush() {
+		System.err.println("[EaglerSaveHandler] flush() called");
+		// Region files now use RandomAccessMemoryFile which auto-flushes
+		// No need for manual cache clearing
 	}
 }

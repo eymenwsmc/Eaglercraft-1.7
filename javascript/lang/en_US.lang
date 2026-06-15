@@ -1817,3 +1817,37 @@ singleplayer.ramdiskdetected.text0=Running in "RAMDisk mode", worlds cannot be s
 singleplayer.ramdiskdetected.text1=Single thread mode may solve this issue
 singleplayer.ramdiskdetected.continue=Continue
 singleplayer.ramdiskdetected.singleThreadCont=Single Thread Mode
+
+
+settingsBackup.importExport.title=What do you wanna do?
+settingsBackup.importExport.import=Import Profile and Settings...
+settingsBackup.importExport.export=Export Profile and Settings...
+
+settingsBackup.import.title=Import Profile and Settings
+settingsBackup.import.option.profile=Import Profile:
+settingsBackup.import.option.settings=Import Settings:
+settingsBackup.import.option.servers=Import Servers:
+settingsBackup.import.option.resourcePacks=Resource Packs:
+settingsBackup.import.option.import=Import
+
+settingsBackup.export.title=Export Profile and Settings
+settingsBackup.export.option.profile=Export Profile:
+settingsBackup.export.option.settings=Export Settings:
+settingsBackup.export.option.servers=Export Servers:
+settingsBackup.export.option.resourcePacks=Resource Packs:
+settingsBackup.export.option.export=Export
+
+settingsBackup.exporting.1=Exporting Profile...
+settingsBackup.exporting.2=Please Wait.
+
+settingsBackup.exporting.failed.1=Export Failed!
+settingsBackup.exporting.failed.2=Could not compile EPK
+
+settingsBackup.importing.1=Importing Profile...
+settingsBackup.importing.2=Please Wait.
+
+settingsBackup.importing.failed.1=Import Failed!
+settingsBackup.importing.failed.2=Could not load EPK
+
+singleplayer.integratedStartup=Starting integrated server
+

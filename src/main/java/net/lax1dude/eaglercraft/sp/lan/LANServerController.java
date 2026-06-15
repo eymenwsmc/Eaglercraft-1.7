@@ -191,6 +191,17 @@ public class LANServerController {
 						logger.error("Relay [{}] relay sent IPacket06ClientFailure for unknown client '{}'",
 								lanRelaySocket.getURI(), ipkt.clientId);
 					}
+				} else if (pkt instanceof RelayPacketFEDisconnectClient) {
+					RelayPacketFEDisconnectClient ipkt = (RelayPacketFEDisconnectClient) pkt;
+					LANClientPeer c = clients.get(ipkt.clientId);
+					if (c != null) {
+						logger.info("Relay [{}] disconnected client '{}': code={}, reason={}", 
+								lanRelaySocket.getURI(), ipkt.clientId, ipkt.code, ipkt.reason);
+						c.disconnect();
+					} else {
+						logger.warn("Relay [{}] sent RelayPacketFEDisconnectClient for unknown client '{}'", 
+								lanRelaySocket.getURI(), ipkt.clientId);
+					}
 				} else if (pkt instanceof RelayPacketFFErrorCode) {
 					RelayPacketFFErrorCode ipkt = (RelayPacketFFErrorCode) pkt;
 					logger.error("Relay [{}] error code thrown: {}({}): {}", lanRelaySocket.getURI(),

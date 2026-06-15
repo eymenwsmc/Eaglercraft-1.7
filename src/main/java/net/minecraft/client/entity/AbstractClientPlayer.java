@@ -3,6 +3,7 @@ package net.minecraft.client.entity;
 import com.mojang.authlib.GameProfile;
 import java.io.File;
 import net.lax1dude.eaglercraft.profile.EaglerProfile;
+import net.lax1dude.eaglercraft.profile.SkinModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.client.renderer.texture.ITextureObject;
@@ -58,6 +59,14 @@ public abstract class AbstractClientPlayer extends EntityPlayer implements SkinM
 			return rl;
 		}
 		return this.locationCape;
+	}
+
+	public SkinModel getEaglerSkinModel() {
+		Minecraft mc = Minecraft.getMinecraft();
+		if (mc != null && mc.thePlayer == this) {
+			return EaglerProfile.getActiveSkinModel();
+		}
+		return SkinModel.STEVE;
 	}
 
 	

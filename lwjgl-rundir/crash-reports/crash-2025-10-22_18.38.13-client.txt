@@ -1,0 +1,77 @@
+---- Minecraft Crash Report ----
+// Jusr 
+
+Time: 22.10.2025 18:38
+Description: Unexpected error
+
+java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
+	at net.minecraft.block.BlockDoublePlant.func_149888_a(BlockDoublePlant.java:117)
+	at net.minecraft.client.renderer.RenderBlocks.renderBlockDoublePlant(RenderBlocks.java:3930)
+	at net.minecraft.client.renderer.RenderBlocks.renderBlockByRenderType(RenderBlocks.java:272)
+	at net.minecraft.client.renderer.WorldRenderer.updateRenderer(WorldRenderer.java:227)
+	at net.minecraft.client.renderer.RenderGlobal.updateRenderers(RenderGlobal.java:1595)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1121)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:980)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:852)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:768)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at net.minecraft.block.BlockDoublePlant.func_149888_a(BlockDoublePlant.java:117)
+	at net.minecraft.client.renderer.RenderBlocks.renderBlockDoublePlant(RenderBlocks.java:3930)
+	at net.minecraft.client.renderer.RenderBlocks.renderBlockByRenderType(RenderBlocks.java:272)
+	at net.minecraft.client.renderer.WorldRenderer.updateRenderer(WorldRenderer.java:227)
+	at net.minecraft.client.renderer.RenderGlobal.updateRenderers(RenderGlobal.java:1595)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1121)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['eymenwsmcw131'/1238, l='MpServer', x=-168,50, y=70,62, z=236,50]]
+	Chunk stats: MultiplayerChunkCache: 49, 49
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-164,64,244), Chunk: (at 12,4,4 in -11,15; contains blocks -176,0,240 to -161,255,255), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 23 game time, 23 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 35 total; [EntitySheep['Sheep'/1089, l='MpServer', x=-185,50, y=81,00, z=176,50], EntitySheep['Sheep'/1092, l='MpServer', x=-175,38, y=77,00, z=186,63], EntitySheep['Sheep'/1093, l='MpServer', x=-175,38, y=78,00, z=184,38], EntitySheep['Sheep'/1094, l='MpServer', x=-176,84, y=77,00, z=185,50], EntitySheep['Sheep'/1095, l='MpServer', x=-173,50, y=72,00, z=186,50], EntitySheep['Sheep'/1096, l='MpServer', x=-167,50, y=71,00, z=210,50], EntitySheep['Sheep'/1097, l='MpServer', x=-166,50, y=70,00, z=212,50], EntityBat['Bat'/1289, l='MpServer', x=-148,36, y=22,69, z=286,60], EntitySheep['Sheep'/1098, l='MpServer', x=-167,50, y=71,00, z=210,50], EntitySheep['Sheep'/1099, l='MpServer', x=-167,50, y=71,00, z=210,50], EntityPig['Pig'/1100, l='MpServer', x=-159,50, y=74,00, z=283,50], EntityPig['Pig'/1101, l='MpServer', x=-161,50, y=74,00, z=282,50], EntityPig['Pig'/1102, l='MpServer', x=-165,50, y=74,00, z=286,50], EntitySpider['Spider'/1490, l='MpServer', x=-209,50, y=40,00, z=252,50], EntitySkeleton['Skeleton'/1491, l='MpServer', x=-212,50, y=40,00, z=248,50], EntitySkeleton['Skeleton'/1492, l='MpServer', x=-212,50, y=40,00, z=251,50], EntitySkeleton['Skeleton'/1493, l='MpServer', x=-209,50, y=40,00, z=247,50], EntityClientPlayerMP['eymenwsmcw131'/1238, l='MpServer', x=-168,50, y=70,62, z=236,50], EntityCreeper['Creeper'/1370, l='MpServer', x=-112,50, y=49,00, z=228,50], EntityCreeper['Creeper'/1371, l='MpServer', x=-112,50, y=49,00, z=227,50], EntitySkeleton['Skeleton'/1760, l='MpServer', x=-212,64, y=37,00, z=230,50], EntitySkeleton['Skeleton'/1761, l='MpServer', x=-210,50, y=37,00, z=227,50], EntitySpider['Spider'/1762, l='MpServer', x=-211,31, y=37,00, z=230,50], EntitySkeleton['Skeleton'/1763, l='MpServer', x=-211,50, y=37,00, z=226,50], EntityBat['Bat'/1444, l='MpServer', x=-119,16, y=44,00, z=243,26], EntityBat['Bat'/1257, l='MpServer', x=-199,69, y=40,50, z=203,60], EntitySpider['Spider'/1579, l='MpServer', x=-138,50, y=37,00, z=195,50], EntityZombie['Zombie'/1581, l='MpServer', x=-135,50, y=36,00, z=197,50], EntitySkeleton['Skeleton'/1709, l='MpServer', x=-118,50, y=31,00, z=236,50], EntitySkeleton['Skeleton'/1710, l='MpServer', x=-123,50, y=31,00, z=234,50], EntityZombie['Zombie'/1461, l='MpServer', x=-126,50, y=42,00, z=231,50], EntitySheep['Sheep'/1083, l='MpServer', x=-205,50, y=68,00, z=236,50], EntitySheep['Sheep'/1084, l='MpServer', x=-205,50, y=68,00, z=236,50], EntitySheep['Sheep'/1085, l='MpServer', x=-206,50, y=67,00, z=234,50], EntitySheep['Sheep'/1086, l='MpServer', x=-206,50, y=67,00, z=234,50]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:368)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2109)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:789)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 307630184 bytes (293 MB) / 566231040 bytes (540 MB) up to 4223664128 bytes (4028 MB)
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	Launched Version: 1.7.10
+	LWJGL: 2.9.4
+	OpenGL: ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.101.4502) GL version OpenGL ES 3.0.0 (ANGLE 2.1.22784 git hash: c67f290ef0f0), Google Inc. (Intel)
+	Is Modded: vanilla
+	Type: Client (map_client.txt)
+	Resource Packs: [Xray Ultimate 1_8]
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

@@ -1021,41 +1021,40 @@ public class Chunk {
 		boolean flag5 = parIChunkProvider.chunkExists(parInt1 + 1, parInt2 + 1);
 		boolean flag6 = parIChunkProvider.chunkExists(parInt1 - 1, parInt2 + 1);
 		boolean flag7 = parIChunkProvider.chunkExists(parInt1 + 1, parInt2 - 1);
+
 		if (flag1 && flag2 && flag5) {
 			if (!this.isTerrainPopulated) {
+
 				parIChunkProvider.populate(parIChunkProvider2, parInt1, parInt2);
-			} else {
-				parIChunkProvider.func_177460_a(parIChunkProvider2, this, parInt1, parInt2);
 			}
 		}
 
 		if (flag3 && flag2 && flag6) {
 			Chunk chunk = parIChunkProvider.provideChunk(parInt1 - 1, parInt2);
+
 			if (!chunk.isTerrainPopulated) {
+
 				parIChunkProvider.populate(parIChunkProvider2, parInt1 - 1, parInt2);
-			} else {
-				parIChunkProvider.func_177460_a(parIChunkProvider2, chunk, parInt1 - 1, parInt2);
 			}
 		}
 
 		if (flag && flag1 && flag7) {
 			Chunk chunk1 = parIChunkProvider.provideChunk(parInt1, parInt2 - 1);
+
 			if (!chunk1.isTerrainPopulated) {
+
 				parIChunkProvider.populate(parIChunkProvider2, parInt1, parInt2 - 1);
-			} else {
-				parIChunkProvider.func_177460_a(parIChunkProvider2, chunk1, parInt1, parInt2 - 1);
 			}
 		}
 
 		if (flag4 && flag && flag3) {
 			Chunk chunk2 = parIChunkProvider.provideChunk(parInt1 - 1, parInt2 - 1);
+
 			if (!chunk2.isTerrainPopulated) {
+
 				parIChunkProvider.populate(parIChunkProvider2, parInt1 - 1, parInt2 - 1);
-			} else {
-				parIChunkProvider.func_177460_a(parIChunkProvider2, chunk2, parInt1 - 1, parInt2 - 1);
 			}
 		}
-
 	}
 
 	/**
@@ -1136,6 +1135,14 @@ public class Chunk {
 
 	public void setStorageArrays(ExtendedBlockStorage[] p_76602_1_) {
 		this.storageArrays = p_76602_1_;
+	}
+	
+	public long getInhabitedTime() {
+		return this.inhabitedTime;
+	}
+
+	public void setInhabitedTime(long newInhabitedTime) {
+		this.inhabitedTime = newInhabitedTime;
 	}
 
 	/**

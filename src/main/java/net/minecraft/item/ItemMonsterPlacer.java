@@ -76,10 +76,15 @@ public class ItemMonsterPlacer extends Item {
 				var12 = 0.5D;
 			}
 
+			int chunkX = p_77648_4_ >> 4;
+			int chunkZ = p_77648_6_ >> 4;
+			p_77648_3_.getChunkFromChunkCoords(chunkX, chunkZ); // Force load chunk
+			
 			Entity var14 = spawnCreature(p_77648_3_, p_77648_1_.getItemDamage(), (double) p_77648_4_ + 0.5D,
 					(double) p_77648_5_ + var12, (double) p_77648_6_ + 0.5D);
 
 			if (var14 != null) {
+				var14.forceSpawn = true; // Force entity to be visible to all players
 				if (var14 instanceof EntityLivingBase && p_77648_1_.hasDisplayName()) {
 					((EntityLiving) var14).setCustomNameTag(p_77648_1_.getDisplayName());
 				}

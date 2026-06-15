@@ -17,16 +17,16 @@ public class GuiButtonLanguage extends GuiButton {
 		if (this.visible) {
 			p_146112_1_.getTextureManager().bindTexture(GuiButton.field_146122_a);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			boolean var4 = p_146112_2_ >= this.field_146128_h && p_146112_3_ >= this.field_146129_i
-					&& p_146112_2_ < this.field_146128_h + this.field_146120_f
-					&& p_146112_3_ < this.field_146129_i + this.field_146121_g;
+			boolean var4 = p_146112_2_ >= this.buttonX && p_146112_3_ >= this.buttonY
+					&& p_146112_2_ < this.buttonX + this.field_146120_f
+					&& p_146112_3_ < this.buttonY + this.field_146121_g;
 			int var5 = 106;
 
 			if (var4) {
 				var5 += this.field_146121_g;
 			}
 
-			this.drawTexturedModalRect(this.field_146128_h, this.field_146129_i, 0, var5, this.field_146120_f,
+			this.drawTexturedModalRect(this.buttonX, this.buttonY, 0, var5, this.field_146120_f,
 					this.field_146121_g);
 		}
 	}

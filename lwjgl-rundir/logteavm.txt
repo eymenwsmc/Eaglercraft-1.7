@@ -1,0 +1,777 @@
+lientMain: [INFO] eaglercraftx is starting...
+Eaglercraft_1.7.10_Offline_en_US.html:509 ClientMain: [INFO] configuration was successful
+Eaglercraft_1.7.10_Offline_en_US.html:509 ClientMain: [INFO] initializing eaglercraftx runtime
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+071][main/INFO][EagRuntime]: Version: EagRuntimeX 1.0
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+077][main/INFO][BrowserRuntime]: ES6 Shim Status: Not present
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+086][main/INFO][BrowserRuntime]: Creating main game canvas
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+118][main/INFO][BrowserRuntime]: Note: Detected game is embedded in body, some screens may be resized to window.visualViewport instead for a better mobile experience
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+120][main/INFO][BrowserRuntime]: Endianness: this CPU is little endian
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+150][main/INFO][BrowserRuntime]: Loading keyboard layout data
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+159][main/INFO][BrowserRuntime]: KeyboardLayoutMap remapped 5 keys from their default codes
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+241][main/INFO][BrowserRuntime]: Creating WebGL context
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+329][main/INFO][BrowserRuntime]: OpenGL Version: WebGL 2.0 (OpenGL ES 3.0 Chromium)
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+331][main/INFO][BrowserRuntime]: OpenGL Renderer: ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002560) Direct3D11 vs_5_0 ps_5_0, D3D11)
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+334][main/INFO][BrowserRuntime]: Unlocked the following OpenGL ES extensions:
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+334][main/INFO][BrowserRuntime]:  - EXT_color_buffer_float
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+335][main/INFO][BrowserRuntime]:  - EXT_texture_filter_anisotropic
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+336][main/INFO][BrowserRuntime]:  - OES_texture_float_linear
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+336][main/INFO][BrowserRuntime]:  - WEBGL_debug_renderer_info
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:47+961][main/INFO][BrowserRuntime]: Downloading: <data: 8000833 chars>
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:50+714][main/INFO][BrowserRuntime]: Decompressing: <data: 8000833 chars>
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:52+113][main/INFO][BrowserRuntime]: Loaded 1998 resources from EPKs
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:53+575][main/INFO][BrowserRuntime]: Initializing filesystem...
+Eaglercraft_1.7.10_Offline_en_US.html:509 net_eymenwsmc_release_1_7_10_
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:29:53+609][main/INFO][BrowserRuntime]: Initializing sound engine...
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+084][main/INFO][BrowserRuntime]: Platform initialization complete
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+087][main/INFO][EaglercraftGPU]: 16-bit HDR render target support: true
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+088][main/INFO][EaglercraftGPU]: 16-bit HDR linear filter support: true
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+088][main/INFO][EaglercraftGPU]: 32-bit HDR render target support: true
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+088][main/INFO][EaglercraftGPU]: 32-bit HDR linear filter support: true
+Eaglercraft_1.7.10_Offline_en_US.html:509 ClientMain: [INFO] launching eaglercraftx main thread
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+178][main/INFO][Minecraft]: Setting user: YiggYeeish8414
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+179][main/INFO][Minecraft]: (Session ID is token:-:-)
+Eaglercraft_1.7.10_Offline_en_US.html:509 3dc70fc6-38b5-3d09-8c9a-ea9ed5e82ece
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+292][main/INFO][Minecraft]: LWJGL Version: 2.9.4
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+313][main/INFO][Minecraft]: Reloading ResourceManager: Default
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:24+709][main/INFO][Minecraft]: Created: 512x256 textures/blocks-atlas
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+025][main/INFO][Minecraft]: Created: 256x256 textures/items-atlas
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+130][main/WARN][Minecraft]: File minecraft:sounds/music/game/calm1.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+131][main/WARN][Minecraft]: File minecraft:sounds/music/game/calm2.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+131][main/WARN][Minecraft]: File minecraft:sounds/music/game/calm3.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+131][main/WARN][Minecraft]: File minecraft:sounds/music/game/hal1.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+132][main/WARN][Minecraft]: File minecraft:sounds/music/game/hal2.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+132][main/WARN][Minecraft]: File minecraft:sounds/music/game/hal3.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+132][main/WARN][Minecraft]: File minecraft:sounds/music/game/hal4.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+133][main/WARN][Minecraft]: File minecraft:sounds/music/game/nuance1.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+133][main/WARN][Minecraft]: File minecraft:sounds/music/game/nuance2.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+133][main/WARN][Minecraft]: File minecraft:sounds/music/game/piano1.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+133][main/WARN][Minecraft]: File minecraft:sounds/music/game/piano2.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+134][main/WARN][Minecraft]: File minecraft:sounds/music/game/piano3.ogg does not exist, cannot add it to event minecraft:music.game
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+134][main/WARN][Minecraft]: File minecraft:sounds/music/game/creative/creative1.ogg does not exist, cannot add it to event minecraft:music.game.creative
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+134][main/WARN][Minecraft]: File minecraft:sounds/music/game/creative/creative2.ogg does not exist, cannot add it to event minecraft:music.game.creative
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+135][main/WARN][Minecraft]: File minecraft:sounds/music/game/creative/creative3.ogg does not exist, cannot add it to event minecraft:music.game.creative
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+135][main/WARN][Minecraft]: File minecraft:sounds/music/game/creative/creative4.ogg does not exist, cannot add it to event minecraft:music.game.creative
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+135][main/WARN][Minecraft]: File minecraft:sounds/music/game/creative/creative5.ogg does not exist, cannot add it to event minecraft:music.game.creative
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+136][main/WARN][Minecraft]: File minecraft:sounds/music/game/creative/creative6.ogg does not exist, cannot add it to event minecraft:music.game.creative
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+136][main/WARN][Minecraft]: File minecraft:sounds/records/cat.ogg does not exist, cannot add it to event minecraft:records.cat
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+136][main/WARN][Minecraft]: File minecraft:sounds/music/game/end/boss.ogg does not exist, cannot add it to event minecraft:music.game.end.dragon
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+137][main/WARN][Minecraft]: File minecraft:sounds/records/mall.ogg does not exist, cannot add it to event minecraft:records.mall
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+138][main/WARN][Minecraft]: File minecraft:sounds/records/stal.ogg does not exist, cannot add it to event minecraft:records.stal
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+138][main/WARN][Minecraft]: File minecraft:sounds/music/game/end/end.ogg does not exist, cannot add it to event minecraft:music.game.end
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+139][main/WARN][Minecraft]: File minecraft:sounds/records/ward.ogg does not exist, cannot add it to event minecraft:records.ward
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+140][main/WARN][Minecraft]: File minecraft:sounds/records/blocks.ogg does not exist, cannot add it to event minecraft:records.blocks
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+141][main/WARN][Minecraft]: File minecraft:sounds/music/game/end/credits.ogg does not exist, cannot add it to event minecraft:music.game.end.credits
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+142][main/WARN][Minecraft]: File minecraft:sounds/records/chirp.ogg does not exist, cannot add it to event minecraft:records.chirp
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+143][main/WARN][Minecraft]: File minecraft:sounds/records/11.ogg does not exist, cannot add it to event minecraft:records.11
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+143][main/WARN][Minecraft]: File minecraft:sounds/records/13.ogg does not exist, cannot add it to event minecraft:records.13
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+145][main/WARN][Minecraft]: File minecraft:sounds/records/strad.ogg does not exist, cannot add it to event minecraft:records.strad
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+146][main/WARN][Minecraft]: File minecraft:sounds/records/far.ogg does not exist, cannot add it to event minecraft:records.far
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+147][main/WARN][Minecraft]: File minecraft:sounds/music/menu/menu1.ogg does not exist, cannot add it to event minecraft:music.menu
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+147][main/WARN][Minecraft]: File minecraft:sounds/music/menu/menu2.ogg does not exist, cannot add it to event minecraft:music.menu
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+148][main/WARN][Minecraft]: File minecraft:sounds/music/menu/menu3.ogg does not exist, cannot add it to event minecraft:music.menu
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+148][main/WARN][Minecraft]: File minecraft:sounds/music/menu/menu4.ogg does not exist, cannot add it to event minecraft:music.menu
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+148][main/WARN][Minecraft]: File minecraft:sounds/music/game/nether/nether1.ogg does not exist, cannot add it to event minecraft:music.game.nether
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+149][main/WARN][Minecraft]: File minecraft:sounds/music/game/nether/nether2.ogg does not exist, cannot add it to event minecraft:music.game.nether
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+149][main/WARN][Minecraft]: File minecraft:sounds/music/game/nether/nether3.ogg does not exist, cannot add it to event minecraft:music.game.nether
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+149][main/WARN][Minecraft]: File minecraft:sounds/music/game/nether/nether4.ogg does not exist, cannot add it to event minecraft:music.game.nether
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+150][main/WARN][Minecraft]: File minecraft:sounds/records/wait.ogg does not exist, cannot add it to event minecraft:records.wait
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+150][main/WARN][Minecraft]: File minecraft:sounds/records/mellohi.ogg does not exist, cannot add it to event minecraft:records.mellohi
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+151][main/INFO][EaglercraftX]: Download this resource pack if you want music: https://bafybeiayojww5jfyzvlmtuk7l5ufkt7nlfto7mhwmzf2vs4bvsjd5ouiuq.ipfs.nftstorage.link/?filename=Music_For_Eaglercraft.zip
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+498][main/INFO][Minecraft]: Created: 512x256 textures/blocks-atlas
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:25+817][main/INFO][Minecraft]: Created: 256x256 textures/items-atlas
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+458][main/INFO][ClientPlatformSingleplayer]: Attempting to create worker URL...
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+458][main/INFO][ClientPlatformSingleplayer]: Loading integrated server source...
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+459][main/INFO][ClientPlatformSingleplayer]: Override URL: null
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+459][main/INFO][ClientPlatformSingleplayer]: Override element: FOUND
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+580][main/INFO][ClientPlatformSingleplayer]: Loading integrated server from inline script tag
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+581][main/INFO][ClientPlatformSingleplayer]: Worker URL created: SUCCESS
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+582][main/INFO][ClientPlatformSingleplayer]: Creating worker with URL: blob:null/64f99f17-13c3-47e2-9167-0d68d150e844
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+583][main/INFO][ClientPlatformSingleplayer]: Sending worker startup configuration: {"worldsDB":"worlds"}
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:28+585][main/INFO][ClientPlatformSingleplayer]: Queueing packet for worker (not ready yet), channel: ~!IPC
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 WorkerMain: [INFO] eaglercraftx worker thread is starting...
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 WorkerMain: [INFO] reading configuration
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:29+355][main/INFO][ClientPlatformSingleplayer]: Worker initialization completed successfully
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 WorkerMain: [INFO] initializing server runtime
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:29+355][main/INFO][ClientPlatformSingleplayer]: Sending 1 pending packets to worker
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:29+356][main/INFO][ServerPlatformSingleplayer]: ES6 Shim Status: Not present
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 net_eymenwsmc_release_1_7_10_
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 WorkerMain: [INFO] starting worker thread
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:29+376][IntegratedServer/INFO][EaglerIntegratedServer]: Starting EaglercraftX integrated server worker...
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 7 paket alındı
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:29+382][main/INFO][SingleplayerServerController]: Integrated server signaled a successful boot
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:31+361][main/WARN][SoundManager]: Unable to play empty soundEvent(2): meta:missing_sound
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:33+118][main/INFO][SingleplayerServerController]: launchEaglercraftServer: called
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:33+119][main/INFO][SingleplayerServerController]: launchEaglercraftServer: sending IPCPacket00StartServer
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  [StringTranslate] WARNING: Missing language file '/assets/minecraft/lang/en_US.lang'.
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_printSB @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23700
+ji_PrintStream_println1 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23606
+nmu_StringTranslate__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670143
+nmu_StringTranslate__clinit_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670556
+nmu_StringTranslate_$callClinit @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670078
+nmu_StringTranslate_getInstance @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670224
+nmu_StatCollector__clinit_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739822
+nmu_StatCollector_$callClinit @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739644
+nmu_StatCollector_translateToLocal @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739690
+nmi_Item_getUnlocalizedNameInefficiently @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:158883
+nmi_Item_getItemStackDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:159212
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+nmi_ItemStack_getDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:311497
+nmi_ItemStack_func_151000_E @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:313239
+nmi_Bootstrap_func_151354_b @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:124634
+nless_EaglerMinecraftServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:64981
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10413
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:14215
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nlessi_ServerPlatformSingleplayer$immediateContinueTeaVM$lambda$_15_0_run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:101205
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+nlessi_ServerPlatformSingleplayer$1_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:45972
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+fn @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:2755
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  Assets may not be loaded yet; continuing with empty translations.
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_printSB @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23700
+ji_PrintStream_println1 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23606
+nmu_StringTranslate__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670143
+nmu_StringTranslate__clinit_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670556
+nmu_StringTranslate_$callClinit @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670078
+nmu_StringTranslate_getInstance @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670224
+nmu_StatCollector__clinit_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739822
+nmu_StatCollector_$callClinit @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739644
+nmu_StatCollector_translateToLocal @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739690
+nmi_Item_getUnlocalizedNameInefficiently @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:158883
+nmi_Item_getItemStackDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:159212
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+nmi_ItemStack_getDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:311497
+nmi_ItemStack_func_151000_E @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:313239
+nmi_Bootstrap_func_151354_b @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:124634
+nless_EaglerMinecraftServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:64981
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10413
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:14215
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nlessi_ServerPlatformSingleplayer$immediateContinueTeaVM$lambda$_15_0_run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:101205
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+nlessi_ServerPlatformSingleplayer$1_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:45972
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+fn @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:2755
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  [StringTranslate] WARNING: Missing language file '/assets/minecraft/lang/en_US.lang'.
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_printSB @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23700
+ji_PrintStream_println1 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23606
+nmu_StringTranslate__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670143
+nmu_StatCollector__clinit_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739831
+nmu_StatCollector_$callClinit @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739644
+nmu_StatCollector_translateToLocal @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739690
+nmi_Item_getUnlocalizedNameInefficiently @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:158883
+nmi_Item_getItemStackDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:159212
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+nmi_ItemStack_getDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:311497
+nmi_ItemStack_func_151000_E @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:313239
+nmi_Bootstrap_func_151354_b @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:124634
+nless_EaglerMinecraftServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:64981
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10413
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:14215
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nlessi_ServerPlatformSingleplayer$immediateContinueTeaVM$lambda$_15_0_run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:101205
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+nlessi_ServerPlatformSingleplayer$1_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:45972
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+fn @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:2755
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  Assets may not be loaded yet; continuing with empty translations.
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_printSB @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23700
+ji_PrintStream_println1 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23606
+nmu_StringTranslate__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:670143
+nmu_StatCollector__clinit_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739831
+nmu_StatCollector_$callClinit @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739644
+nmu_StatCollector_translateToLocal @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:739690
+nmi_Item_getUnlocalizedNameInefficiently @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:158883
+nmi_Item_getItemStackDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:159212
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+nmi_ItemStack_getDisplayName @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:311497
+nmi_ItemStack_func_151000_E @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:313239
+nmi_Bootstrap_func_151354_b @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:124634
+nless_EaglerMinecraftServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:64981
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10413
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:14215
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nlessi_ServerPlatformSingleplayer$immediateContinueTeaVM$lambda$_15_0_run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:101205
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+nlessi_ServerPlatformSingleplayer$1_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:45972
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:574
+fn @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:2755
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:33+210][IntegratedServer/INFO][EaglerIntegratedServer]: server owner: eymenwsmc
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:33+210][IntegratedServer/INFO][EaglerIntegratedServer]: Starting integrated eaglercraft server version 1.12.2
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  java.lang.RuntimeException: Failed to instantiate class net.minecraft.village.VillageCollection
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:407229
+nmw_WorldServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:416713
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48269
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  Caused by: java.lang.IllegalAccessException
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4698
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:407229
+nmw_WorldServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:416713
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48269
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  java.lang.RuntimeException: Failed to instantiate class net.minecraft.village.VillageCollection
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:407229
+nmw_WorldServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:416713
+nmw_WorldServerMulti__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:612475
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48245
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  Caused by: java.lang.IllegalAccessException
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4698
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:407229
+nmw_WorldServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:416713
+nmw_WorldServerMulti__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:612475
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48245
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  java.lang.RuntimeException: Failed to instantiate class net.minecraft.village.VillageCollection
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:407229
+nmw_WorldServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:416713
+nmw_WorldServerMulti__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:612475
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48245
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  Caused by: java.lang.IllegalAccessException
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4698
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:407229
+nmw_WorldServer__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:416713
+nmw_WorldServerMulti__init_ @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:612475
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48245
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:33+291][IntegratedServer/INFO][Minecraft]: Preparing start region for level 0
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  java.lang.RuntimeException: Failed to instantiate class net.minecraft.world.gen.structure.MapGenStructureData
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World_loadItemData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:415718
+nmwgs_MapGenStructure_func_143027_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:757205
+nmwgs_MapGenStructure_func_151538_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756704
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:960092
+nmwg_MapGenBase_func_151539_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756662
+nmwg_ChunkProviderGenerate_provideChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:745689
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:579
+nmwg_ChunkProviderServer_loadChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:678676
+nms_MinecraftServer_initialWorldChunkLoad @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48467
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48217
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  Caused by: java.lang.IllegalAccessException
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4698
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World_loadItemData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:415718
+nmwgs_MapGenStructure_func_143027_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:757205
+nmwgs_MapGenStructure_func_151538_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756704
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:960092
+nmwg_MapGenBase_func_151539_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756662
+nmwg_ChunkProviderGenerate_provideChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:745689
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:579
+nmwg_ChunkProviderServer_loadChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:678676
+nms_MinecraftServer_initialWorldChunkLoad @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48467
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48217
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  java.lang.RuntimeException: Failed to instantiate class net.minecraft.world.gen.structure.MapGenStructureData
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World_loadItemData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:415718
+nmwgs_MapGenStructure_func_143027_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:757205
+nmwgs_MapGenStructure_func_151538_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756704
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:960092
+nmwg_MapGenBase_func_151539_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756662
+nmwg_ChunkProviderGenerate_provideChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:745705
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:579
+nmwg_ChunkProviderServer_loadChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:678676
+nms_MinecraftServer_initialWorldChunkLoad @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48467
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48217
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488  Caused by: java.lang.IllegalAccessException
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:488
+putCodePoint @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:449
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:462
+otcic_StderrOutputStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23777
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:584
+ji_PrintStream_write @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23493
+ji_PrintStream_print0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23541
+ji_PrintStream_println @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:23658
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4641
+jl_Throwable_printStackTrace0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4698
+jl_Throwable_printStackTrace @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:4599
+nmws_MapStorage_loadData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:662947
+nmw_World_loadItemData @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:415718
+nmwgs_MapGenStructure_func_143027_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:757205
+nmwgs_MapGenStructure_func_151538_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756704
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:960092
+nmwg_MapGenBase_func_151539_a @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:756662
+nmwg_ChunkProviderGenerate_provideChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:745705
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:579
+nmwg_ChunkProviderServer_loadChunk @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:678676
+nms_MinecraftServer_initialWorldChunkLoad @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48467
+nms_MinecraftServer_loadAllWorlds @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:48217
+nless_EaglerMinecraftServer_startServer @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:65396
+nless_EaglerIntegratedServerWorker_handleIPCPacket @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:10825
+nless_EaglerIntegratedServerWorker_mainLoop @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:12555
+nless_EaglerIntegratedServerWorker_serverMain @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:13158
+nleit_MainClass_main @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:1829
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:610
+TeaVMThread.run @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962353
+TeaVMThread.resume @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:962347
+callback.$complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:89247
+otpp_AsyncCallbackWrapper_complete @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:50861
+nleit_IndexedDBFilesystem$AsyncHandlers$11_handleEvent$exported$0 @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:763144
+(anonymous) @ blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:569
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:34+293][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 6%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:35+294][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 12%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:36+310][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 19%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:37+322][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 26%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:38+366][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 33%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:39+373][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 41%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:40+386][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 49%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:41+391][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 58%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:42+406][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 67%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:43+409][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 75%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:44+412][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 84%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:45+420][IntegratedServer/INFO][Minecraft]: Preparing spawn area: 92%
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 1 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+316][IntegratedServer/WARN][EaglerIntegratedServer]: Can't keep up! Did the system time change, or is the server overloaded? Running 13161ms behind, skipping 263 tick(s)
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 2 paket alındı
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CLIENT] networkManager ilk kez atanıyor!
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CLIENT] NetHandlerSingleplayerLogin oluşturuldu!
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CLIENT] openLocalPlayerChannel çağrıldı!
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+509][main/INFO][NetworkManager]: Client->Server: C00PacketLoginStart bytes=16 state=LOGIN
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [SERVER] processLoginStart çağrıldı: YiggYeeish8414
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [SERVER] tryAcceptPlayer çağrıldı: YiggYeeish8414
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [SERVER] S02PacketLoginSuccess gönderildi!
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [SERVER] initializeConnectionToPlayer çağrıldı: YiggYeeish8414
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 initializeConnectionToPlayer: YiggYeeish8414
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [SERVER] initializeConnectionToPlayer çağrıldı: YiggYeeish8414
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+529][IntegratedServer/INFO][Minecraft]: YiggYeeish8414[local] logged in with entity id 0 at (-8.5, 68.0, 229.5)
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+532][IntegratedServer/INFO][Minecraft]: multiplayer.player.joined
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+535][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-4, 11) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+535][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-4, 11) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+536][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-4, 12) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+536][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-4, 12) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+537][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-4, 13) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+537][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-4, 13) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+537][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-4, 14) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+537][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-4, 14) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+537][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-4, 15) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+537][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-4, 15) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+538][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-4, 16) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+538][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-4, 16) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+538][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-4, 17) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+538][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-4, 17) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+538][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-3, 11) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+539][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-3, 11) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+539][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-3, 12) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+539][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-3, 12) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+539][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-3, 13) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+539][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-3, 13) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+539][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-3, 14) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+540][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-3, 14) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+540][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-3, 15) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+540][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-3, 15) in biome Ocean
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] runTick: 8 paket alındı
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+540][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-3, 16) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+540][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-3, 16) in biome Ocean
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] Paket istemciye iletiliyor! 53 byte
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] Paket istemciye iletiliyor! 10 byte
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+540][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-3, 17) - populated: true, empty: true
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] Paket istemciye iletiliyor! 17 byte
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] Paket istemciye iletiliyor! 19 byte
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] Paket istemciye iletiliyor! 13 byte
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+541][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-3, 17) in biome Beach
+Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] Paket istemciye iletiliyor! 10 byte
+2Eaglercraft_1.7.10_Offline_en_US.html:509 [CORE] Paket istemciye iletiliyor! 2 byte
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+541][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-2, 11) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+541][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (-2, 11) in biome Plains
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+542][main/INFO][NetworkManager]: Client<-Server: S39PacketPlayerAbilities bytes=10 state=PLAY player=NULL world=NULL
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+542][main/INFO][NetworkManager]: Deferring packet S39PacketPlayerAbilities - player not ready in PLAY state
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+543][main/INFO][NetworkManager]: Client<-Server: S01PacketJoinGame bytes=17 state=PLAY player=NULL world=NULL
+Eaglercraft_1.7.10_Offline_en_US.html:509 HaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHaiHai
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+546][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-2, 12) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+546][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-2, 12) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+547][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-2, 13) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+547][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-2, 13) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+547][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-2, 14) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+547][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-2, 14) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+548][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-2, 15) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+548][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-2, 15) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+548][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-2, 16) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+548][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-2, 16) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+548][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-2, 17) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+548][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-2, 17) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+549][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-1, 11) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+549][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (-1, 11) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+554][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-1, 12) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+554][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (-1, 12) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+558][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-1, 13) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+558][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (-1, 13) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+567][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-1, 14) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+567][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-1, 14) in biome River
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+567][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-1, 15) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+568][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-1, 15) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+568][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-1, 16) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+568][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-1, 16) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+568][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (-1, 17) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+568][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (-1, 17) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+569][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (0, 11) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+569][IntegratedServer/INFO][Minecraft]: Manually generating 2 trees for chunk (0, 11) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+569][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (0, 12) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+569][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (0, 12) in biome Plains
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+571][main/INFO][NetworkManager]: Client->Server: C15PacketClientSettings bytes=12 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+571][main/INFO][NetworkManager]: Client->Server: C17PacketCustomPayload bytes=19 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+572][main/INFO][NetworkManager]: Client->Server: C17PacketCustomPayload bytes=19 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 You fucking bitch you better work or im raping you
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+573][main/INFO][NetworkManager]: Client<-Server: S39PacketPlayerAbilities bytes=10 state=PLAY player=EXISTS world=EXISTS
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+574][main/INFO][NetworkManager]: Client<-Server: S39PacketPlayerAbilities bytes=10 state=PLAY player=EXISTS world=EXISTS
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+576][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (0, 13) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+577][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (0, 13) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+580][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (0, 14) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+581][IntegratedServer/INFO][Minecraft]: Manually generating 2 trees for chunk (0, 14) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+581][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (0, 15) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+581][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (0, 15) in biome River
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+581][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (0, 16) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+582][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (0, 16) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+582][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (0, 17) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+582][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (0, 17) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+582][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (1, 11) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+583][IntegratedServer/INFO][Minecraft]: Manually generating 2 trees for chunk (1, 11) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+588][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (1, 13) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+588][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (1, 13) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+589][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (1, 14) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+589][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (1, 14) in biome River
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+589][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (1, 15) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+589][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (1, 15) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+590][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (1, 16) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+590][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (1, 16) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+590][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (1, 17) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+590][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (1, 17) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+590][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (2, 11) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+590][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (2, 11) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+593][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (2, 12) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+593][IntegratedServer/INFO][Minecraft]: Manually generating 1 trees for chunk (2, 12) in biome Plains
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+597][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (2, 13) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+597][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (2, 13) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+597][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (2, 14) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+598][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (2, 14) in biome Flower Forest
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+598][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (2, 15) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+598][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (2, 15) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+598][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (2, 16) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+598][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (2, 16) in biome Ocean
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+599][IntegratedServer/INFO][Minecraft]: SAFE chunk population for (2, 17) - populated: true, empty: true
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+599][IntegratedServer/INFO][Minecraft]: Manually generating 0 trees for chunk (2, 17) in biome Beach
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+666][IntegratedServer/DEBUG][NetworkManager]: Server->Client: S26PacketMapChunkBulk bytes=28793 state=PLAY
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+705][IntegratedServer/DEBUG][NetworkManager]: Server->Client: S26PacketMapChunkBulk bytes=27245 state=PLAY
+blob:null/64f99f17-13c3-47e2-9167-0d68d150e844:484 [09:30:46+707][IntegratedServer/DEBUG][NetworkManager]: Server->Client: S26PacketMapChunkBulk bytes=1143 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+719][main/INFO][NetworkManager]: Client->Server: C06PacketPlayerPosLook bytes=42 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+724][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+729][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+744][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+796][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+841][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+893][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+941][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:46+996][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+044][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+093][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+141][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+196][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+244][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+293][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+341][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+396][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+444][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+493][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+547][main/INFO][NetworkManager]: Client->Server: C00PacketKeepAlive bytes=5 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+548][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+596][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+644][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+693][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+747][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+796][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+844][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+893][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+947][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:47+996][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+044][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+099][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+147][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+196][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+244][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+299][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+348][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+396][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+444][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+499][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+547][main/INFO][NetworkManager]: Client->Server: C00PacketKeepAlive bytes=5 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+548][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+596][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+644][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+699][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+747][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+796][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+844][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+899][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+947][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:48+996][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+044][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+099][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+147][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+196][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+244][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+299][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+347][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+396][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+444][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+499][main/INFO][NetworkManager]: Client->Server: C04PacketPlayerPosition bytes=34 state=PLAY
+Eaglercraft_1.7.10_Offline_en_US.html:509 [09:30:49+547][main/INFO][NetworkManager]: Client->Server: C00PacketKeepAlive bytes=5 state=PLAY

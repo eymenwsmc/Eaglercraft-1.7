@@ -1817,3 +1817,104 @@ singleplayer.ramdiskdetected.text0=Running in "RAMDisk mode", worlds cannot be s
 singleplayer.ramdiskdetected.text1=Single thread mode may solve this issue
 singleplayer.ramdiskdetected.continue=Continue
 singleplayer.ramdiskdetected.singleThreadCont=Single Thread Mode
+
+
+settingsBackup.importExport.title=What do you wanna do?
+settingsBackup.importExport.import=Import Profile and Settings...
+settingsBackup.importExport.export=Export Profile and Settings...
+
+settingsBackup.import.title=Import Profile and Settings
+settingsBackup.import.option.profile=Import Profile:
+settingsBackup.import.option.settings=Import Settings:
+settingsBackup.import.option.servers=Import Servers:
+settingsBackup.import.option.resourcePacks=Resource Packs:
+settingsBackup.import.option.import=Import
+
+settingsBackup.export.title=Export Profile and Settings
+settingsBackup.export.option.profile=Export Profile:
+settingsBackup.export.option.settings=Export Settings:
+settingsBackup.export.option.servers=Export Servers:
+settingsBackup.export.option.resourcePacks=Resource Packs:
+settingsBackup.export.option.export=Export
+
+settingsBackup.exporting.1=Exporting Profile...
+settingsBackup.exporting.2=Please Wait.
+
+settingsBackup.exporting.failed.1=Export Failed!
+settingsBackup.exporting.failed.2=Could not compile EPK
+
+settingsBackup.importing.1=Importing Profile...
+settingsBackup.importing.2=Please Wait.
+
+settingsBackup.importing.failed.1=Import Failed!
+settingsBackup.importing.failed.2=Could not load EPK
+
+lanInfo.title=Shared World Info
+lanInfo.desc.0=Eaglercraft shared worlds are NOT limited to your local network like vanilla LAN worlds. This means that anyone with an internet connection and connection to the invite relay can join your world provided they have the code.
+lanInfo.desc.1=Join a shared world from the %s screen, or create one with the %s button while in a world.
+
+lanServer.legacyClient=Please use EaglercraftX 1.8!
+
+lanServer.pauseMenu0=Sharing World
+lanServer.pauseMenu1=Relay URL:
+lanServer.pauseMenu2=Join Code:
+
+lanServer.wouldYouLikeToKick=Would you like to kick all players?
+
+lanServer.worldName=World Name:
+lanServer.hidden=Hidden:
+lanServer.hideCode=hide details
+lanServer.showCode=show details
+lanServer.opened=Shared world opened on $relay$, join code is §a$code$
+lanServer.closed=Shared world closed
+lanServer.pleaseWait=Please Wait...
+lanServer.relayDisconnected=Warning: connection to invite relay was lost, you must re-share the world to invite more people
+lanServer.ipGrabNote=Note: Players joining your world can get your IP address
+
+addRelay.title=Add New Relay
+addRelay.name=Relay Comment
+addRelay.address=Relay Address
+addRelay.add=Add Relay
+addRelay.primary=Set Primary
+addRelay.removeText1=Do you want to remove this relay?
+
+directConnect.lanWorld=Join Shared World
+
+directConnect.prompt=What would you like to do?
+directConnect.lanWorld=Join Shared World
+directConnect.lanWorldCode=Enter Join Code:
+directConnect.networkSettingsNote=Click 'Network Settings' to add a relay URL
+directConnect.ipGrabNote=Note: The world's owner can get your IP address
+directConnect.serverJoin=Connect to Server
+directConnect.lanWorldJoin=Join World
+directConnect.lanWorldRelay=Network Settings
+singleplayer.integratedStartup=Starting integrated server
+
+noRelay.title=No Relays are Configured!
+noRelay.titleFail=No Working Relays Available!
+noRelay.noRelay1=Shared Worlds Unavailable: No Relays Configured!
+noRelay.noRelay2=Click '§nNetwork Settings§r' to fix
+noRelay.worldNotFound1=Could not locate '§c$code$§r'!
+noRelay.worldNotFound2=Make sure to add the '§f$code$§r' world's relay URL
+noRelay.worldNotFound3=to the relay list 'Network Settings' to connect
+noRelay.worldFail=Failed to connect to '$code$'!
+
+selectWorld.backup=Backup
+
+selectWorld.duplicate=Duplicate World:
+selectWorld.duplicateButton=Duplicate
+
+selectWorld.ramdiskWarning=WARNING: Running in "RAMDisk mode", worlds will NOT be saved to local storage!
+
+singleplayer.tpscounter.singleThreadMode=Single Thread Mode
+
+networkSettings.title=Shared World Relay Servers
+networkSettings.add=Add Relay
+networkSettings.delete=Delete Relay
+networkSettings.default=Set Primary
+networkSettings.refresh=Refresh
+networkSettings.loadDefaults=Load Defaults
+networkSettings.relayTimeout=Connection Timeout:
+networkSettings.relayTimeoutChange=change
+networkSettings.relayTimeoutTitle=Change Connection Timeout
+networkSettings.downloadRelay=Download JAR

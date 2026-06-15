@@ -23,7 +23,6 @@ import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 
-import net.lax1dude.eaglercraft.PointerInputAbstraction;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,12 +37,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
 
+import net.eymenwsmc.GuiAlert;
 import net.eymenwsmc.Sys;
 import net.lax1dude.eaglercraft.EagRuntime;
-import net.lax1dude.eaglercraft.EaglercraftVersion;
 import net.lax1dude.eaglercraft.IOUtils;
+import net.lax1dude.eaglercraft.PointerInputAbstraction;
 import net.lax1dude.eaglercraft.futures.ListenableFutureTask;
 import net.lax1dude.eaglercraft.internal.EnumPlatformType;
 import net.lax1dude.eaglercraft.internal.PlatformRuntime;
@@ -54,6 +53,7 @@ import net.lax1dude.eaglercraft.opengl.ImageData;
 import net.lax1dude.eaglercraft.profile.EaglerProfile;
 import net.lax1dude.eaglercraft.profile.GuiScreenEditProfile;
 import net.lax1dude.eaglercraft.socket.EaglercraftNetworkManager;
+import net.lax1dude.eaglercraft.sp.IntegratedServerState;
 import net.lax1dude.eaglercraft.sp.SingleplayerServerController;
 import net.lax1dude.eaglercraft.sp.gui.GuiScreenIntegratedServerBusy;
 import net.lax1dude.eaglercraft.sp.gui.GuiScreenSingleplayerConnecting;
@@ -157,7 +157,6 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.WorldProviderHell;
 import net.minecraft.world.WorldSettings;
-import net.minecraft.world.chunk.storage.AnvilSaveConverter;
 import net.minecraft.world.storage.ISaveFormat;
 
 public class Minecraft implements IPlayerUsage {
@@ -246,7 +245,6 @@ public class Minecraft implements IPlayerUsage {
 	public final VFile2 mcDataDir;
 	private final VFile2 fileAssets;
 	private final String launchedVersion;
-	private ISaveFormat saveLoader;
 
 	/**
 	 * This is set to fpsCounter every debug screen update, and is shown on the
@@ -295,7 +293,6 @@ public class Minecraft implements IPlayerUsage {
 	private SoundHandler mcSoundHandler;
 	private MusicTicker mcMusicTicker;
 	private ResourceLocation field_152354_ay;
-	private final MinecraftSessionService field_152355_az;
 	private SkinManager field_152350_aA;
 	private final Queue field_152351_aB = Queues.newArrayDeque();
 	private final Thread field_152352_aC = Thread.currentThread();
@@ -332,7 +329,6 @@ public class Minecraft implements IPlayerUsage {
 		this.field_152356_J = null;
 		this.mcDefaultResourcePack = new DefaultResourcePack();
 		this.addDefaultResourcePack();
-		this.field_152355_az = (new MinecraftSessionService());
 		this.startTimerHackThread();
 		this.session = new Session(EaglerProfile.username, "-", "-", "legacy");
 		logger.info("Setting user: " + session.getUsername());
@@ -398,7 +394,6 @@ public class Minecraft implements IPlayerUsage {
 	private void startGame() throws LWJGLException {
 		this.gameSettings = new GameSettings(this, this.mcDataDir);
 
-		System.out.println(EaglercraftVersion.clientBrandUUID);
 		if (this.gameSettings.overrideHeight > 0 && this.gameSettings.overrideWidth > 0) {
 			this.displayWidth = this.gameSettings.overrideWidth;
 			this.displayHeight = this.gameSettings.overrideHeight;
@@ -437,7 +432,6 @@ public class Minecraft implements IPlayerUsage {
 		this.metadataSerializer_.registerMetadataSectionType(new LanguageMetadataSectionSerializer(),
 				LanguageMetadataSection.class);
 		this.guiAchievement = new GuiAchievement(this);
-		this.saveLoader = new AnvilSaveConverter(new VFile2(this.mcDataDir, "saves"));
 
 		this.mcResourcePackRepository = new ResourcePackRepository(mcDefaultResourcePack, metadataSerializer_,
 				gameSettings);
@@ -447,8 +441,7 @@ public class Minecraft implements IPlayerUsage {
 		this.refreshResources();
 		this.renderEngine = new TextureManager(this.mcResourceManager);
 		this.mcResourceManager.registerReloadListener(this.renderEngine);
-		this.field_152350_aA = new SkinManager(this.renderEngine, new VFile2(this.fileAssets, "skins"),
-				this.field_152355_az);
+		this.field_152350_aA = new SkinManager(this.renderEngine, new VFile2(this.fileAssets, "skins"));
 
 		EaglerProfile.read();
 		this.session.reset();
@@ -552,11 +545,8 @@ public class Minecraft implements IPlayerUsage {
 		this.checkGLError("Post startup");
 		this.ingameGUI = new GuiIngame(this);
 
-		if (this.serverName != null) {
-			this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
-		} else {
-			this.displayGuiScreen(new GuiScreenEditProfile(new GuiMainMenu()));
-		}
+			this.displayGuiScreen(new GuiAlert("NOTICE", "This is EymenWSMC. This project has no longer \n been developing. Because I leaked the 1.12 source for no reason and I left the community", new GuiScreenEditProfile(new GuiMainMenu())));
+		
 
 		this.field_152354_ay = null;
 		this.loadingScreen = new LoadingScreenRenderer(this);
@@ -661,7 +651,7 @@ public class Minecraft implements IPlayerUsage {
 	 * Returns the save loader that is currently being used
 	 */
 	public ISaveFormat getSaveLoader() {
-		return this.saveLoader;
+		return SingleplayerServerController.instance;
 	}
 
 	/**
@@ -860,18 +850,7 @@ public class Minecraft implements IPlayerUsage {
 			this.toggleFullscreen();
 		}
 
-		if (this.gameSettings.showDebugInfo && this.gameSettings.showDebugProfilerChart) {
-			if (!this.mcProfiler.profilingEnabled) {
-				this.mcProfiler.clearProfiling();
-			}
-
-			this.mcProfiler.profilingEnabled = true;
-			this.displayDebugInfo(var6);
-		} else {
-			this.mcProfiler.profilingEnabled = false;
-			this.prevFrameTime = System.nanoTime();
-		}
-
+		
 		this.guiAchievement.func_146254_a();
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
@@ -886,8 +865,7 @@ public class Minecraft implements IPlayerUsage {
 		this.mcProfiler.endSection();
 		this.checkGLError("Post render");
 		++this.fpsCounter;
-		this.isGamePaused = this.isSingleplayer() && this.currentScreen != null && this.currentScreen.doesGuiPauseGame()
-				&& !this.theIntegratedServer.getPublic();
+		this.isGamePaused = this.isSingleplayer() && this.currentScreen != null && this.currentScreen.doesGuiPauseGame();
 
 		while (getSystemTime() >= this.debugUpdateTime + 1000L) {
 			debugFPS = this.fpsCounter;
@@ -1152,7 +1130,7 @@ public class Minecraft implements IPlayerUsage {
 		if (this.currentScreen == null) {
 			this.displayGuiScreen(new GuiIngameMenu());
 
-			if (this.isSingleplayer() && !this.theIntegratedServer.getPublic()) {
+			if (this.isSingleplayer()) {
 				this.mcSoundHandler.resumeSounds();
 			}
 		}
@@ -1341,6 +1319,9 @@ public class Minecraft implements IPlayerUsage {
 	 * Runs the current tick.
 	 */
 	public void runTick() {
+
+		net.lax1dude.eaglercraft.sp.SingleplayerServerController.runTick();
+		
 		this.mcProfiler.startSection("scheduledExecutables");
 		this.mcProfiler.endSection();
 
@@ -1544,7 +1525,6 @@ public class Minecraft implements IPlayerUsage {
 
 						if (Keyboard.getEventKey() == 61) {
 							this.gameSettings.showDebugInfo = !this.gameSettings.showDebugInfo;
-							this.gameSettings.showDebugProfilerChart = GuiScreen.isShiftKeyDown();
 						}
 
 						if (this.gameSettings.keyBindTogglePerspective.isPressed()) {
@@ -1560,7 +1540,7 @@ public class Minecraft implements IPlayerUsage {
 						}
 					}
 
-					if (this.gameSettings.showDebugInfo && this.gameSettings.showDebugProfilerChart) {
+					if (this.gameSettings.showDebugInfo) {
 						if (Keyboard.getEventKey() == 11) {
 							this.updateDebugProfilerName(0);
 						}
@@ -1738,6 +1718,7 @@ public class Minecraft implements IPlayerUsage {
 	 */
 	public void launchIntegratedServer(String folderName, String worldName, WorldSettings worldSettingsIn) {
 		this.loadWorld((WorldClient) null);
+
 		SingleplayerServerController.launchEaglercraftServer(folderName, gameSettings.difficulty.getDifficultyId(),
 				Math.max(gameSettings.renderDistanceChunks, 2), worldSettingsIn);
 		EagRuntime.setMCServerWindowGlobal("singleplayer");
@@ -1748,6 +1729,16 @@ public class Minecraft implements IPlayerUsage {
 					Minecraft.this.displayGuiScreen(GuiScreenIntegratedServerBusy.createException(new GuiMainMenu(),
 							((GuiScreenIntegratedServerBusy) t).failMessage, u));
 				}));
+	}
+	
+	public void shutdownIntegratedServer(GuiScreen cont) {
+		if (SingleplayerServerController.shutdownEaglercraftServer()
+				|| SingleplayerServerController.getStatusState() == IntegratedServerState.WORLD_UNLOADING) {
+			displayGuiScreen(new GuiScreenIntegratedServerBusy(cont, "singleplayer.busy.stoppingIntegratedServer",
+					"singleplayer.failed.stoppingIntegratedServer", SingleplayerServerController::isReady));
+		} else {
+			displayGuiScreen(cont);
+		}
 	}
 
 	/**
@@ -2170,7 +2161,7 @@ public class Minecraft implements IPlayerUsage {
 	 * the integrated one.
 	 */
 	public boolean isSingleplayer() {
-		return this.integratedServerIsRunning && this.theIntegratedServer != null;
+		return SingleplayerServerController.isWorldRunning();
 	}
 
 	/**
@@ -2295,11 +2286,6 @@ public class Minecraft implements IPlayerUsage {
 	public ListenableFuture func_152344_a(Runnable p_152344_1_) {
 		Validate.notNull(p_152344_1_);
 		return this.func_152343_a(Executors.callable(p_152344_1_));
-	}
-
-
-	public MinecraftSessionService func_152347_ac() {
-		return this.field_152355_az;
 	}
 
 	public SkinManager func_152342_ad() {

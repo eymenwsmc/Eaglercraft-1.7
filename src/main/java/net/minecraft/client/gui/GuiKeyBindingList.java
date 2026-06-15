@@ -114,12 +114,12 @@ public class GuiKeyBindingList extends GuiListExtended {
 					p_148279_2_ + 90 - GuiKeyBindingList.this.field_148188_n,
 					p_148279_3_ + p_148279_5_ / 2 - GuiKeyBindingList.this.field_148189_l.fontRenderer.FONT_HEIGHT / 2,
 					16777215);
-			this.field_148281_e.field_146128_h = p_148279_2_ + 190;
-			this.field_148281_e.field_146129_i = p_148279_3_;
+			this.field_148281_e.buttonX = p_148279_2_ + 190;
+			this.field_148281_e.buttonY = p_148279_3_;
 			this.field_148281_e.enabled = this.field_148282_b.getKeyCode() != this.field_148282_b.getKeyCodeDefault();
 			this.field_148281_e.drawButton(GuiKeyBindingList.this.field_148189_l, p_148279_7_, p_148279_8_);
-			this.field_148280_d.field_146128_h = p_148279_2_ + 105;
-			this.field_148280_d.field_146129_i = p_148279_3_;
+			this.field_148280_d.buttonX = p_148279_2_ + 105;
+			this.field_148280_d.buttonY = p_148279_3_;
 			this.field_148280_d.displayString = GameSettings.getKeyDisplayString(this.field_148282_b.getKeyCode());
 			boolean var11 = false;
 

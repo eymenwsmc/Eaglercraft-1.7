@@ -104,7 +104,6 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, net.minecr
 	}
 
 	public void processLoginStart(C00PacketLoginStart p_147316_1_) {
-		System.out.println("[SERVER] processLoginStart çağrıldı: " + p_147316_1_.func_149304_c().getName());
 		Validate.validState(this.currentLoginState == NetHandlerLoginServer.LoginState.HELLO, "Unexpected hello packet",
 				new Object[0]);
 		this.loginGameProfile = p_147316_1_.func_149304_c();
@@ -136,14 +135,11 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, net.minecr
 	}
 
 	private void tryAcceptPlayer() {
-		System.out.println("[SERVER] tryAcceptPlayer çağrıldı: "
-				+ (loginGameProfile != null ? loginGameProfile.getName() : "null"));
 		String s = this.field_147327_f.getConfigurationManager().func_148542_a(this.loginGameProfile);
 		if (s != null) {
 			this.func_147322_a(s);
 		} else {
 			this.currentLoginState = NetHandlerLoginServer.LoginState.ACCEPTED;
-			System.out.println("[SERVER] S02PacketLoginSuccess gönderildi!");
 			this.field_147333_a.sendPacket(new S02PacketLoginSuccess(this.loginGameProfile, this.selectedProtocol));
 			this.field_147333_a.setConnectionState(EnumConnectionState.PLAY);
 			EntityPlayerMP entityplayermp = this.field_147327_f.getConfigurationManager()
@@ -153,8 +149,6 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, net.minecr
 				this.pendingPlayer = this.field_147327_f.getConfigurationManager().func_148545_a(this.loginGameProfile);
 			} else {
 				entityplayermp = this.field_147327_f.getConfigurationManager().func_148545_a(this.loginGameProfile);
-				System.out.println(
-						"[SERVER] initializeConnectionToPlayer çağrıldı: " + entityplayermp.getCommandSenderName());
 				this.field_147327_f.getConfigurationManager().initializeConnectionToPlayer(this.field_147333_a,
 						entityplayermp);
 			}

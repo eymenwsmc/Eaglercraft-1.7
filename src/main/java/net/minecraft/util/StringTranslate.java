@@ -39,6 +39,12 @@ public class StringTranslate {
 
 	public StringTranslate() {
 		InputStream var1 = EagRuntime.getResourceStream("/assets/minecraft/lang/en_US.lang");
+		if (var1 == null) {
+			System.err.println("[StringTranslate] WARNING: Missing language file '/assets/minecraft/lang/en_US.lang'.\n"
+				+ "Assets may not be loaded yet; continuing with empty translations.");
+			this.lastUpdateTimeInMilliseconds = System.currentTimeMillis();
+			return;
+		}
 		Iterator var2 = IOUtils.readLines(var1, StandardCharsets.UTF_8).iterator();
 
 		while (var2.hasNext()) {

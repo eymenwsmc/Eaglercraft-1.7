@@ -1,6 +1,7 @@
 package net.lax1dude.eaglercraft.internal;
 
 import net.lax1dude.eaglercraft.sp.relay.RelayEntry;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -45,4 +46,6 @@ public interface IClientConfigAdapter {
 	boolean isForceWebViewSupport();
 
 	boolean isEnableWebViewCSP();
+
+    JSONObject getIntegratedServerOpts();
 }

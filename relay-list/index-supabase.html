@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eaglercraft Relay List - Find & Share Worlds</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🎮</span>
+                    <h1>Eaglercraft Relay List</h1>
+                </div>
+                <nav class="nav">
+                    <button class="btn btn-primary" id="addServerBtn">
+                        <span>➕</span> Add Your Server
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title">Discover Eaglercraft Shared Worlds</h2>
+            <p class="hero-subtitle">No more reddit please, can I get a promise of no more?</p>
+            
+            <!-- Search & Filter -->
+            <div class="search-bar">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Search servers by name, description, or join code..." class="search-input">
+                </div>
+                <select id="relayFilter" class="filter-select">
+                    <option value="all">All Relays</option>
+                    <option value="wss://relay.deev.is/">relay.deev.is</option>
+                    <option value="wss://relay.lax1dude.net/">relay.lax1dude.net</option>
+                    <option value="wss://relay.shhnowisnottheti.me/">relay.shhnowisnottheti.me</option>
+                </select>
+                <select id="sortFilter" class="filter-select">
+                    <option value="players">Most Players</option>
+                    <option value="newest">Newest First</option>
+                    <option value="name">Name (A-Z)</option>
+                </select>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalServers">0</div>
+                    <div class="stat-label">Active Servers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalPlayers">0</div>
+                    <div class="stat-label">Players Online</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRelays">3</div>
+                    <div class="stat-label">Relay Servers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Server List -->
+    <section class="server-list">
+        <div class="container">
+            <div id="serverGrid" class="server-grid">
+                <!-- Server cards will be inserted here -->
+            </div>
+            
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-icon">📭</div>
+                <h3>No servers found</h3>
+                <p>Be the first to add your server to the list!</p>
+                <button class="btn btn-primary" onclick="document.getElementById('addServerBtn').click()">
+                    Add Server
+                </button>
+            </div>
+
+            <div id="loadingState" class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading servers...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Server Modal -->
+    <div id="addServerModal" class="modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Your Server</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            
+            <form id="addServerForm" class="modal-body">
+                <div class="form-group">
+                    <label for="serverName">Server Name *</label>
+                    <input type="text" id="serverName" placeholder="My Awesome Server" required maxlength="50">
+                    <small>Maximum 50 characters</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="serverDescription">Description *</label>
+                    <textarea id="serverDescription" placeholder="Describe your server, game modes, rules..." required maxlength="200" rows="3"></textarea>
+                    <small>Maximum 200 characters</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="joinCode">Join Code *</label>
+                    <input type="text" id="joinCode" placeholder="x7vd5" required maxlength="5" pattern="[a-z0-9]{5}" style="text-transform: lowercase;">
+                    <small>5 characters (letters and numbers only)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="relayServer">Relay Server *</label>
+                    <select id="relayServer" required>
+                        <option value="">Select a relay server</option>
+                        <option value="wss://relay.deev.is/">relay.deev.is (lax1dude #1)</option>
+                        <option value="wss://relay.lax1dude.net/">relay.lax1dude.net (lax1dude #2)</option>
+                        <option value="wss://relay.shhnowisnottheti.me/">relay.shhnowisnottheti.me (ayunami #1)</option>
+                    </select>
+                </div>
+
+             
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="agreeTerms" required>
+                        I confirm this server is active and I own it
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span id="submitText">Verify & Add Server</span>
+                        <span id="submitSpinner" class="btn-spinner" style="display: none;"></span>
+                    </button>
+                </div>
+
+                <div id="formError" class="form-error" style="display: none;"></div>
+                <div id="formSuccess" class="form-success" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Server Details Modal -->
+    <div id="serverDetailsModal" class="modal">
+        <div class="modal-overlay" onclick="closeDetailsModal()"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="detailsServerName"></h2>
+                <button class="modal-close" onclick="closeDetailsModal()">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="server-details">
+                    <div class="detail-section">
+                        <h3>📝 Description</h3>
+                        <p id="detailsDescription"></p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>🎮 Join Information</h3>
+                        <div class="join-info">
+                            <div class="join-code-display">
+                                <label>Join Code:</label>
+                                <div class="code-box">
+                                    <code id="detailsJoinCode"></code>
+                                    <button class="btn-copy" onclick="copyJoinCode()" title="Copy to clipboard">
+                                        📋
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="relay-info">
+                                <label>Relay Server:</label>
+                                <code id="detailsRelay"></code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>📊 Server Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-icon">👥</span>
+                                <span class="stat-text"><span id="detailsPlayers">0</span> Players Online</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🕐</span>
+                                <span class="stat-text">Added <span id="detailsAdded"></span></span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">✅</span>
+                                <span class="stat-text" id="detailsStatus">Online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>🎯 How to Join</h3>
+                        <ol class="join-steps">
+                            <li>Open Eaglercraft in your browser</li>
+                            <li>Click "Multiplayer" → "Direct Connect"</li>
+                            <li>Enter the join code: <strong id="detailsJoinCodeStep"></strong></li>
+                            <li>Click "Join Server" and have fun!</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🎮 Eaglercraft Relay List - Community-driven server directory</p>
+            <p class="footer-note">Servers are automatically verified and removed if offline • Powered by Supabase</p>
+        </div>
+    </footer>
+
+    <script src="script-supabase.js"></script>
+</body>
+</html>

@@ -38,6 +38,9 @@ public class GL11 extends EaglercraftGPU {
 		case GL_ALPHA_TEST:
 			enableAlpha();
 			break;
+		case GL_SCISSOR_TEST:
+			enableScissor();
+			break;
 		case GL_FOG:
 			enableFog();
 			break;
@@ -85,6 +88,9 @@ public class GL11 extends EaglercraftGPU {
 			break;
 		case GL_LIGHT1:
 			disableMCLight(1);
+			break;
+		case GL_SCISSOR_TEST:
+			disableScissor();
 			break;
 		case GL_ALPHA_TEST:
 			disableAlpha();

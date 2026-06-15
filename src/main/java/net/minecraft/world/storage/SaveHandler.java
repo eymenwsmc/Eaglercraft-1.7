@@ -38,10 +38,15 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 	private final String saveDirectoryName;
 	private static final String __OBFID = "CL_00000585";
 
-	public SaveHandler(VFile2 p_i2146_1_, String p_i2146_2_, boolean p_i2146_3_) {
-		this.worldDirectory = new VFile2(p_i2146_1_, p_i2146_2_);
-		this.playersDirectory = new VFile2(this.worldDirectory, "playerdata");
-		this.mapDataDir = new VFile2(this.worldDirectory, "data");
+	public SaveHandler(VFile2 p_i2146_1_, String p_i2146_2_) {
+		System.err.println("[SaveHandler] Constructor called:");
+		System.err.println("  Base directory: " + p_i2146_1_.getPath());
+		System.err.println("  World name: " + p_i2146_2_);
+
+		this.worldDirectory = net.lax1dude.eaglercraft.sp.server.WorldsDB.newVFile(p_i2146_1_.getPath(), p_i2146_2_);
+		System.err.println("  Final worldDirectory: " + this.worldDirectory.getPath());
+		this.playersDirectory = net.lax1dude.eaglercraft.sp.server.WorldsDB.newVFile(this.worldDirectory.getPath(), "playerdata");
+		this.mapDataDir = net.lax1dude.eaglercraft.sp.server.WorldsDB.newVFile(this.worldDirectory.getPath(), "data");
 		this.saveDirectoryName = p_i2146_2_;
 
 		this.setSessionLock();
@@ -97,7 +102,18 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 	 * Returns the chunk loader with the provided world provider
 	 */
 	public IChunkLoader getChunkLoader(WorldProvider p_75763_1_) {
-		throw new RuntimeException("Old Chunk Storage is no longer supported.");
+
+		net.lax1dude.eaglercraft.internal.vfs2.VFile2 worldDirectory = this.getWorldDirectory();
+		
+		if (p_75763_1_ instanceof net.minecraft.world.WorldProviderHell) {
+			return new net.lax1dude.eaglercraft.sp.server.EaglerChunkLoader(
+				new net.lax1dude.eaglercraft.internal.vfs2.VFile2(worldDirectory, "DIM-1"));
+		} else if (p_75763_1_ instanceof net.minecraft.world.WorldProviderEnd) {
+			return new net.lax1dude.eaglercraft.sp.server.EaglerChunkLoader(
+				new net.lax1dude.eaglercraft.internal.vfs2.VFile2(worldDirectory, "DIM1"));
+		} else {
+			return new net.lax1dude.eaglercraft.sp.server.EaglerChunkLoader(worldDirectory);
+		}
 	}
 
 	/**
@@ -137,6 +153,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 	 * Saves the given World Info with the given NBTTagCompound as the Player.
 	 */
 	public void saveWorldInfoWithPlayer(WorldInfo p_75755_1_, NBTTagCompound p_75755_2_) {
+		System.err.println("[SaveHandler] saveWorldInfoWithPlayer called for: " + p_75755_1_.getWorldName());
+		System.err.println("  worldDirectory: " + this.worldDirectory.getPath());
 		NBTTagCompound var3 = p_75755_1_.cloneNBTCompound(p_75755_2_);
 		NBTTagCompound var4 = new NBTTagCompound();
 		var4.setTag("Data", var3);
@@ -145,16 +163,15 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 			VFile2 var5 = new VFile2(this.worldDirectory, "level.dat_new");
 			VFile2 var6 = new VFile2(this.worldDirectory, "level.dat_old");
 			VFile2 var7 = new VFile2(this.worldDirectory, "level.dat");
+			System.err.println("  Writing to: " + var7.getPath());
+			System.err.println("  var5 (level.dat_new): " + var5.getPath());
 			CompressedStreamTools.writeCompressed(var4, var5.getOutputStream());
 
-			if (var6.exists()) {
-				var6.delete();
-			}
-
-			var7.renameTo(var6);
-
 			if (var7.exists()) {
-				var7.delete();
+				if (var6.exists()) {
+					var6.delete();
+				}
+				var7.renameTo(var6);
 			}
 
 			var5.renameTo(var7);
@@ -162,7 +179,11 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 			if (var5.exists()) {
 				var5.delete();
 			}
+			
+			System.err.println("  Final check - level.dat exists: " + var7.exists());
+			System.err.println("  Final path: " + var7.getPath());
 		} catch (Exception var8) {
+			System.err.println("  ERROR during save:");
 			var8.printStackTrace();
 		}
 	}
@@ -181,14 +202,11 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 			VFile2 var6 = new VFile2(this.worldDirectory, "level.dat");
 			CompressedStreamTools.writeCompressed(var3, var4.getOutputStream());
 
-			if (var5.exists()) {
-				var5.delete();
-			}
-
-			var6.renameTo(var5);
-
 			if (var6.exists()) {
-				var6.delete();
+				if (var5.exists()) {
+					var5.delete();
+				}
+				var6.renameTo(var5);
 			}
 
 			var4.renameTo(var6);

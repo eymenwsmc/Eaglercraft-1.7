@@ -13,6 +13,7 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.particle.EntityFireworkStarterFX;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
@@ -231,7 +232,10 @@ public class WorldClient extends World {
 
 		this.entityHashSet.addKey(p_73027_1_, p_73027_2_);
 
-		if (RenderManager.instance.getEntityRenderObject(p_73027_2_).func_147905_a()) {
+		Render renderObject = RenderManager.instance.getEntityRenderObject(p_73027_2_);
+		if (renderObject == null) {
+			System.err.println("WARNING: No render object for entity: " + p_73027_2_.getClass().getSimpleName());
+		} else if (renderObject.func_147905_a()) {
 			this.mc.renderGlobal.onStaticEntitiesChanged();
 		}
 	}

@@ -20,6 +20,7 @@ import com.google.common.collect.Maps;
 
 import net.lax1dude.eaglercraft.ArrayUtils;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
+import net.lax1dude.eaglercraft.sp.SingleplayerServerController;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.gui.GuiNewChat;
@@ -130,7 +131,6 @@ public class GameSettings {
 
 	/** true if debug info should be displayed instead of version */
 	public boolean showDebugInfo;
-	public boolean showDebugProfilerChart;
 
 	/** The lastServer string. */
 	public String lastServer;
@@ -403,6 +403,7 @@ public class GameSettings {
 
 		if (p_74304_1_ == GameSettings.Options.RENDER_DISTANCE) {
 			this.renderDistanceChunks = (int) p_74304_2_;
+			SingleplayerServerController.setViewDistance(this.renderDistanceChunks);
 		}
 
 		if (p_74304_1_ == GameSettings.Options.STREAM_BYTES_PER_PIXEL) {
@@ -1160,7 +1161,7 @@ public class GameSettings {
 		SENSITIVITY("SENSITIVITY", 1, "options.sensitivity", true, false),
 		FOV("FOV", 2, "options.fov", true, false, 30.0F, 110.0F, 1.0F), GAMMA("GAMMA", 3, "options.gamma", true, false),
 		SATURATION("SATURATION", 4, "options.saturation", true, false),
-		RENDER_DISTANCE("RENDER_DISTANCE", 5, "options.renderDistance", true, false, 2.0F, 16.0F, 1.0F),
+		RENDER_DISTANCE("RENDER_DISTANCE", 5, "options.renderDistance", true, false, 1.0F, 16.0F, 1.0F),
 		VIEW_BOBBING("VIEW_BOBBING", 6, "options.viewBobbing", false, true),
 		ANAGLYPH("ANAGLYPH", 7, "options.anaglyph", false, true),
 		ADVANCED_OPENGL("ADVANCED_OPENGL", 8, "options.advancedOpengl", false, true),

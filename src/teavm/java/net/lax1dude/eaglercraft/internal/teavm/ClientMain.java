@@ -316,7 +316,21 @@ public class ClientMain {
 		strBeforeBuilder.append('\n').append('\n');
 		String strBefore = strBeforeBuilder.toString();
 		
-		HTMLDocument doc = Window.current().getDocument();
+		HTMLDocument doc;
+		try {
+			doc = Window.current().getDocument();
+		} catch (Throwable domEx) {
+			// No DOM available (e.g., worker context). Just print to stderr and return.
+			systemErr.println(strBefore);
+			try {
+				StringBuilder diagnostics = new StringBuilder();
+				diagnostics.append(addWebGLToCrash());
+				diagnostics.append('\n');
+				diagnostics.append(addShimsToCrash());
+				systemErr.println(diagnostics.toString());
+			} catch (Throwable ignored) {}
+			return;
+		}
 		HTMLElement el;
 		if(PlatformRuntime.parent != null) {
 			el = PlatformRuntime.parent;
@@ -408,15 +422,17 @@ public class ClientMain {
 				return;
 			}
 			
-			HTMLElement img = doc.createElement("img");
-			HTMLElement div = doc.createElement("div");
+			HTMLElement img = doc != null ? doc.createElement("img") : null;
+			HTMLElement div = doc != null ? doc.createElement("div") : null;
 			img.setAttribute("style", "z-index:100;position:absolute;top:10px;left:calc(50% - 151px);");
 			img.setAttribute("src", crashImageWrapper());
 			div.setAttribute("style", "z-index:100;position:absolute;top:135px;left:10%;right:10%;bottom:50px;background-color:white;border:1px solid #cccccc;overflow-x:hidden;overflow-y:scroll;overflow-wrap:break-word;white-space:pre-wrap;font: 14px monospace;padding:10px;");
 			div.getClassList().add("_eaglercraftX_crash_element");
 			el.appendChild(img);
 			el.appendChild(div);
-			div.appendChild(doc.createTextNode(strFinal));
+			if(doc != null) {
+				div.appendChild(doc.createTextNode(strFinal));
+			}
 			
 			PlatformRuntime.removeEventHandlers();
 

@@ -2,7 +2,9 @@ package net.lax1dude.eaglercraft.internal.teavm;
 
 import net.lax1dude.eaglercraft.EaglercraftVersion;
 
+import net.lax1dude.eaglercraft.Random;
 import net.lax1dude.eaglercraft.sp.relay.RelayEntry;
+import org.json.JSONObject;
 import org.teavm.jso.JSObject;
 
 import net.lax1dude.eaglercraft.internal.IClientConfigAdapter;
@@ -10,6 +12,7 @@ import net.lax1dude.eaglercraft.internal.IClientConfigAdapterHooks;
 import net.lax1dude.eaglercraft.internal.teavm.opts.JSEaglercraftXOptsHooks;
 import net.lax1dude.eaglercraft.internal.teavm.opts.JSEaglercraftXOptsRoot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,13 +52,15 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 	private boolean eaglerNoDelay = false;
 	private boolean ramdiskMode = false;
 	private boolean enableEPKVersionCheck = true;
-	
+	private JSONObject integratedServerOpts;
+
 	private boolean keepAliveHack = true;
 	private boolean finishOnSwap = true;
 
 	public void loadNative(JSObject jsObject) {
 		JSEaglercraftXOptsRoot eaglercraftXOpts = (JSEaglercraftXOptsRoot)jsObject;
-		
+		integratedServerOpts = new JSONObject();
+
 		worldsDB = eaglercraftXOpts.getWorldsDB("worlds");
 		resourcePacksDB = eaglercraftXOpts.getResourcePacksDB("resourcePacks");
 		checkGLErrors = eaglercraftXOpts.getCheckGLErrors(false);
@@ -75,6 +80,9 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 		enableEPKVersionCheck = eaglercraftXOpts.getEnableEPKVersionCheck(true);
 		keepAliveHack = eaglercraftXOpts.getKeepAliveHack(true);
 		finishOnSwap = eaglercraftXOpts.getFinishOnSwap(true);
+
+
+		integratedServerOpts.put("worldsDB", worldsDB);
 		JSEaglercraftXOptsHooks hooksObj = eaglercraftXOpts.getHooks();
 		if(hooksObj != null) {
 			hooks.loadHooks(hooksObj);
@@ -165,10 +173,6 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 		return false;
 	}
 
-	@Override
-	public List<RelayEntry> getRelays() {
-		return List.of();
-	}
 
 	@Override
 	public boolean isForceWebViewSupport() {
@@ -178,6 +182,22 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 	@Override
 	public boolean isEnableWebViewCSP() {
 		return false;
+	}
+
+	@Override
+	public JSONObject getIntegratedServerOpts() {
+		return integratedServerOpts;
+	}
+	private final List<RelayEntry> relays = new ArrayList<>();
+	@Override
+	public List<RelayEntry> getRelays() {
+		if (relays.isEmpty()) {
+			int relayId = (new Random()).nextInt(3);
+			relays.add(new RelayEntry("wss://relay.deev.is/", "lax1dude relay #1", relayId == 0));
+			relays.add(new RelayEntry("wss://relay.lax1dude.net/", "lax1dude relay #2", relayId == 1));
+			relays.add(new RelayEntry("wss://relay.shhnowisnottheti.me/", "ayunami relay #1", relayId == 2));
+		}
+		return relays;
 	}
 
 	@Override

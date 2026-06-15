@@ -4,9 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.server.S23PacketBlockChange;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldSettings;
@@ -179,7 +182,7 @@ public class ItemInWorldManager {
 				float var6 = var5.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj,
 						p_73082_1_, p_73082_2_, p_73082_3_) * (float) (var4 + 1);
 
-				if (var6 >= 0.7F) {
+				if (var6 >= 0.6F) {
 					this.isDestroyingBlock = false;
 					this.theWorld.destroyBlockInWorldPartially(this.thisPlayerMP.getEntityId(), p_73082_1_, p_73082_2_,
 							p_73082_3_, -1);
@@ -235,6 +238,16 @@ public class ItemInWorldManager {
 		} else {
 			Block var4 = this.theWorld.getBlock(p_73084_1_, p_73084_2_, p_73084_3_);
 			int var5 = this.theWorld.getBlockMetadata(p_73084_1_, p_73084_2_, p_73084_3_);
+
+			if (var4 == Blocks.coal_ore || var4 == Blocks.iron_ore || var4 == Blocks.gold_ore || 
+				var4 == Blocks.diamond_ore || var4 == Blocks.emerald_ore || var4 == Blocks.lapis_ore || 
+				var4 == Blocks.redstone_ore || var4 == Blocks.lit_redstone_ore) {
+				String oreName = Block.blockRegistry.getNameForObject(var4);
+				this.thisPlayerMP.addChatMessage(new ChatComponentText(
+					EnumChatFormatting.GREEN + "[DEBUG] Ore found! " + oreName + " at " + 
+					p_73084_1_ + ", " + p_73084_2_ + ", " + p_73084_3_));
+			}
+			
 			this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, p_73084_1_, p_73084_2_, p_73084_3_,
 					Block.getIdFromBlock(var4)
 							+ (this.theWorld.getBlockMetadata(p_73084_1_, p_73084_2_, p_73084_3_) << 12));

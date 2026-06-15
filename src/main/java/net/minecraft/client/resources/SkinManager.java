@@ -19,21 +19,18 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
 import net.minecraft.client.resources.MinecraftProfileTexture;
 
 public class SkinManager {
 	public static final ResourceLocation field_152793_a = new ResourceLocation("textures/entity/steve.png");
 	private final TextureManager field_152795_c;
 	private final VFile2 field_152796_d;
-	private final MinecraftSessionService field_152797_e;
 	private final Map<GameProfile, Map<MinecraftProfileTexture.Type, MinecraftProfileTexture>> field_152798_f = new HashMap<>();
 	private static final String __OBFID = "CL_00001830";
 
-	public SkinManager(TextureManager p_i1044_1_, VFile2 p_i1044_2_, MinecraftSessionService p_i1044_3_) {
+	public SkinManager(TextureManager p_i1044_1_, VFile2 p_i1044_2_) {
 		this.field_152795_c = p_i1044_1_;
 		this.field_152796_d = p_i1044_2_;
-		this.field_152797_e = p_i1044_3_;
 	}
 
 	public ResourceLocation func_152792_a(MinecraftProfileTexture p_152792_1_,

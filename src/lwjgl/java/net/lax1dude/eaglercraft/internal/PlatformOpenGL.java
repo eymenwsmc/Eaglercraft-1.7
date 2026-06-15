@@ -515,6 +515,10 @@ public class PlatformOpenGL {
 				data == null ? 0l : EaglerLWJGLAllocator.getAddress(data));
 	}
 
+	public static void _wglScissor(int x, int y, int width, int height) {
+		glScissor(x, y, width, height);
+	}
+
 	public static final void _wglCopyTexSubImage2D(int target, int level, int xoffset, int yoffset, int x, int y,
 			int width, int height) {
 		glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);

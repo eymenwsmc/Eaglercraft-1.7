@@ -25,7 +25,7 @@ public class BiomeDecorator {
 	protected World currentWorld;
 
 	/** The Biome Decorator's random number generator. */
-	protected Random randomGenerator;
+	protected net.lax1dude.eaglercraft.Random randomGenerator;
 
 	/** The X-coordinate of the chunk currently being decorated */
 	protected int chunk_X;
@@ -173,18 +173,26 @@ public class BiomeDecorator {
 		this.generateLakes = true;
 	}
 
-	public void func_150512_a(World p_150512_1_, Random p_150512_2_, BiomeGenBase p_150512_3_, int p_150512_4_,
+	public synchronized void func_150512_a(World p_150512_1_, Random p_150512_2_, BiomeGenBase p_150512_3_, int p_150512_4_,
 			int p_150512_5_) {
-		if (this.currentWorld != null) {
-			throw new RuntimeException("Already decorating!!");
-		} else {
+		World previousWorld = this.currentWorld;
+		Random previousRandom = this.randomGenerator;
+		int previousChunkX = this.chunk_X;
+		int previousChunkZ = this.chunk_Z;
+		
+		try {
 			this.currentWorld = p_150512_1_;
 			this.randomGenerator = p_150512_2_;
 			this.chunk_X = p_150512_4_;
 			this.chunk_Z = p_150512_5_;
+			
+			this.func_150513_a(p_150512_3_);
+		} finally {
 
-			this.currentWorld = null;
-			this.randomGenerator = null;
+			this.currentWorld = previousWorld;
+			this.randomGenerator = previousRandom;
+			this.chunk_X = previousChunkX;
+			this.chunk_Z = previousChunkZ;
 		}
 	}
 

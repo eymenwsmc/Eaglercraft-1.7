@@ -9,7 +9,7 @@ import net.lax1dude.eaglercraft.Random;
 import net.lax1dude.eaglercraft.profile.EaglerProfile;
 
 public class Session {
-	private final String username;
+	private String username;
 	private final String playerID;
 	private final String token;
 	private final Session.Type field_152429_d;
@@ -33,7 +33,7 @@ public class Session {
 	}
 
 	public String getUsername() {
-		return this.username;
+		return EaglerProfile.username;
 	}
 
 	public String getToken() {
@@ -51,9 +51,9 @@ public class Session {
 	public GameProfile func_148256_e() {
 		try {
 			EaglercraftUUID var1 = UUIDTypeAdapter.fromString(this.getPlayerID());
-			return new GameProfile(var1, this.getUsername());
+			return new GameProfile(var1, EaglerProfile.username);
 		} catch (IllegalArgumentException var2) {
-			return new GameProfile((EaglercraftUUID) null, this.getUsername());
+			return new GameProfile((EaglercraftUUID) null, EaglerProfile.username);
 		}
 	}
 

@@ -122,7 +122,7 @@ public final class SpawnerAnimals {
 													float var28 = (float) var21 + 0.5F;
 
 													if (p_77192_1_.getClosestPlayer((double) var26, (double) var27,
-															(double) var28, 24.0D) == null) {
+															(double) var28, 40.0D) == null) {
 														float var29 = var26 - (float) var34.posX;
 														float var30 = var27 - (float) var34.posY;
 														float var31 = var28 - (float) var34.posZ;
@@ -130,43 +130,37 @@ public final class SpawnerAnimals {
 
 														if (var32 >= 576.0F) {
 															if (var23 == null) {
-																var23 = p_77192_1_.spawnRandomCreature(var37, var19,
-																		var20, var21);
-
+																var23 = p_77192_1_.spawnRandomCreature(var37, var19, var20, var21);
 																if (var23 == null) {
 																	break label103;
 																}
 															}
-
+														
 															EntityLiving var41;
-
 															try {
-																var41 = (EntityLiving) var23.entityClass
-																		.getConstructor(new Class[] { World.class })
-																		.newInstance(new Object[] { p_77192_1_ });
-															} catch (Exception var33) {
-																var33.printStackTrace();
-																return var5;
+																var41 = (EntityLiving) EntityList.createEntityByClass(var23.entityClass, p_77192_1_);
+															} catch (Exception exception) {
+																EagRuntime.debugPrintStackTrace(exception);
+																continue;
 															}
-
+														
 															if (var41 == null) {
 																continue;
 															}
-
+														
 															var41.setLocationAndAngles((double) var26, (double) var27,
-																	(double) var28,
-																	p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
-
+																	(double) var28, p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
+														
 															if (var41.getCanSpawnHere()) {
 																++var17;
 																p_77192_1_.spawnEntityInWorld(var41);
 																var24 = var41.onSpawnWithEgg(var24);
-
+														
 																if (var17 >= var41.getMaxSpawnedInChunk()) {
 																	continue label110;
 																}
 															}
-
+														
 															var5 += var17;
 														}
 													}

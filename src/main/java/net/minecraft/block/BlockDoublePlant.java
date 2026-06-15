@@ -114,7 +114,13 @@ public class BlockDoublePlant extends BlockBush implements IGrowable {
 	}
 
 	public IIcon func_149888_a(boolean p_149888_1_, int p_149888_2_) {
-		return p_149888_1_ ? this.field_149894_N[p_149888_2_] : this.field_149893_M[p_149888_2_];
+
+		int safeIndex = p_149888_2_ & 7; // Clamp to 0-7 range
+		if (p_149888_1_) {
+			return safeIndex < this.field_149894_N.length ? this.field_149894_N[safeIndex] : this.field_149894_N[0];
+		} else {
+			return safeIndex < this.field_149893_M.length ? this.field_149893_M[safeIndex] : this.field_149893_M[0];
+		}
 	}
 
 	/**

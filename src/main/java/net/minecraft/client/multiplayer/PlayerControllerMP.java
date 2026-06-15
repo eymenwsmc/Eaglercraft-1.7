@@ -456,9 +456,6 @@ public class PlayerControllerMP {
 		} catch (Throwable t) {
 
 		}
-		System.out.println("[CLICK] windowId=" + windowId + ", slot=" + slotId + ", button=" + mouseButton + ", type="
-				+ modifier + ", preItem=" + (preItem != null ? preItem.getDisplayName() : "<null>"));
-
 		try {
 			if (mouseButton == 0) {
 				boolean isChestGui = Minecraft.getMinecraft() != null
@@ -485,24 +482,18 @@ public class PlayerControllerMP {
 						else if (normItem.contains("bedwars"))
 							target = "bedwars";
 					}
-					System.out.println("[FALLBACK] chestGui=" + isChestGui + ", title='" + title + "' (norm='"
-							+ normTitle + "'), item='" + display + "' (norm='" + normItem + "'), target=" + target);
 					if (target != null) {
 						this.netClientHandler.addToSendQueue(new C01PacketChatMessage("/server " + target));
 					}
 				}
 			}
 		} catch (Throwable t) {
-			System.out.println("[FALLBACK] error evaluating zMenu click: " + t.getMessage());
-		}
+			}
 
 		short transactionId = player.openContainer.getNextTransactionID(player.inventory);
 		ItemStack clickedStack = player.openContainer.slotClick(slotId, mouseButton, modifier, player);
 		this.netClientHandler.addToSendQueue(
 				new C0EPacketClickWindow(windowId, slotId, mouseButton, modifier, clickedStack, transactionId));
-		System.out.println("[CLICK->SEND] C0E windowId=" + windowId + ", slot=" + slotId + ", button=" + mouseButton
-				+ ", type=" + modifier + ", carried="
-				+ (clickedStack != null ? clickedStack.getDisplayName() : "<null>") + ", txId=" + (int) transactionId);
 		this.netClientHandler.noteWindowClick(windowId, slotId, mouseButton, modifier);
 
 		return clickedStack;

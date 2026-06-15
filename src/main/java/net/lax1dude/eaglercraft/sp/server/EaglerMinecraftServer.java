@@ -25,11 +25,14 @@ public class EaglerMinecraftServer extends MinecraftServer {
 	protected WorldSettings.GameType gamemode;
 	protected WorldSettings newWorldSettings;
 
+	protected EaglerSaveHandler saveHandler;
+
 	public static int counterTicksPerSecond = 0;
 	public static int counterChunkRead = 0;
 	public static int counterChunkGenerate = 0;
 	public static int counterChunkWrite = 0;
 	public static int counterTileUpdate = 0;
+	public static final VFile2 savesDir = WorldsDB.newVFile("worlds");
 	public static int counterLightUpdate = 0;
 
 	private final List<Runnable> scheduledTasks = new LinkedList();
@@ -40,7 +43,9 @@ public class EaglerMinecraftServer extends MinecraftServer {
 
 	public EaglerMinecraftServer(String world, String owner, int viewDistance, WorldSettings currentWorldSettings,
 			boolean demo) {
-		super(new VFile2(world), null);
+		// Use empty base directory - worlds stored directly in WorldsDB filesystem
+		super(new VFile2(""), null);
+		this.saveHandler = new EaglerSaveHandler(new VFile2(""), world);
 		Bootstrap.func_151354_b();
 		EaglerPlayerList playerList = new EaglerPlayerList(this, viewDistance);
 		this.setServerOwner(owner);
@@ -73,11 +78,68 @@ public class EaglerMinecraftServer extends MinecraftServer {
 		this.setCanSpawnNPCs(true);
 		this.setAllowPvp(true);
 		this.setAllowFlight(true);
-		this.loadAllWorlds(this.getFolderName(), this.getWorldName(), this.newWorldSettings.getSeed(),
-				this.newWorldSettings.getTerrainType(), this.newWorldSettings.func_82749_j());
+		this.loadAllWorlds(saveHandler, this.getWorldName(), newWorldSettings);
+
 		this.setMOTD(this.getServerOwner() + " - " + this.worldServers[0].getWorldInfo().getWorldName());
 		serverRunning = true;
 		return true;
+	}
+
+	@Override
+	protected void initialWorldChunkLoad() {
+		WorldServer worldServer = this.worldServers[0];
+
+		if (worldServer.getGameRules().getGameRuleBooleanValue("loadSpawnChunks")) {
+			super.initialWorldChunkLoad();
+			return;
+		}
+
+		this.setUserMessage("menu.generatingTerrain");
+		logger.info("Preparing minimal start region for Eagler integrated server");
+		int radiusBlocks = 48;
+		int chunksPerAxis = radiusBlocks * 2 / 16 + 1;
+		int totalChunks = chunksPerAxis * chunksPerAxis;
+		int loadedChunks = 0;
+		long lastProgress = MinecraftServer.getCurrentTimeMillis();
+		net.minecraft.util.ChunkCoordinates spawn = worldServer.getSpawnPoint();
+
+		for (int x = -radiusBlocks; x <= radiusBlocks && this.isServerRunning(); x += 16) {
+			for (int z = -radiusBlocks; z <= radiusBlocks && this.isServerRunning(); z += 16) {
+				long now = MinecraftServer.getCurrentTimeMillis();
+
+				if (now - lastProgress > 250L) {
+					this.outputPercentRemaining("Preparing spawn area", loadedChunks * 100 / totalChunks);
+					lastProgress = now;
+				}
+
+				++loadedChunks;
+				worldServer.theChunkProviderServer.loadChunk(spawn.posX + x >> 4, spawn.posZ + z >> 4);
+			}
+		}
+
+		List<net.minecraft.world.ChunkCoordIntPair> chunksToPopulate = new LinkedList<net.minecraft.world.ChunkCoordIntPair>();
+		for (int x = -radiusBlocks; x <= radiusBlocks && this.isServerRunning(); x += 16) {
+			for (int z = -radiusBlocks; z <= radiusBlocks && this.isServerRunning(); z += 16) {
+				int chunkX = spawn.posX + x >> 4;
+				int chunkZ = spawn.posZ + z >> 4;
+				net.minecraft.world.chunk.Chunk chunk = worldServer.theChunkProviderServer.loadChunk(chunkX, chunkZ);
+				if (chunk != null && !chunk.isTerrainPopulated) {
+					chunksToPopulate.add(new net.minecraft.world.ChunkCoordIntPair(chunkX, chunkZ));
+				}
+			}
+		}
+
+		for (net.minecraft.world.ChunkCoordIntPair coord : chunksToPopulate) {
+			try {
+				worldServer.theChunkProviderServer.populate(worldServer.theChunkProviderServer, coord.chunkXPos, coord.chunkZPos);
+			} catch (Exception ex) {
+				logger.warn("Failed to populate spawn chunk at " + coord.chunkXPos + "," + coord.chunkZPos + ": "
+						+ ex.getMessage());
+			}
+		}
+
+		EaglerIntegratedServerWorker.sendProgress("singleplayer.busy.startingIntegratedServer", 1.0f);
+		this.clearCurrentTask();
 	}
 
 	public void mainLoop(boolean singleThreadMode) {
@@ -89,13 +151,18 @@ public class EaglerMinecraftServer extends MinecraftServer {
 		}
 
 		long j = k - this.currentTime;
-		if ((j > (singleThreadMode ? 500L : 2000L)
-				&& this.currentTime - this.timeOfLastWarning >= (singleThreadMode ? 5000L : 15000L))) {
+		
+		// More lenient timing for TeaVM - allow up to 3 seconds lag before warning
+		long maxLag = singleThreadMode ? 3000L : 2000L;
+		long warningInterval = singleThreadMode ? 10000L : 15000L;
+		
+		if ((j > maxLag && this.currentTime - this.timeOfLastWarning >= warningInterval)) {
 			logger.warn(
 					"Can\'t keep up! Did the system time change, or is the server overloaded? Running {}ms behind, skipping {} tick(s)",
 					new Object[] { Long.valueOf(j), Long.valueOf(j / 50L) });
-			j = 100L;
-			this.currentTime = k - 100l;
+			// More aggressive catch-up for TeaVM
+			j = singleThreadMode ? 200L : 100L;
+			this.currentTime = k - j;
 			this.timeOfLastWarning = this.currentTime;
 		}
 
@@ -110,8 +177,10 @@ public class EaglerMinecraftServer extends MinecraftServer {
 			this.tick();
 			++counterTicksPerSecond;
 		} else {
-			if (j > 50L) {
-				this.currentTime += 50l;
+			// More flexible tick timing for TeaVM
+			long tickThreshold = singleThreadMode ? 40L : 50L; // Allow slightly faster ticks in TeaVM
+			if (j >= tickThreshold) {
+				this.currentTime += tickThreshold;
 				this.tick();
 				++counterTicksPerSecond;
 			}
@@ -258,7 +327,7 @@ public class EaglerMinecraftServer extends MinecraftServer {
 
 	@Override
 	public int func_110455_j() {
-		return 0;
+		return 4; 
 	}
 
 }

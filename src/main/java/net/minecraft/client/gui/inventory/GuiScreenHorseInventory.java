@@ -49,7 +49,7 @@ public class GuiScreenHorseInventory extends GuiContainer {
 			this.drawTexturedModalRect(var4 + 7, var5 + 35, 0, this.field_147000_g + 54, 18, 18);
 		}
 
-		GuiInventory.func_147046_a(var4 + 51, var5 + 60, 17, (float) (var4 + 51) - this.field_147033_y,
+		GuiInventory.drawEntityOnScreen(var4 + 51, var5 + 60, 17, (float) (var4 + 51) - this.field_147033_y,
 				(float) (var5 + 75 - 50) - this.field_147032_z, this.field_147034_x);
 	}
 

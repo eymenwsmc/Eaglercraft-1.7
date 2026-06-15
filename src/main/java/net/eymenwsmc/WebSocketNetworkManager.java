@@ -1,6 +1,4 @@
-/*
- * Ported wrapper for Eaglercraft 1.7.10-style networking into com.demez package
- */
+
 package net.eymenwsmc;
 
 import java.io.IOException;

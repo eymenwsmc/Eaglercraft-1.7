@@ -525,8 +525,7 @@ public class RenderItem extends Render {
 				GL11.glDisable(GL11.GL_LIGHTING);
 				p_82406_2_.bindTexture(RES_ITEM_GLINT);
 				GL11.glEnable(GL11.GL_BLEND);
-				OpenGlHelper.glBlendFunc(772, 1, 0, 0); // SRC_COLOR, ONE
-
+				OpenGlHelper.glBlendFunc(772, 1, 0, 0);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
 				GL11.glDepthFunc(GL11.GL_EQUAL);
 				GL11.glDepthMask(false);

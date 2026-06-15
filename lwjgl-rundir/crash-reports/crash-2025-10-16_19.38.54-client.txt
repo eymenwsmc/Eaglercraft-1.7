@@ -1,0 +1,83 @@
+---- Minecraft Crash Report ----
+// I know you're angry, call an escort!
+
+Time: 16.10.2025 19:38
+Description: Updating screen events
+
+java.lang.RuntimeException: Could not load required resource from EPK: relay_download.zip
+	at net.lax1dude.eaglercraft.EagRuntime.getRequiredResourceBytes(EagRuntime.java:134)
+	at net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay.actionPerformed(GuiScreenRelay.java:117)
+	at net.minecraft.client.gui.GuiScreen.mouseClicked(GuiScreen.java:195)
+	at net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay.mouseClicked(GuiScreenRelay.java:168)
+	at net.minecraft.client.gui.GuiScreen.handleMouseInput(GuiScreen.java:265)
+	at net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay.handleMouseInput(GuiScreenRelay.java:215)
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:239)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1396)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:828)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:768)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at net.lax1dude.eaglercraft.EagRuntime.getRequiredResourceBytes(EagRuntime.java:134)
+	at net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay.actionPerformed(GuiScreenRelay.java:117)
+	at net.minecraft.client.gui.GuiScreen.mouseClicked(GuiScreen.java:195)
+	at net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay.mouseClicked(GuiScreenRelay.java:168)
+	at net.minecraft.client.gui.GuiScreen.handleMouseInput(GuiScreen.java:265)
+	at net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay.handleMouseInput(GuiScreenRelay.java:215)
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:239)
+
+-- Affected screen --
+Details:
+	Screen name: net.lax1dude.eaglercraft.sp.gui.GuiScreenRelay
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['eymenwsmcw'/0, l='MpServer', x=-145,08, y=104,35, z=513,09]]
+	Chunk stats: MultiplayerChunkCache: 49, 49
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (224,64,256), Chunk: (at 0,4,0 in 14,16; contains blocks 224,0,256 to 239,255,271), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 171071 game time, 171071 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: true), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 1 total; [EntityClientPlayerMP['eymenwsmcw'/0, l='MpServer', x=-145,08, y=104,35, z=513,09]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:363)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2109)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:784)
+	at net.lax1dude.eaglercraft.internal.lwjgl.LWJGLEntryPoint.main_(LWJGLEntryPoint.java:75)
+	at net.lax1dude.eaglercraft.internal.lwjgl.MainClass.main(MainClass.java:6)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 156284632 bytes (149 MB) / 293601280 bytes (280 MB) up to 4223664128 bytes (4028 MB)
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	Launched Version: 1.7.10
+	LWJGL: 2.9.4
+	OpenGL: ANGLE (Intel, Intel(R) Iris(R) Xe Graphics (0x000046A6) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.101.4502) GL version OpenGL ES 3.0.0 (ANGLE 2.1.22784 git hash: c67f290ef0f0), Google Inc. (Intel)
+	Is Modded: vanilla
+	Type: Client (map_client.txt)
+	Resource Packs: [Xray Ultimate 1_8]
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

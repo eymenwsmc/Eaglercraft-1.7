@@ -296,6 +296,10 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		GuiButton nig;
 		this.buttonList.add(
 				nig = new GuiButton(1, this.width / 2 - 100, parInt1, I18n.format("menu.singleplayer", new Object[0])));
+		boolean k = nig.isMouseOver();
+		if (k) {
+			mc.fontRenderer.drawString("Hello world", parInt2, parInt1, -1);
+		}
 		this.buttonList.add(new GuiButton(2, this.width / 2 - 100, parInt1 + parInt2 * 1,
 				I18n.format("menu.multiplayer", new Object[0])));
 		if (EaglercraftVersion.mainMenuEnableGithubButton) {
@@ -627,38 +631,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 		this.drawString(this.fontRendererObj, s1, this.width - this.fontRendererObj.getStringWidth(s1) - 2,
 				this.height - 10, -1);
 
-		if (!this.mc.isDemo()) {
-			GlStateManager.pushMatrix();
-			GlStateManager.scale(0.75f, 0.75f, 0.75f);
-			int www = 0;
-			int hhh = 0;
-			s1 = EaglercraftVersion.mainMenuStringG;
-			if (s1 != null) {
-				www = this.fontRendererObj.getStringWidth(s1);
-				hhh += 10;
-			}
-			s1 = EaglercraftVersion.mainMenuStringH;
-			if (s1 != null) {
-				www = Math.max(www, this.fontRendererObj.getStringWidth(s1));
-				hhh += 10;
-			}
-			if (www > 0) {
-				drawRect(0, 0, www + 6, hhh + 4, 0x55200000);
-				s1 = EaglercraftVersion.mainMenuStringG;
-				if (s1 != null) {
-					www = this.fontRendererObj.getStringWidth(s1);
-					this.drawString(this.fontRendererObj, s1, 3, 3, 0xFFFFFF99);
-				}
-				s1 = EaglercraftVersion.mainMenuStringH;
-				if (s1 != null) {
-					www = Math.max(www, this.fontRendererObj.getStringWidth(s1));
-					this.drawString(this.fontRendererObj, s1, 3, 13, 0xFFFFFF99);
-				}
-			}
-
-			GlStateManager.popMatrix();
-		}
-
+	
 		String lbl = "CREDITS.txt";
 		int w = fontRendererObj.getStringWidth(lbl) * 3 / 4;
 

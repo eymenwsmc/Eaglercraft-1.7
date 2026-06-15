@@ -37,11 +37,11 @@ public class Realms {
 	}
 
 	public static String uuidToName(String p_uuidToName_0_) {
-		return Minecraft.getMinecraft().func_152347_ac()
-				.fillProfileProperties(new GameProfile(
+		return 
+				new GameProfile(
 						EaglercraftUUID.fromString(p_uuidToName_0_
 								.replaceAll("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5")),
-						(String) null), false)
+						(String) null)
 				.getName();
 	}
 

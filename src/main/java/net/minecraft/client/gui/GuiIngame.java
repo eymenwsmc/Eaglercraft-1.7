@@ -13,6 +13,7 @@ import com.google.common.collect.Lists;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.HString;
 import net.lax1dude.eaglercraft.opengl.GlStateManager;
+import net.lax1dude.eaglercraft.profile.EaglerProfile;
 import net.lax1dude.eaglercraft.sp.SingleplayerServerController;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -192,6 +193,9 @@ public class GuiIngame extends Gui {
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 
+		if (!mc.gameSettings.showDebugInfo)
+		drawSingleplayerStats(var5);
+		
 		int var32;
 
 		if (this.mc.thePlayer.getSleepTimer() > 0) {
@@ -336,11 +340,10 @@ public class GuiIngame extends Gui {
 			long var41 = EagRuntime.totalMemory();
 			long var44 = EagRuntime.freeMemory();
 			long var45 = var41 - var44;
-			String var20 = "Used memory: " + var45 * 100L / var36 + "% (" + var45 / 1024L / 1024L + "MB) of "
-					+ var36 / 1024L / 1024L + "MB";
+			String var20 = mc.isSingleplayer() ? "Local profile " + EnumChatFormatting.RED + EaglerProfile.getName() : "Cracked account " + EnumChatFormatting.GREEN + EaglerProfile.getName();
 			var21 = 14737632;
 			this.drawString(var8, var20, var6 - var8.getStringWidth(var20) - 2, 2, 14737632);
-			var20 = "Allocated memory: " + var41 * 100L / var36 + "% (" + var41 / 1024L / 1024L + "MB)";
+			var20 = mc.isSingleplayer() ? "Playing on integerated server." : "Playing on multiplayer";
 			this.drawString(var8, var20, var6 - var8.getStringWidth(var20) - 2, 12, 14737632);
 			var22 = MathHelper.floor_double(this.mc.thePlayer.posX);
 			var23 = MathHelper.floor_double(this.mc.thePlayer.posY);

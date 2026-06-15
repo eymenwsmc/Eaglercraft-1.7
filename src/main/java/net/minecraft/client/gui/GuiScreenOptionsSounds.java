@@ -95,7 +95,7 @@ public class GuiScreenOptionsSounds extends GuiScreen {
 		protected void mouseDragged(Minecraft p_146119_1_, int p_146119_2_, int p_146119_3_) {
 			if (this.visible) {
 				if (this.field_146155_p) {
-					this.field_146156_o = (float) (p_146119_2_ - (this.field_146128_h + 4))
+					this.field_146156_o = (float) (p_146119_2_ - (this.buttonX + 4))
 							/ (float) (this.field_146120_f - 8);
 
 					if (this.field_146156_o < 0.0F) {
@@ -114,17 +114,17 @@ public class GuiScreenOptionsSounds extends GuiScreen {
 
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				this.drawTexturedModalRect(
-						this.field_146128_h + (int) (this.field_146156_o * (float) (this.field_146120_f - 8)),
-						this.field_146129_i, 0, 66, 4, 20);
+						this.buttonX + (int) (this.field_146156_o * (float) (this.field_146120_f - 8)),
+						this.buttonY, 0, 66, 4, 20);
 				this.drawTexturedModalRect(
-						this.field_146128_h + (int) (this.field_146156_o * (float) (this.field_146120_f - 8)) + 4,
-						this.field_146129_i, 196, 66, 4, 20);
+						this.buttonX + (int) (this.field_146156_o * (float) (this.field_146120_f - 8)) + 4,
+						this.buttonY, 196, 66, 4, 20);
 			}
 		}
 
 		public boolean mousePressed(Minecraft p_146116_1_, int p_146116_2_, int p_146116_3_) {
 			if (super.mousePressed(p_146116_1_, p_146116_2_, p_146116_3_)) {
-				this.field_146156_o = (float) (p_146116_2_ - (this.field_146128_h + 4))
+				this.field_146156_o = (float) (p_146116_2_ - (this.buttonX + 4))
 						/ (float) (this.field_146120_f - 8);
 
 				if (this.field_146156_o < 0.0F) {

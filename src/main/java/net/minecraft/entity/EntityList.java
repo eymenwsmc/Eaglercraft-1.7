@@ -81,9 +81,6 @@ public class EntityList {
 	/** This is a HashMap of the Creative Entity Eggs/Spawners. */
 	public static HashMap entityEggs = new LinkedHashMap();
 
-	private static final Map<Class<? extends Entity>, EntityConstructor<? extends Entity>> classToConstructorMapping = Maps
-			.newHashMap();
-
 	/**
 	 * adds a mapping between Entity classes and both a string representation and an
 	 * ID
@@ -116,18 +113,12 @@ public class EntityList {
 
 
 	public static Entity createEntityByClass(Class<? extends Entity> entityClass, World worldIn) {
-		Entity entity = null;
 
-		try {
-			EntityConstructor<? extends Entity> constructor = classToConstructorMapping.get(entityClass);
-			if (constructor != null) {
-				entity = constructor.createEntity(worldIn);
-			}
-		} catch (Exception exception) {
-			logger.error("Could not create entity", exception);
+		Integer entityId = (Integer) classToIDMapping.get(entityClass);
+		if (entityId != null) {
+			return createEntityByID(entityId.intValue(), worldIn);
 		}
-
-		return entity;
+		return null;
 	}
 
 	/**
@@ -139,8 +130,7 @@ public class EntityList {
 		if (var2 != null) {
 			var2.readFromNBT(par0NBTTagCompound);
 		} else {
-			System.out.println("Skipping Entity with id " + name);
-		}
+			}
 		return var2;
 	}
 
@@ -184,8 +174,10 @@ public class EntityList {
 		case 41:
 			return new EntityBoat(par1World);
 		case 48:
-			return null;		case 49:
-			return null;		case 50:
+			return null;
+		case 49:
+			return null;
+		case 50:
 			return new EntityCreeper(par1World);
 		case 51:
 			return new EntitySkeleton(par1World);
@@ -244,7 +236,6 @@ public class EntityList {
 		case 200:
 			return new EntityEnderCrystal(par1World);
 		default:
-			System.out.println("Skipping Entity with id " + par0);
 			return null;
 		}
 	}

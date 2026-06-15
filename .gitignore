@@ -10,3 +10,4 @@ lwjgl-rundir/filesystem/
 wasm_gc_teavm/bin/
 wasm_gc_teavm/build/
 wasm_gc_teavm/.gradle/
+/.metadata/

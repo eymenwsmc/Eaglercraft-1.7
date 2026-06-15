@@ -61,6 +61,7 @@ public class IPCPacketManager {
 		mappings.put(IPCPacket1ALoggerMessage.ID, IPCPacket1ALoggerMessage::new);
 		mappings.put(IPCPacket1BEnableLogging.ID, IPCPacket1BEnableLogging::new);
 		mappings.put(IPCPacket1CIssueDetected.ID, IPCPacket1CIssueDetected::new);
+		mappings.put(IPCPacket1DSetViewDistance.ID, IPCPacket1DSetViewDistance::new);
 		mappings.put(IPCPacketFFProcessKeepAlive.ID, IPCPacketFFProcessKeepAlive::new);
 	}
 

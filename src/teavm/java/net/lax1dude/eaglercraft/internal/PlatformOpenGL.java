@@ -94,16 +94,6 @@ public class PlatformOpenGL {
 				hasOESTextureHalfFloat = glesVersIn == 200 && ctx.getExtension("OES_texture_half_float") != null;
 				hasOESTextureHalfFloatLinear = glesVersIn == 200 && ctx.getExtension("OES_texture_half_float_linear") != null;
 				hasEXTTextureFilterAnisotropic = ctx.getExtension("EXT_texture_filter_anisotropic") != null;
-                if(hasEXTTextureFilterAnisotropic) {
-                    int maxI = ctx.getParameteri(WebGL2RenderingContext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-                    if(maxI > 0) {
-                        logger.info("EXT_texture_filter_anisotropic enabled, MAX_TEXTURE_MAX_ANISOTROPY_EXT = {}", Integer.valueOf(maxI));
-                    } else {
-                        logger.info("EXT_texture_filter_anisotropic enabled, MAX_TEXTURE_MAX_ANISOTROPY_EXT not reported");
-                    }
-                } else {
-                    logger.info("EXT_texture_filter_anisotropic not available");
-                }
 			}else {
 				hasANGLEInstancedArrays = false;
 				hasEXTColorBufferFloat = false;
@@ -449,14 +439,7 @@ public class PlatformOpenGL {
              float max = maxI > 0 ? (float)maxI : value;
              float clamped = value < 1.0f ? 1.0f : (value > max ? max : value);
              ctx.texParameterf(target, param, clamped);
-             if(logger.isDebugEnabled()) {
-                 logger.debug("Set anisotropy param target={} value={} (clamped to max={})", Integer.valueOf(target), Float.valueOf(clamped), Float.valueOf(max));
-             }
          } else {
-             if(!loggedAnisoMissingWarn) {
-                 loggedAnisoMissingWarn = true;
-                 logger.info("EXT_texture_filter_anisotropic not available; ignoring anisotropy parameter calls");
-             }
          }
      } else {
          ctx.texParameterf(target, param, value);
@@ -763,11 +746,17 @@ public class PlatformOpenGL {
 	
 	public static final void _wglFramebufferRenderbuffer(int target, int attachment,
 			int renderbufferTarget, IRenderbufferGL renderbuffer) {
+		if(ctx == null) {
+			return;
+		}
 		ctx.framebufferRenderbuffer(target, attachment, renderbufferTarget,
 				((OpenGLObjects.RenderbufferGL)renderbuffer).ptr);
 	}
 	
 	public static final String _wglGetString(int param) {
+		if(ctx == null) {
+			return "null";
+		}
 		if(hasWEBGLDebugRendererInfo) {
 			String s;
 			switch(param) {
@@ -792,17 +781,22 @@ public class PlatformOpenGL {
 	}
 	
 	public static final int _wglGetInteger(int param) {
+		if(ctx == null) {
+			return 0;
+		}
 		return ctx.getParameteri(param);
 	}
 	
 	public static final int _wglGetError() {
+		if(ctx == null) {
+			return 0;
+		}
 		return ctx.getError();
 	}
 	
 	public static final int checkOpenGLESVersion() {
 		return glesVers;
 	}
-	
 	public static final boolean checkEXTGPUShader5Capable() {
 		return false;
 	}
@@ -882,6 +876,11 @@ public class PlatformOpenGL {
 			logger.error("##############################");
 		}
 	}
+
+	public static void _wglScissor(int x, int y, int width, int height) {
+		ctx.scissor(x, y, width, height);
+	}
+
 	// Legacy fixed-function emulation: glEnableClientState
 	public static final void _wglEnableClientState(int array) {
 		switch (array) {

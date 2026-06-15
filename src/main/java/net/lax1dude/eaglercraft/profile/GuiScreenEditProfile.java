@@ -40,7 +40,7 @@ import java.io.IOException;
 public class GuiScreenEditProfile extends GuiScreen {
 
 	private final GuiScreen parent;
-	private GuiTextField usernameField;
+	public static GuiTextField usernameField;
 
 	private boolean dropDownOpen = false;
 	private String[] dropDownOptions;

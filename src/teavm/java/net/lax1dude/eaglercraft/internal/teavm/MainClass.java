@@ -1,5 +1,8 @@
 package net.lax1dude.eaglercraft.internal.teavm;
 
+import net.lax1dude.eaglercraft.sp.server.internal.teavm.WorkerMain;
+import org.teavm.jso.workers.Worker;
+
 /**
  * Copyright (c) 2022-2024 lax1dude. All Rights Reserved.
  * 
@@ -18,7 +21,15 @@ package net.lax1dude.eaglercraft.internal.teavm;
 public class MainClass {
 
 	public static void main(String[] args) {
-		clientMain();
+		if(args.length == 1) {
+			if("_worker_process_".equalsIgnoreCase(args[0])) {
+				WorkerMain._main();
+				return;
+			}
+		}else if(args.length == 0) {
+			clientMain();
+			return;
+		}
 	}
 
 	private static void clientMain() {

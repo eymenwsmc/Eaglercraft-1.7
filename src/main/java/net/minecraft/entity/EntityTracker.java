@@ -47,14 +47,16 @@ public class EntityTracker {
 	 * List of tracked entities, used for iteration operations on tracked entities.
 	 */
 	private Set trackedEntities = new HashSet();
-	private IntHashMap trackedEntityIDs = new IntHashMap();
+	public IntHashMap trackedEntityIDs = new IntHashMap();
 	private int entityViewDistance;
 	private static final String __OBFID = "CL_00001431";
 
 	public EntityTracker(WorldServer p_i1516_1_) {
 		this.theWorld = p_i1516_1_;
-		this.entityViewDistance = p_i1516_1_.func_73046_m().getConfigurationManager().getEntityViewDistance();
-	}
+		int configDistance = p_i1516_1_.func_73046_m().getConfigurationManager().getEntityViewDistance();
+
+		this.entityViewDistance = Math.max(configDistance, 160);
+		}
 
 	/**
 	 * if entity is a player sends all tracked events to the player, otherwise, adds
@@ -143,6 +145,12 @@ public class EntityTracker {
 			this.trackedEntityIDs.addKey(p_72785_1_.getEntityId(), var5);
 			var5.sendEventsToPlayers(this.theWorld.playerEntities);
 		} catch (Throwable var11) {
+
+			if (var11 instanceof IllegalStateException && var11.getMessage().contains("already tracked")) {
+
+				return;
+			}
+			
 			CrashReport var6 = CrashReport.makeCrashReport(var11, "Adding entity to track");
 			CrashReportCategory var7 = var6.makeCategory("Entity To Track");
 			var7.addCrashSection("Tracking range", p_72785_2_ + " blocks");

@@ -487,12 +487,16 @@ public abstract class BiomeGenBase {
 		Block var12 = this.fillerBlock;
 		int var13 = -1;
 		int var14 = (int) (p_150560_7_ / 3.0D + 3.0D + p_150560_2_.nextDouble() * 0.25D);
+		if (var14 > 20)
+			var14 = 20;
+		if (var14 < 0)
+			var14 = 0;
 		int var15 = p_150560_5_ & 15;
 		int var16 = p_150560_6_ & 15;
 		int var17 = p_150560_3_.length / 256;
 
 		for (int var18 = 255; var18 >= 0; --var18) {
-			int var19 = (var16 * 16 + var15) * var17 + var18;
+			int var19 = (var15 * 16 + var16) * var17 + var18;
 
 			if (var18 <= 0 + p_150560_2_.nextInt(5)) {
 				p_150560_3_[var19] = Blocks.bedrock;

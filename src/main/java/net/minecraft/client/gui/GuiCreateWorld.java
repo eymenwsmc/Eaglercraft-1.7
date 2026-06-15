@@ -367,7 +367,7 @@ public class GuiCreateWorld extends GuiScreen {
 			if (WorldType.worldTypes[this.field_146331_K].func_151357_h()) {
 				this.fontRendererObj.drawSplitString(
 						I18n.format(WorldType.worldTypes[this.field_146331_K].func_151359_c(), new Object[0]),
-						this.field_146320_D.field_146128_h + 2, this.field_146320_D.field_146129_i + 22,
+						this.field_146320_D.buttonX + 2, this.field_146320_D.buttonY + 22,
 						this.field_146320_D.func_146117_b(), 10526880);
 			}
 		} else {

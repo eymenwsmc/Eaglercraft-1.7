@@ -620,7 +620,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer {
 		this.func_147051_a(var4);
 
 		if (var4 == CreativeTabs.tabInventory) {
-			GuiInventory.func_147046_a(this.field_147003_i + 43, this.field_147009_r + 45, 20,
+			GuiInventory.drawEntityOnScreen(this.field_147003_i + 43, this.field_147009_r + 45, 20,
 					(float) (this.field_147003_i + 43 - p_146976_2_),
 					(float) (this.field_147009_r + 45 - 30 - p_146976_3_), this.mc.thePlayer);
 		}

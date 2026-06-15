@@ -208,9 +208,9 @@ public class GuiBeacon extends GuiContainer {
 			if (this.visible) {
 				p_146112_1_.getTextureManager().bindTexture(GuiBeacon.field_147025_v);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.field_146123_n = p_146112_2_ >= this.field_146128_h && p_146112_3_ >= this.field_146129_i
-						&& p_146112_2_ < this.field_146128_h + this.field_146120_f
-						&& p_146112_3_ < this.field_146129_i + this.field_146121_g;
+				this.field_146123_n = p_146112_2_ >= this.buttonX && p_146112_3_ >= this.buttonY
+						&& p_146112_2_ < this.buttonX + this.field_146120_f
+						&& p_146112_3_ < this.buttonY + this.field_146121_g;
 				short var4 = 219;
 				int var5 = 0;
 
@@ -222,14 +222,14 @@ public class GuiBeacon extends GuiContainer {
 					var5 += this.field_146120_f * 3;
 				}
 
-				this.drawTexturedModalRect(this.field_146128_h, this.field_146129_i, var5, var4, this.field_146120_f,
+				this.drawTexturedModalRect(this.buttonX, this.buttonY, var5, var4, this.field_146120_f,
 						this.field_146121_g);
 
 				if (!GuiBeacon.field_147025_v.equals(this.field_146145_o)) {
 					p_146112_1_.getTextureManager().bindTexture(this.field_146145_o);
 				}
 
-				this.drawTexturedModalRect(this.field_146128_h + 2, this.field_146129_i + 2, this.field_146144_p,
+				this.drawTexturedModalRect(this.buttonX + 2, this.buttonY + 2, this.field_146144_p,
 						this.field_146143_q, 18, 18);
 			}
 		}

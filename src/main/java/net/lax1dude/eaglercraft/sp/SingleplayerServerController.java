@@ -185,7 +185,6 @@ public class SingleplayerServerController implements ISaveFormat {
 	}
 
 	public static void openLocalPlayerChannel() {
-		System.out.println("[CLIENT] openLocalPlayerChannel çağrıldı!");
 		localPlayerNetworkManager.isPlayerChannelOpen = true;
 		sendIPCPacket(new IPCPacket0CPlayerChannel(PLAYER_CHANNEL, true));
 	}
@@ -299,8 +298,6 @@ public class SingleplayerServerController implements ISaveFormat {
 					handleIPCPacket(ipc);
 				} else if (packetData.channel.equals(SingleplayerServerController.PLAYER_CHANNEL)) {
 					if (localPlayerNetworkManager.getConnectStatus() != EnumEaglerConnectionState.CLOSED) {
-						System.out
-								.println("[CORE] Paket istemciye iletiliyor! " + packetData.contents.length + " byte");
 						localPlayerNetworkManager.addRecievedPacket(packetData.contents);
 					} else {
 						logger.warn("Recieved {} byte packet on closed local player connection",
@@ -648,6 +645,12 @@ public class SingleplayerServerController implements ISaveFormat {
 	public static void setDifficulty(int difficultyId) {
 		if (isWorldRunning()) {
 			sendIPCPacket(new IPCPacket0ASetWorldDifficulty((byte) difficultyId));
+		}
+	}
+
+	public static void setViewDistance(int viewDistance) {
+		if (isWorldRunning()) {
+			sendIPCPacket(new IPCPacket1DSetViewDistance((byte) viewDistance));
 		}
 	}
 

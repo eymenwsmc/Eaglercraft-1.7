@@ -335,12 +335,15 @@ public class EntityTrackerEntry {
 		if (p_73117_1_ != this.myEntity) {
 			double var2 = p_73117_1_.posX - (double) (this.lastScaledXPosition / 32);
 			double var4 = p_73117_1_.posZ - (double) (this.lastScaledZPosition / 32);
-
+			double distance = Math.sqrt(var2*var2 + var4*var4);
+			
 			if (var2 >= (double) (-this.blocksDistanceThreshold) && var2 <= (double) this.blocksDistanceThreshold
 					&& var4 >= (double) (-this.blocksDistanceThreshold)
 					&& var4 <= (double) this.blocksDistanceThreshold) {
+				
+				boolean watchingChunk = this.isPlayerWatchingThisChunk(p_73117_1_);
 				if (!this.trackingPlayers.contains(p_73117_1_)
-						&& (this.isPlayerWatchingThisChunk(p_73117_1_) || this.myEntity.forceSpawn)) {
+						&& (watchingChunk || this.myEntity.forceSpawn)) {
 					this.trackingPlayers.add(p_73117_1_);
 					Packet var6 = this.func_151260_c();
 					p_73117_1_.playerNetServerHandler.sendPacket(var6);
@@ -428,6 +431,10 @@ public class EntityTrackerEntry {
 	}
 
 	public void sendEventsToPlayers(List p_73125_1_) {
+		if (p_73125_1_ == null || p_73125_1_.isEmpty()) {
+			return;
+		}
+		
 		for (int var2 = 0; var2 < p_73125_1_.size(); ++var2) {
 			this.tryStartWachingThis((EntityPlayerMP) p_73125_1_.get(var2));
 		}

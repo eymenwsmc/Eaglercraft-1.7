@@ -1008,9 +1008,18 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 		return "channel:" + this.playerNetServerHandler.netManager.playerChannel;
 	}
 
+	public int clientRenderDistance = 8; // Store client's render distance setting
+	private long lastViewDistanceUpdate = 0; // Throttle view distance updates
+	
 	public void func_147100_a(C15PacketClientSettings p_147100_1_) {
 		this.translator = p_147100_1_.func_149524_c();
 		int var2 = 256 >> p_147100_1_.func_149521_d();
+
+		this.clientRenderDistance = p_147100_1_.func_149521_d();
+
+
+		if (this.mcServer != null && this.mcServer.isSinglePlayer()) {
+			}
 
 		if (var2 > 3 && var2 < 20) {
 			;
