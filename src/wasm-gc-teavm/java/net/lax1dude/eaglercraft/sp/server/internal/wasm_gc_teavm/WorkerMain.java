@@ -23,7 +23,11 @@ import net.lax1dude.eaglercraft.sp.ipc.IPCPacket15Crashed;
 import net.lax1dude.eaglercraft.sp.ipc.IPCPacketFFProcessKeepAlive;
 import net.lax1dude.eaglercraft.sp.server.EaglerIntegratedServerWorker;
 import net.lax1dude.eaglercraft.sp.server.internal.ServerPlatformSingleplayer;
+import org.teavm.interop.Async;
+import org.teavm.interop.AsyncCallback;
 import org.teavm.interop.Import;
+import org.teavm.jso.JSFunctor;
+import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 
 import java.io.PrintStream;
@@ -46,16 +50,34 @@ public class WorkerMain {
 		}catch(Throwable t) {
 			System.setOut(systemOut);
 			System.setErr(systemErr);
-			systemErr.println("WorkerMain: [ERROR] uncaught exception thrown!");
+			System.err.println("WorkerMain: [ERROR] uncaught exception thrown!");
 			EagRuntime.debugPrintStackTraceToSTDERR(t);
-			EaglerIntegratedServerWorker.sendIPCPacket(new IPCPacket15Crashed("UNCAUGHT EXCEPTION CAUGHT IN WORKER PROCESS!\n\n" + EagRuntime.getStackTrace(t)));
+			EaglerIntegratedServerWorker.sendIPCPacket(new IPCPacket15Crashed("UNCAUGHT EXCEPTION CAUGHT IN WORKER PROCESS!\\n\\n" + EagRuntime.getStackTrace(t)));
 			EaglerIntegratedServerWorker.sendIPCPacket(new IPCPacketFFProcessKeepAlive(IPCPacketFFProcessKeepAlive.EXITED));
 		}finally {
-			systemErr.println("WorkerMain: [ERROR] eaglercraftx worker thread has exited");
+			System.err.println("WorkerMain: [ERROR] eaglercraftx worker thread has exited");
 		}
+	}
+
+	@JSFunctor
+	private static interface WorkerArgumentsPacketHandler extends JSObject {
+		public void onMessage(String msg);
 	}
 
 	@Import(module = "platformRuntime", name = "getEaglercraftXOpts")
 	private static native JSObject getEaglerXOpts();
+
+	@Async
+	private static native String getStartArgs();
+
+	private static void getStartArgs(final AsyncCallback<String> cb) {
+		ServerPlatformSingleplayer.register();
+		// Send ready signal to client after registration
+		postMessage();
+		cb.complete(getStartArgs());
+	}
+
+	@JSBody(params = {}, script = "postMessage({ ch: '__WORKER_READY__', dat: null });")
+	private static native void postMessage();
 
 }

@@ -10,7 +10,7 @@ public class Sys {
 	}
 
 	public static long getTime() {
-		return System.currentTimeMillis();
+		return EagRuntime.steadyTimeMillis();
 	}
 
 	public static long getTimerResolution() {

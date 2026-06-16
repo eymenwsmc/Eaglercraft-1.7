@@ -20,6 +20,7 @@ import net.lax1dude.eaglercraft.EaglerSaveFormat;
 import net.lax1dude.eaglercraft.Random;
 import java.util.concurrent.Callable;
 
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 import net.lax1dude.eaglercraft.sp.server.EaglerIntegratedServerWorker;
 import net.minecraft.command.CommandBase;
@@ -174,7 +175,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 	}
 
 	protected static long getCurrentTimeMillis() {
-		return System.currentTimeMillis();
+		return EagRuntime.steadyTimeMillis();
 	}
 
 	/**

@@ -78,10 +78,8 @@ public class GameProfile {
 	}
 
 	public String toString() {
-		return (new ToStringBuilder(this)).append("id", this.id).append("name", this.name).append("legacy", false)
-				.toString();
+		return "GameProfile{id=" + this.id + ", name='" + this.name + "', legacy=false}";
 	}
-
 	public boolean isLegacy() {
 		return false;
 	}

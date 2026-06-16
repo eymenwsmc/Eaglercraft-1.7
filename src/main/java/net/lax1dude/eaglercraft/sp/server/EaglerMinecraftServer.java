@@ -184,12 +184,15 @@ public class EaglerMinecraftServer extends MinecraftServer {
 			this.tick();
 			++counterTicksPerSecond;
 		} else {
-			// More flexible tick timing for TeaVM
-			long tickThreshold = singleThreadMode ? 40L : 50L; // Allow slightly faster ticks in TeaVM
-			if (j >= tickThreshold) {
+			long tickThreshold = 50L;
+			int catchUp = 0;
+			while (j >= tickThreshold) {
 				this.currentTime += tickThreshold;
 				this.tick();
 				++counterTicksPerSecond;
+				j -= tickThreshold;
+				if (++catchUp > 4)
+					break;
 			}
 		}
 	}

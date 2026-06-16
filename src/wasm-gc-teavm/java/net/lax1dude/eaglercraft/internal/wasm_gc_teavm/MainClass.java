@@ -16,6 +16,8 @@
 
 package net.lax1dude.eaglercraft.internal.wasm_gc_teavm;
 
+import net.lax1dude.eaglercraft.sp.server.internal.wasm_gc_teavm.WorkerMain;
+
 public class MainClass {
 
 	public static void main(String[] args) {
@@ -23,8 +25,7 @@ public class MainClass {
 		MemoryViews.setupCallback();
 		if(args.length == 1) {
 			if("_worker_process_".equalsIgnoreCase(args[0])) {
-				//TODO
-				//workerMain();
+				WorkerMain._main();
 				return;
 			}
 		}else if(args.length == 0) {

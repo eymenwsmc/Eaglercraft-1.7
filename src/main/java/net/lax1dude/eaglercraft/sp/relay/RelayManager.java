@@ -395,7 +395,6 @@ public class RelayManager {
 			}
 		}
 		sort();
-        save(); // Ensure they are saved immediately
 	}
 
 	public String makeNewRelayName() {

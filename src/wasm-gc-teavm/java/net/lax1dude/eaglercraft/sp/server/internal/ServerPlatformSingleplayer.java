@@ -25,14 +25,19 @@ import net.lax1dude.eaglercraft.internal.buffer.MemoryStack;
 import net.lax1dude.eaglercraft.internal.buffer.WASMGCDirectArrayCopy;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.BetterJSStringConverter;
+import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.TeaVMUtils;
 import net.lax1dude.eaglercraft.internal.wasm_gc_teavm.WASMGCClientConfigAdapter;
 import net.lax1dude.eaglercraft.sp.server.IWASMCrashCallback;
 import net.lax1dude.eaglercraft.sp.server.internal.wasm_gc_teavm.JS_IPCPacketData;
 import org.teavm.interop.Address;
 import org.teavm.interop.Import;
 import org.teavm.jso.JSFunctor;
+import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.core.JSString;
+import org.teavm.jso.typedarrays.ArrayBuffer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +46,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ServerPlatformSingleplayer {
+
+	private static final Logger logger = LogManager.getLogger("ServerPlatformSingleplayer");
 
 	private static final List<IPCPacketData> messageQueue = new LinkedList<>();
 
@@ -55,6 +62,38 @@ public class ServerPlatformSingleplayer {
 		singleThreadCB = null;
 		filesystem = Filesystem.getHandleFor(getClientConfigAdapter().getWorldsDB());
 		VFile2.setPrimaryFilesystem(filesystem);
+	}
+
+	@JSBody(params = { "wb" }, script = "__eaglerXOnMessage = function(o) { wb(o.data.ch, o.data.dat); };")
+	private static native void registerPacketHandler(WorkerBinaryPacketHandler wb);
+
+	@JSFunctor
+	private static interface WorkerBinaryPacketHandler extends JSObject {
+		public void onMessage(String channel, ArrayBuffer buf);
+	}
+
+	private static class WorkerBinaryPacketHandlerImpl implements WorkerBinaryPacketHandler {
+		
+		public void onMessage(String channel, ArrayBuffer buf) {
+			if(channel == null) {
+				logger.error("Recieved IPC packet with null channel");
+				return;
+			}
+			
+			if(buf == null) {
+				logger.error("Recieved IPC packet with null buffer");
+				return;
+			}
+			
+			synchronized(messageQueue) {
+				messageQueue.add(new IPCPacketData(channel, TeaVMUtils.wrapByteArrayBuffer(buf)));
+			}
+		}
+		
+	}
+
+	public static void register() {
+		registerPacketHandler(new WorkerBinaryPacketHandlerImpl());
 	}
 
 	public static IEaglerFilesystem getWorldsDatabase() {
