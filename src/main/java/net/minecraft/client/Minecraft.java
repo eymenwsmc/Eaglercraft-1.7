@@ -533,8 +533,7 @@ public class Minecraft implements IPlayerUsage {
 		this.checkGLError("Post startup");
 		this.ingameGUI = new GuiIngame(this);
 
-			this.displayGuiScreen(new GuiAlert("NOTICE", "This is EymenWSMC. This project has no longer \n been developing. Because I leaked the 1.12 source for no reason and I left the community", new GuiScreenEditProfile(new GuiMainMenu())));
-
+this.displayGuiScreen(new GuiMainMenu());
 		this.relayManager.loadDefaults();
 		this.field_152354_ay = null;
 		this.loadingScreen = new LoadingScreenRenderer(this);

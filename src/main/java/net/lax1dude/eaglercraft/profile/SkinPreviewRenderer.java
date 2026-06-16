@@ -41,11 +41,16 @@ public class SkinPreviewRenderer {
 	}
 
 	public static void renderPreview(int x, int y, int mx, int my, SkinModel skinModel) {
-		renderPreview(x, y, mx, my, false, skinModel, null, null);
+		renderPreview(x, y, mx, my, false, skinModel, null, null, 50.0f, 80.0f);
 	}
 
 	public static void renderPreview(int x, int y, int mx, int my, boolean capeMode, SkinModel skinModel,
 			ResourceLocation skinTexture, ResourceLocation capeTexture) {
+		renderPreview(x, y, mx, my, capeMode, skinModel, skinTexture, capeTexture, 50.0f, 80.0f);
+	}
+
+	public static void renderPreview(int x, int y, int mx, int my, boolean capeMode, SkinModel skinModel,
+			ResourceLocation skinTexture, ResourceLocation capeTexture, float scale, float yOffset) {
 		// Ensure models are initialized before use
 		if (playerModelSteve == null || playerModelAlex == null || playerModelZombie == null) {
 			initialize();
@@ -78,8 +83,8 @@ public class SkinPreviewRenderer {
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(x, y - 80.0f, 100.0f);
-		GlStateManager.scale(50.0f, 50.0f, 50.0f);
+		GlStateManager.translate(x, y - yOffset, 100.0f);
+		GlStateManager.scale(scale, scale, scale);
 		GlStateManager.rotate(180.0f, 1.0f, 0.0f, 0.0f);
 		GlStateManager.scale(1.0f, -1.0f, 1.0f);
 

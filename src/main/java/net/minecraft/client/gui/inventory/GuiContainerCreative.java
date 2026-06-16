@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import net.lax1dude.eaglercraft.opengl.GlStateManager;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.achievement.GuiAchievements;
@@ -584,6 +586,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer {
 		}
 	}
 
+
 	protected void func_146976_a(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderHelper.enableGUIStandardItemLighting();
@@ -593,12 +596,14 @@ public class GuiContainerCreative extends InventoryEffectRenderer {
 		int var7;
 
 		for (var7 = 0; var7 < var6; ++var7) {
+			GlStateManager.enableDepth();
 			CreativeTabs var8 = var5[var7];
 			this.mc.getTextureManager().bindTexture(field_147061_u);
 
 			if (var8.getTabIndex() != field_147058_w) {
 				this.func_147051_a(var8);
 			}
+			GlStateManager.disableDepth();
 		}
 
 		this.mc.getTextureManager().bindTexture(
@@ -620,9 +625,13 @@ public class GuiContainerCreative extends InventoryEffectRenderer {
 		this.func_147051_a(var4);
 
 		if (var4 == CreativeTabs.tabInventory) {
-			GuiInventory.drawEntityOnScreen(this.field_147003_i + 43, this.field_147009_r + 45, 20,
-					(float) (this.field_147003_i + 43 - p_146976_2_),
-					(float) (this.field_147009_r + 45 - 30 - p_146976_3_), this.mc.thePlayer);
+			GlStateManager.enableDepth();
+			GuiInventory.drawEntityOnScreen(this.field_147003_i + 43, this.field_147009_r +
+							65, 20,
+					                   (float) (this.field_147003_i + 43 - p_146976_2_),
+					                 (float) (this.field_147009_r + 45 - 30 - p_146976_3_), this.mc.thePlayer);
+			GlStateManager.disableDepth();
+
 		}
 	}
 

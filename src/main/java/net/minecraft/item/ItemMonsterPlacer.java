@@ -61,35 +61,36 @@ public class ItemMonsterPlacer extends Item {
 	 * clicking, he will have one of those. Return True if something happen and
 	 * false if it don't. This is for ITEMS, not BLOCKS
 	 */
-	public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_,
-			int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
-		if (p_77648_3_.isClient) {
+	public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
+	{
+		if (p_77648_3_.isClient)
+		{
 			return true;
-		} else {
+		}
+		else
+		{
 			Block var11 = p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_);
 			p_77648_4_ += Facing.offsetsXForSide[p_77648_7_];
 			p_77648_5_ += Facing.offsetsYForSide[p_77648_7_];
 			p_77648_6_ += Facing.offsetsZForSide[p_77648_7_];
 			double var12 = 0.0D;
 
-			if (p_77648_7_ == 1 && var11.getRenderType() == 11) {
+			if (p_77648_7_ == 1 && var11.getRenderType() == 11)
+			{
 				var12 = 0.5D;
 			}
 
-			int chunkX = p_77648_4_ >> 4;
-			int chunkZ = p_77648_6_ >> 4;
-			p_77648_3_.getChunkFromChunkCoords(chunkX, chunkZ); // Force load chunk
-			
-			Entity var14 = spawnCreature(p_77648_3_, p_77648_1_.getItemDamage(), (double) p_77648_4_ + 0.5D,
-					(double) p_77648_5_ + var12, (double) p_77648_6_ + 0.5D);
+			Entity var14 = spawnCreature(p_77648_3_, p_77648_1_.getItemDamage(), (double)p_77648_4_ + 0.5D, (double)p_77648_5_ + var12, (double)p_77648_6_ + 0.5D);
 
-			if (var14 != null) {
-				var14.forceSpawn = true; // Force entity to be visible to all players
-				if (var14 instanceof EntityLivingBase && p_77648_1_.hasDisplayName()) {
-					((EntityLiving) var14).setCustomNameTag(p_77648_1_.getDisplayName());
+			if (var14 != null)
+			{
+				if (var14 instanceof EntityLivingBase && p_77648_1_.hasDisplayName())
+				{
+					((EntityLiving)var14).setCustomNameTag(p_77648_1_.getDisplayName());
 				}
 
-				if (!p_77648_2_.capabilities.isCreativeMode) {
+				if (!p_77648_2_.capabilities.isCreativeMode)
+				{
 					--p_77648_1_.stackSize;
 				}
 			}

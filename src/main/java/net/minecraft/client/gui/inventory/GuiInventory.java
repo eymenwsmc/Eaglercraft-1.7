@@ -10,6 +10,7 @@ import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -66,15 +67,18 @@ public class GuiInventory extends InventoryEffectRenderer {
 		int var4 = this.field_147003_i;
 		int var5 = this.field_147009_r;
 		this.drawTexturedModalRect(var4, var5, 0, 0, this.field_146999_f, this.field_147000_g);
+		
+		GlStateManager.enableDepth();
 		drawEntityOnScreen(var4 + 51, var5 + 75, 30, (float) (var4 + 51) - this.field_147048_u,
 				(float) (var5 + 75 - 50) - this.field_147047_v, this.mc.thePlayer);
+		GlStateManager.disableDepth();
 	}
 
 	public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY,
 			EntityLivingBase ent) {
 		GlStateManager.enableColorMaterial();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate((float) posX, (float) posY, 50.0F);
+		GlStateManager.translate((float) posX, (float) posY - 50, 50.0F);
 		GlStateManager.scale((float) (-scale), (float) scale, (float) scale);
 		GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
 		float f = ent.renderYawOffset;
@@ -93,19 +97,14 @@ public class GuiInventory extends InventoryEffectRenderer {
 		ent.prevRotationYawHead = ent.rotationYaw;
 		GlStateManager.translate(0.0F, 0.0F, 0.0F);
 		RenderManager rendermanager = RenderManager.instance;
-		RenderManager.instance.playerViewY = 180.0F;
-
-		boolean hideCape = false;
-		if (ent instanceof net.minecraft.client.entity.AbstractClientPlayer) {
-			net.minecraft.client.entity.AbstractClientPlayer player = (net.minecraft.client.entity.AbstractClientPlayer) ent;
-			hideCape = player.getHideCape();
-			player.setHideCape(1, true);
+		float oldPlayerViewY = rendermanager.playerViewY;
+		rendermanager.playerViewY = 180.0F;
+		Render renderer = rendermanager.getEntityRenderObject(ent);
+		//im gonna molest you
+		if (renderer != null) {
+			renderer.doRender(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
 		}
-		rendermanager.func_147940_a(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
-
-		if (ent instanceof net.minecraft.client.entity.AbstractClientPlayer) {
-		        ((net.minecraft.client.entity.AbstractClientPlayer) ent).setHideCape(1, hideCape);
-		}
+		rendermanager.playerViewY = oldPlayerViewY;
 		ent.renderYawOffset = f;
 		ent.rotationYaw = f1;
 		ent.rotationPitch = f2;
@@ -114,6 +113,7 @@ public class GuiInventory extends InventoryEffectRenderer {
 		GlStateManager.popMatrix();
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.disableRescaleNormal();
+		
 		GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 		GlStateManager.disableTexture2D();
 		GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
