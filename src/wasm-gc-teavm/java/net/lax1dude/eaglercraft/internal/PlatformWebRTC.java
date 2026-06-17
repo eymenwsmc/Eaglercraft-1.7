@@ -38,7 +38,7 @@ public class PlatformWebRTC {
 
 	private static final Logger logger = LogManager.getLogger("PlatformWebRTC");
 
-	private static boolean isSupported = false;
+	private static boolean isSupported = true;
 
 	public static void initialize() {
 		isSupported = supported0();

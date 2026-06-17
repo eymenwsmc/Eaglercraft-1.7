@@ -29,7 +29,7 @@ public class GuiScreenLANInfo extends GuiScreen {
 
 	public void initGui() {
 		buttonList.clear();
-		buttonList.add(new GuiButton(0, this.width / 2 - 100, height / 6 + 168, I18n.format("gui.continue")));
+		buttonList.add(new GuiButton(0, this.width / 2 - 100, height / 6 + 168, I18n.format("Continue")));
 	}
 
 	public void drawScreen(int par1, int par2, float par3) {

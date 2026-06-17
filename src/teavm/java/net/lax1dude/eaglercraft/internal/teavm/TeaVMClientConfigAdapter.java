@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * Copyright (c) 2022-2024 lax1dude. All Rights Reserved.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -28,7 +28,7 @@ import java.util.List;
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 
@@ -90,6 +90,21 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 	}
 
 	@Override
+	public String getDefaultLocale() {
+		return "";
+	}
+
+	@Override
+	public List<DefaultServer> getDefaultServerList() {
+		return List.of();
+	}
+
+	@Override
+	public String getServerToJoin() {
+		return "";
+	}
+
+	@Override
 	public String getWorldsDB() {
 		return worldsDB;
 	}
@@ -100,8 +115,73 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 	}
 
 	@Override
+	public boolean isCheckShaderGLErrors() {
+		return false;
+	}
+
+	@Override
+	public boolean isDemo() {
+		return false;
+	}
+
+	@Override
+	public boolean allowUpdateSvc() {
+		return false;
+	}
+
+	@Override
+	public boolean allowUpdateDL() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnableDownloadOfflineButton() {
+		return false;
+	}
+
+	@Override
+	public String getDownloadOfflineButtonLink() {
+		return "";
+	}
+
+	@Override
+	public boolean useSpecialCursors() {
+		return false;
+	}
+
+	@Override
+	public boolean isLogInvalidCerts() {
+		return false;
+	}
+
+	@Override
+	public boolean isCheckRelaysForUpdates() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnableSignatureBadge() {
+		return false;
+	}
+
+	@Override
+	public boolean isAllowVoiceClient() {
+		return false;
+	}
+
+	@Override
+	public boolean isAllowFNAWSkins() {
+		return false;
+	}
+
+	@Override
 	public String getLocalStorageNamespace() {
 		return localStorageNamespace;
+	}
+
+	@Override
+	public boolean isEnableMinceraft() {
+		return false;
 	}
 
 	public boolean isForceWebGL1TeaVM() {
@@ -173,6 +253,16 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 		return false;
 	}
 
+	@Override
+	public boolean isAllowServerRedirects() {
+		return false;
+	}
+
+	@Override
+	public boolean isOpenDebugConsoleOnLaunch() {
+		return false;
+	}
+
 
 	@Override
 	public boolean isForceWebViewSupport() {
@@ -181,6 +271,16 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 
 	@Override
 	public boolean isEnableWebViewCSP() {
+		return false;
+	}
+
+	@Override
+	public boolean isAllowBootMenu() {
+		return false;
+	}
+
+	@Override
+	public boolean isForceProfanityFilter() {
 		return false;
 	}
 
@@ -204,11 +304,11 @@ public class TeaVMClientConfigAdapter implements IClientConfigAdapter {
 	public String getResourcePacksDB() {
 		return this.resourcePacksDB;
 	}
-	
+
 	public boolean isKeepAliveHackTeaVM() {
 		return keepAliveHack;
 	}
-	
+
 	public boolean isFinishOnSwapTeaVM() {
 		return finishOnSwap;
 	}
