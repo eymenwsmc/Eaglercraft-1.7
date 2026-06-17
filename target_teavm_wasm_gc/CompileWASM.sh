@@ -1,3 +1,4 @@
 #!/bin/sh
+cd ../
 chmod +x gradlew
-./gradlew generateWasmGC
+./gradlew target_teavm_wasm_gc:assembleMainComponents

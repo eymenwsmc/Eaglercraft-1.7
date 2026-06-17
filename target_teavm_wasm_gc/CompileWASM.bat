@@ -1,4 +1,5 @@
 @echo off
-title gradlew generateWasmGC
-call gradlew generateWasmGC
+title gradlew target_teavm_wasm_gc:assembleMainComponents 
+cd ../
+call gradlew target_teavm_wasm_gc:assembleMainComponents
 pause

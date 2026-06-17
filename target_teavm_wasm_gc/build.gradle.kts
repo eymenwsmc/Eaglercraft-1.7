@@ -16,12 +16,18 @@ java {
 }
 
 sourceSets {
-	named("main") {
-		java.srcDirs(
-			"../src/wasm-gc-teavm/java"
+	main {
+		java.setSrcDirs(
+			listOf(
+				"../src/wasm-gc-teavm/java",
+				"../src/main/java"
+			)
 		)
-		resources.srcDirs(
-			"../src/teavm/resources"
+
+		resources.setSrcDirs(
+			listOf(
+				"../src/teavm/resources"
+			)
 		)
 	}
 }
@@ -37,11 +43,12 @@ dependencies {
 	teavm(teavm.libs.jso)
 	teavm(teavm.libs.jsoApis)
 	compileOnly("org.teavm:teavm-core:0.12.1-EAGLER-R3") // workaround for a few hacks
-	implementation(rootProject)
 	implementation(libs.jorbis)
 	implementation(libs.bundles.common)
 }
 
+tasks.register("prepareKotlinBuildScriptModel") {
+}
 val wasmFolder = "javascript"
 val wasmOutputFileName = "classes.wasm"
 
@@ -51,7 +58,7 @@ teavm.wasmGC {
 	outOfProcess = false
 	fastGlobalAnalysis = false
 	processMemory = 512
-	mainClass = "net.lax1dude.eaglercraft.v1_8.internal.wasm_gc_teavm.MainClass"
+	mainClass = "net.lax1dude.eaglercraft.internal.wasm_gc_teavm.MainClass"
 	outputDir = file(wasmFolder)
 	properties = mapOf("java.util.TimeZone.autodetect" to "true")
 	debugInformation = true
@@ -103,7 +110,7 @@ eaglercraftBuild {
 			epwSearchDirectory = file(wasmFolder)
 			clientBundleOutputDir = file("javascript_dist")
 		}.apply {
-			epkSources = file("../desktopRuntime/resources")
+			epkSources = file("../lwjgl-rundir/resources")
 			epkOutput = file("javascript/assets.epk")
 
 			languageMetadataInput = file("../target_teavm_javascript/javascript/lang")
